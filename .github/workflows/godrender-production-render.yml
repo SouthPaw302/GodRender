@@ -19,15 +19,15 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: technical-${{ github.ref }-${{ github.event_name }
+  group: technical-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: false
 jobs:
   plan:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     outputs:
-      matrix: ${{ steps.sources.outputs.matrix }
-      source_sha: ${{ steps.sources.outputs.source_sha }
+      matrix: ${{ steps.sources.outputs.matrix }}
+      source_sha: ${{ steps.sources.outputs.source_sha }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -40,9 +40,9 @@ jobs:
       - name: Create SHA-pinned source bundle and matrix
         id: sources
         env:
-          MANIFEST_INPUT: ${{ inputs.manifest }
-          FIXTURE_INPUT: ${{ inputs.fixture }
-          EVENT_KIND: ${{ github.event_name }
+          MANIFEST_INPUT: ${{ inputs.manifest }}
+          FIXTURE_INPUT: ${{ inputs.fixture }}
+          EVENT_KIND: ${{ github.event_name }}
         shell: bash
         run: |
           set -euo pipefail
@@ -77,8 +77,8 @@ jobs:
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: godrender-source-${{ github.run_id }
-          path: ${{ runner.temp }/godrender-input/
+          name: godrender-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/godrender-input/
           retention-days: 3
   render-shot:
     needs: plan
@@ -87,11 +87,11 @@ jobs:
     strategy:
       fail-fast: false
       max-parallel: 8
-      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: ${{ needs.plan.outputs.source_sha }
+          ref: ${{ needs.plan.outputs.source_sha }}
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
@@ -100,17 +100,17 @@ jobs:
         run: python -m pip install numpy opencv-python-headless
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: godrender-source-${{ github.run_id }
-          path: ${{ runner.temp }/input
+          name: godrender-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input
       - name: Render source frames with approved FXExecutor
         run: |
-          python render/godrender_runtime.py shot --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --shot-id "${{ matrix.shot_id }" --out "$RUNNER_TEMP/shot"
-          test -s "$RUNNER_TEMP/shot/${{ matrix.shot_id }.mp4"
+          python render/godrender_runtime.py shot --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --shot-id "${{ matrix.shot_id }}" --out "$RUNNER_TEMP/shot"
+          test -s "$RUNNER_TEMP/shot/${{ matrix.shot_id }}.mp4"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: godrender-shot-${{ matrix.shot_id }
-          path: ${{ runner.temp }/shot/
+          name: godrender-shot-${{ matrix.shot_id }}
+          path: ${{ runner.temp }}/shot/
           retention-days: 30
           if-no-files-found: warn
   assemble:
@@ -120,16 +120,16 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: ${{ needs.plan.outputs.source_sha }
+          ref: ${{ needs.plan.outputs.source_sha }}
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: godrender-source-${{ github.run_id }
-          path: ${{ runner.temp }/input
+          name: godrender-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           pattern: godrender-shot-*
-          path: ${{ runner.temp }/shards
+          path: ${{ runner.temp }}/shards
           merge-multiple: false
       - name: Restore shard IDs from artifact names
         shell: bash
@@ -162,7 +162,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: godrender-review-film-${{ github.run_id }
-          path: ${{ runner.temp }/final/
+          name: godrender-review-film-${{ github.run_id }}
+          path: ${{ runner.temp }}/final/
           retention-days: 30
           if-no-files-found: warn
