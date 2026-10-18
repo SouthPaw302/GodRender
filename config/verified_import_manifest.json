@@ -29,13 +29,15 @@
     },
     {
       "path": "docs/SOURCE_PROVENANCE.md",
-      "git_blob_sha": "b97ee630c3949b9dc40b5adfb4a3a71c1b679f05",
-      "role": "preserved_existing_godrender"
+      "git_blob_sha": "fde83199aafbb6461ddb5702bfea78657a738e0d",
+      "role": "preserved_existing_godrender",
+      "delta": "Archived import provenance document updated to mark historical references as nonactive"
     },
     {
       "path": "docs/STAGED_TRANSFER_CONTRACT.md",
-      "git_blob_sha": "bc5d5b64808980e3cc87b2e3ffc8eabbd48816ca",
-      "role": "preserved_existing_godrender"
+      "git_blob_sha": "938c85f5e0e54679e56be4513562f67166d8573f",
+      "role": "preserved_existing_godrender",
+      "delta": "Archived import provenance document updated to mark historical references as nonactive"
     },
     {
       "path": "godrender_boot.py",
