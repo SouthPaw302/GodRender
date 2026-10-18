@@ -89,6 +89,7 @@ class CoreAdapter:
         self.session_file = SESSION_FILE
         self._boot_lock = threading.RLock()
         self._previous_core: Path | None = None
+        self._core_swapped = False
 
     def _session_valid(self, session: dict) -> bool:
         return (
@@ -103,19 +104,21 @@ class CoreAdapter:
         )
 
     def _restore_prior_core(self) -> None:
-        """Rollback a candidate that failed bootstrap instead of losing the last PASS."""
-        if self._previous_core is None:
+        """Rollback only installed candidates, not a prior core after clone failure."""
+        if not self._core_swapped:
             return
         if self.core_repo.exists():
             shutil.rmtree(self.core_repo)
-        if self._previous_core.exists():
+        if self._previous_core is not None and self._previous_core.exists():
             self._previous_core.rename(self.core_repo)
         self._previous_core = None
+        self._core_swapped = False
 
     def _commit_core(self) -> None:
         if self._previous_core is not None:
             shutil.rmtree(self._previous_core, ignore_errors=True)
             self._previous_core = None
+        self._core_swapped = False
 
     def _install_core(self, offline: bool) -> subprocess.CompletedProcess:
         """Clone first; never destroy the known-good core when GitHub is unavailable."""
@@ -152,6 +155,7 @@ class CoreAdapter:
                     prior.rename(CORE_REPO)
                 raise
             self._previous_core = prior if prior.exists() else None
+            self._core_swapped = True
             return install
         finally:
             if pending.exists():
