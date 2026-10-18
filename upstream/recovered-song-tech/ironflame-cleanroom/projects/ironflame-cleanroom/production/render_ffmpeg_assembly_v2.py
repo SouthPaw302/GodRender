@@ -1,0 +1,10 @@
+from pathlib import Path
+import subprocess,sys
+SRC='/mnt/data/reference_video.mp4';GIF='/mnt/data/ironflame_depth_support/gifs';FX='/mnt/data/ironflame_fx_overlay_loops';OUT=Path('/mnt/data/ironflame_v2_parts');OUT.mkdir(exist_ok=True)
+SECTIONS=[(0,18),(18,42),(42,77),(77,95),(95,110),(110,122),(122,137),(137,167),(167,187),(187,210),(210,233),(233,244.68)]
+GRADES=[('contrast=1.035:saturation=.99:brightness=-.006','bs=.02'),('contrast=1.04:saturation=1.02:brightness=-.006','bs=.025'),('contrast=1.05:saturation=1.07:brightness=-.004','rs=.035:gs=.01'),('contrast=1.04:saturation=1.00:brightness=-.006','bs=.025'),('contrast=1.04:saturation=1.04:brightness=-.003','rs=.015:bs=.01'),('contrast=1.045:saturation=1.05:brightness=-.003','rs=.03:gs=.012'),('contrast=1.05:saturation=1.04:brightness=-.004','rs=.02:bs=.012'),('contrast=1.04:saturation=1.00:brightness=-.006','bs=.025'),('contrast=1.05:saturation=1.035:brightness=-.004','rs=.02:bs=.01'),('contrast=1.05:saturation=1.05:brightness=-.004','rs=.03:bs=.008'),('contrast=1.035:saturation=1.025:brightness=-.002','rs=.015:gs=.008'),('contrast=1.04:saturation=1.07:brightness=-.001','rs=.04:gs=.015')]
+for n in map(int,sys.argv[1:]):
+ i=n-1;s,e=SECTIONS[i];d=e-s;eq,cb=GRADES[i];out=OUT/f'seg_{n:02d}.mp4'
+ filt=f'[0:v]setpts=PTS-STARTPTS,scale=1280:720[base];[1:v]fps=24,scale=1280:720,format=rgba,colorchannelmixer=aa=0.04[lp];[base][lp]overlay=0:0:shortest=1[dep];[2:v]fps=24,scale=640:360,colorkey=0x000000:0.10:0.08,format=rgba,colorchannelmixer=aa=0.28[fx];[dep][fx]overlay=0:0:shortest=1:format=auto,eq={eq},colorbalance={cb},unsharp=3:3:0.15:3:3:0.0[out]'
+ cmd=['ffmpeg','-y','-hide_banner','-loglevel','error','-ss',str(s),'-t',str(d),'-i',SRC,'-stream_loop','-1','-i',f'{GIF}/depth_loop_{n:02d}.gif','-stream_loop','-1','-i',f'{FX}/fx_overlay_{n:02d}.mp4','-filter_complex',filt,'-map','[out]','-an','-r','24','-c:v','libx264','-preset','ultrafast','-crf','18','-pix_fmt','yuv420p',str(out)]
+ subprocess.run(cmd,check=True);print(out,flush=True)
