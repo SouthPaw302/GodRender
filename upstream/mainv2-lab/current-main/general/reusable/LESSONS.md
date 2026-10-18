@@ -1,0 +1,31 @@
+# Reusable Lessons
+- A valid still-image timeline is not a dynamic film.
+- Effects must visibly survive export.
+- Inspect short proofs before scaling.
+- Gate success is not artistic acceptance.
+- A rendered output is not an accepted production result until the required proof/QC checks pass; agents must not advance project state from an unchecked render.
+- A style/motion reference is not automatically final-picture content. Declare the reference role explicitly and do not reuse its subject, scene, frames, or footage unless the current user authorizes content reuse.
+- Generated companion media must expand the visual world; near-duplicates of the reference subject are not meaningful new media.
+- A current-user creative rejection invalidates prior proof/final-QC acceptance for the affected material and requires rollback to the earliest stage that must be rebuilt.
+- Protect real-person identity through all processing.
+- Production music-reactivity should use measured controls.
+- Prefer meaningful internal motion over constant whole-frame shake.
+- A capability is not reusable until project-specific media, paths, constants, assumptions, and names are removed.
+- Once generalized, it belongs to AIVideoEdit; origin is provenance, not identity.
+- When no visual reference/style is supplied, build and lock the story universe first: narrative arc, recurring motifs, locations, hero characters, palette, light language, and shot grammar must exist before large media generation.
+- Generated still batches are shot-source assets, not finished scenes. Convert selected stills into branch-local shot packages with motion layers, masks/depth where useful, atmosphere/light/FX assets, proof renders, and QC before assembly.
+- Establish hero-character continuity early. Reuse a locked character identity and wardrobe/world language across generated shot sources so the film reads as one authored universe rather than unrelated images.
+- A short visual cold-open before the music can strengthen narrative entry when intentionally authored; its duration must be explicit in the timing map and final runtime/audio-sync QC.
+- Repair locally whenever possible. If a small subset of rendered shots fail or corrupt, patch/re-render only those shot packages and splice them back into the assembly instead of rebuilding the entire film.
+- Storyboard acceptance is permission to produce shots, not permission to assemble. The storyboard establishes the world; short finished shot proofs establish that the world actually moves and survives the effect stack.
+
+## Canonical source-to-export Director findings
+- Scan **every relevant media folder** before creating/replacing visuals: original image batches, GIF/MP4 loops, alternate stills, derived frame variations, true-video clips, approved/rejected outputs, and durable storage. Distinguish main picture sources from effect proofs and backups. Use hashes, not names or sizes alone, to identify duplicates.
+- A 2-second 640x360 FX loop repeated across a 5–13-second 1080p shot is **not** high-resolution articulated motion. Report both the native resolution gap and the time-loop deficit; retain the high-resolution original still as source truth. Verify renderer backend equivalence if proof and production implementations differ.
+- Measure within-shot and across-shot progression separately. A very low frame-difference score can reflect weak real motion; a large score can reflect distracting overlays. Neither number alone measures quality. Require actual walking, driving, hand or wheel motion when a story calls for articulation; do not hide missing action under camera movement.
+- Scene-appropriate FX outrank maximum FX variety. Transparent sky light, practical glow, weather and subtle atmosphere must respect protected geometry, faces, text and the world lighting. Canonically registered fantasy/crowd/particle effects may still be creatively inappropriate.
+- An audio analyzer/model loading is not evidence that its controls influenced the render. Detect constant placeholder `energy`/`transient`; verify downstream frame-aligned consumption of approved measured signals. Preserve and identify original soundtrack separately from a conservative optional safety master.
+- Intro/outro are real art-direction work: inspect their frames, titles, accurate artist/channel spelling, pause, audio cue and transitions. Protect accepted core timing; no generic or unapproved end cards. Use distinct artistic and platform delivery masters.
+- Lock a user-approved full edit; when accepted **with caveats**, preserve that baseline and repair only named exceptions. Source provenance, actual export hash and human viewing scope must stay explicit. `full decode`, `contact sheet`, `sampled QC`, `Director recommendation`, `user artistic acceptance`, and `authenticated release` are different states.
+- A multipart durable master is a transport mechanism, not a clickable current-version review link. Publish a separate playable current-candidate review copy, verify the revision, and preserve reassembly SHA/parts without recompression. A subsequent 4K upscale is a new output with its own QC.
+- The detailed reusable method and regression checks live in `DIRECTOR_SCAN_CANON.md`. The originating production's story, aesthetic, assets and brand are **not** automatically transferable to future songs.
