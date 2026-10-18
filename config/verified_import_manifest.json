@@ -71,13 +71,13 @@
     },
     {
       "path": "studio/core_adapter.py",
-      "git_blob_sha": "9e37150e28396b9e37207613630eab7db7381ed7",
+      "git_blob_sha": "a163db8f1b3ab616ab477b8f71bf4161f3e6cf78",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/core_adapter.py",
       "upstream_blob_sha": "230d33a63cceac3b257ac22daa7edef50b1b675e",
-      "delta": "GodRender port adaptation (see integration commit 30822b7)"
+      "delta": "GodRender-specific Studio reliability/efficiency fix; upstream canonical source preserved separately"
     },
     {
       "path": "studio/deepseek_harness/README.md",
@@ -317,12 +317,13 @@
     },
     {
       "path": "studio/stack.py",
-      "git_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67",
+      "git_blob_sha": "442fbfec472c5b435a19a524cb8413d8c8cc244d",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/stack.py",
-      "upstream_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67"
+      "upstream_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67",
+      "delta": "GodRender-specific Studio reliability/efficiency fix; upstream canonical source preserved separately"
     },
     {
       "path": "studio/start_termux.sh",

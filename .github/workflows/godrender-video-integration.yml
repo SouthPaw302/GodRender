@@ -21,6 +21,10 @@ jobs:
         run: python3 -m compileall -q studio upstream godrender_boot.py tools
       - name: Import GodRender core adapter with no production side effects
         run: PYTHONPATH=studio python3 -c 'import core_adapter; assert "AIVideoEdit-MainV2-Lab" in core_adapter.CANONICAL_REMOTE; print("ADAPTER IMPORT PASS")'
+      - name: Run Studio regression and compatibility tests
+        run: PYTHONPATH=studio python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Run existing structural Studio self-test
+        run: PYTHONPATH=studio python3 studio/selftest.py
       - name: Verify full Studio Python import and tool graph
         run: PYTHONPATH=studio python3 -c 'import stack; print("STUDIO IMPORT PASS", len(stack.all_tool_schemas()))'
       - name: Serve browser Studio and verify HTTP endpoints

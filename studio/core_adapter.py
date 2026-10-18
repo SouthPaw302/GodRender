@@ -13,6 +13,9 @@ import os
 import shutil
 import subprocess
 import sys
+import threading
+import uuid
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -35,13 +38,21 @@ def _core_ref() -> str:
     return value or "main"
 
 
+@lru_cache(maxsize=64)
+def _read_json_at_version(path: str, mtime_ns: int, size: int, inode: int) -> Any:
+    """Reuse unmodified registry/config JSON across frequent Studio polls."""
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
 def _read_json(path: Path, default: Any) -> Any:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
+        stamp = path.stat()
+        return _read_json_at_version(str(path), stamp.st_mtime_ns, stamp.st_size, stamp.st_ino)
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
         return default
 
 
+@lru_cache(maxsize=1)
 def _host_branch() -> str:
     try:
         proc = subprocess.run(
@@ -76,13 +87,41 @@ class CoreAdapter:
         self.core_repo = CORE_REPO
         self.os_root = OS_ROOT
         self.session_file = SESSION_FILE
+        self._boot_lock = threading.RLock()
+        self._previous_core: Path | None = None
+        self._core_swapped = False
+
+    def _session_valid(self, session: dict) -> bool:
+        return (
+            session.get("schema") == "aivideoedit.session.v1"
+            and session.get("branch") == "main"
+            and session.get("guard_result") == "PASS"
+            and bool(session.get("session_id"))
+            and bool(session.get("os_main_commit"))
+            and session.get("os_root") == str(self.os_root)
+            and self.os_root.is_dir()
+            and (self.core_repo / "bootstrap.py").is_file()
+        )
+
+    def _restore_prior_core(self) -> None:
+        """Rollback only installed candidates, not a prior core after clone failure."""
+        if not self._core_swapped:
+            return
+        if self.core_repo.exists():
+            shutil.rmtree(self.core_repo)
+        if self._previous_core is not None and self._previous_core.exists():
+            self._previous_core.rename(self.core_repo)
+        self._previous_core = None
+        self._core_swapped = False
+
+    def _commit_core(self) -> None:
+        if self._previous_core is not None:
+            shutil.rmtree(self._previous_core, ignore_errors=True)
+            self._previous_core = None
+        self._core_swapped = False
 
     def _install_core(self, offline: bool) -> subprocess.CompletedProcess:
-        """Clone the canonical production OS, NEVER the GodRender host checkout.
-
-        --offline may only use an explicitly supplied local AIVideoEdit checkout.
-        An unrelated GodRender checkout is not valid authority for the OS.
-        """
+        """Clone first; never destroy the known-good core when GitHub is unavailable."""
         if not shutil.which("git"):
             raise RuntimeError("git is required for canonical production boot")
         ref = _core_ref()
@@ -92,62 +131,103 @@ class CoreAdapter:
         if not source:
             raise RuntimeError("offline boot requires AIVE_CORE_LOCAL_REPO pointing to a real AIVideoEdit checkout")
         CORE_HOME.mkdir(parents=True, exist_ok=True)
-        if CORE_REPO.exists():
-            shutil.rmtree(CORE_REPO)
-        return _run(
-            ["git", "clone", "--no-hardlinks", "--branch", ref, "--single-branch", source, str(CORE_REPO)],
-            HOST_REPO,
-            timeout=300,
-        )
+        pending = CORE_HOME / (".incoming-" + uuid.uuid4().hex)
+        prior = CORE_HOME / (".previous-" + uuid.uuid4().hex)
+        try:
+            install = _run(
+                ["git", "clone", "--no-hardlinks", "--branch", ref, "--single-branch", source, str(pending)],
+                HOST_REPO,
+                timeout=300,
+            )
+            if install.returncode != 0:
+                return install
+            if not (pending / "bootstrap.py").is_file():
+                return subprocess.CompletedProcess(
+                    args=install.args, returncode=1, stdout=install.stdout,
+                    stderr="cloned source lacks canonical bootstrap.py",
+                )
+            if CORE_REPO.exists():
+                CORE_REPO.rename(prior)
+            try:
+                pending.rename(CORE_REPO)
+            except Exception:
+                if prior.exists():
+                    prior.rename(CORE_REPO)
+                raise
+            self._previous_core = prior if prior.exists() else None
+            self._core_swapped = True
+            return install
+        finally:
+            if pending.exists():
+                shutil.rmtree(pending, ignore_errors=True)
 
     def bootstrap(self, offline: bool = False) -> dict:
-        try:
-            install = self._install_core(offline)
-        except Exception as exc:
-            return {"ok": False, "bootstrapped": False, "error": str(exc), **self.status()}
-        if install.returncode != 0:
-            return {
-                "ok": False,
-                "bootstrapped": False,
-                "phase": "install",
-                "stdout": (install.stdout or "")[-4000:],
-                "stderr": (install.stderr or "")[-4000:],
-                **self.status(),
-            }
-
-        bootstrap = CORE_REPO / "bootstrap.py"
-        if not bootstrap.is_file():
-            return {"ok": False, "bootstrapped": False, "error": "installed main lacks bootstrap.py", **self.status()}
-
-        requested_ref = _core_ref()
-        boot_branch = "main"
-        cmd = [
-            sys.executable,
-            str(bootstrap),
-            "boot",
-            "--repo-root",
-            str(CORE_REPO),
-            "--branch",
-            boot_branch,
-        ]
-        if offline:
-            cmd.append("--offline")
-        env = dict(os.environ)
-        if requested_ref != "main":
-            env["AIVIDEOEDIT_AUTHORITY_REF"] = requested_ref
-            env["AIVIDEOEDIT_VALIDATION_MODE"] = "1"
-        proc = _run(cmd, CORE_REPO, timeout=300, env=env)
-        result = {
-            "ok": proc.returncode == 0,
-            "returncode": proc.returncode,
-            "phase": "boot",
-            "stdout": (proc.stdout or "")[-4000:],
-            "stderr": (proc.stderr or "")[-4000:],
-        }
-        result.update(self.status())
-        return result
+        with self._boot_lock:
+            try:
+                install = self._install_core(offline)
+                if install.returncode != 0:
+                    snapshot = self.status()
+                    return {
+                        **snapshot, "ok": False, "bootstrapped": False,
+                        "previous_core_available": snapshot["bootstrapped"],
+                        "phase": "install",
+                        "stdout": (install.stdout or "")[-4000:],
+                        "stderr": (install.stderr or "")[-4000:],
+                    }
+                bootstrap = CORE_REPO / "bootstrap.py"
+                env = dict(os.environ)
+                requested_ref = _core_ref()
+                if requested_ref != "main":
+                    env["AIVIDEOEDIT_AUTHORITY_REF"] = requested_ref
+                    env["AIVIDEOEDIT_VALIDATION_MODE"] = "1"
+                cmd = [
+                    sys.executable, str(bootstrap), "boot",
+                    "--repo-root", str(CORE_REPO), "--branch", "main",
+                ]
+                if offline:
+                    cmd.append("--offline")
+                proc = _run(cmd, CORE_REPO, timeout=300, env=env)
+                valid = (
+                    proc.returncode == 0
+                    and "AIVideoEdit OS BOOTSTRAP: PASS" in (proc.stdout or "")
+                    and self._session_valid(_read_json(self.session_file, {}))
+                )
+                if not valid:
+                    self._restore_prior_core()
+                    snapshot = self.status()
+                    return {
+                        **snapshot, "ok": False, "bootstrapped": False,
+                        "previous_core_available": snapshot["bootstrapped"],
+                        "phase": "boot", "returncode": proc.returncode,
+                        "stdout": (proc.stdout or "")[-4000:],
+                        "stderr": ((proc.stderr or "") + "\\nBOOTSTRAP ATTESTATION FAILED")[-4000:],
+                    }
+                self._commit_core()
+                return {
+                    **self.status(), "ok": True, "bootstrapped": True,
+                    "returncode": 0, "phase": "boot",
+                    "stdout": (proc.stdout or "")[-4000:],
+                    "stderr": (proc.stderr or "")[-4000:],
+                }
+            except Exception as exc:
+                try:
+                    self._restore_prior_core()
+                    recovery_error = None
+                except Exception as recovery:
+                    recovery_error = str(recovery)
+                snapshot = self.status()
+                return {
+                    **snapshot, "ok": False, "bootstrapped": False,
+                    "previous_core_available": snapshot["bootstrapped"],
+                    "phase": "exception",
+                    "error": str(exc), "recovery_error": recovery_error,
+                }
 
     def status(self) -> dict:
+        with self._boot_lock:
+            return self._status_unlocked()
+
+    def _status_unlocked(self) -> dict:
         session = _read_json(self.session_file, {})
         contract = _read_json(self.os_root / CONTRACT, {}) if self.os_root.is_dir() else {}
         matrix = _read_json(self.os_root / CAPABILITY_MATRIX, {}) if self.os_root.is_dir() else {}
@@ -155,7 +235,7 @@ class CoreAdapter:
         capabilities = self._records(matrix, ("capabilities", "media_capabilities", "items"))
         effects = self._records(fx, ("effects", "fx", "registry", "items"))
         ref = _core_ref()
-        bootstrapped = bool(session) and self.os_root.is_dir() and session.get("branch") == "main"
+        bootstrapped = self._session_valid(session)
         return {
             "ok": True,
             "bootstrapped": bootstrapped,
