@@ -151,6 +151,13 @@ jobs:
           python render/godrender_runtime.py assemble --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --shards "$RUNNER_TEMP/shards" --out "$RUNNER_TEMP/final"
           test -s "$RUNNER_TEMP/final/godrender_review.mp4"
           ffprobe -v error -show_entries stream=codec_type -of compact "$RUNNER_TEMP/final/godrender_review.mp4"
+      - name: Sync actual receipt to Drive Brain when authenticated
+        env:
+          GODRENDER_DRIVE_SA_JSON: ${{ secrets.GODRENDER_DRIVE_SA_JSON }}
+          GODRENDER_DRIVE_SHEET: "1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c"
+        run: |
+          if [ -n "$GODRENDER_DRIVE_SA_JSON" ]; then python -m pip install google-auth requests; fi
+          python render/brain_sync.py --receipt "$RUNNER_TEMP/final/render_receipt.json"             --run-url "https://github.com/SouthPaw302/GodRender/actions/runs/${{ github.run_id }}"             --outbox "$RUNNER_TEMP/final/BRAIN_OUTBOX.json"
       - name: Verify production is not creatively approved
         shell: bash
         run: |
