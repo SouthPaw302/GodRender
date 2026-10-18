@@ -90,14 +90,24 @@ def system_snapshot():
         running=sum(1 for j in base.STATE["jobs"] if j.get("status")=="running");queued=sum(1 for j in base.STATE["jobs"] if j.get("status")=="queued");stored=sum(int(a.get("size_bytes") or 0)+int(a.get("proxy_size_bytes") or 0) for a in base.STATE["assets"]);projects=len(base.STATE["projects"]);assets=len(base.STATE["assets"])
     return {"workers":WORKER_COUNT,"queue_depth":JOB_QUEUE.qsize(),"running_jobs":running,"queued_jobs":queued,"projects":projects,"assets":assets,"stored_bytes":stored,"disk":{"total":usage.total,"used":usage.used,"free":usage.free},"storage":storage.status(),"core":CORE.status(),"tool_count":len(all_tool_schemas()),"harness":harness_tools.status()}
 def prepare_project(pid):
+    """Idempotent across repeated browser clicks; do not queue duplicate expensive work."""
     created=[]
-    with base.LOCK:assets=[dict(a) for a in base.STATE["assets"] if a.get("project")==pid and a.get("status")=="ready"]
-    for asset in assets:
-        m=asset.get("metadata") or {}
-        if m.get("video_codec"):
-            if not asset.get("proxy_url"):created.append(base.add_job("make_proxy",pid,asset["id"]))
-            if not asset.get("review_frames"):created.append(base.add_job("extract_review_frames",pid,asset["id"]))
-        if (asset.get("qc") or {}).get("status")!="pass":created.append(base.add_job("qc_media",pid,asset["id"]))
+    with base.LOCK:
+        assets=[dict(a) for a in base.STATE["assets"] if a.get("project")==pid and a.get("status")=="ready"]
+        active={(j.get("type"),j.get("asset_id")) for j in base.STATE["jobs"]
+                if j.get("project")==pid and j.get("status") in {"queued","running"}}
+        for asset in assets:
+            needed=[]
+            m=asset.get("metadata") or {}
+            if m.get("video_codec"):
+                if not asset.get("proxy_url"):needed.append("make_proxy")
+                if not asset.get("review_frames"):needed.append("extract_review_frames")
+            if (asset.get("qc") or {}).get("status")!="pass":needed.append("qc_media")
+            for typ in needed:
+                key=(typ,asset["id"])
+                if key not in active:
+                    created.append(base.add_job(typ,pid,asset["id"]))
+                    active.add(key)
     for job in created:dispatch_job(job)
     return created
 def _tool_call(name: str, args: dict):
@@ -113,7 +123,13 @@ def _remote_auth(handler):
 
 
 def _json_body(handler):
-    length=int(handler.headers.get("Content-Length","0") or 0);raw=handler.rfile.read(length) if length else b"{}"
+    try:
+        length=int(handler.headers.get("Content-Length","0") or 0)
+    except ValueError:
+        raise ValueError("invalid Content-Length")
+    if length < 0 or length > 2*1024*1024:
+        raise ValueError("JSON request must be between 0 and 2 MiB")
+    raw=handler.rfile.read(length) if length else b"{}"
     try:
         data=json.loads(raw.decode("utf-8"));return data if isinstance(data,dict) else {}
     except Exception as exc:raise ValueError(f"invalid JSON: {exc}")
