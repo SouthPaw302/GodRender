@@ -23,8 +23,9 @@
   "files": [
     {
       "path": "README.md",
-      "git_blob_sha": "39501dba5e1ab110239a2170e1cd6cfd3e7cb3f1",
-      "role": "preserved_existing_godrender"
+      "git_blob_sha": "456486bb3d34ae22a3fcf4ca5540382a124e10a4",
+      "role": "godrender_integration_document",
+      "delta": "Post-import GodRender root README was deliberately updated for the integration"
     },
     {
       "path": "docs/SOURCE_PROVENANCE.md",
