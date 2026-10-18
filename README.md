@@ -1,43 +1,45 @@
-# GodRender — video-system consolidation with pinned MainV2 sources
+# GodRender
 
-**Status: INTEGRATION CANDIDATE.** GodRender now includes provenance-preserving video-system sources and a Studio boot adapter. Runtime/film acceptance remains gated by live GitHub Actions and full render testing.
+**GodRender is the one active home for our film-production and Godot-rendering work.** New features, fixes, agents, FX integration, runtime tests and release decisions belong in this repository. Earlier productions remain a recoverable creative and technical history—not separate active systems.
 
-Source: `SouthPaw302/AIVideoEdit-MainV2-Lab`, branch `test/godot-render`, commit `289ef9ec997ddc426aba43bf66dcd401ee5c3648`.
+## Studio and production system
 
-This branch preserves source code, Godot scenes, project files, source locks, technical reviews, and four inactive CI workflow snapshots. The import intentionally does **not** rewrite upstream implementations to claim portability or turn historical technical PASS records into artistic approval.
+- **Studio:** browser production workflow, asset preparation, direction, storyboard, shots, FX, assembly and final review.
+- **Rendering:** Godot 2D/3D scenes, camera and depth experiments, still-image motion, video/FFmpeg tooling.
+- **FX library:** consolidated source, canonical registry and historical recoverable techniques, with provenance and proof gates.
+- **Evidence:** per-shot source hashes, moving proofs, technical QC, human Director acceptance and reproducible GitHub Actions.
+- **External Brain:** [GodRender production knowledge on Google Drive](https://docs.google.com/spreadsheets/d/1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c/edit). Historical production names and techniques are retained there.
 
-## Imported families
+## Run
 
-- `upstream/mainv2-lab/lab/godot/` — 2D/3D Godot renderer smoke
-- `upstream/mainv2-lab/lab/godot-source/` — authorized source-video atmosphere compositing
-- `upstream/mainv2-lab/lab/godot-film/` — still + WAV to film with optional MainV2 FX
-- `upstream/mainv2-lab/lab/godot-procedural/` — procedural true 3D scene + WAV + FX
-- `upstream/mainv2-lab/lab/reviews/` — historical technical review records
-- `upstream/mainv2-lab/workflow-snapshots/` — nonexecuting source workflow YAML copies
+From a GodRender checkout with Python, Git and FFmpeg:
 
-The four workflows are not active under `.github/workflows/`. No assets, reference binaries, or trained models were fabricated or silently replaced.
+```bash
+python godrender_boot.py
+python studio/stack.py
+```
 
-## Architectural authority
+Open **http://127.0.0.1:8080**. To use the browser without loading production authority first, start the Studio alone; guarded production operations require a successful bootstrap. For Windows or Termux, use `studio/start_windows.bat` or `studio/start_termux.sh`.
 
-GodRender owns native Godot scene generation, cameras, simulation, frames and signed evidence. AIVideoEdit-MainV2-Lab owns lyric/music direction, canonical FX IDs, effect gates, shot/asset authorization, film assembly and release QC. GodRender must **not** copy MainV2's canonical FX runtime as a second independent authority; use a versioned, explicitly approved adapter.
+To verify the consolidated sources and the Studio contracts:
 
-Google Drive external brain (index, not execution authority):
-- https://drive.google.com/drive/folders/17ZK0fSakXcDSGGj7EeVtF3IriMoAf1HY
-- https://docs.google.com/spreadsheets/d/1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c/edit
-- https://docs.google.com/document/d/1HKMEg_VuOKjqTDexrDXPioZFD4GxRW_tenYXbi5RjA8/edit
+```bash
+python tools/verify_consolidation.py
+PYTHONPATH=studio python -m unittest discover -s tests -p 'test_*.py' -v
+PYTHONPATH=studio python studio/selftest.py
+```
 
-Read `docs/STAGED_TRANSFER_CONTRACT.md` and `docs/SOURCE_PROVENANCE.md` before touching imported files.
+## One repository, preserved productions
 
+- **New work:** commit in `SouthPaw302/GodRender`, on reviewed branches; do not start or update a different active video repo.
+- **Historical source:** retained, unchanged under `upstream/`, and tracked by `config/verified_import_manifest.json` and `config/brain_source_index.json`.
+- **Recovered production technology:** `upstream/recovered-song-tech/` is a forensic library. Reuse its neutral method only after media authorization, current gates and representative proof.
+- **Current production authority:** `AGENTS.md` and the live guarded runtime. Do not promote rejected scenes or infer success from an archived render.
 
-## Video consolidation (October 18, 2026)
+## Important runtime compatibility boundary
 
-- Canonical MainV2 source snapshot: `upstream/mainv2-lab/current-main/` (pinned `900e3e5749ed6fa13ad91524975a9e64661e6649`).
-- Godot's existing scene implementations remain under `upstream/mainv2-lab/lab/`.
-- Browser workstation Studio port: `studio/` with `python studio/stack.py` (host with Python/Git/FFmpeg).
-- Source-only recoverable song techniques: `upstream/recovered-song-tech/`; **not approved to auto-run or reuse historical footage**.
-- Source provenance/hashes: `config/verified_import_manifest.json`; machine check `python tools/verify_consolidation.py`.
-- 100-branch discovery manifest: `config/brain_source_index.json` with exact Git SHAs.
-- [External production brain](https://docs.google.com/spreadsheets/d/1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c/edit): FX Pixel Application Atlas, Callable Capabilities, FX Recipes, Recoverable Render Lineage and Agent Boot Handshake.
-- Start by running `python godrender_boot.py`. Only a literal `AIVideoEdit OS BOOTSTRAP: PASS` and attested session permits subsequent production work.
+The visible product, project direction, agent workspace and change destination are **GodRender**. The current imported production bootstrap **still uses a legacy compatibility checkout and its existing schemas**. Those are implementation dependencies, not a second project identity, and must not be silently renamed or claimed independent. See [compatibility migration status](docs/COMPATIBILITY_DEBT.md).
 
-Details, status limits and next validation gates: [Video integration](docs/VIDEO_CONSOLIDATION.md) · [GitHub ↔ Drive brain](docs/BRAIN_INTEGRATION.md). Archived YAML is nonexecuting; CI in `.github/workflows/` is GodRender-specific.
+GodRender's GitHub checks verify the imported source, Studio HTTP and bootstrap. A full Godot → FX → music → final-film Director-accepted render is **not yet proven** by these checks.
+
+[GodRender Studio guide](studio/README.md) · [Agent boot contract](AGENTS.md) · [External brain](docs/BRAIN_INTEGRATION.md) · [Import history](docs/VIDEO_CONSOLIDATION.md)
