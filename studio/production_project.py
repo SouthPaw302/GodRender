@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 import server as base
+import native_workspaces
 from core_adapter import CORE
 
 
@@ -87,7 +88,10 @@ def _git_commit_paths(engine: Path, paths: list[Path], message: str) -> str | No
     if commit.returncode != 0:
         raise RuntimeError((commit.stderr or commit.stdout or "git commit failed")[-1200:])
     sha = _run(["git", "rev-parse", "HEAD"], engine, timeout=20)
-    return sha.stdout.strip() if sha.returncode == 0 else None
+    committed = sha.stdout.strip() if sha.returncode == 0 else None
+    if committed and engine.parent.name and (engine.parent / "godrender" / ".git").is_dir():
+        native_workspaces.mirror(engine.parent.name, engine / "projects" / engine.parent.name, committed)
+    return committed
 
 
 def _sha256_file(path: Path) -> str:
@@ -200,6 +204,9 @@ def initialize(project_id: str) -> dict:
     if not CORE.status().get("bootstrapped"):
         raise RuntimeError("canonical core is not loaded")
 
+    # GitHub-native GodRender project branch is the source of truth.
+    # The engine below remains an isolated compatibility guard checkout.
+    native_workspaces.initialize(project_id)
     engine = _engine_root(project_id)
     if engine.exists():
         return status(project_id)
@@ -254,6 +261,7 @@ def initialize(project_id: str) -> dict:
             "stderr": (boot.stderr or "")[-4000:],
         }
     _write_guard_marker(project_id)
+    native_workspaces.mirror(project_id, project_dir, _head(engine))
     return status(project_id)
 
 
@@ -408,6 +416,7 @@ def status(project_id: str) -> dict:
         "project_dir": str(project_dir) if project_dir.is_dir() else None,
         "main_commit": session.get("os_main_commit"),
         "session_id": session.get("session_id"),
+        "native_godrender": native_workspaces.status(project_id),
         "workstation_asset_sync_complete": bool(state.get("workstation_asset_sync_complete")),
         "workstation_asset_count": int(state.get("workstation_asset_count") or 0),
         "workstation_ready_asset_count": int(state.get("workstation_ready_asset_count") or 0),
