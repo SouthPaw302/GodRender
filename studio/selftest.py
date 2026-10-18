@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-REPO = ROOT.parents[1]
+REPO = ROOT.parent
 
 
 def check(condition: bool, message: str, failures: list[str]) -> None:

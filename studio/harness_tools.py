@@ -14,14 +14,16 @@ import shutil
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 import server as base
 import production_project
 from core_adapter import CORE
-from general.reusable.tools.harness_router import harness_enabled
+def harness_enabled() -> bool:
+    """Optional advisory harness flag; production still requires canonical OS."""
+    return os.environ.get("AIVE_HARNESS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
 
 SCHEMAS = [
     {

@@ -21,6 +21,26 @@ jobs:
         run: python3 -m compileall -q studio upstream godrender_boot.py tools
       - name: Import GodRender core adapter with no production side effects
         run: PYTHONPATH=studio python3 -c 'import core_adapter; assert "AIVideoEdit-MainV2-Lab" in core_adapter.CANONICAL_REMOTE; print("ADAPTER IMPORT PASS")'
+      - name: Verify full Studio Python import and tool graph
+        run: PYTHONPATH=studio python3 -c 'import stack; print("STUDIO IMPORT PASS", len(stack.all_tool_schemas()))'
+      - name: Serve browser Studio and verify HTTP endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AIVE_RUNTIME="$RUNNER_TEMP/godrender-studio"
+          python3 studio/stack.py > /tmp/godrender-studio.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true; cat /tmp/godrender-studio.log' EXIT
+          ready=0
+          for _ in $(seq 1 35); do
+            if curl -fsS http://127.0.0.1:8080/api/health > /tmp/studio-health.json; then ready=1; break; fi
+            sleep 1
+          done
+          test "$ready" -eq 1
+          curl -fsS http://127.0.0.1:8080/api/system > /tmp/studio-system.json
+          curl -fsS http://127.0.0.1:8080/api/core > /tmp/studio-core.json
+          python3 -c 'import json; assert json.load(open("/tmp/studio-health.json"))["ok"] is True'
+          echo 'BROWSER STUDIO HTTP SMOKE PASS'
   canonical-os-boot:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
