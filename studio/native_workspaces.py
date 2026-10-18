@@ -54,12 +54,19 @@ def status(project_id):
     path=path_for(project_id)
     if not (path/".git").is_dir():
         return {"exists":False,"branch":"song/"+_slug(project_id),"remote_published":False}
+    receipt_path=path.parent/"native_publish.json"
+    try:
+        receipt=json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError,ValueError):
+        receipt={}
+    committed=_git(path,"rev-parse","HEAD")
+    published=receipt.get("remote_published") is True and receipt.get("commit")==committed
     return {"exists":True,"repo":"SouthPaw302/GodRender",
             "branch":_git(path,"branch","--show-current"),
-            "head":_git(path,"rev-parse","HEAD"),
+            "head":committed,
             "path":str(path),
-            "remote_published":False,
-            "status":"LOCAL_NATIVE_BRANCH; GITHUB_PUSH_REQUIRES_EXPLICIT_AUTHORIZATION"}
+            "remote_published":published,
+            "status":"PUBLISHED_NATIVE_BRANCH" if published else "LOCAL_NATIVE_BRANCH; GITHUB_PUSH_REQUIRES_EXPLICIT_AUTHORIZATION"}
 
 def mirror(project_id, legacy_project_dir, source_commit):
     """Commit guarded, small production JSON/notes into the only active Git workspace."""
@@ -91,3 +98,38 @@ def mirror(project_id, legacy_project_dir, source_commit):
         elif changes.returncode!=0:
             raise RuntimeError("native Git index check failed")
         return status(project_id)
+
+
+def publish(project_id, *, explicit_approval=False):
+    """Only an explicit user-requested push can publish a local native song branch."""
+    import os
+    import tempfile
+    if explicit_approval is not True:
+        raise PermissionError("explicit native GodRender branch publication approval required")
+    token=os.environ.get("GODRENDER_GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if not token:
+        raise RuntimeError("GODRENDER_GITHUB_TOKEN / GH_TOKEN is not configured")
+    with MIRROR_LOCK:
+        path=path_for(project_id)
+        current=status(project_id)
+        if not current["exists"] or current["branch"]!="song/"+_slug(project_id):
+            raise RuntimeError("cannot publish an absent or mismatched native branch")
+        with tempfile.TemporaryDirectory() as temp:
+            askpass=Path(temp)/"askpass.sh"
+            askpass.write_text("#!/bin/sh\ncase \"$1\" in *Username*) printf 'x-access-token';; *) printf '%s' \"$GODRENDER_GITHUB_TOKEN\";; esac\n")
+            askpass.chmod(0o700)
+            env=dict(os.environ)
+            env["GODRENDER_GITHUB_TOKEN"]=token
+            env["GIT_ASKPASS"]=str(askpass)
+            env["GIT_TERMINAL_PROMPT"]="0"
+            command=["git","-c","credential.helper=","push","https://github.com/SouthPaw302/GodRender.git",
+                     "HEAD:refs/heads/"+current["branch"]]
+            proc=subprocess.run(command,cwd=str(path),env=env,
+                                capture_output=True,text=True,timeout=180,check=False)
+            if proc.returncode:
+                raise RuntimeError("GodRender branch push failed without force: "+(proc.stderr or proc.stdout)[-600:])
+        receipt={"schema":"godrender.native-publish.v1","project_id":project_id,
+                 "repo":"SouthPaw302/GodRender","branch":current["branch"],
+                 "commit":current["head"],"remote_published":True}
+        (path.parent/"native_publish.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
+        return receipt
