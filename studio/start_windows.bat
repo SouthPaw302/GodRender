@@ -20,6 +20,6 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-echo Starting AIVideoEdit Alpha Stack...
+echo Starting GodRender Studio...
 %PY% stack.py
 pause

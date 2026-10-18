@@ -1,146 +1,43 @@
-# AIVideoEdit Studio — Browser-First Alpha Stack
+# GodRender Studio
 
-A single-user browser-controlled production workstation. The browser is the normal human interface; the execution service can run on any suitable host. GitHub remains source control and the canonical AIVideoEdit system authority. Runtime media, processing, QC and optional external mirroring stay outside GitHub Actions storage.
+The GodRender browser workstation uses a six-stage direction-to-release production workflow backed by Python, FFmpeg, reusable FX and explicit technical/creative acceptance.
 
-## Architecture
+## Start
 
-Browser Studio / External Agent / Future ChatGPT App
--> Provider-neutral Tool API
--> Local workstation service
--> Isolated canonical AIVideoEdit core from current `main`
--> Per-project canonical `song/<slug>` production workspace
--> Worker queue / FFmpeg / reusable FX / guards / QC / storage
-
-The browser is optional for agent-native use. An external agent with Git/sandbox access can still clone the public repository and operate AIVideoEdit directly.
-
-## Run the browser workstation
-
-From a host with Python, Git and FFmpeg:
+At the **GodRender repository root**:
 
 ```bash
-python prototype/backend_gui/stack.py
+python godrender_boot.py
+python studio/stack.py
 ```
 
-Then open `http://127.0.0.1:8080`. Studio binds only to loopback by default.
+Open `http://127.0.0.1:8080`. The full app lives in `studio/`; `studio/server.py` is a smaller fallback. Windows: `studio/start_windows.bat`. Termux: `bash studio/start_termux.sh`.
 
-LAN access is opt-in. Set both a non-loopback `AIVE_HOST` and an
-`AIVE_STUDIO_TOKEN` of at least 32 bytes; startup fails closed otherwise.
-The browser requests the token once and exchanges it for an HttpOnly,
-same-site session cookie. The remote-agent bridge keeps its separate
-`AIVE_REMOTE_TOKEN` authorization boundary.
+Studio listens on loopback unless configured otherwise. For LAN binding a strong access token is mandatory. Runtime media, proxies and logs are local by default; optional storage mirroring uses `rclone`.
 
-Termux can host the same browser workstation:
+## Compatibility settings
+
+Legacy configuration environment keys remain operational so deployed workstations do not break: `AIVE_HOST`, `AIVE_PORT`, `AIVE_STUDIO_TOKEN`, `AIVE_RUNTIME`, `AIVE_WORKERS`, `AIVE_MAX_UPLOAD`, `AIVE_RCLONE_REMOTE`, and `AIVE_CORE_AUTOBOOT`. These are compatibility **identifiers**, not the product name. Renaming their wire contracts requires a separately tested migration.
+
+## Interfaces
+
+- `GET /api/health`, `/api/system`, `/api/core`, `/api/tools`
+- `POST /api/core/bootstrap`, `/api/tools/call`
+- `python studio/godrender_mcp.py` — first-party MCP entry; older script filename remains a forwarding-compatible adapter.
+- Tool families: project/media lifecycle, production stages, FX gate, shot proof, assembly, final QC, archive and optional harness.
+
+## Rules and acceptance
+
+GodRender is the single active project. Keep old song production methods discoverable through the [External Brain](https://docs.google.com/spreadsheets/d/1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c/edit); never treat their footage as automatically approved.
+
+Current core bootstrap still uses a pinned legacy production-OS checkout to validate source contracts and emit historic session schemas. Studio may correctly show 'core not loaded' when that compatibility checkout cannot be validated. Read `docs/COMPATIBILITY_DEBT.md` before changing its implementation.
+
+## Verification
 
 ```bash
-cd AIVideoEdit/prototype/backend_gui
-bash start_termux.sh
+python tools/verify_consolidation.py
+PYTHONPATH=studio python -m unittest discover -s tests -p 'test_*.py' -v
+PYTHONPATH=studio python studio/selftest.py
 ```
 
-`server.py` remains the bare-alpha fallback. `stack.py` is the full runtime.
-
-Environment overrides:
-
-- `AIVE_HOST` (default `127.0.0.1`)
-- `AIVE_STUDIO_TOKEN` (required for every non-loopback bind)
-- `AIVE_PORT` (default `8080`)
-- `AIVE_RUNTIME` (default `prototype/backend_gui/.runtime`)
-- `AIVE_MAX_UPLOAD` (default 2 GiB)
-- `AIVE_WORKERS` (default `2`)
-- `AIVE_RCLONE_REMOTE` (optional external mirror target)
-- `AIVE_CORE_AUTOBOOT=1` (optional background canonical-core load at startup)
-
-## Canonical core adapter
-
-The workstation branch is **not** treated as a production branch. Loading the production engine creates an isolated runtime checkout of exact current `main`, then runs that checkout's own `bootstrap.py` and current-main guard as `main`.
-
-This provides the workstation with the canonical:
-
-- production contract
-- media capability matrix
-- FX v2 registry
-- reusable system files
-- current production/narrative guards
-
-The core cache lives under the runtime directory, not in the prototype source tree.
-
-## Canonical project bridge
-
-A browser project can be connected to the original production system without switching branches in the workstation repository.
-
-`production.initialize` creates a separate local engine checkout for that project, creates its isolated `song/<slug>` branch, writes only a minimal `INITIALIZED` compatibility scaffold, and then runs the **real current-main production guard**. Later stage progression remains governed by the canonical project files and guards.
-
-Unchecked or invalid production state is not promoted by the bridge.
-
-## Tool API
-
-`stack.py` exposes a provider-neutral machine interface intended to remain stable across browser, agent, hosted API and ChatGPT integrations:
-
-- `GET /api/tools`
-- `POST /api/tools/call`
-- `GET /api/core`
-- `POST /api/core/bootstrap`
-
-Current tool families include:
-
-- `core.status`, `core.bootstrap`
-- `capabilities.list`
-- `fx.list`
-- `project.list`, `project.create`, `project.status`, `project.prepare`
-- `production.initialize`, `production.status`, `production.guard`
-- `media.list`, `media.prepare`
-- `storage.status`, `storage.sync`
-
-Tool call shape:
-
-```json
-{
-  "name": "project.status",
-  "arguments": {"project_id": "my-video"}
-}
-```
-
-This is the seam a future ChatGPT App/plugin, external agent, MCP adapter or private hosted API can use without depending on Studio internals.
-
-## Workstation features
-
-- multiple persistent projects
-- direct browser media ingest
-- restart-safe project/asset/job state
-- bounded configurable worker queue
-- project-wide preparation
-- SHA-256 asset identity
-- FFprobe metadata inspection
-- thumbnails and byte-range browser playback
-- H.264/AAC proxy generation
-- six-point review-frame extraction
-- decode/integrity QC
-- asset deletion with derivative cleanup
-- project-scoped job history
-- storage/disk/queue telemetry
-- optional external project mirror through rclone
-- canonical current-main core loading
-- isolated canonical production workspace per browser project
-- provider-neutral Tool API
-- runtime media excluded from Git
-
-## External storage
-
-Local media remains authoritative during alpha. External storage is an optional mirror. Install/configure `rclone` and set `AIVE_RCLONE_REMOTE` to an R2/B2/S3-compatible or other rclone-supported target. Credentials remain outside browser JavaScript and Git.
-
-## Verified work
-
-The media path was exercised end-to-end in the development sandbox with H.264/AAC media: ingest, SHA-256, metadata probe, thumbnail, H.264/AAC proxy, six review frames, HTTP 206 playback, decode/integrity QC and project manifest all completed successfully. The bounded worker runtime was separately exercised with three preparation jobs submitted together; proxy, review-frame extraction and QC completed through two workers.
-
-The new canonical-core/project bridge is deliberately fail-closed. This development sandbox could not DNS-resolve GitHub for a fresh branch clone during its final smoke test, so the repository does **not** claim that the new isolated current-main bootstrap/project initialization path has been externally executed here yet. It must pass its real bootstrap/guard on a networked host before that claim is made.
-
-## Next build layers
-
-- canonical source-ingest synchronization from Studio assets into the production project manifests
-- stage-transition API that edits evidence first and then runs the guard
-- scene/shot model and shot-package operations
-- reusable FX execution through canonical registry IDs
-- render/assembly orchestration
-- final production QC/export
-- agent chat/provider adapter in Studio
-- MCP / ChatGPT App surface over the same Tool API
-- TLS termination and managed identity for public or monetized hosted use
+The GitHub smoke test verifies boot, server endpoints, and sources; this does **not** substitute for a real film with accepted media, audio, FX and Director visual QC.

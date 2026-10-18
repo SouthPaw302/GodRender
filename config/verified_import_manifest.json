@@ -23,24 +23,27 @@
   "files": [
     {
       "path": "README.md",
-      "git_blob_sha": "456486bb3d34ae22a3fcf4ca5540382a124e10a4",
+      "git_blob_sha": "07b29fba040cfb24df298eb0674792604424599b",
       "role": "godrender_integration_document",
-      "delta": "Post-import GodRender root README was deliberately updated for the integration"
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "docs/SOURCE_PROVENANCE.md",
-      "git_blob_sha": "b97ee630c3949b9dc40b5adfb4a3a71c1b679f05",
-      "role": "preserved_existing_godrender"
+      "git_blob_sha": "fde83199aafbb6461ddb5702bfea78657a738e0d",
+      "role": "preserved_existing_godrender",
+      "delta": "Archived import provenance document updated to mark historical references as nonactive"
     },
     {
       "path": "docs/STAGED_TRANSFER_CONTRACT.md",
-      "git_blob_sha": "bc5d5b64808980e3cc87b2e3ffc8eabbd48816ca",
-      "role": "preserved_existing_godrender"
+      "git_blob_sha": "938c85f5e0e54679e56be4513562f67166d8573f",
+      "role": "preserved_existing_godrender",
+      "delta": "Archived import provenance document updated to mark historical references as nonactive"
     },
     {
       "path": "godrender_boot.py",
-      "git_blob_sha": "69a2b10ebd4c69ddc9562acd5bd32d2c53aea2fc",
-      "role": "existing"
+      "git_blob_sha": "ef318c674836dbaf7e4b68a49e37de3b589f4d0e",
+      "role": "existing",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/.gitignore",
@@ -53,49 +56,53 @@
     },
     {
       "path": "studio/README.md",
-      "git_blob_sha": "af0f8a46a11a9220908d027e1625756fb8e91892",
+      "git_blob_sha": "149c78b95ac9c34ff0648c7a6e51b35595d1f82c",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/README.md",
-      "upstream_blob_sha": "af0f8a46a11a9220908d027e1625756fb8e91892"
+      "upstream_blob_sha": "af0f8a46a11a9220908d027e1625756fb8e91892",
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "studio/aivideo_mcp.py",
-      "git_blob_sha": "b1eb9a5866744400c9871c121cd973b733f7062b",
+      "git_blob_sha": "14bb4a5d9a905489e76dcd52720753f67ab22e92",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/aivideo_mcp.py",
-      "upstream_blob_sha": "b1eb9a5866744400c9871c121cd973b733f7062b"
+      "upstream_blob_sha": "b1eb9a5866744400c9871c121cd973b733f7062b",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/core_adapter.py",
-      "git_blob_sha": "a163db8f1b3ab616ab477b8f71bf4161f3e6cf78",
+      "git_blob_sha": "e42298e9cf8eff617a2b5a2234edf297ef00d08c",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/core_adapter.py",
       "upstream_blob_sha": "230d33a63cceac3b257ac22daa7edef50b1b675e",
-      "delta": "GodRender-specific Studio reliability/efficiency fix; upstream canonical source preserved separately"
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "studio/deepseek_harness/README.md",
-      "git_blob_sha": "dbfe0300fe89c0f8b3d2e55fd3a6a2c54c68f7f0",
+      "git_blob_sha": "dc724bbe08cea2dbc2e6e75d732ef028559dc5a0",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/deepseek_harness/README.md",
-      "upstream_blob_sha": "dbfe0300fe89c0f8b3d2e55fd3a6a2c54c68f7f0"
+      "upstream_blob_sha": "dbfe0300fe89c0f8b3d2e55fd3a6a2c54c68f7f0",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/deepseek_harness/cordis.patch.yml.example",
-      "git_blob_sha": "92672826bb4497e83da701c296ce76ecd3fe6f90",
+      "git_blob_sha": "fab8fdac9009bedecfb665c3a30d1d8e5c333d98",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/deepseek_harness/cordis.patch.yml.example",
-      "upstream_blob_sha": "92672826bb4497e83da701c296ce76ecd3fe6f90"
+      "upstream_blob_sha": "92672826bb4497e83da701c296ce76ecd3fe6f90",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/deepseek_harness/production_probe.py",
@@ -226,12 +233,13 @@
     },
     {
       "path": "studio/production_project.py",
-      "git_blob_sha": "0f295c9f5a5bbfe0733ae6efe9eed3eed6cb5401",
+      "git_blob_sha": "a584d51c007ad5d9409b8efd44fc24c235ea405e",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_project.py",
-      "upstream_blob_sha": "0f295c9f5a5bbfe0733ae6efe9eed3eed6cb5401"
+      "upstream_blob_sha": "0f295c9f5a5bbfe0733ae6efe9eed3eed6cb5401",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/production_proofs.py",
@@ -308,59 +316,63 @@
     },
     {
       "path": "studio/server.py",
-      "git_blob_sha": "00816636365b904c8457d4915fb8e92ab7b32683",
+      "git_blob_sha": "8ad19ae6b06c66fc0b80e7d62b5a06a7701994e2",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/server.py",
-      "upstream_blob_sha": "00816636365b904c8457d4915fb8e92ab7b32683"
+      "upstream_blob_sha": "00816636365b904c8457d4915fb8e92ab7b32683",
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "studio/stack.py",
-      "git_blob_sha": "442fbfec472c5b435a19a524cb8413d8c8cc244d",
+      "git_blob_sha": "bfc8670167e61f4c5f658d8fe8e95e0f109529d3",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/stack.py",
       "upstream_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67",
-      "delta": "GodRender-specific Studio reliability/efficiency fix; upstream canonical source preserved separately"
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/start_termux.sh",
-      "git_blob_sha": "4209ddf7b585ee4ecfe854e7f746638d50a9e3f4",
+      "git_blob_sha": "9fb4c590c93a18e31410cb6d70e36c2894fd6b11",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/start_termux.sh",
-      "upstream_blob_sha": "4209ddf7b585ee4ecfe854e7f746638d50a9e3f4"
+      "upstream_blob_sha": "4209ddf7b585ee4ecfe854e7f746638d50a9e3f4",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/start_windows.bat",
-      "git_blob_sha": "66f863699c7283faee18d4d69f436212994ee2aa",
+      "git_blob_sha": "903820b64c9cab5e9d44c98639356d9f933b8ce0",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/start_windows.bat",
-      "upstream_blob_sha": "66f863699c7283faee18d4d69f436212994ee2aa"
+      "upstream_blob_sha": "66f863699c7283faee18d4d69f436212994ee2aa",
+      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
     },
     {
       "path": "studio/static/app.js",
-      "git_blob_sha": "cb3a6ed675e1288376aaecfcc824aaa5a3c7c798",
+      "git_blob_sha": "755177762244163fef11cf7c258d5490bd934194",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/static/app.js",
-      "upstream_blob_sha": "cb3a6ed675e1288376aaecfcc824aaa5a3c7c798"
+      "upstream_blob_sha": "cb3a6ed675e1288376aaecfcc824aaa5a3c7c798",
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "studio/static/index.html",
-      "git_blob_sha": "8e1b6007240c66c0aac99e1da630f4218afb6529",
+      "git_blob_sha": "164de79d75f1cd65cc0838f1341cf4de0bbf2228",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/static/index.html",
       "upstream_blob_sha": "e796337843a4bb5f5c57482c70a5fb6e2743f39c",
-      "delta": "GodRender port adaptation (see integration commit 30822b7)"
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "studio/static/production_ui.js",
@@ -436,13 +448,13 @@
     },
     {
       "path": "studio/tool_api.py",
-      "git_blob_sha": "9d051290344c830721903a167d4797e0ac7b8d98",
+      "git_blob_sha": "7d2bb03fee59587be7dc4a324ed00cf87c5c5532",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/tool_api.py",
       "upstream_blob_sha": "b3977b53803e3159cba668bb1943ae25eedfb95c",
-      "delta": "GodRender port adaptation (see integration commit 30822b7)"
+      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
     },
     {
       "path": "upstream/mainv2-lab/current-main/.github/requirements/render-runner.lock.txt",

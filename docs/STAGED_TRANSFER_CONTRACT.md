@@ -1,4 +1,6 @@
-# Stage Gate — GodRender + MainV2 hybrid integration
+# Archived transfer contract (provenance, not a current project boundary)
+
+This was the initial cross-repository consolidation plan. **GodRender is now the only active project**. Older names and links below are historical evidence. For current operations use [AGENTS.md](../AGENTS.md) and [compatibility status](COMPATIBILITY_DEBT.md).
 
 ## Scope
 

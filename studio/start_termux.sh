@@ -6,5 +6,5 @@ command -v ffmpeg >/dev/null || { echo "FFmpeg missing. Run: pkg install ffmpeg"
 export AIVE_HOST="${AIVE_HOST:-127.0.0.1}"
 export AIVE_PORT="${AIVE_PORT:-8080}"
 export AIVE_WORKERS="${AIVE_WORKERS:-2}"
-echo "Starting AIVideoEdit Alpha Stack on port $AIVE_PORT with $AIVE_WORKERS workers..."
+echo "Starting GodRender Studio on port $AIVE_PORT with $AIVE_WORKERS workers..."
 exec python stack.py

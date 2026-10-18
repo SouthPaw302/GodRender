@@ -1,4 +1,6 @@
-# Source Provenance
+# Historical Source Provenance
+
+This document preserves original Git SHA and source URLs for reproducibility; it does **not** identify another active project. All new work is in **GodRender**. See [compatibility migration status](COMPATIBILITY_DEBT.md).
 
 Source repository: `SouthPaw302/AIVideoEdit-MainV2-Lab`
 Source branch: `test/godot-render`

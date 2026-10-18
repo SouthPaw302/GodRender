@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Minimal stdio MCP bridge exposing AIVideoEdit Studio tools to agent harnesses.
+"""Minimal stdio MCP bridge exposing GodRender Studio tools to agent harnesses.
 
 No DeepSeek SDK dependency is required here. DeepSeek Harness owns the MCP
-client; AIVideoEdit remains the production authority and executes the same
+client; GodRender remains the production authority and executes the same
 Tool API used by Studio.
 """
 from __future__ import annotations
@@ -17,7 +17,7 @@ import tool_api
 import operating_tools
 import harness_tools
 
-SERVER_NAME = "aivideoedit"
+SERVER_NAME = "godrender"
 SERVER_VERSION = "0.1.0-prototype"
 SUPPORTED_LEGACY_PROTOCOLS = ("2025-11-25", "2025-06-18", "2025-03-26")
 DEFAULT_PROTOCOL = SUPPORTED_LEGACY_PROTOCOLS[0]
@@ -105,7 +105,7 @@ def _handle(message: dict):
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
                 "instructions": (
-                    "AIVideoEdit is the production authority. Call harness__context for the active "
+                    "GodRender is the production authority. Call harness__context for the active "
                     "project before stage-changing work. Use the exposed production tools instead of "
                     "editing canonical state by hand. Canonical guards may reject invalid transitions. "
                     "This prototype must not mutate repository main."
@@ -129,7 +129,7 @@ def _handle(message: dict):
             return _result(
                 request_id,
                 {
-                    "content": [{"type": "text", "text": f"Unknown AIVideoEdit tool: {external}"}],
+                    "content": [{"type": "text", "text": f"Unknown GodRender tool: {external}"}],
                     "isError": True,
                 },
             )
@@ -162,7 +162,7 @@ def main() -> int:
     try:
         _initialize_runtime()
     except Exception as exc:
-        print(f"AIVideoEdit MCP startup failed: {exc}", file=sys.stderr, flush=True)
+        print(f"GodRender MCP startup failed: {exc}", file=sys.stderr, flush=True)
         return 2
 
     for raw in sys.stdin:

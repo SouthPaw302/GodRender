@@ -1,15 +1,15 @@
 # Example DeepSeek Harness profile patch.
-# Replace /absolute/path/to/AIVideoEdit before use.
-- id: mcp-aivideoedit
+# Replace /absolute/path/to/GodRender before use.
+- id: mcp-godrender
   name: '@deepseek-ai/dsh-mcp-client'
   config:
-    serverName: aivideo
+    serverName: godrender
     transport: stdio
     command: python
     args:
-      - prototype/backend_gui/aivideo_mcp.py
+      - studio/godrender_mcp.py
     env: {}
-    cwd: /absolute/path/to/AIVideoEdit
+    cwd: /absolute/path/to/GodRender
     toolCallTimeoutMs: 300000
     failOnStartupError: false
     maxInstructionBytes: 32768
