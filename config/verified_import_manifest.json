@@ -126,12 +126,13 @@
     },
     {
       "path": "studio/harness_tools.py",
-      "git_blob_sha": "f05cddbed623644ff4893af8007b15292953f4d4",
+      "git_blob_sha": "6b7a70ff20d8739a56aec6c5087c65758a7d5729",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/harness_tools.py",
-      "upstream_blob_sha": "f05cddbed623644ff4893af8007b15292953f4d4"
+      "upstream_blob_sha": "f05cddbed623644ff4893af8007b15292953f4d4",
+      "delta": "Ported Studio code adapted to GodRender root; source version retained in upstream Lab SHA."
     },
     {
       "path": "studio/operating_tools.py",
@@ -297,12 +298,13 @@
     },
     {
       "path": "studio/selftest.py",
-      "git_blob_sha": "a18c7e061803a41aeb10aea16d713f2af2f9ffb5",
+      "git_blob_sha": "6a9e4d13239806b24085ba171908b296ca827694",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/selftest.py",
-      "upstream_blob_sha": "a18c7e061803a41aeb10aea16d713f2af2f9ffb5"
+      "upstream_blob_sha": "a18c7e061803a41aeb10aea16d713f2af2f9ffb5",
+      "delta": "Ported Studio code adapted to GodRender root; source version retained in upstream Lab SHA."
     },
     {
       "path": "studio/server.py",
