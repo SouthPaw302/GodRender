@@ -1,0 +1,2592 @@
+{
+  "schema": "godrender.import-provenance.v1",
+  "generated_date": "2026-10-18",
+  "source_authority": {
+    "repository": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+    "commit": "900e3e5749ed6fa13ad91524975a9e64661e6649"
+  },
+  "original_godrender_main": "cdf69c11c121a61a605dec09da4e96cf5418f24d",
+  "notes": [
+    "SHA comparison is Git blob content identity, not runtime success.",
+    "Historical song renderers are archived for reusable algorithms and evidence, not approved source media.",
+    "Studio paths are relocated; deviations are marked by delta.",
+    "GitHub workflow snapshots in upstream are intentionally inactive."
+  ],
+  "summary": {
+    "preserved_existing_godrender": 39,
+    "existing": 1,
+    "studio_port": 44,
+    "canonical_snapshot": 169,
+    "inactive_workflow_snapshot": 20,
+    "historical_song_tech": 24
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "456486bb3d34ae22a3fcf4ca5540382a124e10a4",
+      "role": "godrender_integration_document",
+      "delta": "Post-import GodRender root README was deliberately updated for the integration"
+    },
+    {
+      "path": "docs/SOURCE_PROVENANCE.md",
+      "git_blob_sha": "b97ee630c3949b9dc40b5adfb4a3a71c1b679f05",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "docs/STAGED_TRANSFER_CONTRACT.md",
+      "git_blob_sha": "bc5d5b64808980e3cc87b2e3ffc8eabbd48816ca",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "godrender_boot.py",
+      "git_blob_sha": "69a2b10ebd4c69ddc9562acd5bd32d2c53aea2fc",
+      "role": "existing"
+    },
+    {
+      "path": "studio/.gitignore",
+      "git_blob_sha": "8db78a061b482747f89849f1bd26347cf4e770b9",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/.gitignore",
+      "upstream_blob_sha": "8db78a061b482747f89849f1bd26347cf4e770b9"
+    },
+    {
+      "path": "studio/README.md",
+      "git_blob_sha": "af0f8a46a11a9220908d027e1625756fb8e91892",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/README.md",
+      "upstream_blob_sha": "af0f8a46a11a9220908d027e1625756fb8e91892"
+    },
+    {
+      "path": "studio/aivideo_mcp.py",
+      "git_blob_sha": "b1eb9a5866744400c9871c121cd973b733f7062b",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/aivideo_mcp.py",
+      "upstream_blob_sha": "b1eb9a5866744400c9871c121cd973b733f7062b"
+    },
+    {
+      "path": "studio/core_adapter.py",
+      "git_blob_sha": "9e37150e28396b9e37207613630eab7db7381ed7",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/core_adapter.py",
+      "upstream_blob_sha": "230d33a63cceac3b257ac22daa7edef50b1b675e",
+      "delta": "GodRender port adaptation (see integration commit 30822b7)"
+    },
+    {
+      "path": "studio/deepseek_harness/README.md",
+      "git_blob_sha": "dbfe0300fe89c0f8b3d2e55fd3a6a2c54c68f7f0",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/deepseek_harness/README.md",
+      "upstream_blob_sha": "dbfe0300fe89c0f8b3d2e55fd3a6a2c54c68f7f0"
+    },
+    {
+      "path": "studio/deepseek_harness/cordis.patch.yml.example",
+      "git_blob_sha": "92672826bb4497e83da701c296ce76ecd3fe6f90",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/deepseek_harness/cordis.patch.yml.example",
+      "upstream_blob_sha": "92672826bb4497e83da701c296ce76ecd3fe6f90"
+    },
+    {
+      "path": "studio/deepseek_harness/production_probe.py",
+      "git_blob_sha": "23266dab398b680da087c7cbe1368d5d6ba8db1d",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/deepseek_harness/production_probe.py",
+      "upstream_blob_sha": "23266dab398b680da087c7cbe1368d5d6ba8db1d"
+    },
+    {
+      "path": "studio/delivery_archive.py",
+      "git_blob_sha": "098c837427ea1665e4b94e40fdde4179784188b9",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/delivery_archive.py",
+      "upstream_blob_sha": "098c837427ea1665e4b94e40fdde4179784188b9"
+    },
+    {
+      "path": "studio/harness_selftest.py",
+      "git_blob_sha": "0ebe0d05794600878b7a89ee903c40cece518a7c",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/harness_selftest.py",
+      "upstream_blob_sha": "0ebe0d05794600878b7a89ee903c40cece518a7c"
+    },
+    {
+      "path": "studio/harness_tools.py",
+      "git_blob_sha": "6b7a70ff20d8739a56aec6c5087c65758a7d5729",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/harness_tools.py",
+      "upstream_blob_sha": "f05cddbed623644ff4893af8007b15292953f4d4",
+      "delta": "Ported Studio code adapted to GodRender root; source version retained in upstream Lab SHA."
+    },
+    {
+      "path": "studio/operating_tools.py",
+      "git_blob_sha": "02d6a21c462b0ff145c851d6278c0ff7d9f03ece",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/operating_tools.py",
+      "upstream_blob_sha": "02d6a21c462b0ff145c851d6278c0ff7d9f03ece"
+    },
+    {
+      "path": "studio/probes/mainv2_micro_production.py",
+      "git_blob_sha": "bb23ebe1ead166735e8835d804f23384ddd6abf3",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/probes/mainv2_micro_production.py",
+      "upstream_blob_sha": "bb23ebe1ead166735e8835d804f23384ddd6abf3"
+    },
+    {
+      "path": "studio/production_analysis.py",
+      "git_blob_sha": "664a7ba16a7b5840d3b25022c8424819e694a72b",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_analysis.py",
+      "upstream_blob_sha": "664a7ba16a7b5840d3b25022c8424819e694a72b"
+    },
+    {
+      "path": "studio/production_approach.py",
+      "git_blob_sha": "10c4ffced5627dd6c139669aef0c22061237ce95",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_approach.py",
+      "upstream_blob_sha": "10c4ffced5627dd6c139669aef0c22061237ce95"
+    },
+    {
+      "path": "studio/production_archive.py",
+      "git_blob_sha": "af06b301d2ec0f04372c3920b1e2f318204083ad",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_archive.py",
+      "upstream_blob_sha": "af06b301d2ec0f04372c3920b1e2f318204083ad"
+    },
+    {
+      "path": "studio/production_assembly.py",
+      "git_blob_sha": "091535138344b8d22c1db314c6a4de2e74c16e1e",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_assembly.py",
+      "upstream_blob_sha": "091535138344b8d22c1db314c6a4de2e74c16e1e"
+    },
+    {
+      "path": "studio/production_final_qc.py",
+      "git_blob_sha": "3fac39ea302f4ce27cbec9b268a890089fd7e436",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_final_qc.py",
+      "upstream_blob_sha": "3fac39ea302f4ce27cbec9b268a890089fd7e436"
+    },
+    {
+      "path": "studio/production_fx.py",
+      "git_blob_sha": "498daa3d114ed198e0ca31cc84349f7a58554d6c",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_fx.py",
+      "upstream_blob_sha": "498daa3d114ed198e0ca31cc84349f7a58554d6c"
+    },
+    {
+      "path": "studio/production_generated.py",
+      "git_blob_sha": "2b6bb3770f19c1e5ea9b969e9d05fd7c6a7782ea",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_generated.py",
+      "upstream_blob_sha": "2b6bb3770f19c1e5ea9b969e9d05fd7c6a7782ea"
+    },
+    {
+      "path": "studio/production_operating_order.py",
+      "git_blob_sha": "eed1a8bf8700cf4d93a1898b7b36371b38b1696b",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_operating_order.py",
+      "upstream_blob_sha": "eed1a8bf8700cf4d93a1898b7b36371b38b1696b"
+    },
+    {
+      "path": "studio/production_project.py",
+      "git_blob_sha": "0f295c9f5a5bbfe0733ae6efe9eed3eed6cb5401",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_project.py",
+      "upstream_blob_sha": "0f295c9f5a5bbfe0733ae6efe9eed3eed6cb5401"
+    },
+    {
+      "path": "studio/production_proofs.py",
+      "git_blob_sha": "dd5309c07f18c9b2c624e9062fd99ba2928fe909",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_proofs.py",
+      "upstream_blob_sha": "dd5309c07f18c9b2c624e9062fd99ba2928fe909"
+    },
+    {
+      "path": "studio/production_shots.py",
+      "git_blob_sha": "92195b8564a94090ba41f7b63536532e03b54a32",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_shots.py",
+      "upstream_blob_sha": "92195b8564a94090ba41f7b63536532e03b54a32"
+    },
+    {
+      "path": "studio/production_stage.py",
+      "git_blob_sha": "ef806f9dd90b4feb58daeb05a38d1c16e4ca79e5",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_stage.py",
+      "upstream_blob_sha": "ef806f9dd90b4feb58daeb05a38d1c16e4ca79e5"
+    },
+    {
+      "path": "studio/production_storyboard.py",
+      "git_blob_sha": "d57d3b6cf100a9013af7a1ce9de1cafd2e7b729c",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/production_storyboard.py",
+      "upstream_blob_sha": "d57d3b6cf100a9013af7a1ce9de1cafd2e7b729c"
+    },
+    {
+      "path": "studio/remote_agent_client.py",
+      "git_blob_sha": "d6c543a389aa774c0a59a9cba249cc19cc84342b",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/remote_agent_client.py",
+      "upstream_blob_sha": "d6c543a389aa774c0a59a9cba249cc19cc84342b"
+    },
+    {
+      "path": "studio/remote_bridge.py",
+      "git_blob_sha": "e03336cc39e4f58b63e538e4b45a7b8722d4276a",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/remote_bridge.py",
+      "upstream_blob_sha": "e03336cc39e4f58b63e538e4b45a7b8722d4276a"
+    },
+    {
+      "path": "studio/runtime_gatekeeper.py",
+      "git_blob_sha": "b38dffb0ffed9d32636a2d043ee14754d59c8b16",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/runtime_gatekeeper.py",
+      "upstream_blob_sha": "b38dffb0ffed9d32636a2d043ee14754d59c8b16"
+    },
+    {
+      "path": "studio/selftest.py",
+      "git_blob_sha": "6a9e4d13239806b24085ba171908b296ca827694",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/selftest.py",
+      "upstream_blob_sha": "a18c7e061803a41aeb10aea16d713f2af2f9ffb5",
+      "delta": "Ported Studio code adapted to GodRender root; source version retained in upstream Lab SHA."
+    },
+    {
+      "path": "studio/server.py",
+      "git_blob_sha": "00816636365b904c8457d4915fb8e92ab7b32683",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/server.py",
+      "upstream_blob_sha": "00816636365b904c8457d4915fb8e92ab7b32683"
+    },
+    {
+      "path": "studio/stack.py",
+      "git_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/stack.py",
+      "upstream_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67"
+    },
+    {
+      "path": "studio/start_termux.sh",
+      "git_blob_sha": "4209ddf7b585ee4ecfe854e7f746638d50a9e3f4",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/start_termux.sh",
+      "upstream_blob_sha": "4209ddf7b585ee4ecfe854e7f746638d50a9e3f4"
+    },
+    {
+      "path": "studio/start_windows.bat",
+      "git_blob_sha": "66f863699c7283faee18d4d69f436212994ee2aa",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/start_windows.bat",
+      "upstream_blob_sha": "66f863699c7283faee18d4d69f436212994ee2aa"
+    },
+    {
+      "path": "studio/static/app.js",
+      "git_blob_sha": "cb3a6ed675e1288376aaecfcc824aaa5a3c7c798",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/app.js",
+      "upstream_blob_sha": "cb3a6ed675e1288376aaecfcc824aaa5a3c7c798"
+    },
+    {
+      "path": "studio/static/index.html",
+      "git_blob_sha": "8e1b6007240c66c0aac99e1da630f4218afb6529",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/index.html",
+      "upstream_blob_sha": "e796337843a4bb5f5c57482c70a5fb6e2743f39c",
+      "delta": "GodRender port adaptation (see integration commit 30822b7)"
+    },
+    {
+      "path": "studio/static/production_ui.js",
+      "git_blob_sha": "59c92803cb7822f97f356835d26aeb72db3d26fd",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/production_ui.js",
+      "upstream_blob_sha": "59c92803cb7822f97f356835d26aeb72db3d26fd"
+    },
+    {
+      "path": "studio/static/storyboard.js",
+      "git_blob_sha": "39dc62e5f8f5f6e24690e92552cddf031f8b9873",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/storyboard.js",
+      "upstream_blob_sha": "39dc62e5f8f5f6e24690e92552cddf031f8b9873"
+    },
+    {
+      "path": "studio/static/studio.js",
+      "git_blob_sha": "d000bffa263b422cbed906fd24f51c0bd765cea7",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/studio.js",
+      "upstream_blob_sha": "d000bffa263b422cbed906fd24f51c0bd765cea7"
+    },
+    {
+      "path": "studio/static/styles.css",
+      "git_blob_sha": "82bd96741d7b95b6e235c7034cdc9b5e1c279fdf",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/styles.css",
+      "upstream_blob_sha": "82bd96741d7b95b6e235c7034cdc9b5e1c279fdf"
+    },
+    {
+      "path": "studio/static/workflow.css",
+      "git_blob_sha": "de8afd67f92f5374b6fe555f8eaef090431c3951",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/workflow.css",
+      "upstream_blob_sha": "de8afd67f92f5374b6fe555f8eaef090431c3951"
+    },
+    {
+      "path": "studio/static/workflow_ui.js",
+      "git_blob_sha": "dd4004e03c3efb18ffed9d165c524f4b137bad25",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/static/workflow_ui.js",
+      "upstream_blob_sha": "dd4004e03c3efb18ffed9d165c524f4b137bad25"
+    },
+    {
+      "path": "studio/storage.py",
+      "git_blob_sha": "923b9af31e43a65699d98b6d4b09c7813b7a9a5f",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/storage.py",
+      "upstream_blob_sha": "923b9af31e43a65699d98b6d4b09c7813b7a9a5f"
+    },
+    {
+      "path": "studio/studio_security.py",
+      "git_blob_sha": "3d18d51f530e0dfebc85f6ca7f4092bbf090e804",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/studio_security.py",
+      "upstream_blob_sha": "3d18d51f530e0dfebc85f6ca7f4092bbf090e804"
+    },
+    {
+      "path": "studio/tool_api.py",
+      "git_blob_sha": "9d051290344c830721903a167d4797e0ac7b8d98",
+      "role": "studio_port",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "prototype/backend_gui/tool_api.py",
+      "upstream_blob_sha": "b3977b53803e3159cba668bb1943ae25eedfb95c",
+      "delta": "GodRender port adaptation (see integration commit 30822b7)"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/.github/requirements/render-runner.lock.txt",
+      "git_blob_sha": "4e7a30db949503054aaab26e765db5b9c296e2e9",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/requirements/render-runner.lock.txt",
+      "upstream_blob_sha": "4e7a30db949503054aaab26e765db5b9c296e2e9"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/.github/requirements/verification.lock.txt",
+      "git_blob_sha": "60423f7f3061ca9fed8ccd40d646d4766a357b4a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/requirements/verification.lock.txt",
+      "upstream_blob_sha": "60423f7f3061ca9fed8ccd40d646d4766a357b4a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/AGENTS.md",
+      "git_blob_sha": "08d177a630084c77ab0a0a43222b01f6e1f56328",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "AGENTS.md",
+      "upstream_blob_sha": "08d177a630084c77ab0a0a43222b01f6e1f56328"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/AGENT_HANDOFF.md",
+      "git_blob_sha": "cc5fbe9cda79d6570206ea9da39d4915d6947258",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "AGENT_HANDOFF.md",
+      "upstream_blob_sha": "cc5fbe9cda79d6570206ea9da39d4915d6947258"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/BIBLE.md",
+      "git_blob_sha": "da7f3c2f2cd1aef686c2d68ffb1f8693adb11745",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "BIBLE.md",
+      "upstream_blob_sha": "da7f3c2f2cd1aef686c2d68ffb1f8693adb11745"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/CLAUDE.md",
+      "git_blob_sha": "fffbf9b2625e61d9b062b6855a73498e43754ff1",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "CLAUDE.md",
+      "upstream_blob_sha": "fffbf9b2625e61d9b062b6855a73498e43754ff1"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/LAB_PROTOCOL.md",
+      "git_blob_sha": "059c0420865ad265bb12e24431c0a50dac134a3c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "LAB_PROTOCOL.md",
+      "upstream_blob_sha": "059c0420865ad265bb12e24431c0a50dac134a3c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/PRIME_DIRECTIVE.md",
+      "git_blob_sha": "e9f679e26703e7a477e8adf35554a2e82655ed7c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "PRIME_DIRECTIVE.md",
+      "upstream_blob_sha": "e9f679e26703e7a477e8adf35554a2e82655ed7c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/README.md",
+      "git_blob_sha": "825a03a6992e2b11954e8c1e62bcae8c581a2b3d",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "README.md",
+      "upstream_blob_sha": "825a03a6992e2b11954e8c1e62bcae8c581a2b3d"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/SOUL.md",
+      "git_blob_sha": "af5fa849210d77d6d69c940a3fc6700101299ef3",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "SOUL.md",
+      "upstream_blob_sha": "af5fa849210d77d6d69c940a3fc6700101299ef3"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/SYSTEM_INDEX.md",
+      "git_blob_sha": "1a05517d837921bb1a8670ef5ea5d102f0085979",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "SYSTEM_INDEX.md",
+      "upstream_blob_sha": "1a05517d837921bb1a8670ef5ea5d102f0085979"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/bootstrap.py",
+      "git_blob_sha": "adbb1dc0d4f7eaa4e7e50fac8bb086dc1cd2e38f",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "bootstrap.py",
+      "upstream_blob_sha": "adbb1dc0d4f7eaa4e7e50fac8bb086dc1cd2e38f"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/docs/LAB_RENDER_OPERATOR.md",
+      "git_blob_sha": "029faed3461dc458cf9132fcb724ed8586069ffc",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "docs/LAB_RENDER_OPERATOR.md",
+      "upstream_blob_sha": "029faed3461dc458cf9132fcb724ed8586069ffc"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/docs/MAINV2_REMOTE_BRIDGE.md",
+      "git_blob_sha": "3770d0a067f5609b4e0de135db3c90b4956abb0f",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "docs/MAINV2_REMOTE_BRIDGE.md",
+      "upstream_blob_sha": "3770d0a067f5609b4e0de135db3c90b4956abb0f"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/docs/MAINV2_SURGICAL_PLAN.json",
+      "git_blob_sha": "ef79fb3345a1bf7c1bd5845188358724b89d7de0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "docs/MAINV2_SURGICAL_PLAN.json",
+      "upstream_blob_sha": "ef79fb3345a1bf7c1bd5845188358724b89d7de0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/docs/PRODUCTION_RELEASE_GATE.md",
+      "git_blob_sha": "9da1451a35fc30b77fd7b0377ebbdd0d4eed40dd",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "docs/PRODUCTION_RELEASE_GATE.md",
+      "upstream_blob_sha": "9da1451a35fc30b77fd7b0377ebbdd0d4eed40dd"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/docs/director-case-studies/EL_CAMION_DELIVERY_ARCHIVE.json",
+      "git_blob_sha": "d571b31d0b5e7e10baae341d9042badfed3f019d",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "docs/director-case-studies/EL_CAMION_DELIVERY_ARCHIVE.json",
+      "upstream_blob_sha": "d571b31d0b5e7e10baae341d9042badfed3f019d"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/docs/director-case-studies/EL_CAMION_SOURCE_LED_RECOVERY.md",
+      "git_blob_sha": "553f08bb6bc5ea04010acbe8befbacfed7e37d08",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "docs/director-case-studies/EL_CAMION_SOURCE_LED_RECOVERY.md",
+      "upstream_blob_sha": "553f08bb6bc5ea04010acbe8befbacfed7e37d08"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/AIVIDEOEDIT_OS_MANIFEST.json",
+      "git_blob_sha": "d82f28e2a6b78ff68e0e9ceedd74bd63b1915529",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/AIVIDEOEDIT_OS_MANIFEST.json",
+      "upstream_blob_sha": "d82f28e2a6b78ff68e0e9ceedd74bd63b1915529"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/CANONICAL_EFFECT_REGISTRY.json",
+      "git_blob_sha": "b6c61cb936b2803dec63d4de97a7547ce2a443d2",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/CANONICAL_EFFECT_REGISTRY.json",
+      "upstream_blob_sha": "b6c61cb936b2803dec63d4de97a7547ce2a443d2"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/CANONICAL_EFFECT_REGISTRY.md",
+      "git_blob_sha": "6555207df60f354a0c9abda2e2636f448cecefe4",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/CANONICAL_EFFECT_REGISTRY.md",
+      "upstream_blob_sha": "6555207df60f354a0c9abda2e2636f448cecefe4"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/CAPABILITY_LINEAGE.md",
+      "git_blob_sha": "80958911d7c693703ee48c5dfbf4fb45812a4566",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/CAPABILITY_LINEAGE.md",
+      "upstream_blob_sha": "80958911d7c693703ee48c5dfbf4fb45812a4566"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/DIRECTOR_SCAN_CANON.md",
+      "git_blob_sha": "edefde9e1d6af7bcbc85f1898daf00566dd0e111",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/DIRECTOR_SCAN_CANON.md",
+      "upstream_blob_sha": "edefde9e1d6af7bcbc85f1898daf00566dd0e111"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/DIRECTOR_SCAN_RECORD.schema.json",
+      "git_blob_sha": "c56a78c42911561c7b0cb2a46d278b0496ebf614",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/DIRECTOR_SCAN_RECORD.schema.json",
+      "upstream_blob_sha": "c56a78c42911561c7b0cb2a46d278b0496ebf614"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/DIRECTOR_SUPERVISION.md",
+      "git_blob_sha": "706852dfa50fa8438edeb17a66f061e34f1b6361",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/DIRECTOR_SUPERVISION.md",
+      "upstream_blob_sha": "706852dfa50fa8438edeb17a66f061e34f1b6361"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/DOCTRINE_LIVING_SCENE.md",
+      "git_blob_sha": "54782bf4d8c7d549ed963b684c374504cbf06b47",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/DOCTRINE_LIVING_SCENE.md",
+      "upstream_blob_sha": "54782bf4d8c7d549ed963b684c374504cbf06b47"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/DRIFT_TESTS.md",
+      "git_blob_sha": "5264cc602e82d389d234419d381f96ed3d993d88",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/DRIFT_TESTS.md",
+      "upstream_blob_sha": "5264cc602e82d389d234419d381f96ed3d993d88"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/EFFECT_PACKAGE_STANDARD.md",
+      "git_blob_sha": "e68bfc5c7f34f4e325e9b4480bef7418964b8dc7",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/EFFECT_PACKAGE_STANDARD.md",
+      "upstream_blob_sha": "e68bfc5c7f34f4e325e9b4480bef7418964b8dc7"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/LESSONS.md",
+      "git_blob_sha": "a74843e8c30864a62542db60fc5019f3b9fdb9d9",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/LESSONS.md",
+      "upstream_blob_sha": "a74843e8c30864a62542db60fc5019f3b9fdb9d9"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/MEDIA_CAPABILITY_MATRIX.json",
+      "git_blob_sha": "570174b957587e3d861dc630a3fba75c21c31c57",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/MEDIA_CAPABILITY_MATRIX.json",
+      "upstream_blob_sha": "570174b957587e3d861dc630a3fba75c21c31c57"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/MEDIA_CAPABILITY_MATRIX.md",
+      "git_blob_sha": "c0ce81c5fcb5d967bb631cc62205ed7c3c786cbf",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/MEDIA_CAPABILITY_MATRIX.md",
+      "upstream_blob_sha": "c0ce81c5fcb5d967bb631cc62205ed7c3c786cbf"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/MODE_AWARE_QC.md",
+      "git_blob_sha": "5d64e0d691b3734295ac40a89a030d90d32a3e08",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/MODE_AWARE_QC.md",
+      "upstream_blob_sha": "5d64e0d691b3734295ac40a89a030d90d32a3e08"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/NARRATIVE_CONTRACT.md",
+      "git_blob_sha": "c5940204cc1fbc736703ac833dde130dc26cd71a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/NARRATIVE_CONTRACT.md",
+      "upstream_blob_sha": "c5940204cc1fbc736703ac833dde130dc26cd71a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/PRODUCTION_CONTRACT.json",
+      "git_blob_sha": "a1f387959ee84d55b11ba49b8719696e9ac3728a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/PRODUCTION_CONTRACT.json",
+      "upstream_blob_sha": "a1f387959ee84d55b11ba49b8719696e9ac3728a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/PRODUCTION_MODES.json",
+      "git_blob_sha": "9f9b7510b5fa0efc3e048d25ee013bd920c8e117",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/PRODUCTION_MODES.json",
+      "upstream_blob_sha": "9f9b7510b5fa0efc3e048d25ee013bd920c8e117"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/PRODUCTION_MODES.md",
+      "git_blob_sha": "c7eb5e6835dd9a7217e745bf17775111b17b78d5",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/PRODUCTION_MODES.md",
+      "upstream_blob_sha": "c7eb5e6835dd9a7217e745bf17775111b17b78d5"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/PRODUCTION_PIPELINE.md",
+      "git_blob_sha": "35cbcef08984c7de4880cc78196425596a33750d",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/PRODUCTION_PIPELINE.md",
+      "upstream_blob_sha": "35cbcef08984c7de4880cc78196425596a33750d"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/README.md",
+      "git_blob_sha": "906d035f83e62acb256e5942e867fd32c5205fdd",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/README.md",
+      "upstream_blob_sha": "906d035f83e62acb256e5942e867fd32c5205fdd"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/RECUT_REFINEMENT.md",
+      "git_blob_sha": "80619c16778aaf0d7596fffd036d33e8979c1570",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/RECUT_REFINEMENT.md",
+      "upstream_blob_sha": "80619c16778aaf0d7596fffd036d33e8979c1570"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/REUSABLE_EFFECTS_POLICY.md",
+      "git_blob_sha": "09bbe7f555bf40821f2463726514014cb3e1279e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/REUSABLE_EFFECTS_POLICY.md",
+      "upstream_blob_sha": "09bbe7f555bf40821f2463726514014cb3e1279e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/RUNTIME_OPT_IN.md",
+      "git_blob_sha": "579726caaf5e1e95aa5b9e25e379ff254916cfbe",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/RUNTIME_OPT_IN.md",
+      "upstream_blob_sha": "579726caaf5e1e95aa5b9e25e379ff254916cfbe"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/SCENE_RUNTIME_CONTRACT.md",
+      "git_blob_sha": "35ca9739e472dd79b9c708c5f83638d3b1da4f26",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/SCENE_RUNTIME_CONTRACT.md",
+      "upstream_blob_sha": "35ca9739e472dd79b9c708c5f83638d3b1da4f26"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/SPATIAL_3DGS_SUPERSPLAT.md",
+      "git_blob_sha": "dd3042f9a231c2c3fcca607752e2ead198578721",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/SPATIAL_3DGS_SUPERSPLAT.md",
+      "upstream_blob_sha": "dd3042f9a231c2c3fcca607752e2ead198578721"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/STANDARD_WORKFLOWS.md",
+      "git_blob_sha": "91d13f6707df0e40969d911c88840a70ab2cce34",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/STANDARD_WORKFLOWS.md",
+      "upstream_blob_sha": "91d13f6707df0e40969d911c88840a70ab2cce34"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/STANDARD_WORKFLOW_REGISTRY.json",
+      "git_blob_sha": "fb8f0308bb3c9393297f968527bd623f629502fd",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/STANDARD_WORKFLOW_REGISTRY.json",
+      "upstream_blob_sha": "fb8f0308bb3c9393297f968527bd623f629502fd"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/STYLE_CONTRACT.md",
+      "git_blob_sha": "1669ea7b7e3187d11dec62a595da54b42c0e3a70",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/STYLE_CONTRACT.md",
+      "upstream_blob_sha": "1669ea7b7e3187d11dec62a595da54b42c0e3a70"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/ZERO_DRIFT_DIRECTOR_DIRECTIVE.md",
+      "git_blob_sha": "e25079c2b2e024d9a0f5e691d243c171ac50e916",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/ZERO_DRIFT_DIRECTOR_DIRECTIVE.md",
+      "upstream_blob_sha": "e25079c2b2e024d9a0f5e691d243c171ac50e916"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/depth-parallax-25d/README.md",
+      "git_blob_sha": "53f26526535da121851b1bc94b9604227431e7c8",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/depth-parallax-25d/README.md",
+      "upstream_blob_sha": "53f26526535da121851b1bc94b9604227431e7c8"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/depth-parallax-25d/depth_parallax_25d.py",
+      "git_blob_sha": "c88682d895f6c6a58fe809f35b87eac6e9e80975",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/depth-parallax-25d/depth_parallax_25d.py",
+      "upstream_blob_sha": "c88682d895f6c6a58fe809f35b87eac6e9e80975"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/AGENT_HANDOFF.md",
+      "git_blob_sha": "3da6e89806bb48816a51608c41fd2f842ace25a4",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/AGENT_HANDOFF.md",
+      "upstream_blob_sha": "3da6e89806bb48816a51608c41fd2f842ace25a4"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/COHERENT_STORM_SYSTEM.md",
+      "git_blob_sha": "7f84943ff4a416052f1f072050a5dac3b0622cca",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/COHERENT_STORM_SYSTEM.md",
+      "upstream_blob_sha": "7f84943ff4a416052f1f072050a5dac3b0622cca"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/LIVE_EFFECT_POLICY.md",
+      "git_blob_sha": "02263b9961cff9d65832740e36df09826b0c37da",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/LIVE_EFFECT_POLICY.md",
+      "upstream_blob_sha": "02263b9961cff9d65832740e36df09826b0c37da"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/PRECOMPILE_FX_GATE.md",
+      "git_blob_sha": "19369f40970e1d16d8429d2e5478fe616a853cae",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/PRECOMPILE_FX_GATE.md",
+      "upstream_blob_sha": "19369f40970e1d16d8429d2e5478fe616a853cae"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/PROMOTED_EFFECT_NAMES.txt",
+      "git_blob_sha": "079a900137e904dcfd2d6f875539f795a0e07ea0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/PROMOTED_EFFECT_NAMES.txt",
+      "upstream_blob_sha": "079a900137e904dcfd2d6f875539f795a0e07ea0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/PROMOTION_SUMMARY.json",
+      "git_blob_sha": "164b2c5cc287e0095210b891df2e056a513a4922",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/PROMOTION_SUMMARY.json",
+      "upstream_blob_sha": "164b2c5cc287e0095210b891df2e056a513a4922"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/PROOF_POLICY_PROMOTED.md",
+      "git_blob_sha": "c10f5e0999cd693734457fe21eaf8a49dfbf8ad9",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/PROOF_POLICY_PROMOTED.md",
+      "upstream_blob_sha": "c10f5e0999cd693734457fe21eaf8a49dfbf8ad9"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/README.md",
+      "git_blob_sha": "74626c4f78e82cabe69930fc190af3438efa415a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/README.md",
+      "upstream_blob_sha": "74626c4f78e82cabe69930fc190af3438efa415a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/README_EFFECT_NAMES.md",
+      "git_blob_sha": "3c395605dd88e904c346efaea10d4b2a75ed5f8a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/README_EFFECT_NAMES.md",
+      "upstream_blob_sha": "3c395605dd88e904c346efaea10d4b2a75ed5f8a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/README_PROMOTED_EFFECTS.md",
+      "git_blob_sha": "2cdd8d7f80464706641c89531fc81b95fdcd6e7a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/README_PROMOTED_EFFECTS.md",
+      "upstream_blob_sha": "2cdd8d7f80464706641c89531fc81b95fdcd6e7a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/VERIFICATION_REQUIREMENTS.md",
+      "git_blob_sha": "7162316ce6526a556279f6064ce04c3cfa43c749",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/VERIFICATION_REQUIREMENTS.md",
+      "upstream_blob_sha": "7162316ce6526a556279f6064ce04c3cfa43c749"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/effect_aliases.json",
+      "git_blob_sha": "765670c01f16a27865b5b8a18c3c40490575b6f5",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/effect_aliases.json",
+      "upstream_blob_sha": "765670c01f16a27865b5b8a18c3c40490575b6f5"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/effect_name_registry.json",
+      "git_blob_sha": "4a361fbfbf7cbc6e620afa30b103f81e5189fc81",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/effect_name_registry.json",
+      "upstream_blob_sha": "4a361fbfbf7cbc6e620afa30b103f81e5189fc81"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/examples/approved-runtime-core.fx.json",
+      "git_blob_sha": "2e6262061e8bd6e20cd3e4731a1580ebb6169c35",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/examples/approved-runtime-core.fx.json",
+      "upstream_blob_sha": "2e6262061e8bd6e20cd3e4731a1580ebb6169c35"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/execution_guard.py",
+      "git_blob_sha": "f1da6a044d557c2612b7220354bf2ee0e3a9d2cf",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/execution_guard.py",
+      "upstream_blob_sha": "f1da6a044d557c2612b7220354bf2ee0e3a9d2cf"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/executor.py",
+      "git_blob_sha": "9ff9beec6ae80b96a118686544dbf1190161debb",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/executor.py",
+      "upstream_blob_sha": "9ff9beec6ae80b96a118686544dbf1190161debb"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/fx_resolver.py",
+      "git_blob_sha": "3b43f9e620f26fa060f4b2c10fd9a36b03876478",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/fx_resolver.py",
+      "upstream_blob_sha": "3b43f9e620f26fa060f4b2c10fd9a36b03876478"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/living_still_fx.py",
+      "git_blob_sha": "55811b3028abadc7ba977415ecd07620da682e44",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/living_still_fx.py",
+      "upstream_blob_sha": "55811b3028abadc7ba977415ecd07620da682e44"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/matched_angle_viewpoint.py",
+      "git_blob_sha": "6dda60dfac12def8b417803eb5fcc5a628eecf59",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/matched_angle_viewpoint.py",
+      "upstream_blob_sha": "6dda60dfac12def8b417803eb5fcc5a628eecf59"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/material_reactive_layers.py",
+      "git_blob_sha": "a78afdb7af4312970dd59aaa611fa68174fa16fb",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/material_reactive_layers.py",
+      "upstream_blob_sha": "a78afdb7af4312970dd59aaa611fa68174fa16fb"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/precompile_gate.py",
+      "git_blob_sha": "3fe693722386b56c808b3be15b1ae42dab565432",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/precompile_gate.py",
+      "upstream_blob_sha": "3fe693722386b56c808b3be15b1ae42dab565432"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/presets.json",
+      "git_blob_sha": "73abf3476f3d172e576dac5023c436e24a624318",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/presets.json",
+      "upstream_blob_sha": "73abf3476f3d172e576dac5023c436e24a624318"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/project_local_fx_gate.py",
+      "git_blob_sha": "614687c360d48cffdc914849600e6a2a3abd9481",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/project_local_fx_gate.py",
+      "upstream_blob_sha": "614687c360d48cffdc914849600e6a2a3abd9481"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/promoted_effects.py",
+      "git_blob_sha": "557b57b4d3f0003c9c5224493c141991f63ede1b",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/promoted_effects.py",
+      "upstream_blob_sha": "557b57b4d3f0003c9c5224493c141991f63ede1b"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF01_LIVING_TAVERN.json",
+      "git_blob_sha": "9eef716b782976773354f038aff6c527bce5cbe5",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF01_LIVING_TAVERN.json",
+      "upstream_blob_sha": "9eef716b782976773354f038aff6c527bce5cbe5"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF02_LIVING_SCENE_CANONICAL.json",
+      "git_blob_sha": "1512c75861ef1033e7707ef5f3b7e58f7854f840",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF02_LIVING_SCENE_CANONICAL.json",
+      "upstream_blob_sha": "1512c75861ef1033e7707ef5f3b7e58f7854f840"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF03_REACTIVE_MATERIAL_LAYERS.json",
+      "git_blob_sha": "8c16080c2fe86534edf4fa2e61a1f9b4bc7e4d69",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF03_REACTIVE_MATERIAL_LAYERS.json",
+      "upstream_blob_sha": "8c16080c2fe86534edf4fa2e61a1f9b4bc7e4d69"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF04_PROMOTED_EFFECT_LIBRARY.json",
+      "git_blob_sha": "baa473a5dd3e8ff560705907fc2b83ef35415c7e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF04_PROMOTED_EFFECT_LIBRARY.json",
+      "upstream_blob_sha": "baa473a5dd3e8ff560705907fc2b83ef35415c7e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF04_PROMOTED_EFFECT_LIBRARY.verification.json",
+      "git_blob_sha": "59e0d4ae050970d4f2062be448337ff0e7309e2f",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF04_PROMOTED_EFFECT_LIBRARY.verification.json",
+      "upstream_blob_sha": "59e0d4ae050970d4f2062be448337ff0e7309e2f"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF04_STANDARD_EFFECT_LIBRARY.json",
+      "git_blob_sha": "1dc1556abdf6eb2a3f8100d729010c3be4c515f1",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF04_STANDARD_EFFECT_LIBRARY.json",
+      "upstream_blob_sha": "1dc1556abdf6eb2a3f8100d729010c3be4c515f1"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/proofs/FX2_PROOF04_STANDARD_EFFECT_LIBRARY.report.json",
+      "git_blob_sha": "9f69f3c5f47f4f305750939570c000492c653b4b",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/proofs/FX2_PROOF04_STANDARD_EFFECT_LIBRARY.report.json",
+      "upstream_blob_sha": "9f69f3c5f47f4f305750939570c000492c653b4b"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/recipes.json",
+      "git_blob_sha": "b00e4f2169a2eb3e7007415d6d2af82522b506a7",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/recipes.json",
+      "upstream_blob_sha": "b00e4f2169a2eb3e7007415d6d2af82522b506a7"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/registry.json",
+      "git_blob_sha": "e817763435e9bb948523c7e3c9a5d83252a11932",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/registry.json",
+      "upstream_blob_sha": "e817763435e9bb948523c7e3c9a5d83252a11932"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/requirements-runtime.txt",
+      "git_blob_sha": "e6ba0910172916b23bf21d2cfb69b0eed6bb4fc0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/requirements-runtime.txt",
+      "upstream_blob_sha": "e6ba0910172916b23bf21d2cfb69b0eed6bb4fc0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/runtime.py",
+      "git_blob_sha": "dce4d8751a394c5d4a18426c33f77297d9d08aa2",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/runtime.py",
+      "upstream_blob_sha": "dce4d8751a394c5d4a18426c33f77297d9d08aa2"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/tests/test_camera_fx.py",
+      "git_blob_sha": "7cc8f5e4d62b83884f5f8c0aceb04ca5ffc0d698",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/tests/test_camera_fx.py",
+      "upstream_blob_sha": "7cc8f5e4d62b83884f5f8c0aceb04ca5ffc0d698"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/tests/test_fx_resolver.py",
+      "git_blob_sha": "0247183d40229e8b8eb4a286fdfd26b212cb2eed",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/tests/test_fx_resolver.py",
+      "upstream_blob_sha": "0247183d40229e8b8eb4a286fdfd26b212cb2eed"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/tests/test_promoted_effects.py",
+      "git_blob_sha": "54364859483574584230a018ff472f64aa3535c7",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/tests/test_promoted_effects.py",
+      "upstream_blob_sha": "54364859483574584230a018ff472f64aa3535c7"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/threshold_prism_bleed.py",
+      "git_blob_sha": "86b11090ae60a0b1868239d5ace9c5c9d2a10691",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/threshold_prism_bleed.py",
+      "upstream_blob_sha": "86b11090ae60a0b1868239d5ace9c5c9d2a10691"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/tools/generate_canonical_proof02.py",
+      "git_blob_sha": "09888fa78ef1ad74e4a01e4159f3e4164a95ebe4",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/tools/generate_canonical_proof02.py",
+      "upstream_blob_sha": "09888fa78ef1ad74e4a01e4159f3e4164a95ebe4"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/verify_living_still_fx.py",
+      "git_blob_sha": "4dbb06933309fe27e973e7f308e10b3bc8e1e047",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/verify_living_still_fx.py",
+      "upstream_blob_sha": "4dbb06933309fe27e973e7f308e10b3bc8e1e047"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/verify_promoted_effects.py",
+      "git_blob_sha": "5134e914dd63edf390478d86a85945a0c5a3dd7b",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/verify_promoted_effects.py",
+      "upstream_blob_sha": "5134e914dd63edf390478d86a85945a0c5a3dd7b"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/fx_v2/verify_standard_effects.py",
+      "git_blob_sha": "8038abe5756b3ab7cfe8adb32cb6c886b84b2634",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/fx_v2/verify_standard_effects.py",
+      "upstream_blob_sha": "8038abe5756b3ab7cfe8adb32cb6c886b84b2634"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/PLAN.md",
+      "git_blob_sha": "93e170a53b537cfe683381724a7660d5350aadd1",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/PLAN.md",
+      "upstream_blob_sha": "93e170a53b537cfe683381724a7660d5350aadd1"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/README.md",
+      "git_blob_sha": "262ce1c3caf33ae20aa2b7a3d612741480f81e46",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/README.md",
+      "upstream_blob_sha": "262ce1c3caf33ae20aa2b7a3d612741480f81e46"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/audio/reactive_core.py",
+      "git_blob_sha": "0dad38161e5c6355ccf870303f36f2d2b83bc406",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/audio/reactive_core.py",
+      "upstream_blob_sha": "0dad38161e5c6355ccf870303f36f2d2b83bc406"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/control_schema.json",
+      "git_blob_sha": "faea973d4022dcf422909a548d24244806130435",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/control_schema.json",
+      "upstream_blob_sha": "faea973d4022dcf422909a548d24244806130435"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/registry_entries.json",
+      "git_blob_sha": "c54b063579f8e2d48dd52a5b55efb859fbf2ec9e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/registry_entries.json",
+      "upstream_blob_sha": "c54b063579f8e2d48dd52a5b55efb859fbf2ec9e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/requirements.txt",
+      "git_blob_sha": "fdaaec20ea725aeb458ae42b507b84f2cd071c0c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/requirements.txt",
+      "upstream_blob_sha": "fdaaec20ea725aeb458ae42b507b84f2cd071c0c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/spatial/living_parallax.py",
+      "git_blob_sha": "541c8d53847edeffec8a69b1bf807fd0bcfe793e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/spatial/living_parallax.py",
+      "upstream_blob_sha": "541c8d53847edeffec8a69b1bf807fd0bcfe793e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/generative-engine/visualizers/reactive_field.py",
+      "git_blob_sha": "bd831c96e9fd82692ae1b66b5528195cc5a8f8d0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/generative-engine/visualizers/reactive_field.py",
+      "upstream_blob_sha": "bd831c96e9fd82692ae1b66b5528195cc5a8f8d0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/intelligence/MODEL_REGISTRY.json",
+      "git_blob_sha": "ecc3b2c96db134db70d3e871bf1ee3ff9662babe",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/intelligence/MODEL_REGISTRY.json",
+      "upstream_blob_sha": "ecc3b2c96db134db70d3e871bf1ee3ff9662babe"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/memory-atmosphere/VISIBLE_MEMORY_FX_PRESET.md",
+      "git_blob_sha": "6a52b41e3e36c431559df29180fc3316f48c7731",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/memory-atmosphere/VISIBLE_MEMORY_FX_PRESET.md",
+      "upstream_blob_sha": "6a52b41e3e36c431559df29180fc3316f48c7731"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/memory-atmosphere/memory_atmosphere_fx.py",
+      "git_blob_sha": "b9a6a41338d6ddbbadbddce3127ef65077042b41",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/memory-atmosphere/memory_atmosphere_fx.py",
+      "upstream_blob_sha": "b9a6a41338d6ddbbadbddce3127ef65077042b41"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/README.md",
+      "git_blob_sha": "b9423a0c6c7b26a9cc721b1741a8c7a3f65adc9e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/README.md",
+      "upstream_blob_sha": "b9423a0c6c7b26a9cc721b1741a8c7a3f65adc9e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/audio/analyze_edit_map.py",
+      "git_blob_sha": "4de1bd03b0e16c91b3411073c8cb928b8063bb45",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/audio/analyze_edit_map.py",
+      "upstream_blob_sha": "4de1bd03b0e16c91b3411073c8cb928b8063bb45"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/audio/build_reactivity.py",
+      "git_blob_sha": "9345d1a24b3cff8fca1d4fd93adab05e56295db9",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/audio/build_reactivity.py",
+      "upstream_blob_sha": "9345d1a24b3cff8fca1d4fd93adab05e56295db9"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/docs/EFFECTS_METHOD_CATALOG.md",
+      "git_blob_sha": "fa77d98d683c45a3429353b415813cbadb717ed6",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/docs/EFFECTS_METHOD_CATALOG.md",
+      "upstream_blob_sha": "fa77d98d683c45a3429353b415813cbadb717ed6"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/docs/MOTION_CALIBRATION_AND_NARRATIVE_RIBBON.md",
+      "git_blob_sha": "d185a9d46cba26a578b1fb278e36db170d0a54d4",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/docs/MOTION_CALIBRATION_AND_NARRATIVE_RIBBON.md",
+      "upstream_blob_sha": "d185a9d46cba26a578b1fb278e36db170d0a54d4"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/docs/MUSIC_DIRECTED_LIVING_PAINTING.md",
+      "git_blob_sha": "280852dfc2e81120601976bef77ddf6afb7029ce",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/docs/MUSIC_DIRECTED_LIVING_PAINTING.md",
+      "upstream_blob_sha": "280852dfc2e81120601976bef77ddf6afb7029ce"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/docs/PAINTERLY_MOTION_METHODS.md",
+      "git_blob_sha": "28b514268ab1aad65c84d2be478917c5096f1141",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/docs/PAINTERLY_MOTION_METHODS.md",
+      "upstream_blob_sha": "28b514268ab1aad65c84d2be478917c5096f1141"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/hybrid_painterly_fx.py",
+      "git_blob_sha": "f38515f3d14fa8e0a38d3aa612f3a1b597875af2",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/hybrid_painterly_fx.py",
+      "upstream_blob_sha": "f38515f3d14fa8e0a38d3aa612f3a1b597875af2"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/living_paint_transfer.py",
+      "git_blob_sha": "e5c0b47cf4a171c47a29e7c79307b2ecdc4ad828",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/living_paint_transfer.py",
+      "upstream_blob_sha": "e5c0b47cf4a171c47a29e7c79307b2ecdc4ad828"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/render_living_painting.py",
+      "git_blob_sha": "d90bd65731c908dc422727d85ff2f9f9a3bba5c0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/render_living_painting.py",
+      "upstream_blob_sha": "d90bd65731c908dc422727d85ff2f9f9a3bba5c0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/analyze_motion_signature.py",
+      "git_blob_sha": "9542989445bc2b1ff022166c3aef460b5a222998",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/analyze_motion_signature.py",
+      "upstream_blob_sha": "9542989445bc2b1ff022166c3aef460b5a222998"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/narrative_ribbon.py",
+      "git_blob_sha": "133baf165e2eabee3069bf3c9fdda40ea7cb48f7",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/narrative_ribbon.py",
+      "upstream_blob_sha": "133baf165e2eabee3069bf3c9fdda40ea7cb48f7"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/painterly_cpu_fx.py",
+      "git_blob_sha": "d3d745316a1b4f377d42b133ffc359ad3b563572",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/painterly_cpu_fx.py",
+      "upstream_blob_sha": "d3d745316a1b4f377d42b133ffc359ad3b563572"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/painterly_motion_extensions.py",
+      "git_blob_sha": "2bbe2ba9e02b391644027b114c832e55a1222bd0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/painterly_motion_extensions.py",
+      "upstream_blob_sha": "2bbe2ba9e02b391644027b114c832e55a1222bd0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/render_music_directed_living_painting.py",
+      "git_blob_sha": "7536f21db88b460a3847aa7b316808d47038ca9d",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/render_music_directed_living_painting.py",
+      "upstream_blob_sha": "7536f21db88b460a3847aa7b316808d47038ca9d"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/render_painterly_sequence.py",
+      "git_blob_sha": "83b41847860b3ae3eeb660904c35bdf8c1bc5e64",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/render_painterly_sequence.py",
+      "upstream_blob_sha": "83b41847860b3ae3eeb660904c35bdf8c1bc5e64"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/temporal_qc.py",
+      "git_blob_sha": "686ab1d7e7027cfc512a8c9335458fb3545368b1",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/temporal_qc.py",
+      "upstream_blob_sha": "686ab1d7e7027cfc512a8c9335458fb3545368b1"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_fx/tiny_nerf_volume.py",
+      "git_blob_sha": "b2f11a55e1ba4e54fc2b338e2b8db79029eb93d9",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_fx/tiny_nerf_volume.py",
+      "upstream_blob_sha": "b2f11a55e1ba4e54fc2b338e2b8db79029eb93d9"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/painterly-motion/video_qc/temporal_qc.py",
+      "git_blob_sha": "6ceb8dbe72fbc6adab42e19932d2f71b1231d3e0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/painterly-motion/video_qc/temporal_qc.py",
+      "upstream_blob_sha": "6ceb8dbe72fbc6adab42e19932d2f71b1231d3e0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/README.md",
+      "git_blob_sha": "dec823b14e97ae1a243eeed17c2fd5a771d679ac",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/README.md",
+      "upstream_blob_sha": "dec823b14e97ae1a243eeed17c2fd5a771d679ac"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/THIRD_PARTY_NOTICES.md",
+      "git_blob_sha": "2b362672db047cf3aac300a233d24f80320c407c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/THIRD_PARTY_NOTICES.md",
+      "upstream_blob_sha": "2b362672db047cf3aac300a233d24f80320c407c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/audio_mix.example.json",
+      "git_blob_sha": "aaeae09158a640af98708dc426f61a0afdcee3d4",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/audio_mix.example.json",
+      "upstream_blob_sha": "aaeae09158a640af98708dc426f61a0afdcee3d4"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/audio_mix_bridge.js",
+      "git_blob_sha": "b34c22b900edaaff25eb28ecff9ebe92d527c2c9",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/audio_mix_bridge.js",
+      "upstream_blob_sha": "b34c22b900edaaff25eb28ecff9ebe92d527c2c9"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/effects_catalog.json",
+      "git_blob_sha": "28b4c1b38494ed85cb2488cf230a40788cba39a6",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/effects_catalog.json",
+      "upstream_blob_sha": "28b4c1b38494ed85cb2488cf230a40788cba39a6"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/package.json",
+      "git_blob_sha": "7fc848154dbdb135e98178489dee357c454e5b5b",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/package.json",
+      "upstream_blob_sha": "7fc848154dbdb135e98178489dee357c454e5b5b"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/render_scene.mjs",
+      "git_blob_sha": "b0e6e90ceac62a128f1be153e48aae790975153e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/render_scene.mjs",
+      "upstream_blob_sha": "b0e6e90ceac62a128f1be153e48aae790975153e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/runtime_doctor.mjs",
+      "git_blob_sha": "19ffceaf3278d10535f1c5e64dbfb1bee65b46ce",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/runtime_doctor.mjs",
+      "upstream_blob_sha": "19ffceaf3278d10535f1c5e64dbfb1bee65b46ce"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/runtime_opt_in.mjs",
+      "git_blob_sha": "090ec9d75e15c381b1cfb8a75fe4510bd7ec137a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/runtime_opt_in.mjs",
+      "upstream_blob_sha": "090ec9d75e15c381b1cfb8a75fe4510bd7ec137a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/scene_qc.mjs",
+      "git_blob_sha": "0afb19f7af3406ad9a8ae481aeae82d0f6e9c5e0",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/scene_qc.mjs",
+      "upstream_blob_sha": "0afb19f7af3406ad9a8ae481aeae82d0f6e9c5e0"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/stage_runtime_assets.mjs",
+      "git_blob_sha": "13e856fa0580692c91ec2082f642e6c2e4992959",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/stage_runtime_assets.mjs",
+      "upstream_blob_sha": "13e856fa0580692c91ec2082f642e6c2e4992959"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/render_runtime/transition_bridge.js",
+      "git_blob_sha": "c477039f8d6a307d1322b6b4fc2e77948e53c439",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/render_runtime/transition_bridge.js",
+      "upstream_blob_sha": "c477039f8d6a307d1322b6b4fc2e77948e53c439"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/storage/README.md",
+      "git_blob_sha": "d4cad124c8c5c0057d97ad068706d853b4c48084",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/storage/README.md",
+      "upstream_blob_sha": "d4cad124c8c5c0057d97ad068706d853b4c48084"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/storage/STORAGE_MANIFEST.schema.json",
+      "git_blob_sha": "45342ae4777b5fc57069e7f38334ebd574cc380c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/storage/STORAGE_MANIFEST.schema.json",
+      "upstream_blob_sha": "45342ae4777b5fc57069e7f38334ebd574cc380c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/storage/github_release_storage.py",
+      "git_blob_sha": "7a1ded2b823ea26d68ecdb246a5ed0155ab8505c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/storage/github_release_storage.py",
+      "upstream_blob_sha": "7a1ded2b823ea26d68ecdb246a5ed0155ab8505c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/README.md",
+      "git_blob_sha": "e5370850663a45aca7277ea23102acdd7d7456bc",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/README.md",
+      "upstream_blob_sha": "e5370850663a45aca7277ea23102acdd7d7456bc"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/audio_map.py",
+      "git_blob_sha": "69e5598595d10774b1c8d89c9f35b9baa0454dac",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/audio_map.py",
+      "upstream_blob_sha": "69e5598595d10774b1c8d89c9f35b9baa0454dac"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/audio_mix.py",
+      "git_blob_sha": "a25ff271800f7d8d90d70eb3303600a53de0f255",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/audio_mix.py",
+      "upstream_blob_sha": "a25ff271800f7d8d90d70eb3303600a53de0f255"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/branch_policy.py",
+      "git_blob_sha": "6f37c1816703e4ec34e70e0711a1bd1c6a2598cd",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/branch_policy.py",
+      "upstream_blob_sha": "6f37c1816703e4ec34e70e0711a1bd1c6a2598cd"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/director_checkpoint.py",
+      "git_blob_sha": "6ed9a0ce541391d0be6adeab9972908fe6cc0c54",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/director_checkpoint.py",
+      "upstream_blob_sha": "6ed9a0ce541391d0be6adeab9972908fe6cc0c54"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/director_scan_gate.py",
+      "git_blob_sha": "46e1fb0c5565f632e22324e101cd80cd9e16fce4",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/director_scan_gate.py",
+      "upstream_blob_sha": "46e1fb0c5565f632e22324e101cd80cd9e16fce4"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/execution_ledger.py",
+      "git_blob_sha": "5e566a52352e617859c7ae467d8734a3bd7e606a",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/execution_ledger.py",
+      "upstream_blob_sha": "5e566a52352e617859c7ae467d8734a3bd7e606a"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/export_variety_qc.py",
+      "git_blob_sha": "f7e334db0a798c26171420a759b2273970c8d6ec",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/export_variety_qc.py",
+      "upstream_blob_sha": "f7e334db0a798c26171420a759b2273970c8d6ec"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/harness_router.py",
+      "git_blob_sha": "9094fe6bd04a300fef92e75512dcc5b82fd2163e",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/harness_router.py",
+      "upstream_blob_sha": "9094fe6bd04a300fef92e75512dcc5b82fd2163e"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/hero_library_extract.py",
+      "git_blob_sha": "f16af7b060db9da91b48b01f530e27127f3b5d42",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/hero_library_extract.py",
+      "upstream_blob_sha": "f16af7b060db9da91b48b01f530e27127f3b5d42"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/jev_decision.py",
+      "git_blob_sha": "36b891ca76b84f31948b5cf9139bd025ea6a638f",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/jev_decision.py",
+      "upstream_blob_sha": "36b891ca76b84f31948b5cf9139bd025ea6a638f"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/model_provision.py",
+      "git_blob_sha": "cbdff888348a3685494be2ea2b5b522e134179d5",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/model_provision.py",
+      "upstream_blob_sha": "cbdff888348a3685494be2ea2b5b522e134179d5"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/model_registry.py",
+      "git_blob_sha": "b275297e68375202b4798e5288688e4def766a06",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/model_registry.py",
+      "upstream_blob_sha": "b275297e68375202b4798e5288688e4def766a06"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/music_beat_worker.py",
+      "git_blob_sha": "3d85f014559e1d7b3e368ea44833c58fd0f20d1f",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/music_beat_worker.py",
+      "upstream_blob_sha": "3d85f014559e1d7b3e368ea44833c58fd0f20d1f"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/narrative_guard.py",
+      "git_blob_sha": "91269fcf738ebf44874927333370084f774449be",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/narrative_guard.py",
+      "upstream_blob_sha": "91269fcf738ebf44874927333370084f774449be"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/production_guard.py",
+      "git_blob_sha": "8b17c9615ba73cdf250d5477911ae69822ba3bf5",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/production_guard.py",
+      "upstream_blob_sha": "8b17c9615ba73cdf250d5477911ae69822ba3bf5"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/promote_standard_library.py",
+      "git_blob_sha": "476c56cad92125cad3cb2348dabd4dfbdb591929",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/promote_standard_library.py",
+      "upstream_blob_sha": "476c56cad92125cad3cb2348dabd4dfbdb591929"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/recipe_execution_guard.py",
+      "git_blob_sha": "bcff4fe34179b04d9b4770e2bbd48086429cb466",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/recipe_execution_guard.py",
+      "upstream_blob_sha": "bcff4fe34179b04d9b4770e2bbd48086429cb466"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/recut_guard.py",
+      "git_blob_sha": "5c25d0c7cc4a6ae32de0131b21f47ea03f696a62",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/recut_guard.py",
+      "upstream_blob_sha": "5c25d0c7cc4a6ae32de0131b21f47ea03f696a62"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/refinement_qc_compare.py",
+      "git_blob_sha": "1123687caa801f65440337ada801e61d4b1cbf42",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/refinement_qc_compare.py",
+      "upstream_blob_sha": "1123687caa801f65440337ada801e61d4b1cbf42"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/scene_timeline.py",
+      "git_blob_sha": "80f3858f33826ae81332201f919fdfdb74557ae5",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/scene_timeline.py",
+      "upstream_blob_sha": "80f3858f33826ae81332201f919fdfdb74557ae5"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/surgical_verify.py",
+      "git_blob_sha": "e1201bcaef6a71417ab2f3997f3c13420dfa0fed",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/surgical_verify.py",
+      "upstream_blob_sha": "e1201bcaef6a71417ab2f3997f3c13420dfa0fed"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_audio_mix.py",
+      "git_blob_sha": "43a2b22f1c0c0c5a26a0c92138ef9d523e46c1ff",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_audio_mix.py",
+      "upstream_blob_sha": "43a2b22f1c0c0c5a26a0c92138ef9d523e46c1ff"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_director_brain.py",
+      "git_blob_sha": "1baeb8b48060bffb04c0e5732a35bddca23cd23c",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_director_brain.py",
+      "upstream_blob_sha": "1baeb8b48060bffb04c0e5732a35bddca23cd23c"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_director_scan_gate.py",
+      "git_blob_sha": "4adde84cebfd0858914dbf5f42910da9f2662056",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_director_scan_gate.py",
+      "upstream_blob_sha": "4adde84cebfd0858914dbf5f42910da9f2662056"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_project_scene_branch.py",
+      "git_blob_sha": "3579579318931fc8c9467525c22183c581ba68a6",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_project_scene_branch.py",
+      "upstream_blob_sha": "3579579318931fc8c9467525c22183c581ba68a6"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_recipe_execution_guard.py",
+      "git_blob_sha": "293a553cf64780564f2c7ba2aba1de8dc88f9cdc",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_recipe_execution_guard.py",
+      "upstream_blob_sha": "293a553cf64780564f2c7ba2aba1de8dc88f9cdc"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_recut_system.py",
+      "git_blob_sha": "6c8af1fe21b9b22a496814f9dd5f67d4f5108d64",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_recut_system.py",
+      "upstream_blob_sha": "6c8af1fe21b9b22a496814f9dd5f67d4f5108d64"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_scene_timeline.py",
+      "git_blob_sha": "25d4641ae2ad2acf75af5b961e33227be57a6522",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_scene_timeline.py",
+      "upstream_blob_sha": "25d4641ae2ad2acf75af5b961e33227be57a6522"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/test_workflow_authority.py",
+      "git_blob_sha": "211187a9240b6093b8811f6c80ef9fc8a9bc045d",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/test_workflow_authority.py",
+      "upstream_blob_sha": "211187a9240b6093b8811f6c80ef9fc8a9bc045d"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/workflow_guard.py",
+      "git_blob_sha": "70c69ef9f52465fa36868c770fd865bbce482612",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/workflow_guard.py",
+      "upstream_blob_sha": "70c69ef9f52465fa36868c770fd865bbce482612"
+    },
+    {
+      "path": "upstream/mainv2-lab/current-main/general/reusable/tools/workflow_resolver.py",
+      "git_blob_sha": "d1c6a84cb7526020943a2c95c3441cea1011e31b",
+      "role": "canonical_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": "general/reusable/tools/workflow_resolver.py",
+      "upstream_blob_sha": "d1c6a84cb7526020943a2c95c3441cea1011e31b"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/README.md",
+      "git_blob_sha": "43ccb71fda492570648057879fbaafcb3bcd4e10",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/project.godot",
+      "git_blob_sha": "0ad3c47c35c5d385c07ca036ca20f835a814a51d",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/scenes/twilight.tscn",
+      "git_blob_sha": "c336d551fdc13053f4f274e456925000ec747a0c",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/scripts/twilight.gd",
+      "git_blob_sha": "173258c1e2310e5aced333a539ca5e2053264d51",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/source-lock.json",
+      "git_blob_sha": "59abfcad7695b1b8143a8c35cead0dcdde4b5675",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/tools/apply_fx.py",
+      "git_blob_sha": "278b888ed606e6f45bba249f147dc9ec6c3f8655",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/tools/prepare.py",
+      "git_blob_sha": "f9ff3efeb7c28b532dc5301eee9ff6515383e4ab",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-film/tools/verify.py",
+      "git_blob_sha": "01423ba6938ef207d2129baed4b679866324d0b5",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/README.md",
+      "git_blob_sha": "7e77513194c4d1661a3180eb24792c2a3f069ba5",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/project.godot",
+      "git_blob_sha": "6751ca6bee0d210b711d12fe459322cda06183dc",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/scenes/procedural_world.tscn",
+      "git_blob_sha": "708dc7c82296ce5e2c67da05d984f2ed9127ed83",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/scripts/procedural_world.gd",
+      "git_blob_sha": "cfb718ca9aa29eee6f67db838a6e0d295ac6d872",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/source-lock.json",
+      "git_blob_sha": "6117055279bd9012a253775d255c7437b2ba5c3d",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/tools/apply_fx.py",
+      "git_blob_sha": "128a0292468fc5d6cd69b9c71cdd86bfb4e69896",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/tools/prepare.py",
+      "git_blob_sha": "47dec97ef8b096db605e790848030e4cb0cd6743",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-procedural/tools/verify.py",
+      "git_blob_sha": "c8c7791f3f4797a9cb131933dabd49d9a3936110",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-source/README.md",
+      "git_blob_sha": "31046cb553b19f6c17112926e0481f2857784afe",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-source/atmosphere.gd",
+      "git_blob_sha": "0700556d318ea5aefb264866fd657d7e6fc672aa",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-source/atmosphere.tscn",
+      "git_blob_sha": "5ae6e93425db43b3bc0daaad0d3239ca9c5f8222",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-source/composite.py",
+      "git_blob_sha": "f3c3b37e32c8d538f9eaecdde412e8c39bf17b35",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-source/fetch_pinned.py",
+      "git_blob_sha": "f0dabc436046aeb8f0bbd972afc19a6b0c6be990",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot-source/project.godot",
+      "git_blob_sha": "ae714f2dc77963e0d38a939edd9974051bef10be",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/README.md",
+      "git_blob_sha": "d2233f1272a14a06dc127c61423bc0a86ea59170",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/project.godot",
+      "git_blob_sha": "1c701f7e33ab45e31d4054408d3fbad5d7bf2817",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/scenes/proof_2d.tscn",
+      "git_blob_sha": "2f78126a2ff42b2127c7566e67ab6af7c3a40581",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/scenes/proof_3d.tscn",
+      "git_blob_sha": "bf49568a2117af4b4ccaab99a476a5f98ef2e66f",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/scripts/proof_2d.gd",
+      "git_blob_sha": "dfb4f412b653a423bf928d15a08967d6a58860cd",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/scripts/proof_3d.gd",
+      "git_blob_sha": "24a46a08fbbbccd4ea277a662248b1deec1b4592",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/godot/verify_render.py",
+      "git_blob_sha": "3bd2db654dfaaa7517aac6f96133119d8a1cb6e4",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/reviews/godot-original-film-20261015.json",
+      "git_blob_sha": "85acb69ddc93f1a0176a8b79b9a3ccdd180a5f41",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/reviews/godot-procedural3d-20261015.json",
+      "git_blob_sha": "4f8d60d1c9ebec54ce8447d972b5e2265ac4b5c0",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/lab/reviews/godot-womanclouds-source-experiment.json",
+      "git_blob_sha": "30033963b195c9a4b28cdb21d4e657c7f3c1e2e1",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/deepseek-harness-bootstrap.yml",
+      "git_blob_sha": "9f6af8a0145b2714cb2a8b90c55bb6f82d907723",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/deepseek-harness-bootstrap.yml",
+      "upstream_blob_sha": "9f6af8a0145b2714cb2a8b90c55bb6f82d907723"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/deepseek-harness-production.yml",
+      "git_blob_sha": "09219654fdfe43e151064b4a9479d3f1b54dd411",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/deepseek-harness-production.yml",
+      "upstream_blob_sha": "09219654fdfe43e151064b4a9479d3f1b54dd411"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/deepseek-harness-repo-runtime-v2.yml",
+      "git_blob_sha": "30ff49e0a9e50b5e2d13dd4e56245a975bec3c1d",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/deepseek-harness-repo-runtime-v2.yml",
+      "upstream_blob_sha": "30ff49e0a9e50b5e2d13dd4e56245a975bec3c1d"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/deepseek-harness-repo-runtime.yml",
+      "git_blob_sha": "ce18b39acddf252bec2e56af1e3f10309d12ca3a",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/deepseek-harness-repo-runtime.yml",
+      "upstream_blob_sha": "ce18b39acddf252bec2e56af1e3f10309d12ca3a"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/director-scan-canon-verify.yml",
+      "git_blob_sha": "3e038e7331be34c390685c968a5da748a71e184e",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/director-scan-canon-verify.yml",
+      "upstream_blob_sha": "3e038e7331be34c390685c968a5da748a71e184e"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/fx-v2-precompile-gate.yml",
+      "git_blob_sha": "0549ea088ad02e981da18451665b46f13e0beb7d",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/fx-v2-precompile-gate.yml",
+      "upstream_blob_sha": "0549ea088ad02e981da18451665b46f13e0beb7d"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/generate-fx2-proof02.yml",
+      "git_blob_sha": "ac2d5c7c9bd5227dce9d3f7b6bdfbc37d8e72afb",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/generate-fx2-proof02.yml",
+      "upstream_blob_sha": "ac2d5c7c9bd5227dce9d3f7b6bdfbc37d8e72afb"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/irish-eyes-real-song-proof.yml",
+      "git_blob_sha": "5992aa6c0d0b1d313702f87779584f723661e967",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/irish-eyes-real-song-proof.yml",
+      "upstream_blob_sha": "5992aa6c0d0b1d313702f87779584f723661e967"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/lab-gate.yml",
+      "git_blob_sha": "2f07e0fcf08f649211c3a38922266cc7239d6e6a",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/lab-gate.yml",
+      "upstream_blob_sha": "2f07e0fcf08f649211c3a38922266cc7239d6e6a"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/mainv2-director-parallel-real-render.yml",
+      "git_blob_sha": "85ba158b2573e273157ac5bbf9c61a383667e6e4",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/mainv2-director-parallel-real-render.yml",
+      "upstream_blob_sha": "85ba158b2573e273157ac5bbf9c61a383667e6e4"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/mainv2-lab-full-compile.yml",
+      "git_blob_sha": "9eed5d4384632420f408fb21730e80e1bae1ee46",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/mainv2-lab-full-compile.yml",
+      "upstream_blob_sha": "9eed5d4384632420f408fb21730e80e1bae1ee46"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/mainv2-micro-production.yml",
+      "git_blob_sha": "2ffadc727cb1dd820c01c61bcdb6194655ee65d5",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/mainv2-micro-production.yml",
+      "upstream_blob_sha": "2ffadc727cb1dd820c01c61bcdb6194655ee65d5"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/mainv2-onnx.yml",
+      "git_blob_sha": "599429ca207b7d8e99350c1721d58c5427cde3c6",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/mainv2-onnx.yml",
+      "upstream_blob_sha": "599429ca207b7d8e99350c1721d58c5427cde3c6"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/mainv2-real-render.yml",
+      "git_blob_sha": "7effd03450fba797313a3dbe2c3640812c0c31f1",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/mainv2-real-render.yml",
+      "upstream_blob_sha": "7effd03450fba797313a3dbe2c3640812c0c31f1"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/mainv2-surgical.yml",
+      "git_blob_sha": "4e270142a643f4b210573fd8cf8f3a9182543119",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/mainv2-surgical.yml",
+      "upstream_blob_sha": "4e270142a643f4b210573fd8cf8f3a9182543119"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/production-contract.yml",
+      "git_blob_sha": "975d5b0a1dca52e06e837bc2d6d99eb7b60621fb",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/production-contract.yml",
+      "upstream_blob_sha": "975d5b0a1dca52e06e837bc2d6d99eb7b60621fb"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/production-final-release.yml",
+      "git_blob_sha": "ca49a19639eeec861371e116ea1f7b29564c8acd",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/production-final-release.yml",
+      "upstream_blob_sha": "ca49a19639eeec861371e116ea1f7b29564c8acd"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/promote-standard-library.yml",
+      "git_blob_sha": "ed3cc9f1d627d0bff86df73133075c18a34c9d87",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/promote-standard-library.yml",
+      "upstream_blob_sha": "ed3cc9f1d627d0bff86df73133075c18a34c9d87"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/promoted-effects-verify.yml",
+      "git_blob_sha": "818eafc9ac761e79c660d0e6cd34fa87c0f718ad",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/promoted-effects-verify.yml",
+      "upstream_blob_sha": "818eafc9ac761e79c660d0e6cd34fa87c0f718ad"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/current-main/verify-living-still-fx.yml",
+      "git_blob_sha": "0db45b5843fa80bea67122a0f60adf07d66c1961",
+      "role": "inactive_workflow_snapshot",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "source_path": ".github/workflows/verify-living-still-fx.yml",
+      "upstream_blob_sha": "0db45b5843fa80bea67122a0f60adf07d66c1961"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/godot-original-film.yml",
+      "git_blob_sha": "a8b70ef77d32fd6c753b48059b4d450177edaf06",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/godot-procedural.yml",
+      "git_blob_sha": "63e537b423fec489ba0a7dd1eee47fcd573ba311",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/godot-render-test.yml",
+      "git_blob_sha": "c5bf66d3bf237148b8c4b2d66b6f4c496ae9051c",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/mainv2-lab/workflow-snapshots/godot-source-test.yml",
+      "git_blob_sha": "1c0a18d206504b713e24e55d2b31b81c651eb5f6",
+      "role": "preserved_existing_godrender"
+    },
+    {
+      "path": "upstream/recovered-song-tech/a-thousand-doors/projects/a-thousand-doors/effects/threshold_prism_bleed.py",
+      "git_blob_sha": "3ccd65a7a778648a1aa391e2a69adf6bec466769",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/a-thousand-doors",
+      "source_commit": "bd6d57548296b2bb56ee25f483efcf5e51513bd7",
+      "source_path": "projects/a-thousand-doors/effects/threshold_prism_bleed.py",
+      "upstream_blob_sha": "3ccd65a7a778648a1aa391e2a69adf6bec466769",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/ironflame-cleanroom/projects/ironflame-cleanroom/production/build_control_map.py",
+      "git_blob_sha": "38c2c8c52ebccd5ea5e0859e2dca2d24f63502e2",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/ironflame-cleanroom-20260917",
+      "source_commit": "cf688425c55943ee2bdeaaa4c49cc670165e303c",
+      "source_path": "projects/ironflame-cleanroom/production/build_control_map.py",
+      "upstream_blob_sha": "38c2c8c52ebccd5ea5e0859e2dca2d24f63502e2",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/ironflame-cleanroom/projects/ironflame-cleanroom/production/render_ffmpeg_assembly_v2.py",
+      "git_blob_sha": "e69b2d966631fe21feb062207031fac8af46ec9f",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/ironflame-cleanroom-20260917",
+      "source_commit": "cf688425c55943ee2bdeaaa4c49cc670165e303c",
+      "source_path": "projects/ironflame-cleanroom/production/render_ffmpeg_assembly_v2.py",
+      "upstream_blob_sha": "e69b2d966631fe21feb062207031fac8af46ec9f",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/ironflame-cleanroom/projects/ironflame-cleanroom/production/render_fx_pass.py",
+      "git_blob_sha": "12988ab72599793519b1c77fe5191bbbab179d83",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/ironflame-cleanroom-20260917",
+      "source_commit": "cf688425c55943ee2bdeaaa4c49cc670165e303c",
+      "source_path": "projects/ironflame-cleanroom/production/render_fx_pass.py",
+      "upstream_blob_sha": "12988ab72599793519b1c77fe5191bbbab179d83",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/ironflame-cleanroom/projects/ironflame-cleanroom/production/render_reference_cut.py",
+      "git_blob_sha": "83dde219e0f0f92c3ac929e0e2d942ac0dd0435b",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/ironflame-cleanroom-20260917",
+      "source_commit": "cf688425c55943ee2bdeaaa4c49cc670165e303c",
+      "source_path": "projects/ironflame-cleanroom/production/render_reference_cut.py",
+      "upstream_blob_sha": "83dde219e0f0f92c3ac929e0e2d942ac0dd0435b",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_b01_fx_runner.py",
+      "git_blob_sha": "acfa367494703aa7664fa42542885c9e7fa8a7f5",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_b01_fx_runner.py",
+      "upstream_blob_sha": "acfa367494703aa7664fa42542885c9e7fa8a7f5",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_b01b02_movement_compile.py",
+      "git_blob_sha": "23ad185866fe5113f8d2d7c16c2f54060ed1a9c3",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_b01b02_movement_compile.py",
+      "upstream_blob_sha": "23ad185866fe5113f8d2d7c16c2f54060ed1a9c3",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_b02_fx_runner.py",
+      "git_blob_sha": "0998c95b2e543838a5b5c0363f2c7d3221bcc387",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_b02_fx_runner.py",
+      "upstream_blob_sha": "0998c95b2e543838a5b5c0363f2c7d3221bcc387",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_b03_native_fx_runner.py",
+      "git_blob_sha": "8bebf199dcdcdf4c701f7198921428c72887fe8d",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_b03_native_fx_runner.py",
+      "upstream_blob_sha": "8bebf199dcdcdf4c701f7198921428c72887fe8d",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_b04_native_fx_runner.py",
+      "git_blob_sha": "c310a2db84ca3180d04119c919f8b306ce6356d0",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_b04_native_fx_runner.py",
+      "upstream_blob_sha": "c310a2db84ca3180d04119c919f8b306ce6356d0",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_b05_native_fx_runner.py",
+      "git_blob_sha": "000d43954df3c307ef468d1cf65741283a41c572",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_b05_native_fx_runner.py",
+      "upstream_blob_sha": "000d43954df3c307ef468d1cf65741283a41c572",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/la-luna-de-florida/scripts/la_luna_fx_canon_guard.py",
+      "git_blob_sha": "90b9852ce5973b99f8126d760d250c7e870c3377",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "source_branch": "song/la-luna-de-florida",
+      "source_commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "source_path": "scripts/la_luna_fx_canon_guard.py",
+      "upstream_blob_sha": "90b9852ce5973b99f8126d760d250c7e870c3377",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/leave-it-by-the-door/projects/leave-it-by-the-door/scripts/recover_v2_shots_from_master.py",
+      "git_blob_sha": "e1d8eeff526e1d5bbeede2be3344b68fdeb424f0",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/leave-it-by-the-door",
+      "source_commit": "56333cb9dbd449f40e5b7d90f0e2d51f87c15b2a",
+      "source_path": "projects/leave-it-by-the-door/scripts/recover_v2_shots_from_master.py",
+      "upstream_blob_sha": "e1d8eeff526e1d5bbeede2be3344b68fdeb424f0",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/leave-it-by-the-door/projects/leave-it-by-the-door/scripts/render_full_native24_v2.py",
+      "git_blob_sha": "d7b09bcc517971eabd95235178be5acd034d426a",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/leave-it-by-the-door",
+      "source_commit": "56333cb9dbd449f40e5b7d90f0e2d51f87c15b2a",
+      "source_path": "projects/leave-it-by-the-door/scripts/render_full_native24_v2.py",
+      "upstream_blob_sha": "d7b09bcc517971eabd95235178be5acd034d426a",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/leave-it-by-the-door/projects/leave-it-by-the-door/scripts/render_native24_living_scene_proof.py",
+      "git_blob_sha": "e4d4fff175ca632fbb7e7c62cea7c02b7e0ce6d9",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/leave-it-by-the-door",
+      "source_commit": "56333cb9dbd449f40e5b7d90f0e2d51f87c15b2a",
+      "source_path": "projects/leave-it-by-the-door/scripts/render_native24_living_scene_proof.py",
+      "upstream_blob_sha": "e4d4fff175ca632fbb7e7c62cea7c02b7e0ce6d9",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/leave-it-by-the-door/projects/leave-it-by-the-door/scripts/render_v3_refinement.py",
+      "git_blob_sha": "bdb39ab2fa15b8c139fbf4647cd02034df9135e7",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/leave-it-by-the-door",
+      "source_commit": "56333cb9dbd449f40e5b7d90f0e2d51f87c15b2a",
+      "source_path": "projects/leave-it-by-the-door/scripts/render_v3_refinement.py",
+      "upstream_blob_sha": "bdb39ab2fa15b8c139fbf4647cd02034df9135e7",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/silver-coin/projects/silver-coin/render_v6_chunk.py",
+      "git_blob_sha": "a384823a052cde434f31b87dca21d9c08fb7d5c8",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/silver-coin",
+      "source_commit": "e2506963f618bcc4e546d7530afd9ac5a7859099",
+      "source_path": "projects/silver-coin/render_v6_chunk.py",
+      "upstream_blob_sha": "a384823a052cde434f31b87dca21d9c08fb7d5c8",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/silver-coin/projects/silver-coin/render_v6_full.py",
+      "git_blob_sha": "8849d7aade4caec62aa22921069b154a5a0702ef",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/silver-coin",
+      "source_commit": "e2506963f618bcc4e546d7530afd9ac5a7859099",
+      "source_path": "projects/silver-coin/render_v6_full.py",
+      "upstream_blob_sha": "8849d7aade4caec62aa22921069b154a5a0702ef",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/silver-coin/tools/video_fx/render_silver_coin_v8_effect_pack.py",
+      "git_blob_sha": "8fac7af1005e823a90aceb36b7cf22328e7a8c11",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/silver-coin",
+      "source_commit": "e2506963f618bcc4e546d7530afd9ac5a7859099",
+      "source_path": "tools/video_fx/render_silver_coin_v8_effect_pack.py",
+      "upstream_blob_sha": "8fac7af1005e823a90aceb36b7cf22328e7a8c11",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/the-door-between-the-seconds/projects/the-door-between-the-seconds/production/build_branch_picture.py",
+      "git_blob_sha": "bbe141b67b4f9d2f303dc02b4ea6058dd71e02f2",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/the-door-between-the-seconds",
+      "source_commit": "da76956c5927ea767fe587e4b7e5f6f3e065855a",
+      "source_path": "projects/the-door-between-the-seconds/production/build_branch_picture.py",
+      "upstream_blob_sha": "bbe141b67b4f9d2f303dc02b4ea6058dd71e02f2",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/the-door-between-the-seconds/projects/the-door-between-the-seconds/production/build_fresh_cut_sequential.py",
+      "git_blob_sha": "e08d7199f808ea61df550b5c2bf5e12cd971857e",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/the-door-between-the-seconds",
+      "source_commit": "da76956c5927ea767fe587e4b7e5f6f3e065855a",
+      "source_path": "projects/the-door-between-the-seconds/production/build_fresh_cut_sequential.py",
+      "upstream_blob_sha": "e08d7199f808ea61df550b5c2bf5e12cd971857e",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/the-door-between-the-seconds/projects/the-door-between-the-seconds/production/build_pandora_final.py",
+      "git_blob_sha": "b3cb5592f17b6f0f7828e52b0cf408ee17f24181",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/the-door-between-the-seconds",
+      "source_commit": "da76956c5927ea767fe587e4b7e5f6f3e065855a",
+      "source_path": "projects/the-door-between-the-seconds/production/build_pandora_final.py",
+      "upstream_blob_sha": "b3cb5592f17b6f0f7828e52b0cf408ee17f24181",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/the-door-between-the-seconds/projects/the-door-between-the-seconds/production/build_shot_packages_from_v2.py",
+      "git_blob_sha": "77c0a2f6d6e74bcb49c432fffd853ea9d67c2b96",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/the-door-between-the-seconds",
+      "source_commit": "da76956c5927ea767fe587e4b7e5f6f3e065855a",
+      "source_path": "projects/the-door-between-the-seconds/production/build_shot_packages_from_v2.py",
+      "upstream_blob_sha": "77c0a2f6d6e74bcb49c432fffd853ea9d67c2b96",
+      "historical_only": true
+    },
+    {
+      "path": "upstream/recovered-song-tech/the-door-between-the-seconds/projects/the-door-between-the-seconds/production/generate_branch_scene_bank.py",
+      "git_blob_sha": "964bce4ee34c9e16099ff5ded40c05b9095bdd05",
+      "role": "historical_song_tech",
+      "source_repo": "SouthPaw302/AIVideoEdit",
+      "source_branch": "song/the-door-between-the-seconds",
+      "source_commit": "da76956c5927ea767fe587e4b7e5f6f3e065855a",
+      "source_path": "projects/the-door-between-the-seconds/production/generate_branch_scene_bank.py",
+      "upstream_blob_sha": "964bce4ee34c9e16099ff5ded40c05b9095bdd05",
+      "historical_only": true
+    }
+  ]
+}
