@@ -7,7 +7,7 @@ import os
 import subprocess
 import sys
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
@@ -27,7 +27,21 @@ import production_final_qc
 import production_archive
 import runtime_gatekeeper
 import operating_tools
-from general.reusable.tools.jev_decision import decide as jev_decide
+import importlib.util
+
+def jev_decide(evidence):
+    """Resolve Jev from the bootstrapped current-main OS, not GodRender."""
+    if not CORE.status().get("bootstrapped"):
+        raise RuntimeError("canonical AIVideoEdit OS has not bootstrapped")
+    source = CORE.os_root / "general/reusable/tools/jev_decision.py"
+    if not source.is_file():
+        raise RuntimeError("bootstrapped OS does not contain Jev decision module")
+    spec = importlib.util.spec_from_file_location("canonical_jev_decision", source)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load canonical Jev decision module")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.decide(evidence)
 from core_adapter import CORE
 
 TOOL_SCHEMAS=[

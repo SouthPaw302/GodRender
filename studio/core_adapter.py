@@ -17,8 +17,8 @@ from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
-HOST_REPO = HERE.parents[1]
-HOST_BOOTSTRAP = HOST_REPO / "bootstrap.py"
+HOST_REPO = HERE.parent
+CANONICAL_REMOTE = "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab.git"
 RUNTIME = Path(os.environ.get("AIVE_RUNTIME", str(HERE / ".runtime"))).resolve()
 CORE_HOME = RUNTIME / "core"
 CORE_REPO = CORE_HOME / "repo"
@@ -78,48 +78,26 @@ class CoreAdapter:
         self.session_file = SESSION_FILE
 
     def _install_core(self, offline: bool) -> subprocess.CompletedProcess:
+        """Clone the canonical production OS, NEVER the GodRender host checkout.
+
+        --offline may only use an explicitly supplied local AIVideoEdit checkout.
+        An unrelated GodRender checkout is not valid authority for the OS.
+        """
+        if not shutil.which("git"):
+            raise RuntimeError("git is required for canonical production boot")
+        ref = _core_ref()
+        if ref != "main" and os.environ.get("AIVIDEOEDIT_VALIDATION_MODE") != "1":
+            raise RuntimeError("non-main core ref requires explicit validation mode")
+        source = os.environ.get("AIVE_CORE_LOCAL_REPO", "").strip() if offline else CANONICAL_REMOTE
+        if not source:
+            raise RuntimeError("offline boot requires AIVE_CORE_LOCAL_REPO pointing to a real AIVideoEdit checkout")
         CORE_HOME.mkdir(parents=True, exist_ok=True)
         if CORE_REPO.exists():
             shutil.rmtree(CORE_REPO)
-
-        if offline:
-            if not shutil.which("git"):
-                raise RuntimeError("offline core loading requires git")
-            proc = _run(
-                ["git", "clone", "--no-hardlinks", str(HOST_REPO), str(CORE_REPO)],
-                HOST_REPO,
-            )
-            if proc.returncode != 0:
-                return proc
-            ref = _core_ref()
-            target = f"origin/{ref}"
-            check = _run(["git", "rev-parse", "--verify", target], CORE_REPO, timeout=30)
-            if check.returncode != 0:
-                host_ref = _run(
-                    ["git", "-C", str(HOST_REPO), "rev-parse", f"refs/remotes/origin/{ref}"],
-                    HOST_REPO,
-                    timeout=30,
-                )
-                if host_ref.returncode == 0 and host_ref.stdout.strip():
-                    target = host_ref.stdout.strip()
-                    check = _run(["git", "cat-file", "-e", f"{target}^{{commit}}"], CORE_REPO, timeout=30)
-                if check.returncode == 0:
-                    return _run(["git", "checkout", "-B", ref, target], CORE_REPO, timeout=60)
-                fetched = _run(
-                    ["git", "fetch", "origin", f"refs/heads/{ref}:refs/remotes/origin/{ref}"],
-                    CORE_REPO,
-                    timeout=120,
-                )
-                check = _run(["git", "rev-parse", "--verify", target], CORE_REPO, timeout=30)
-                if check.returncode != 0 and fetched.returncode != 0:
-                    target = "FETCH_HEAD" if ref == "main" else ref
-            return _run(["git", "checkout", "-B", ref, target], CORE_REPO, timeout=60)
-
-        if not HOST_BOOTSTRAP.is_file():
-            raise RuntimeError("host bootstrap.py not found")
         return _run(
-            [sys.executable, str(HOST_BOOTSTRAP), "install", "--workspace", str(CORE_REPO)],
+            ["git", "clone", "--no-hardlinks", "--branch", ref, "--single-branch", source, str(CORE_REPO)],
             HOST_REPO,
+            timeout=300,
         )
 
     def bootstrap(self, offline: bool = False) -> dict:
