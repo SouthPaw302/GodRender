@@ -1,6 +1,6 @@
-# GodRender — staged MainV2 hybrid Godot import
+# GodRender — video-system consolidation with pinned MainV2 sources
 
-**Status: REVIEW ONLY — not a runnable, verified standalone pipeline.**
+**Status: INTEGRATION CANDIDATE.** GodRender now includes provenance-preserving video-system sources and a Studio boot adapter. Runtime/film acceptance remains gated by live GitHub Actions and full render testing.
 
 Source: `SouthPaw302/AIVideoEdit-MainV2-Lab`, branch `test/godot-render`, commit `289ef9ec997ddc426aba43bf66dcd401ee5c3648`.
 
@@ -27,3 +27,17 @@ Google Drive external brain (index, not execution authority):
 - https://docs.google.com/document/d/1HKMEg_VuOKjqTDexrDXPioZFD4GxRW_tenYXbi5RjA8/edit
 
 Read `docs/STAGED_TRANSFER_CONTRACT.md` and `docs/SOURCE_PROVENANCE.md` before touching imported files.
+
+
+## Video consolidation (October 18, 2026)
+
+- Canonical MainV2 source snapshot: `upstream/mainv2-lab/current-main/` (pinned `900e3e5749ed6fa13ad91524975a9e64661e6649`).
+- Godot's existing scene implementations remain under `upstream/mainv2-lab/lab/`.
+- Browser workstation Studio port: `studio/` with `python studio/stack.py` (host with Python/Git/FFmpeg).
+- Source-only recoverable song techniques: `upstream/recovered-song-tech/`; **not approved to auto-run or reuse historical footage**.
+- Source provenance/hashes: `config/verified_import_manifest.json`; machine check `python tools/verify_consolidation.py`.
+- 100-branch discovery manifest: `config/brain_source_index.json` with exact Git SHAs.
+- [External production brain](https://docs.google.com/spreadsheets/d/1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c/edit): FX Pixel Application Atlas, Callable Capabilities, FX Recipes, Recoverable Render Lineage and Agent Boot Handshake.
+- Start by running `python godrender_boot.py`. Only a literal `AIVideoEdit OS BOOTSTRAP: PASS` and attested session permits subsequent production work.
+
+Details, status limits and next validation gates: [Video integration](docs/VIDEO_CONSOLIDATION.md) · [GitHub ↔ Drive brain](docs/BRAIN_INTEGRATION.md). Archived YAML is nonexecuting; CI in `.github/workflows/` is GodRender-specific.

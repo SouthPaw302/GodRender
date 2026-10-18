@@ -1,0 +1,709 @@
+{
+  "schema": "godrender.brain-sources.v1",
+  "snapshot_date": "2026-10-18",
+  "drive_spreadsheet_url": "https://docs.google.com/spreadsheets/d/1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c/edit",
+  "drive_spreadsheet_id": "1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c",
+  "branch_heads": [
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "MainV2-clean",
+      "commit": "5617ad260cf39b361222832712b78529a6759315",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/MainV2-clean"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "MainV2",
+      "commit": "316fe96c7316d76d14308d5f27293e071aa20943",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/MainV2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "archive/american-empire-quiet-accession-canon",
+      "commit": "d768ee1684ebddd06af249f3a366181c929bc80c",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/archive/american-empire-quiet-accession-canon"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "archive/video/irish-eyes",
+      "commit": "10d95d6d2d03001bb50cde0d1c14dd6af19d2138",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/archive/video/irish-eyes"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "checkpoint/pre-dawn-full-mainv2",
+      "commit": "dcff47f08cc7cedc3385db6b66991e2a84d0f440",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/checkpoint/pre-dawn-full-mainv2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "checkpoint/pre-dawn-mainv2",
+      "commit": "713fc0f457d0066c3ff9215d5ca38af3114c08b7",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/checkpoint/pre-dawn-mainv2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "chore/zero-drift-director-directive",
+      "commit": "a586c5f441233e0d45273adb6c2c935a6c5e1405",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/chore/zero-drift-director-directive"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "director-brain-v2",
+      "commit": "aa2c66bda2ac6a49e835694509b1e1e3685fcd82",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/director-brain-v2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "docs/project-branch-catalog-20260920",
+      "commit": "22f897b9395d3577ebdb2702217f2c31002f9980",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/docs/project-branch-catalog-20260920"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "feat/coherent-storm-system",
+      "commit": "63bcc39ccba7a3c36faaaa6d9777725b88280e71",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/feat/coherent-storm-system"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "feat/mainv2-authored-camera-fx",
+      "commit": "3c438fe90e2f78225a1562a48ba5e97b84037473",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/feat/mainv2-authored-camera-fx"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "feat/video-continuation-rules",
+      "commit": "821e8ec8cf4f4b7a8903a9bea38bbc6174704d27",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/feat/video-continuation-rules"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "feature/long-form-loops",
+      "commit": "451b15ab19970087abfbaa90e450d008ccdc0803",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/feature/long-form-loops"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "fix/explicit-runtime-opt-in-20260917",
+      "commit": "c18cf53b1986aa5f4d4191238c669fcc4abdccd4",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/fix/explicit-runtime-opt-in-20260917"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "fx/canonical-v2",
+      "commit": "51c4b32596d581b51f0eab6f3aa09371e29be148",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/fx/canonical-v2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "integration/audio-mix",
+      "commit": "4dfba7b4c209774a004bf7cda48f7bbc657d15b6",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/integration/audio-mix"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "integration/effects-timeline",
+      "commit": "ae4ab2b539af0c8ef2f38a71b8207883b84eec02",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/integration/effects-timeline"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "integration/render-audio-qc",
+      "commit": "7bac2178fa382ec6ce89d78dae72264cbe1365ab",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/integration/render-audio-qc"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "integration/runtime-workflow-authority-fix-20260917",
+      "commit": "5f49820faaa0e0a4821a2d742a4ec41860ddda42",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/integration/runtime-workflow-authority-fix-20260917"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "main",
+      "commit": "97983737b46ca1851d9fa6468a2ef905d79cb146",
+      "kind": "CANON",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/main"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "movie/american-empire-act1",
+      "commit": "4dfd981e2fe1cf4e2993e5b73cbff3ace4401e03",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/movie/american-empire-act1"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "ops/actions-storage-cutover",
+      "commit": "679743a21dd6aa0d6dc90a5e0dafc209c50461e2",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/ops/actions-storage-cutover"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "project/american-empire-act1/main",
+      "commit": "a5af0b8c2dca4c2d9950f6d1ef6eeafb61469fdd",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/project/american-empire-act1/main"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "project/american-empire-act1/scene-01",
+      "commit": "324077dd1f69b4474f022e2f94a28d3f3f502e09",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/project/american-empire-act1/scene-01"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "project/american-empire-act1/scene-02",
+      "commit": "7bd6bc3ffe771b66939ed4edcf4de0afec16ad6d",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/project/american-empire-act1/scene-02"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "project/american-empire-act1/scene-03",
+      "commit": "2caefdb6cc227f247b85865c165350a1d800a2ec",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/project/american-empire-act1/scene-03"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "promote/music-directed-production-workflows",
+      "commit": "23ceec37ce8f82b40645072057914880b640bf1e",
+      "kind": "PROMOTION_CANDIDATE",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/promote/music-directed-production-workflows"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "promote/reactive-materials-visual-variety-qc",
+      "commit": "797665baf8ebfd74b47de0aa09af4e519cf33f0d",
+      "kind": "PROMOTION_CANDIDATE",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/promote/reactive-materials-visual-variety-qc"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "promote/tribal-house-reusable-fx",
+      "commit": "612d9648d7b147531af93f4b3142837bf5b14562",
+      "kind": "PROMOTION_CANDIDATE",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/promote/tribal-house-reusable-fx"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "prototype/backend-gui",
+      "commit": "f38d2a8907997d83588b1e8a38982193b9a72b0f",
+      "kind": "PROTOTYPE",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/prototype/backend-gui"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "prototype/deepseek-harness",
+      "commit": "f4968684ddb0c0f58ac6f954fdc7647d0c225cb7",
+      "kind": "PROTOTYPE",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/prototype/deepseek-harness"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "snapshot/pre-hyperframes-2026-09-17",
+      "commit": "0126b1c2978dc96810a02956a270feccdf02bdcf",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/snapshot/pre-hyperframes-2026-09-17"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/a-thousand-doors",
+      "commit": "bd6d57548296b2bb56ee25f483efcf5e51513bd7",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/a-thousand-doors"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/american-empire-act1-scene1",
+      "commit": "be49db28de3f3c9cf9a62863ce788274868876b4",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/american-empire-act1-scene1"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/american-empire-act1-scene2",
+      "commit": "92a7bf99e9d6c33d86b413185920aa8410f31797",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/american-empire-act1-scene2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/american-empire-act1-scene3",
+      "commit": "63140925b33f65eca8fb8b637755377ab3c45906",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/american-empire-act1-scene3"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/caspian-cleanroom-20260917",
+      "commit": "1c970d42cc51f2560ef013d2963b65cad7477dbe",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/caspian-cleanroom-20260917"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/caspian-the-day-the-silence-sang",
+      "commit": "81182cd11bb791988f8a1355d132e4b2ad8d79bc",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/caspian-the-day-the-silence-sang"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/celtic",
+      "commit": "345861a84f0045addb564fdfdbb988c547f69f55",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/celtic"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/el-viento-trae-tu-nombre",
+      "commit": "2f382a87ea646a024cecac98be070c44cfd010ed",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/el-viento-trae-tu-nombre"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/irish-eyes",
+      "commit": "10d95d6d2d03001bb50cde0d1c14dd6af19d2138",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/irish-eyes"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/ironflame",
+      "commit": "06ba8f00d784b474b86e9093595e03180337607f",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/ironflame"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/ironflame-20260905-0216",
+      "commit": "31ed71513d16628ff4612f0d8dff8627aa073f67",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/ironflame-20260905-0216"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/ironflame-cleanroom-20260917",
+      "commit": "cf688425c55943ee2bdeaaa4c49cc670165e303c",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/ironflame-cleanroom-20260917"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/ironflame-redux",
+      "commit": "514a571c4369ba5a22f253e7a79722abd9fee757",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/ironflame-redux"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/ironflamenew",
+      "commit": "b0491fbc280128159d6049b865099ec62916a970",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/ironflamenew"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/leave-it-by-the-door",
+      "commit": "56333cb9dbd449f40e5b7d90f0e2d51f87c15b2a",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/leave-it-by-the-door"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/midnight-tribal-pulse",
+      "commit": "a67113f281a6871f63175fb9a7b43acc9f7b2205",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/midnight-tribal-pulse"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/mountain-noir-after-midnight",
+      "commit": "3ad130d7cc9800edfe458c03924178ff00108437",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/mountain-noir-after-midnight"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/mountain-noir-after-midnight-mainv2-runtime",
+      "commit": "38750c61297612cbfce62de5caed64f67ae5ea2e",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/mountain-noir-after-midnight-mainv2-runtime"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/mountain-noir-after-midnight-mainv2",
+      "commit": "e81795366f6460155de85051d7ffe36277225740",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/mountain-noir-after-midnight-mainv2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/nordic-remastered",
+      "commit": "1d16549691d98fad331c8f84483ca8406558b52d",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/nordic-remastered"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/pre-dawn-in-paris-mainv2-clean",
+      "commit": "01b05a214a3902746561ed9d8345f65f717e4e67",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/pre-dawn-in-paris-mainv2-clean"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/pre-dawn-mainv2-checkpoint",
+      "commit": "6323f10e6a647bd59c513c9cad89ad4233ce04d9",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/pre-dawn-mainv2-checkpoint"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/shifting-cycles-recursive-horizon",
+      "commit": "a387c7dc7023bcd6553d8af6f6389188c4f19264",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/shifting-cycles-recursive-horizon"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/sigh-no-more",
+      "commit": "64ae74463bf0464e75a7363088465e286c5f1bdc",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/sigh-no-more"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/silver-coin",
+      "commit": "e2506963f618bcc4e546d7530afd9ac5a7859099",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/silver-coin"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/silver-coin-alternate",
+      "commit": "a93cec5c21d9b34fbdce0789ecb0c3de13805adc",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/silver-coin-alternate"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/silver-coin-test-2",
+      "commit": "7055e3f08828115b71a67c9da654fd43e8450589",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/silver-coin-test-2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/the-door-between-the-seconds",
+      "commit": "da76956c5927ea767fe587e4b7e5f6f3e065855a",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/the-door-between-the-seconds"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "song/tribal-house-remastered",
+      "commit": "02b068e536e49256fac41629aeab5aa025ca7ebb",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/song/tribal-house-remastered"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "sync/american-empire-scene01-main",
+      "commit": "be49db28de3f3c9cf9a62863ce788274868876b4",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/sync/american-empire-scene01-main"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/allow-user-lyric-exclusion",
+      "commit": "cd1dfeb5929fb9b3fa5ed7f338bfbca4ad9287f2",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/allow-user-lyric-exclusion"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/canonical-hero-library-recut",
+      "commit": "515e9036f333965022e8f13e50f4340c62c3799e",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/canonical-hero-library-recut"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/generative-engine-upgrade-20260905",
+      "commit": "426dd0a554df39fa73b211371faff70212315aa7",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/generative-engine-upgrade-20260905"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/github-release-storage",
+      "commit": "ee9537101c43cc16ce064fedac44d56542d0fb97",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/github-release-storage"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/github-release-storage-v2",
+      "commit": "6ca36243c65a290ed85d1e513ae44472d61455b6",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/github-release-storage-v2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/github-release-storage-v3",
+      "commit": "61c14d80196121dcf3e5972a9833401f3c4a4449",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/github-release-storage-v3"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/living-still-fx-pack-20260908",
+      "commit": "6e4b8174c453dc02f4c2cd910f2e5ba8ec6fb7d4",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/living-still-fx-pack-20260908"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/music-narrative-script-gates",
+      "commit": "2fe69dd417e285a0fdc6994840886aca8f27b0fb",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/music-narrative-script-gates"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/narrative-guard-repo-root-fix",
+      "commit": "2b6e615aa2c3f275e242a1c011f345d25e793ee4",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/narrative-guard-repo-root-fix"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/no-reference-visual-direction-gate",
+      "commit": "c9771323bada7db7ef67fd2efee35c8bd21755df",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/no-reference-visual-direction-gate"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/project-scene-branch-support",
+      "commit": "a3399ab47c7c7d2abf068c82ccc60a2b664b4ef8",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/project-scene-branch-support"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/promote-effect-library-20260915",
+      "commit": "ca1af9c377a89a60e93db549fda4249ed47803bd",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/promote-effect-library-20260915"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/recipe-execution-attestation-fix",
+      "commit": "edcde72a34a3afa913469fa5e7de2ec698b20d15",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/recipe-execution-attestation-fix"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/reference-authority-rejection-rules",
+      "commit": "1ad572a55579c4fcf407a12c4e805a74926f50ac",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/reference-authority-rejection-rules"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/render-cli-alias-fix-20260917",
+      "commit": "89d8ec571b3ac0e05b7c3810cfc811ff96db6ac8",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/render-cli-alias-fix-20260917"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/reusable-media-capabilities",
+      "commit": "b3e56b0792dfcd6a1a42a693a977c05901438973",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/reusable-media-capabilities"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/standard-workflow-core-checks-20260915",
+      "commit": "d7c2b5df67b8995ef8da1909b7edb01f32bce6e0",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/standard-workflow-core-checks-20260915"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/surgical-fx-resolver-harvest-20260924",
+      "commit": "cfc6ba102048dc4ac8850195994f3c8a397cdbff",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/surgical-fx-resolver-harvest-20260924"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "system/workflow-guard-bootstrap-root-fix-20260915",
+      "commit": "fb0793965ef3a46285421bf301b06c5a7107e741",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/system/workflow-guard-bootstrap-root-fix-20260915"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "tmp/claude-system-docs-20260906",
+      "commit": "4599459c192c7c7f10944813fd32e9fed1889f14",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/tmp/claude-system-docs-20260906"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit",
+      "branch": "work/ironflame-claude-implementation-20260906",
+      "commit": "1bb7e2298e1480a7b053c8dad67dc7bfb058ad43",
+      "kind": "SYSTEM_OR_OTHER",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/work/ironflame-claude-implementation-20260906"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "MainV2",
+      "commit": "e44b16ff39a15eee265ff1170375b66c96773175",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/MainV2"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "camion-new",
+      "commit": "a6664820281398614a2fae1abd8e483361845a25",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/camion-new"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "canon/director-visual-scan",
+      "commit": "72e2626c89b135c7fab51c3b09d71abd4eb64494",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/canon/director-visual-scan"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "fix/issue-4-production-release-gate",
+      "commit": "c04c468bf1289448b3a4cede721ed943ba22114e",
+      "kind": "REPAIR",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/fix/issue-4-production-release-gate"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "handoff/audit-11-repair-plan",
+      "commit": "462ab6fc4976ec595a9dbd56d02c3c76a2011ef7",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/handoff/audit-11-repair-plan"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "main",
+      "commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
+      "kind": "CANON",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/main"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "prototype/ai",
+      "commit": "3596fb8449af82ef7ce50f390c8b146d622e4485",
+      "kind": "PROTOTYPE",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/prototype/ai"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "repair/audit-11-packet-01-workstation-security",
+      "commit": "9763845269f3999502aa2b0562dd34277d25ece7",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/repair/audit-11-packet-01-workstation-security"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "repair/audit-11-packet-03-lineage",
+      "commit": "b1ca81fd5df063bed40e9053be5aa310e70b2fdd",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/repair/audit-11-packet-03-lineage"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "setup/lab-guardrails-v1",
+      "commit": "27fe147dc47496b6b6dd282716f53eda488be193",
+      "kind": "SYSTEM",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/setup/lab-guardrails-v1"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "song/camion-live",
+      "commit": "76fddeb77d5c0648ccd51003b3ee7d4571c0307a",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/song/camion-live"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "song/camion-new",
+      "commit": "816651fb5112d0428d3f6ff64a229fcaf74be22d",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/song/camion-new"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "song/el-viento-trae-tu-nombre",
+      "commit": "0872aae52bce98c9a56ebabd960de671cb55e792",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/song/el-viento-trae-tu-nombre"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "song/irish-eyes-lab",
+      "commit": "1a43805c62b3bd8b57347c1a312c17f48ebe593c",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/song/irish-eyes-lab"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "song/la-luna-de-florida",
+      "commit": "47c9256f03c2987625aba2e58e1ac5de97e95beb",
+      "kind": "SONG",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/song/la-luna-de-florida"
+    },
+    {
+      "repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
+      "branch": "test/godot-render",
+      "commit": "289ef9ec997ddc426aba43bf66dcd401ee5c3648",
+      "kind": "TEST",
+      "source_url": "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab/tree/test/godot-render"
+    },
+    {
+      "repo": "SouthPaw302/GodRender",
+      "branch": "main",
+      "commit": "cdf69c11c121a61a605dec09da4e96cf5418f24d",
+      "kind": "RENDERER_IMPORT",
+      "source_url": "https://github.com/SouthPaw302/GodRender/tree/main"
+    }
+  ],
+  "policy": "Discovery index only; bootstrapped AIVideoEdit main and current user authorization govern execution. Branch head SHAs are snapshots, not live-head assumptions."
+}
