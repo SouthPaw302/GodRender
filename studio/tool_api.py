@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Provider-neutral Tool API for AIVideoEdit."""
+"""Provider-neutral Tool API for GodRender Studio."""
 from __future__ import annotations
 from typing import Callable
 from pathlib import Path
@@ -30,9 +30,9 @@ import operating_tools
 import importlib.util
 
 def jev_decide(evidence):
-    """Resolve Jev from the bootstrapped current-main OS, not GodRender."""
+    """Resolve Jev from the bootstrapped compatibility engine; GodRender owns production."""
     if not CORE.status().get("bootstrapped"):
-        raise RuntimeError("canonical AIVideoEdit OS has not bootstrapped")
+        raise RuntimeError("GodRender compatibility engine has not bootstrapped")
     source = CORE.os_root / "general/reusable/tools/jev_decision.py"
     if not source.is_file():
         raise RuntimeError("bootstrapped OS does not contain Jev decision module")
@@ -45,8 +45,8 @@ def jev_decide(evidence):
 from core_adapter import CORE
 
 TOOL_SCHEMAS=[
-{"name":"core.status","description":"Show canonical AIVideoEdit OS/bootstrap status.","input_schema":{"type":"object","properties":{}}},
-{"name":"core.bootstrap","description":"Install and attest an isolated exact current-main AIVideoEdit core.","input_schema":{"type":"object","properties":{"offline":{"type":"boolean"}}}},
+{"name":"core.status","description":"Show GodRender production engine bootstrap status.","input_schema":{"type":"object","properties":{}}},
+{"name":"core.bootstrap","description":"Install and attest the current GodRender-compatible production engine.","input_schema":{"type":"object","properties":{"offline":{"type":"boolean"}}}},
 {"name":"capabilities.list","description":"List canonical media capabilities from the bootstrapped OS.","input_schema":{"type":"object","properties":{}}},
 {"name":"fx.list","description":"List reusable effects from the canonical FX registry.","input_schema":{"type":"object","properties":{}}},
 {"name":"project.list","description":"List local workstation projects.","input_schema":{"type":"object","properties":{}}},

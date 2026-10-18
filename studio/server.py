@@ -339,7 +339,7 @@ def project_manifest(project_id: str) -> dict:
 
 
 class Handler(SimpleHTTPRequestHandler):
-    server_version = "AIVideoEditAlpha/0.1"
+    server_version = "GodRenderStudio/1.0"
 
     def log_message(self, fmt, *args):
         print(f"[{self.log_date_time_string()}] {fmt % args}")
@@ -456,7 +456,7 @@ class Handler(SimpleHTTPRequestHandler):
                 "token_required": bool(studio_security.configured_token()),
             })
         if path == "/api/health":
-            return self.send_json({"ok": True, "service": "aivideoedit-alpha", "version": "0.1.0-alpha", "pid": os.getpid()})
+            return self.send_json({"ok": True, "service": "godrender-studio", "version": "0.1.0-alpha", "pid": os.getpid()})
         if path.startswith("/api/") or path.startswith("/media/"):
             if not self.require_studio(mutating=False):
                 return
@@ -622,7 +622,7 @@ if __name__ == "__main__":
     host = os.environ.get("AIVE_HOST", "127.0.0.1")
     studio_security.validate_bind(host)
     port = int(os.environ.get("AIVE_PORT", "8080"))
-    print(f"AIVideoEdit Alpha: http://127.0.0.1:{port}")
+    print(f"GodRender Studio: http://127.0.0.1:{port}")
     print(f"LAN bind: {host}:{port}")
     print(f"Workspace: {RUNTIME}")
     ThreadingHTTPServer((host, port), Handler).serve_forever()

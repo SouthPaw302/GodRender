@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AIVideoEdit alpha stack runtime."""
+"""GodRender browser Studio runtime (legacy internal API contracts retained)."""
 from __future__ import annotations
 import json,os,queue,shutil,threading
 from pathlib import Path
@@ -83,7 +83,7 @@ def worker_loop(index):
         finally:JOB_QUEUE.task_done()
 def dispatch_job(job):JOB_QUEUE.put(job)
 def start_workers():
-    for index in range(WORKER_COUNT):threading.Thread(target=worker_loop,args=(index,),name=f"aive-worker-{index+1}",daemon=True).start()
+    for index in range(WORKER_COUNT):threading.Thread(target=worker_loop,args=(index,),name=f"godrender-worker-{index+1}",daemon=True).start()
 def system_snapshot():
     usage=shutil.disk_usage(base.RUNTIME)
     with base.LOCK:
@@ -135,7 +135,7 @@ def _json_body(handler):
     except Exception as exc:raise ValueError(f"invalid JSON: {exc}")
 
 class StackHandler(base.Handler):
-    server_version="AIVideoEditAlphaStack/0.8"
+    server_version="GodRenderStudio/1.0"
     def do_GET(self):
         path=urlparse(self.path).path
         if path=="/api/remote/health":
@@ -193,6 +193,6 @@ class StackHandler(base.Handler):
         return super().do_POST()
 
 if __name__=="__main__":
-    base.load_state();base.dispatch_job=dispatch_job;start_workers();host=os.environ.get("AIVE_HOST","127.0.0.1");base.studio_security.validate_bind(host);port=int(os.environ.get("AIVE_PORT","8080"));print(f"AIVideoEdit Alpha Stack: http://127.0.0.1:{port}");print(f"Bind: {host}:{port}");print(f"Workspace: {base.RUNTIME}");print(f"Workers: {WORKER_COUNT}");print(f"Storage: {storage.status()['detail']}");print(f"Canonical core: {'loaded' if CORE.status().get('bootstrapped') else 'not bootstrapped'}");print(f"Tool API: {len(all_tool_schemas())} tools")
-    if os.environ.get("AIVE_CORE_AUTOBOOT","").strip().lower() in {"1","true","yes"}:threading.Thread(target=CORE.bootstrap,name="aive-core-bootstrap",daemon=True).start()
+    base.load_state();base.dispatch_job=dispatch_job;start_workers();host=os.environ.get("AIVE_HOST","127.0.0.1");base.studio_security.validate_bind(host);port=int(os.environ.get("AIVE_PORT","8080"));print(f"GodRender Studio: http://127.0.0.1:{port}");print(f"Bind: {host}:{port}");print(f"Workspace: {base.RUNTIME}");print(f"Workers: {WORKER_COUNT}");print(f"Storage: {storage.status()['detail']}");print(f"Canonical core: {'loaded' if CORE.status().get('bootstrapped') else 'not bootstrapped'}");print(f"Tool API: {len(all_tool_schemas())} tools")
+    if os.environ.get("AIVE_CORE_AUTOBOOT","").strip().lower() in {"1","true","yes"}:threading.Thread(target=CORE.bootstrap,name="godrender-core-bootstrap",daemon=True).start()
     ThreadingHTTPServer((host,port),StackHandler).serve_forever()

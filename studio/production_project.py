@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bridge browser projects into isolated canonical AIVideoEdit production repos.
+"""Bridge GodRender Studio projects into isolated guarded production workspaces.
 
 Each workstation project gets its own local checkout and `song/<slug>` branch.
 The compatibility scaffold only creates the minimum INITIALIZED project files;
@@ -141,7 +141,7 @@ def _scaffold(project_id: str, name: str, engine: Path) -> Path:
     denied = contract.get("default_denied_sources", [])
 
     text_files = {
-        "PROJECT.md": f"# {name}\n\nAIVideoEdit production workspace.\n",
+        "PROJECT.md": f"# {name}\n\nGodRender production workspace.\n",
         "STATUS.md": "# Status\n\nStage: INITIALIZED\n",
         "HANDOFF.md": "# Handoff\n\nProduction initialized; no creative direction is implied by this scaffold.\n",
         "SCRIPT.md": "# Script\n\nNot locked.\n",
@@ -221,10 +221,10 @@ def initialize(project_id: str) -> dict:
         raise RuntimeError((checkout.stderr or checkout.stdout or "song branch creation failed")[-1200:])
 
     project_dir = _scaffold(project_id, project.get("name") or project_id, engine)
-    _run(["git", "config", "user.name", "AIVideoEdit Workstation"], engine, timeout=20)
-    _run(["git", "config", "user.email", "workstation@aivideoedit.local"], engine, timeout=20)
+    _run(["git", "config", "user.name", "GodRender Studio"], engine, timeout=20)
+    _run(["git", "config", "user.email", "studio@godrender.local"], engine, timeout=20)
     _run(["git", "add", f"projects/{project_dir.name}"], engine, timeout=30)
-    commit = _run(["git", "commit", "-m", "Initialize AIVideoEdit production workspace"], engine, timeout=60)
+    commit = _run(["git", "commit", "-m", "Initialize GodRender production workspace"], engine, timeout=60)
     if commit.returncode != 0:
         raise RuntimeError((commit.stderr or commit.stdout or "initial project commit failed")[-1200:])
 

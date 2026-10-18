@@ -10,7 +10,7 @@ let studioAuthPromise = null;
 async function establishStudioSession() {
   if (studioAuthPromise) return studioAuthPromise;
   studioAuthPromise = (async () => {
-    const token = window.prompt('Enter the AIVideoEdit Studio access token.');
+    const token = window.prompt('Enter the GodRender Studio access token.');
     if (!token) throw new Error('Studio authorization is required.');
     const res = await fetch('/api/auth/session', {
       method: 'POST', credentials: 'same-origin',
