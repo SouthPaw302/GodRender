@@ -1,7 +1,7 @@
 name: GodRender video integration verification
 on:
   push:
-    branches: [main, integration/full-video-system-20261018, 'fix/studio-cleanup-debug-20261018']
+    branches: [main, integration/full-video-system-20261018]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -23,6 +23,8 @@ jobs:
         run: PYTHONPATH=studio python3 -c 'import core_adapter; assert "AIVideoEdit-MainV2-Lab" in core_adapter.CANONICAL_REMOTE; print("ADAPTER IMPORT PASS")'
       - name: Run Studio regression and compatibility tests
         run: PYTHONPATH=studio python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Run existing structural Studio self-test
+        run: PYTHONPATH=studio python3 studio/selftest.py
       - name: Verify full Studio Python import and tool graph
         run: PYTHONPATH=studio python3 -c 'import stack; print("STUDIO IMPORT PASS", len(stack.all_tool_schemas()))'
       - name: Serve browser Studio and verify HTTP endpoints
