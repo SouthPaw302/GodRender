@@ -98,6 +98,8 @@ jobs:
           python-version: '3.11'
       - name: Install real FX dependencies
         run: python -m pip install numpy opencv-python-headless
+      - name: Install FFmpeg/FFprobe for pixel encoding
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: godrender-source-${{ github.run_id }}
@@ -131,6 +133,8 @@ jobs:
           pattern: godrender-shot-*
           path: ${{ runner.temp }}/shards
           merge-multiple: false
+      - name: Install FFmpeg/FFprobe for mux and verification
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
       - name: Restore shard IDs from artifact names
         shell: bash
         run: |
