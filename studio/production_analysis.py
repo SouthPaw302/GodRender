@@ -205,11 +205,32 @@ def _music_analysis(asset: dict, analysis_root: Path) -> dict:
     cue_indices = sorted(range(len(envelope)), key=lambda i: envelope[i], reverse=True)[:8]
     cues = [{"seconds": round(i * step, 2), "type": "energy_peak", "relative_energy": round(envelope[i] / peak if peak else 0.0, 3)} for i in sorted(cue_indices)]
     metric = bpm is not None and confidence >= 0.08
+    # Prefer the installed approved Beat This ONNX model, with explicit DSP fallback.
+    # Always retain the original FFmpeg/RMS evidence and never fabricate inference.
+    import model_runtime
+    model_evidence = {}
+    try:
+        model_evidence = model_runtime.music_analysis(source)
+        detected = model_evidence.get("bpm")
+        if detected is not None and float(model_evidence.get("confidence") or 0) >= 0.5:
+            bpm = round(float(detected), 3)
+            confidence = float(model_evidence["confidence"])
+            metric = True
+    except Exception as exc:
+        model_evidence = {"engine":"unavailable","authority":"evidence_only",
+                          "error":type(exc).__name__+": "+str(exc)[:360],
+                          "used_fallback":True}
     return {
         "schema": "aivideoedit.music-analysis.v1",
         "source_asset_id": asset["id"],
         "source_uri": f"aive://asset/{asset['id']}",
-        "analysis_method": "ffmpeg PCM decode + 100ms RMS/onset autocorrelation",
+        "analysis_method": "FFmpeg PCM RMS + bounded model-worker inference with explicit fallback",
+        "model_evidence": model_evidence,
+        "model_engine": model_evidence.get("engine"),
+        "model_resolution": model_evidence.get("model_resolution"),
+        "beat_positions_seconds": model_evidence.get("beat_positions_seconds", []),
+        "downbeat_positions_seconds": model_evidence.get("downbeat_positions_seconds", []),
+        "audio_controls": model_evidence.get("audio_controls", {}),
         "rhythm_or_pulse": {"estimated_bpm": bpm, "confidence": confidence, "status": "pulse_detected" if metric else "weak_or_unresolved"},
         "tempo_or_non_metric_status": {"status": "estimated_metric" if metric else "non_metric_or_unresolved", "estimated_bpm": bpm, "confidence": confidence},
         "meter_or_groove": {"status": "unresolved_by_signal_only", "note": "Meter/groove interpretation is intentionally deferred to an agent or user."},
