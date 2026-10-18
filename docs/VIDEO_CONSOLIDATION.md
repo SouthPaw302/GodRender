@@ -1,4 +1,6 @@
-# GodRender video systems consolidation — source + runtime boundary
+# Archived GodRender consolidation record — October 18, 2026
+
+**Historical provenance only.** This records how code was consolidated; the sole active project is **GodRender**. See [the current policy](../AGENTS.md) and [compatibility debt](COMPATIBILITY_DEBT.md). Older repository names below refer only to historical source or the existing legacy runtime dependency.
 
 **2026-10-18 transfer from** `SouthPaw302/AIVideoEdit-MainV2-Lab` `900e3e5749ed6fa13ad91524975a9e64661e6649`.
 **Original GodRender main** `cdf69c11c121a61a605dec09da4e96cf5418f24d`. No source repos or song branches were mutated.
@@ -12,7 +14,7 @@
 
 ## Architecture
 `GodRender`: owns Godot scene build, temporal cameras, frame/export mechanics, experimental renderers and the Studio host integration.
-`AIVideoEdit-MainV2-Lab`: **single authoritative** production OS and latest approved FX gate, rules, music interpretation, shot auth, release QC and edit decisions. GodRender boots an isolated real AIVideoEdit checkout; snapshots do not grant production rights.
+`Legacy compatibility engine`: as of this recorded import, it supplies the production guard/FX implementation. **GodRender now owns the active project and all new changes**; the old runtime dependency remains tracked separately until safely migrated. GodRender boots an isolated real AIVideoEdit checkout; snapshots do not grant production rights.
 `Drive brain`: searchable retrieval and history, not execution or merge authority.
 
 ## Agent startup and GUI

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Adapter between the workstation stack and the canonical AIVideoEdit OS.
+"""GodRender Studio adapter for the validated legacy production OS.
 
-The workstation is not a production branch and must never pretend to be one.
-This adapter installs a clean current `main` checkout into the runtime cache,
+GodRender remains the only active repository and production workspace.
+The compatibility adapter currently installs a clean legacy main checkout into the runtime cache,
 boots/attests that checkout as `main`, and reads canonical contracts,
 capabilities and effects from its `.aivideoedit/os` snapshot.
 """
@@ -129,7 +129,7 @@ class CoreAdapter:
             raise RuntimeError("non-main core ref requires explicit validation mode")
         source = os.environ.get("AIVE_CORE_LOCAL_REPO", "").strip() if offline else CANONICAL_REMOTE
         if not source:
-            raise RuntimeError("offline boot requires AIVE_CORE_LOCAL_REPO pointing to a real AIVideoEdit checkout")
+            raise RuntimeError("offline boot requires AIVE_CORE_LOCAL_REPO pointing to a real legacy engine checkout")
         CORE_HOME.mkdir(parents=True, exist_ok=True)
         pending = CORE_HOME / (".incoming-" + uuid.uuid4().hex)
         prior = CORE_HOME / (".previous-" + uuid.uuid4().hex)
