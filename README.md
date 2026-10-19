@@ -38,8 +38,8 @@ PYTHONPATH=studio python studio/selftest.py
 
 ## Important runtime compatibility boundary
 
-The visible product, project direction, agent workspace and change destination are **GodRender**. After PR #6, the checked-in core and Studio bootstrap use **GodRender's own checkout**. Legacy storage paths and schema identifiers remain supported for existing media/projects, but no external historical repository is an active production authority. Do not remove compatibility interfaces without a tested migration. See [compatibility migration status](docs/COMPATIBILITY_DEBT.md).
+The visible product, project direction, agent workspace and change destination are **GodRender**. The current imported production bootstrap **still uses a legacy compatibility checkout and its existing schemas**. Those are implementation dependencies, not a second project identity, and must not be silently renamed or claimed independent. See [compatibility migration status](docs/COMPATIBILITY_DEBT.md).
 
 GodRender's GitHub checks verify the imported source, Studio HTTP and bootstrap. A full Godot → FX → music → final-film Director-accepted render is **not yet proven** by these checks.
 
-[Native guardrails](docs/NATIVE_GUARDRAILS.md) · [GodRender Studio guide](studio/README.md) · [Agent boot contract](AGENTS.md) · [External brain](docs/BRAIN_INTEGRATION.md) · [Import history](docs/VIDEO_CONSOLIDATION.md)
+[GodRender Studio guide](studio/README.md) · [Agent boot contract](AGENTS.md) · [External brain](docs/BRAIN_INTEGRATION.md) · [Import history](docs/VIDEO_CONSOLIDATION.md)
