@@ -296,17 +296,17 @@ def _refresh_boot_capsule(project_id: str) -> None:
     engine = Path(current["engine_root"])
     project_dir = Path(current["project_dir"])
     env = dict(os.environ)
-    core_ref = os.environ.get("AIVE_CORE_REF", "main").strip() or "main"
+    core_ref = os.environ.get("GODRENDER_CORE_REF", "main").strip() or "main"
     if core_ref != "main":
-        env["AIVIDEOEDIT_AUTHORITY_REF"] = core_ref
-        env["AIVIDEOEDIT_VALIDATION_MODE"] = "1"
+        env["GODRENDER_AUTHORITY_REF"] = core_ref
+        env["GODRENDER_VALIDATION_MODE"] = "1"
     boot_cmd = [
         sys.executable, str(engine / "bootstrap.py"), "boot",
         "--repo-root", str(engine),
         "--branch", str(current["branch"]),
         "--project-dir", str(project_dir.relative_to(engine)),
     ]
-    if os.environ.get("AIVE_OFFLINE", "").strip().lower() in {"1", "true", "yes", "on"}:
+    if os.environ.get("GODRENDER_OFFLINE", "").strip().lower() in {"1", "true", "yes", "on"}:
         boot_cmd.append("--offline")
     proc = subprocess.run(
         boot_cmd,
