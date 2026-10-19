@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Runtime mutation gatekeeper for AIVideoEdit MainV2-clean.
+"""Runtime mutation gatekeeper for GodRender MainV2-clean.
 
 This layer does not replace the canonical production guard. It validates that
 the active mutation still matches the boot capsule/session attestation before
@@ -83,7 +83,7 @@ def evaluate(
 ) -> dict:
     engine = engine.resolve()
     project_dir = project_dir.resolve()
-    session_dir = engine / ".aivideoedit"
+    session_dir = engine / ".godrender"
     capsule_path = session_dir / "boot_capsule.json"
     attestation_path = session_dir / "session_attestation.json"
 
@@ -91,9 +91,9 @@ def evaluate(
     attestation = _read_json(attestation_path)
     errors: list[str] = []
 
-    if capsule.get("schema") != "aivideoedit.boot-capsule.v1":
+    if capsule.get("schema") != "godrender.boot-capsule.v1":
         errors.append("valid boot capsule is required")
-    if attestation.get("schema") != "aivideoedit.session-attestation.v1":
+    if attestation.get("schema") != "godrender.session-attestation.v1":
         errors.append("valid session attestation is required")
     if capsule and attestation:
         actual_capsule_hash = _stable_json_sha256(capsule)
@@ -168,7 +168,7 @@ def evaluate(
             errors.append(f"{scope_name}: {reason}")
 
     return {
-        "schema": "aivideoedit.runtime-gatekeeper.v1",
+        "schema": "godrender.runtime-gatekeeper.v1",
         "operation": operation,
         "branch": branch,
         "stage": stage,
