@@ -33,7 +33,7 @@ def run_tests(repo: Path) -> dict:
     cmd=[sys.executable,"-m","pytest","-q",*DEFAULT_TESTS]
     proc=subprocess.run(cmd,cwd=str(repo),capture_output=True,text=True,check=False)
     return {
-        "schema":"aivideoedit.surgical-verification.v1",
+        "schema":"godrender.surgical-verification.v1",
         "result":"PASS" if proc.returncode==0 else "FAIL",
         "returncode":proc.returncode,
         "tests":DEFAULT_TESTS,
