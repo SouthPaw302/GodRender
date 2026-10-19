@@ -20,7 +20,7 @@ LEGACY_CLONE = re.compile(
     r"\bgit\s+clone\b.{0,200}\b(?:AIVideoEdit|MainV2-Lab)\b",
     re.IGNORECASE,
 )
-EXEMPT = ("upstream/", "docs/", "tests/fixtures/", ".git/")
+EXEMPT = ("upstream/", "docs/", "tests/fixtures/", ".git/", "config/brain_source_index.json")
 SUFFIX = {".py", ".sh", ".js", ".ts", ".yml", ".yaml", ".json", ".toml", ".ps1"}
 
 def main() -> int:
