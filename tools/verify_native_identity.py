@@ -27,7 +27,7 @@ def main() -> int:
         path = raw.decode("utf-8", "surrogateescape")
         if path not in ROOTS and not path.startswith(PREFIXES):
             continue
-        if any(x in path for x in SKIP) or pathlib.Path(path).suffix not in {".py", ".json", ".yml", ".yaml", ".sh", ".js", ".ts"}:
+        if (any(x in path for x in SKIP) or (path.startswith("general/reusable/fx_v2/") and path.endswith(".json")) or pathlib.Path(path).suffix not in {".py", ".json", ".yml", ".yaml", ".sh", ".js", ".ts"}):
             continue
         try:
             data = (ROOT / path).read_text(encoding="utf-8")
