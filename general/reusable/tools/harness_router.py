@@ -8,7 +8,7 @@ from typing import Any
 
 
 def harness_enabled() -> bool:
-    return os.environ.get("AIVE_HARNESS_ENABLED", "").strip().lower() in {"1","true","yes","on"}
+    return os.environ.get("GODRENDER_HARNESS_ENABLED", "").strip().lower() in {"1","true","yes","on"}
 
 
 def launcher() -> str | None:
@@ -19,19 +19,19 @@ def route_jev(decision: dict[str, Any]) -> dict[str, Any]:
     value=str(decision.get("decision") or "").upper()
     if value != "ESCALATE":
         return {
-            "schema":"aivideoedit.harness-route.v1",
+            "schema":"godrender.harness-route.v1",
             "route":"none",
             "reason":"Jev did not request escalation",
         }
     if harness_enabled():
         return {
-            "schema":"aivideoedit.harness-route.v1",
+            "schema":"godrender.harness-route.v1",
             "route":"optional_harness_specialist",
             "reason":"Jev escalated and optional Harness is enabled",
             "launcher":launcher(),
         }
     return {
-        "schema":"aivideoedit.harness-route.v1",
+        "schema":"godrender.harness-route.v1",
         "route":"authorized_sandbox_agent",
         "reason":"Jev escalated but optional Harness is disabled",
     }
