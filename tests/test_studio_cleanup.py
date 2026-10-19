@@ -33,6 +33,10 @@ class CoreRefreshTests(unittest.TestCase):
             p = mock.patch.object(core_adapter, name, value)
             p.start()
             self.addCleanup(p.stop)
+        # Native engine setup must expose real GodRender bootstrap and contract files.
+        (self.root / "bootstrap.py").write_text("# native test bootstrap\n")
+        (self.root / "general" / "reusable").mkdir(parents=True)
+        (self.root / "general" / "reusable" / "PRODUCTION_CONTRACT.json").write_text("{}\n")
         git = mock.patch.object(core_adapter.shutil, "which", return_value="/usr/bin/git")
         git.start()
         self.addCleanup(git.stop)
@@ -52,12 +56,14 @@ class CoreRefreshTests(unittest.TestCase):
     def _runner(self, *, clone_return=0, boot_return=0, valid_session=True):
         def run(cmd, cwd, timeout=300, env=None):
             if cmd[0] == "git":
-                if clone_return:
-                    return subprocess.CompletedProcess(cmd, clone_return, "", "git clone failed")
-                new = Path(cmd[-1])
-                new.mkdir(parents=True, exist_ok=True)
-                (new / "bootstrap.py").write_text("pass\n", encoding="utf-8")
-                return subprocess.CompletedProcess(cmd, 0, "cloned", "")
+                if "clone" in cmd:
+                    if clone_return:
+                        return subprocess.CompletedProcess(cmd, clone_return, "", "git clone failed")
+                    new = Path(cmd[-1]); new.mkdir(parents=True, exist_ok=True)
+                    (new / "bootstrap.py").write_text("pass\n", encoding="utf-8")
+                    return subprocess.CompletedProcess(cmd, 0, "cloned", "")
+                # Native bootstrap checks out a pinned GodRender ref separately.
+                return subprocess.CompletedProcess(cmd, 0, "checked-out", "")
             if boot_return == 0 and valid_session:
                 self.os_root.mkdir(parents=True, exist_ok=True)
                 self.session.write_text(json.dumps({
