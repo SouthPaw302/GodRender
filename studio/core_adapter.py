@@ -199,7 +199,7 @@ class CoreAdapter:
                 proc = _run(cmd, CORE_REPO, timeout=300, env=env)
                 valid = (
                     proc.returncode == 0
-                    and "AIVideoEdit OS BOOTSTRAP: PASS" in (proc.stdout or "")
+                    and "GODRENDER OS BOOTSTRAP: PASS" in (proc.stdout or "")
                     and self._session_valid(_read_json(self.session_file, {}))
                 )
                 if not valid:
