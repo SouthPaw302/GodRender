@@ -8,7 +8,7 @@ HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[2]
 REGISTRY=HERE/"registry.json"
 def _load_module(path):
-    full=(REPO/path).resolve();spec=importlib.util.spec_from_file_location("aive_fx_adapter_"+full.stem,full)
+    full=(REPO/path).resolve();spec=importlib.util.spec_from_file_location("godrender_fx_adapter_"+full.stem,full)
     if spec is None or spec.loader is None:raise RuntimeError(f"cannot load FX adapter: {path}")
     mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);return mod
 class FXExecutor:
