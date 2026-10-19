@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AIVideoEdit portable OS bootstrap.
+"""GodRender portable production OS bootstrap (legacy serialized schema read-compat).
 
 Every session materializes the entire exact current `main` commit into
 `.aivideoedit/os/`, runs current-main fail-closed guards against the active
@@ -22,7 +22,7 @@ import urllib.request
 import uuid
 from pathlib import Path
 
-REPOSITORY = "SouthPaw302/AIVideoEdit-MainV2-Lab"
+REPOSITORY = "SouthPaw302/GodRender"
 DEFAULT_REF = "main"
 API_MAIN = f"https://api.github.com/repos/{REPOSITORY}/commits/{DEFAULT_REF}"
 SESSION_DIRNAME = ".aivideoedit"

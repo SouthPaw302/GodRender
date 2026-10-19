@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""GodRender Studio adapter for the validated legacy production OS.
+"""GodRender-native production OS adapter.
 
-GodRender remains the only active repository and production workspace.
-The compatibility adapter currently installs a clean legacy main checkout into the runtime cache,
-boots/attests that checkout as `main`, and reads canonical contracts,
-capabilities and effects from its `.aivideoedit/os` snapshot.
+Clone and boot the pinned GodRender source tree locally. The versioned
+.aivideoedit wire schemas and historical source provenance remain readable;
+no legacy repository is cloned or required at runtime.
 """
 from __future__ import annotations
 
@@ -21,7 +20,7 @@ from typing import Any
 
 HERE = Path(__file__).resolve().parent
 HOST_REPO = HERE.parent
-CANONICAL_REMOTE = "https://github.com/SouthPaw302/AIVideoEdit-MainV2-Lab.git"
+CANONICAL_REMOTE = "https://github.com/SouthPaw302/GodRender.git"
 RUNTIME = Path(os.environ.get("AIVE_RUNTIME", str(HERE / ".runtime"))).resolve()
 CORE_HOME = RUNTIME / "core"
 CORE_REPO = CORE_HOME / "repo"
@@ -127,20 +126,31 @@ class CoreAdapter:
         ref = _core_ref()
         if ref != "main" and os.environ.get("AIVIDEOEDIT_VALIDATION_MODE") != "1":
             raise RuntimeError("non-main core ref requires explicit validation mode")
-        source = os.environ.get("AIVE_CORE_LOCAL_REPO", "").strip() if offline else CANONICAL_REMOTE
-        if not source:
-            raise RuntimeError("offline boot requires AIVE_CORE_LOCAL_REPO pointing to a real legacy engine checkout")
+        # Never execute an external historical repository. Only GodRender itself
+        # can supply executable bootstrap/guards; a missing local engine fails closed.
+        source = str(HOST_REPO)
+        if not (HOST_REPO / "bootstrap.py").is_file() or not (HOST_REPO / "general/reusable/PRODUCTION_CONTRACT.json").is_file():
+            raise RuntimeError("GodRender native bootstrap/contracts missing from local source checkout")
         CORE_HOME.mkdir(parents=True, exist_ok=True)
         pending = CORE_HOME / (".incoming-" + uuid.uuid4().hex)
         prior = CORE_HOME / (".previous-" + uuid.uuid4().hex)
         try:
             install = _run(
-                ["git", "clone", "--no-hardlinks", "--branch", ref, "--single-branch", source, str(pending)],
+                ["git", "clone", "--no-hardlinks", "--no-checkout", source, str(pending)],
                 HOST_REPO,
                 timeout=300,
             )
             if install.returncode != 0:
                 return install
+            checkout = _run(["git", "checkout", "--detach", ref], pending, timeout=90)
+            if checkout.returncode != 0:
+                # A PR commit may be in FETCH_HEAD rather than the cloned branch refs.
+                fetch = _run(["git", "fetch", "--no-tags", source, ref], pending, timeout=90)
+                if fetch.returncode != 0:
+                    return fetch
+                checkout = _run(["git", "checkout", "--detach", "FETCH_HEAD"], pending, timeout=90)
+            if checkout.returncode != 0:
+                return checkout
             if not (pending / "bootstrap.py").is_file():
                 return subprocess.CompletedProcess(
                     args=install.args, returncode=1, stdout=install.stdout,

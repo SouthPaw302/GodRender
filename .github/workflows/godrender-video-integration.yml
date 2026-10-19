@@ -20,7 +20,7 @@ jobs:
       - name: Syntax-check Studio and imported Python source
         run: python3 -m compileall -q studio upstream godrender_boot.py tools
       - name: Import GodRender compatibility adapter without production side effects
-        run: PYTHONPATH=studio python3 -c 'import core_adapter; assert "AIVideoEdit-MainV2-Lab" in core_adapter.CANONICAL_REMOTE; print("ADAPTER IMPORT PASS")'
+        run: PYTHONPATH=studio python3 -c 'import core_adapter; assert core_adapter.CANONICAL_REMOTE == "https://github.com/SouthPaw302/GodRender.git"; assert (core_adapter.HOST_REPO/"bootstrap.py").is_file(); print("GODRENDER NATIVE CORE IMPORT PASS"); print("ADAPTER IMPORT PASS")'
       - name: Check runtime render and branch synchronization APIs
         run: python3 -m compileall -q render studio tools
       - name: Run Studio regression and compatibility tests
