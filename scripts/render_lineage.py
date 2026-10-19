@@ -21,7 +21,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 
-SCHEMA = "aivideoedit.render-lineage.v1"
+SCHEMA = "godrender.render-lineage.v1"
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 TOOLCHAIN_PATHS = (
