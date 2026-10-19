@@ -37,7 +37,7 @@ def walk_forbidden(obj: Any, path="root"):
 
 def validate_registry(data: dict, media_matrix: dict | None = None):
     errors = []
-    if data.get("schema") != "aivideoedit.standard-workflows.v1":
+    if data.get("schema") != "godrender.standard-workflows.v1":
         errors.append("invalid standard workflow registry schema")
     workflows = data.get("workflows")
     if not isinstance(workflows, list) or not workflows:
