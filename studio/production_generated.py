@@ -39,14 +39,14 @@ def request_generation(project_id:str,*,shot_id:str,capability:str,prompt:str,pr
     prompt=str(prompt or "").strip()
     if not prompt:raise ValueError("prompt is required")
     _validate_shot_capability(project_dir,shot_id,capability)
-    path=_requests_path(project_id);data=_read_json(path,{"schema":"aivideoedit.generation-requests.v1","requests":[]})
+    path=_requests_path(project_id);data=_read_json(path,{"schema":"godrender.generation-requests.v1","requests":[]})
     rec={"id":uuid.uuid4().hex[:12],"project_id":project_id,"shot_id":str(shot_id).strip(),"capability":str(capability).strip(),"prompt":prompt,"provider_hint":str(provider_hint or "").strip() or None,"notes":str(notes or "").strip() or None,"status":"requested","created_at":base.now(),"asset_id":None}
     data.setdefault("requests",[]).append(rec);_write_json(path,data);return {"ok":True,"request":rec}
 def register_generated(project_id:str,*,asset_id:str,shot_id:str,capability:str,request_id:str="",provider:str="",model:str="",prompt:str="",role:str="generated_visual")->dict:
     current,engine,project_dir=_project(project_id)
     if current.get("stage") not in {"STORYBOARD_LOCKED","SHOT_PACKAGES_BUILT"}:raise RuntimeError("generated media registration requires STORYBOARD_LOCKED or SHOT_PACKAGES_BUILT stage")
     shot_id=str(shot_id or "").strip();capability=str(capability or "").strip();_validate_shot_capability(project_dir,shot_id,capability);request_id=str(request_id or "").strip()
-    req_path=_requests_path(project_id);reqs=_read_json(req_path,{"schema":"aivideoedit.generation-requests.v1","requests":[]})
+    req_path=_requests_path(project_id);reqs=_read_json(req_path,{"schema":"godrender.generation-requests.v1","requests":[]})
     if request_id:
         req=next((x for x in reqs.get("requests",[]) if isinstance(x,dict) and x.get("id")==request_id),None)
         if not req:raise ValueError("generation request not found")
@@ -58,8 +58,8 @@ def register_generated(project_id:str,*,asset_id:str,shot_id:str,capability:str,
         if asset.get("status")!="ready" or not str(asset.get("sha256") or "").strip():raise RuntimeError("generated asset must exist, be ready, and have SHA-256 evidence")
         generation={"request_id":request_id or None,"shot_id":shot_id,"capability":capability,"provider":str(provider or "").strip() or None,"model":str(model or "").strip() or None,"prompt":str(prompt or "").strip() or None,"registered_at":base.now()}
         asset.update({"origin":"generated","kind":capability,"role":str(role or "generated_visual"),"generation":generation,"creative_status":"candidate","updated_at":base.now()});base.save_state();asset_copy=dict(asset)
-    manifest_path=project_dir/"ASSET_MANIFEST.json";manifest=_read_json(manifest_path,{"schema":"aivideoedit.asset-manifest.v1","assets":[]});assets=manifest.get("assets",[]) if isinstance(manifest.get("assets"),list) else []
-    record={"id":asset_copy.get("id"),"name":asset_copy.get("filename"),"uri":f"aive://asset/{asset_copy.get('id')}","sha256":asset_copy.get("sha256"),"content_type":asset_copy.get("content_type"),"size_bytes":asset_copy.get("size_bytes"),"status":"ready","origin":"generated","kind":capability,"role":str(role or "generated_visual"),"authority":"current_project_generated","generation":generation,"metadata":asset_copy.get("metadata") or {},"qc":asset_copy.get("qc") or {"status":"unchecked"},"creative_status":"candidate"}
+    manifest_path=project_dir/"ASSET_MANIFEST.json";manifest=_read_json(manifest_path,{"schema":"godrender.asset-manifest.v1","assets":[]});assets=manifest.get("assets",[]) if isinstance(manifest.get("assets"),list) else []
+    record={"id":asset_copy.get("id"),"name":asset_copy.get("filename"),"uri":f"godrender://asset/{asset_copy.get('id')}","sha256":asset_copy.get("sha256"),"content_type":asset_copy.get("content_type"),"size_bytes":asset_copy.get("size_bytes"),"status":"ready","origin":"generated","kind":capability,"role":str(role or "generated_visual"),"authority":"current_project_generated","generation":generation,"metadata":asset_copy.get("metadata") or {},"qc":asset_copy.get("qc") or {"status":"unchecked"},"creative_status":"candidate"}
     for i,old in enumerate(assets):
         if isinstance(old,dict) and str(old.get("id"))==str(asset_id):assets[i]=record;break
     else:assets.append(record)
