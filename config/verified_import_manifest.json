@@ -41,9 +41,9 @@
     },
     {
       "path": "godrender_boot.py",
-      "git_blob_sha": "ef318c674836dbaf7e4b68a49e37de3b589f4d0e",
+      "git_blob_sha": "3e4030befaf98f531c6a50218533f4d6b766e5dd",
       "role": "existing",
-      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
+      "delta": "Intentional GodRender-native runtime identity migration; historical upstream source retained in archive"
     },
     {
       "path": "studio/.gitignore",
@@ -76,13 +76,13 @@
     },
     {
       "path": "studio/core_adapter.py",
-      "git_blob_sha": "df2a92d6516909c80e72776d0016327cd20d918f",
+      "git_blob_sha": "08e1d8fb62b6e111e85d34c13d9b55ab6bf95634",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/core_adapter.py",
       "upstream_blob_sha": "230d33a63cceac3b257ac22daa7edef50b1b675e",
-      "delta": "Native GodRender cutover: core clones exclusively the current local GodRender Git checkout; legacy serialized schemas kept readable. Source provenance retained."
+      "delta": "Intentional GodRender-native runtime identity migration; historical upstream source retained in archive"
     },
     {
       "path": "studio/deepseek_harness/README.md",
