@@ -12,8 +12,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "aivideoedit.project-local-fx.v1"
-LOCK_SCHEMA = "aivideoedit.project-local-fx-lock.v1"
+SCHEMA = "godrender.project-local-fx.v1"
+LOCK_SCHEMA = "godrender.project-local-fx-lock.v1"
 
 
 def sha256_file(path: Path) -> str:
@@ -148,7 +148,7 @@ def main() -> int:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     errors = validate_manifest(manifest, root)
     if errors:
-        print("AIVideoEdit project-local FX gate: FAIL")
+        print("GodRender project-local FX gate: FAIL")
         for e in errors:
             print("- " + e)
         return 1
@@ -156,16 +156,16 @@ def main() -> int:
         lock = make_lock(manifest_path, root)
         out = args.output or manifest_path.with_suffix(".lock.json")
         out.write_text(json.dumps(lock, indent=2) + "\n", encoding="utf-8")
-        print(f"AIVideoEdit project-local FX lock: PASS ({out})")
+        print(f"GodRender project-local FX lock: PASS ({out})")
         return 0
     lock_path = manifest_path.with_suffix(".lock.json")
     lock_errors = validate_lock(manifest_path, lock_path, root)
     if lock_errors:
-        print("AIVideoEdit project-local FX gate: FAIL")
+        print("GodRender project-local FX gate: FAIL")
         for e in lock_errors:
             print("- " + e)
         return 1
-    print("AIVideoEdit project-local FX gate: PASS")
+    print("GodRender project-local FX gate: PASS")
     return 0
 
 
