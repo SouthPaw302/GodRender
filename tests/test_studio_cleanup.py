@@ -19,12 +19,12 @@ class CoreRefreshTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.home = self.root / "core"
         self.repo = self.home / "repo"
-        self.os_root = self.repo / ".aivideoedit" / "os"
-        self.session = self.repo / ".aivideoedit" / "session.json"
+        self.os_root = self.repo / ".godrender" / "os"
+        self.session = self.repo / ".godrender" / "session.json"
         values = {
             "CORE_HOME": self.home,
             "CORE_REPO": self.repo,
-            "SESSION_ROOT": self.repo / ".aivideoedit",
+            "SESSION_ROOT": self.repo / ".godrender",
             "OS_ROOT": self.os_root,
             "SESSION_FILE": self.session,
             "HOST_REPO": self.root,
@@ -48,7 +48,7 @@ class CoreRefreshTests(unittest.TestCase):
         (self.repo / "preserved.txt").write_text("prior-good-core", encoding="utf-8")
         self.os_root.mkdir(parents=True, exist_ok=True)
         self.session.write_text(json.dumps({
-            "schema": "aivideoedit.session.v1", "branch": "main",
+            "schema": "godrender.session.v1", "branch": "main",
             "guard_result": "PASS", "session_id": "old-session",
             "os_main_commit": "a" * 40, "os_root": str(self.os_root),
         }), encoding="utf-8")
@@ -67,7 +67,7 @@ class CoreRefreshTests(unittest.TestCase):
             if boot_return == 0 and valid_session:
                 self.os_root.mkdir(parents=True, exist_ok=True)
                 self.session.write_text(json.dumps({
-                    "schema": "aivideoedit.session.v1", "branch": "main",
+                    "schema": "godrender.session.v1", "branch": "main",
                     "guard_result": "PASS", "session_id": "new-session",
                     "os_main_commit": "b" * 40, "os_root": str(self.os_root),
                 }), encoding="utf-8")
