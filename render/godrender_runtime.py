@@ -15,9 +15,18 @@ import wave
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL = ROOT / "upstream/mainv2-lab/current-main"
+CANONICAL = ROOT  # GodRender source root is sole executable FX authority
 sys.path.insert(0, str(CANONICAL))
 SCHEMA = "godrender.production.v1"
+
+def current_godrender_commit():
+    """Bind processing receipts to exact native GodRender execution source."""
+    result=subprocess.run(["git","-C",str(ROOT),"rev-parse","HEAD"],
+                          capture_output=True,text=True,timeout=10,check=False)
+    sha=result.stdout.strip()
+    if result.returncode != 0 or len(sha)!=40 or any(c not in "0123456789abcdef" for c in sha):
+        raise RuntimeError("cannot attest GodRender source revision")
+    return sha
 
 def sha256(path):
     digest = hashlib.sha256()
@@ -183,7 +192,7 @@ def render_one(data, shot, input_root, out):
                "nonidentical_frames":nonidentical,"fx_executed":effects,
                "video":result_path.name,"video_sha256":sha256(result_path),
                "source_sha256":(shot.get("image") or shot.get("video") or {}).get("sha256"),
-               "source_main_sha":"900e3e5749ed6fa13ad91524975a9e64661e6649"}
+               "source_main_sha":current_godrender_commit()}
     (out/f"{shot['id']}.receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
     return receipt
 
