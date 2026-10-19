@@ -115,31 +115,33 @@
     },
     {
       "path": "studio/delivery_archive.py",
-      "git_blob_sha": "098c837427ea1665e4b94e40fdde4179784188b9",
+      "git_blob_sha": "111a00a340f108e045b433862201e8c7cdee2b44",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/delivery_archive.py",
-      "upstream_blob_sha": "098c837427ea1665e4b94e40fdde4179784188b9"
+      "upstream_blob_sha": "098c837427ea1665e4b94e40fdde4179784188b9",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/harness_selftest.py",
-      "git_blob_sha": "0ebe0d05794600878b7a89ee903c40cece518a7c",
+      "git_blob_sha": "79ac859399f0c1ffe8a9240e51cea9935106fb26",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/harness_selftest.py",
-      "upstream_blob_sha": "0ebe0d05794600878b7a89ee903c40cece518a7c"
+      "upstream_blob_sha": "0ebe0d05794600878b7a89ee903c40cece518a7c",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/harness_tools.py",
-      "git_blob_sha": "ef7f3545992d30ff08d9f2d13834122379fa1191",
+      "git_blob_sha": "81a02fd6cc63d13425ae5800837da782df8de58c",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/harness_tools.py",
       "upstream_blob_sha": "f05cddbed623644ff4893af8007b15292953f4d4",
-      "delta": "GodRender native seven-system runtime integration; upstream source blob preserved under source_commit/source_path; new source verified by GitHub Actions."
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/operating_tools.py",
@@ -161,76 +163,83 @@
     },
     {
       "path": "studio/production_analysis.py",
-      "git_blob_sha": "3321aa568a89f3541e2627751086681d1bbd338d",
+      "git_blob_sha": "18579777b4ca43548d5fe4e022c256e0fe4aca90",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_analysis.py",
       "upstream_blob_sha": "664a7ba16a7b5840d3b25022c8424819e694a72b",
-      "delta": "GodRender native seven-system runtime integration; upstream source blob preserved under source_commit/source_path; new source verified by GitHub Actions."
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_approach.py",
-      "git_blob_sha": "10c4ffced5627dd6c139669aef0c22061237ce95",
+      "git_blob_sha": "5238e650d5d42aef91aa5ebb8fbe055094251785",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_approach.py",
-      "upstream_blob_sha": "10c4ffced5627dd6c139669aef0c22061237ce95"
+      "upstream_blob_sha": "10c4ffced5627dd6c139669aef0c22061237ce95",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_archive.py",
-      "git_blob_sha": "af06b301d2ec0f04372c3920b1e2f318204083ad",
+      "git_blob_sha": "4cf0bcb9449c7f9d6a61eff24621eae9053877cc",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_archive.py",
-      "upstream_blob_sha": "af06b301d2ec0f04372c3920b1e2f318204083ad"
+      "upstream_blob_sha": "af06b301d2ec0f04372c3920b1e2f318204083ad",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_assembly.py",
-      "git_blob_sha": "091535138344b8d22c1db314c6a4de2e74c16e1e",
+      "git_blob_sha": "7907f24ca24ae516634ad30e912759f1ab4fa17f",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_assembly.py",
-      "upstream_blob_sha": "091535138344b8d22c1db314c6a4de2e74c16e1e"
+      "upstream_blob_sha": "091535138344b8d22c1db314c6a4de2e74c16e1e",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_final_qc.py",
-      "git_blob_sha": "3fac39ea302f4ce27cbec9b268a890089fd7e436",
+      "git_blob_sha": "bc410d488d43a638352f7a9d89af7349fc9d78a5",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_final_qc.py",
-      "upstream_blob_sha": "3fac39ea302f4ce27cbec9b268a890089fd7e436"
+      "upstream_blob_sha": "3fac39ea302f4ce27cbec9b268a890089fd7e436",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_fx.py",
-      "git_blob_sha": "498daa3d114ed198e0ca31cc84349f7a58554d6c",
+      "git_blob_sha": "02da966ad13e9a0a19c54a12179dae7473f9839c",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_fx.py",
-      "upstream_blob_sha": "498daa3d114ed198e0ca31cc84349f7a58554d6c"
+      "upstream_blob_sha": "498daa3d114ed198e0ca31cc84349f7a58554d6c",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_generated.py",
-      "git_blob_sha": "2b6bb3770f19c1e5ea9b969e9d05fd7c6a7782ea",
+      "git_blob_sha": "42ffee992bb4128e7997448c3dac3fc9fcb54344",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_generated.py",
-      "upstream_blob_sha": "2b6bb3770f19c1e5ea9b969e9d05fd7c6a7782ea"
+      "upstream_blob_sha": "2b6bb3770f19c1e5ea9b969e9d05fd7c6a7782ea",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_operating_order.py",
-      "git_blob_sha": "eed1a8bf8700cf4d93a1898b7b36371b38b1696b",
+      "git_blob_sha": "b9c7ad30c2bb82aa55aaabae9e125a935a4a552f",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_operating_order.py",
-      "upstream_blob_sha": "eed1a8bf8700cf4d93a1898b7b36371b38b1696b"
+      "upstream_blob_sha": "eed1a8bf8700cf4d93a1898b7b36371b38b1696b",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_project.py",
@@ -244,66 +253,73 @@
     },
     {
       "path": "studio/production_proofs.py",
-      "git_blob_sha": "dd5309c07f18c9b2c624e9062fd99ba2928fe909",
+      "git_blob_sha": "0b30b5ec4db4765551e22113b316528759eb92d7",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_proofs.py",
-      "upstream_blob_sha": "dd5309c07f18c9b2c624e9062fd99ba2928fe909"
+      "upstream_blob_sha": "dd5309c07f18c9b2c624e9062fd99ba2928fe909",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_shots.py",
-      "git_blob_sha": "92195b8564a94090ba41f7b63536532e03b54a32",
+      "git_blob_sha": "7ce2067ed0a549a0c8c249e8ffea153f8bd55813",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_shots.py",
-      "upstream_blob_sha": "92195b8564a94090ba41f7b63536532e03b54a32"
+      "upstream_blob_sha": "92195b8564a94090ba41f7b63536532e03b54a32",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_stage.py",
-      "git_blob_sha": "ef806f9dd90b4feb58daeb05a38d1c16e4ca79e5",
+      "git_blob_sha": "a32a9f880ce43eed6c194b1afc856b9d26eae23f",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_stage.py",
-      "upstream_blob_sha": "ef806f9dd90b4feb58daeb05a38d1c16e4ca79e5"
+      "upstream_blob_sha": "ef806f9dd90b4feb58daeb05a38d1c16e4ca79e5",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/production_storyboard.py",
-      "git_blob_sha": "d57d3b6cf100a9013af7a1ce9de1cafd2e7b729c",
+      "git_blob_sha": "d5683497f6540f6f1e13e589c06bbb5d7f59ffe7",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_storyboard.py",
-      "upstream_blob_sha": "d57d3b6cf100a9013af7a1ce9de1cafd2e7b729c"
+      "upstream_blob_sha": "d57d3b6cf100a9013af7a1ce9de1cafd2e7b729c",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/remote_agent_client.py",
-      "git_blob_sha": "d6c543a389aa774c0a59a9cba249cc19cc84342b",
+      "git_blob_sha": "2d9cd7192dfc23b7e144f6a4b3b2481c6fb98ea6",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/remote_agent_client.py",
-      "upstream_blob_sha": "d6c543a389aa774c0a59a9cba249cc19cc84342b"
+      "upstream_blob_sha": "d6c543a389aa774c0a59a9cba249cc19cc84342b",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/remote_bridge.py",
-      "git_blob_sha": "e03336cc39e4f58b63e538e4b45a7b8722d4276a",
+      "git_blob_sha": "f33f0e36cb03e698efbc2f4fd4320f8f091f4679",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/remote_bridge.py",
-      "upstream_blob_sha": "e03336cc39e4f58b63e538e4b45a7b8722d4276a"
+      "upstream_blob_sha": "e03336cc39e4f58b63e538e4b45a7b8722d4276a",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/runtime_gatekeeper.py",
-      "git_blob_sha": "b38dffb0ffed9d32636a2d043ee14754d59c8b16",
+      "git_blob_sha": "3452bc5ac00d6c6a4a14e85f6ef481f5ac2b1c48",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/runtime_gatekeeper.py",
-      "upstream_blob_sha": "b38dffb0ffed9d32636a2d043ee14754d59c8b16"
+      "upstream_blob_sha": "b38dffb0ffed9d32636a2d043ee14754d59c8b16",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/selftest.py",
@@ -317,23 +333,23 @@
     },
     {
       "path": "studio/server.py",
-      "git_blob_sha": "8ad19ae6b06c66fc0b80e7d62b5a06a7701994e2",
+      "git_blob_sha": "f96adfa0fdb7445b19086f25fbc4b13a3643cd6a",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/server.py",
       "upstream_blob_sha": "00816636365b904c8457d4915fb8e92ab7b32683",
-      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/stack.py",
-      "git_blob_sha": "153dd4199d36358c19356fd86461cb5830debc46",
+      "git_blob_sha": "587daf0682fe91dbc22df7fd1ac440c1b0d60f4b",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/stack.py",
       "upstream_blob_sha": "c7f9b23c88dce65052c5ecab59a6af567cf60d67",
-      "delta": "GodRender native seven-system runtime integration; upstream source blob preserved under source_commit/source_path; new source verified by GitHub Actions."
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/start_termux.sh",
@@ -431,31 +447,33 @@
     },
     {
       "path": "studio/storage.py",
-      "git_blob_sha": "923b9af31e43a65699d98b6d4b09c7813b7a9a5f",
+      "git_blob_sha": "ac4d15fcf213304db720aa6d177868751e6065ff",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/storage.py",
-      "upstream_blob_sha": "923b9af31e43a65699d98b6d4b09c7813b7a9a5f"
+      "upstream_blob_sha": "923b9af31e43a65699d98b6d4b09c7813b7a9a5f",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/studio_security.py",
-      "git_blob_sha": "3d18d51f530e0dfebc85f6ca7f4092bbf090e804",
+      "git_blob_sha": "477c6e4e7712fed6df1149b4c425aeeb696e5ade",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/studio_security.py",
-      "upstream_blob_sha": "3d18d51f530e0dfebc85f6ca7f4092bbf090e804"
+      "upstream_blob_sha": "3d18d51f530e0dfebc85f6ca7f4092bbf090e804",
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "studio/tool_api.py",
-      "git_blob_sha": "5058820d032689c796556a9902b06afbd8c208cf",
+      "git_blob_sha": "be8b22e5acf13fbc54432114e353bdc5cb543f15",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/tool_api.py",
       "upstream_blob_sha": "b3977b53803e3159cba668bb1943ae25eedfb95c",
-      "delta": "GodRender native seven-system runtime integration; upstream source blob preserved under source_commit/source_path; new source verified by GitHub Actions."
+      "delta": "Intentional native GodRender format migration; historic upstream immutable copy remains preserved"
     },
     {
       "path": "upstream/mainv2-lab/current-main/.github/requirements/render-runner.lock.txt",
