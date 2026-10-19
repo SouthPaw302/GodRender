@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free client for the optional AIVideoEdit remote Tool API adapter."""
+"""Dependency-free client for the optional GodRender remote Tool API adapter."""
 from __future__ import annotations
 
 import json
@@ -11,7 +11,7 @@ import uuid
 class RemoteClient:
     def __init__(self, base_url:str, token:str|None=None, timeout:float=60.0):
         self.base_url=base_url.rstrip("/")
-        self.token=token or os.environ.get("AIVE_REMOTE_TOKEN") or ""
+        self.token=token or os.environ.get("GODRENDER_REMOTE_TOKEN") or ""
         self.timeout=timeout
 
     def _request(self,path:str,payload:dict|None=None):
