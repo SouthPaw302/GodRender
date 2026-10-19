@@ -12,7 +12,7 @@ from typing import Mapping
 from urllib.parse import unquote, urlparse
 
 STUDIO_TOKEN_ENV = "GODRENDER_STUDIO_TOKEN"
-SESSION_COOKIE = "aive_studio_session"
+SESSION_COOKIE = "godrender_studio_session"
 _SESSION_CONTEXT = b"godrender-studio-session-v1"
 
 
