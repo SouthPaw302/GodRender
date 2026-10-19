@@ -46,7 +46,7 @@ def run_technical(pid):
     freeze=_run([ffmpeg,"-hide_banner","-i",str(path),"-vf","freezedetect=n=-55dB:d=1.5","-an","-f","null","-"],1800)
     black_events=[line.strip() for line in (black.stderr or "").splitlines() if "black_start:" in line]
     freeze_events=[line.strip() for line in (freeze.stderr or "").splitlines() if "freeze_start:" in line or "freeze_duration:" in line]
-    technical={"schema":"aivideoedit.final-qc.v1","assembly_asset_id":record.get("output_asset_id"),"assembly_sha256":record.get("sha256"),"script_sha256":_sha(project_dir/"SCRIPT.json"),"fx_lock_sha256":_sha(project_dir/"fx.lock.json"),"technical":{"decode_probe":"PASS" if probe.returncode==0 else "FAIL","duration_match":"PASS" if duration_ok else "FAIL","expected_duration_seconds":target,"actual_duration_seconds":round(actual,6),"video_present":bool(video),"audio_present":bool(audio),"black_events":black_events,"freeze_events":freeze_events,"black_check":"PASS" if black.returncode==0 and not black_events else "FAIL","freeze_check":"PASS" if freeze.returncode==0 and not freeze_events else "FAIL","dimensions":[video.get("width"),video.get("height")],"video_codec":video.get("codec_name"),"audio_codec":audio.get("codec_name"),"fx_lock_live_verified":True},"creative":{"status":"pending_review","verified_shot_ids":[],"mode_aware_checks":{},"acceptance_instruction":None},"technical_pass":bool(duration_ok and video and audio and black.returncode==0 and freeze.returncode==0 and not black_events and not freeze_events),"final_pass":False,"recorded_at":base.now()}
+    technical={"schema":"godrender.final-qc.v1","assembly_asset_id":record.get("output_asset_id"),"assembly_sha256":record.get("sha256"),"script_sha256":_sha(project_dir/"SCRIPT.json"),"fx_lock_sha256":_sha(project_dir/"fx.lock.json"),"technical":{"decode_probe":"PASS" if probe.returncode==0 else "FAIL","duration_match":"PASS" if duration_ok else "FAIL","expected_duration_seconds":target,"actual_duration_seconds":round(actual,6),"video_present":bool(video),"audio_present":bool(audio),"black_events":black_events,"freeze_events":freeze_events,"black_check":"PASS" if black.returncode==0 and not black_events else "FAIL","freeze_check":"PASS" if freeze.returncode==0 and not freeze_events else "FAIL","dimensions":[video.get("width"),video.get("height")],"video_codec":video.get("codec_name"),"audio_codec":audio.get("codec_name"),"fx_lock_live_verified":True},"creative":{"status":"pending_review","verified_shot_ids":[],"mode_aware_checks":{},"acceptance_instruction":None},"technical_pass":bool(duration_ok and video and audio and black.returncode==0 and freeze.returncode==0 and not black_events and not freeze_events),"final_pass":False,"recorded_at":base.now()}
     qc_path=project_dir/"FINAL_QC.json";_write(qc_path,technical);state_path=project_dir/"PROJECT_STATE.json";state=_read(state_path,{});state["final_qc_passed"]=False;state["mode_aware_qc_passed"]=False;_write(state_path,state)
     md=project_dir/"QC.md";md.write_text("# Final QC\n\nTechnical pass: "+("PASS" if technical["technical_pass"] else "FAIL")+"\nCreative review: pending\n",encoding="utf-8")
     commit=production_project._git_commit_paths(engine,[qc_path,state_path,md],"Record technical final QC evidence");production_project._clear_guard_marker(engine)
@@ -78,7 +78,7 @@ def accept_creative(pid,*,verified_shot_ids:list[str],mode_aware_checks:dict,ins
 def reject(pid,*,reason:str):
     current,engine,project_dir=_project(pid);reason=str(reason or "").strip()
     if not reason:raise ValueError("rejection reason is required")
-    qc_path=project_dir/"FINAL_QC.json";qc=_read(qc_path,{"schema":"aivideoedit.final-qc.v1"});qc["creative"]={"status":"rejected","reason":reason,"rejected_at":base.now()};qc["final_pass"]=False;_write(qc_path,qc)
+    qc_path=project_dir/"FINAL_QC.json";qc=_read(qc_path,{"schema":"godrender.final-qc.v1"});qc["creative"]={"status":"rejected","reason":reason,"rejected_at":base.now()};qc["final_pass"]=False;_write(qc_path,qc)
     state_path=project_dir/"PROJECT_STATE.json";state=_read(state_path,{})
     states=["INITIALIZED","SOURCE_INGESTED","REFERENCES_ANALYZED","APPROACH_ESTABLISHED","STORYBOARD_LOCKED","SHOT_PACKAGES_BUILT","SHOT_PROOFS_ACCEPTED","FX_LOCKED","ASSEMBLED","FINAL_QC_PASSED","ARCHIVED"]
     if state.get("stage") in states and states.index(state["stage"])>=states.index("FINAL_QC_PASSED"):state["stage"]="ASSEMBLED"
@@ -87,7 +87,7 @@ def reject(pid,*,reason:str):
 def status(pid):
     current,_engine,project_dir=_project(pid);qc=_read(project_dir/"FINAL_QC.json",{});state=_read(project_dir/"PROJECT_STATE.json",{})
     gate=_read(project_dir/"RELEASE_GATE.json",{})
-    gated=bool(gate.get("schema")=="aivideoedit.release-gate.v1" and gate.get("status")=="PASS" and
+    gated=bool(gate.get("schema")=="godrender.release-gate.v1" and gate.get("status")=="PASS" and
                gate.get("human_visual_approval") is True and gate.get("decoded_full_export") is True and
                state.get("release_gate_status")=="PASS" and state.get("human_visual_approval") is True and
                gate.get("export_sha256")==qc.get("assembly_sha256") and
