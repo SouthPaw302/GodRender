@@ -163,13 +163,13 @@ def main() -> int:
             events.extend(data.get("events") or [])
     events.append({"component": "director_harness", "subject": "DIRECTOR_HARNESS_RECEIPT.json", "stage": "consumed", "actor": "parallel_assembly", "consumer": "render_receipt", "required_consumption": True})
     events.append({"component": "music", "subject": "MUSIC_BEAT_EVIDENCE.json", "stage": "consumed", "actor": "parallel_assembly", "consumer": "render_receipt", "required_consumption": True})
-    ledger = {"schema": "aivideoedit.production-execution-ledger.v1", "project": manifest.get("production_id"), "events": events}
+    ledger = {"schema": "godrender.production-execution-ledger.v1", "project": manifest.get("production_id"), "events": events}
     (args.out / "PRODUCTION_EXECUTION_LEDGER.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
     final_ledger = args.out / "PRODUCTION_EXECUTION_LEDGER.json"
     shutil.copyfile(lock, args.out / "FX_LOCK.json")
     shutil.copyfile(args.lineage, args.out / "RUN_LINEAGE.json")
     receipt = {
-        "schema": "aivideoedit.real-render-receipt.v1",
+        "schema": "godrender.real-render-receipt.v1",
         "production_id": lineage.get("production_id"),
         "status": "TECHNICAL_RENDER_PASS_VISUAL_REVIEW_PENDING",
         "human_visual_approval": False,
