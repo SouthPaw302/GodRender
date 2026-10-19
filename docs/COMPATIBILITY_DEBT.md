@@ -1,13 +1,18 @@
-# GodRender — Native Core Cutover
+# GodRender — Native Runtime Migration (2026-10-19)
 
-GodRender contains its own checked-in `bootstrap.py`, `general/reusable/` production guards, FX runtime, model registry and `scripts/` utilities. The Studio boot adapter clones **only its own current local GodRender Git checkout** into an isolated attested runtime. No other repository is cloned or treated as an executable authority.
+GodRender is the only active production/processing authority. Native bootstrap, Studio, project state, guard contracts, release checks, Jev, model/ONNX routing and FX execution use GodRender-owned runtime identifiers. The Studio core adapter uses a pinned GodRender local checkout; no historical repository is cloned, executed, or required.
 
-## Versioned compatibility (not active legacy infrastructure)
+## Removed active legacy interfaces
+- Native session and boot data use `.godrender` and `godrender.*` identifiers.
+- Environment variables and asset URIs use `GODRENDER_*` and `godrender://`.
+- The active OS guard manifest is `general/reusable/GODRENDER_OS_MANIFEST.json`.
+- MCP executes from `studio/godrender_mcp.py`, without the retired adapter module.
+- CI enforces both `tools/verify_independence.py` (external repo isolation) and `tools/verify_native_identity.py` (active-code identifiers).
 
-Old `.aivideoedit` directories, `aivideoedit.*` JSON schemas, `AIVE_*` configuration keys, `aive://` links and the literal bootstrap PASS are kept as wire/storage compatibility formats. Their presence does not mean GodRender depends on a historical repository. Existing projects, receipts, and older production records continue to use those formats.
+## Frozen historical evidence
+`upstream/`, `config/brain_source_index.json` and immutable source/FX proofs remain traceable historical inputs. They cannot authorize execution, and their legacy labels are **not** connections to old repositories. The import manifest records retired files and intentional native replacements. Do not rewrite approved media, effect identities, hashes or past receipts to make the archive look newly produced.
 
-The 175 original core files were restored from the historical MainV2-Lab main source, including the exact original FX proof MP4 and contact sheet. The Git source history remains provenance only. Native bootstrap `REPOSITORY` and the current-main source manifest now point to `SouthPaw302/GodRender`; all original code/FX files remain traceable to their Git SHA. `upstream/` history is never executed as the primary core.
+Historical local project files are **not silently converted**: any import requires explicit project-by-project conversion with a backup and hash evidence. Unconverted data must fail closed instead of being interpreted as a validated native production.
 
-## Cutover acceptance
-
-The change is not qualified for production until both GitHub Studio integration verification and parallel processing checks pass on the native cutover branch, the real native boot attests its snapshot, the source integrity manifest passes, and an independent production review confirms existing song state is preserved. Approval for releasing a film remains manual.
+## Verification boundary
+Native bootstrap, CI, import integrity and schema checks establish technical correctness only. They do not establish that a particular song's media was processed, that a full-film proof was reviewed, or that the user approved release.
