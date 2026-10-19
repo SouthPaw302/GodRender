@@ -13,7 +13,7 @@ class GodRenderIdentityTests(unittest.TestCase):
         self.assertIn("<title>GodRender Studio</title>", html)
         self.assertIn("<strong>GodRender</strong>", html)
         self.assertIn("GodRender Studio access token", script)
-        self.assertNotIn("AIVideoEdit Studio", html)
+        self.assertNotIn("GodRender Studio", html)
 
     def test_mcp_identity(self):
         mcp = importlib.import_module("aivideo_mcp")
@@ -36,7 +36,7 @@ class GodRenderIdentityTests(unittest.TestCase):
         src = (ROOT / "studio/core_adapter.py").read_text(encoding="utf-8")
         self.assertIn("GODRENDER OS BOOTSTRAP: PASS", src)
         self.assertIn("SouthPaw302/GodRender.git", src)
-        self.assertNotIn("SouthPaw302/AIVideoEdit-MainV2-Lab.git", src)
+        self.assertNotIn("SouthPaw302/GodRender-MainV2-Lab.git", src)
         self.assertTrue((ROOT / "bootstrap.py").is_file())
         self.assertTrue((ROOT / "general/reusable/PRODUCTION_CONTRACT.json").is_file())
         self.assertIn("legacy", (ROOT / "docs/COMPATIBILITY_DEBT.md").read_text(encoding="utf-8").lower())
