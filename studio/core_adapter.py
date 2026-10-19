@@ -2,7 +2,7 @@
 """GodRender-native production OS adapter.
 
 Clone and boot the pinned GodRender source tree locally. The versioned
-.aivideoedit wire schemas and historical source provenance remain readable;
+.godrender wire schemas and historical source provenance remain readable;
 no legacy repository is cloned or required at runtime.
 """
 from __future__ import annotations
@@ -21,10 +21,10 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 HOST_REPO = HERE.parent
 CANONICAL_REMOTE = "https://github.com/SouthPaw302/GodRender.git"
-RUNTIME = Path(os.environ.get("AIVE_RUNTIME", str(HERE / ".runtime"))).resolve()
+RUNTIME = Path(os.environ.get("GODRENDER_RUNTIME", str(HERE / ".runtime"))).resolve()
 CORE_HOME = RUNTIME / "core"
 CORE_REPO = CORE_HOME / "repo"
-SESSION_ROOT = CORE_REPO / ".aivideoedit"
+SESSION_ROOT = CORE_REPO / ".godrender"
 OS_ROOT = SESSION_ROOT / "os"
 SESSION_FILE = SESSION_ROOT / "session.json"
 CONTRACT = Path("general/reusable/PRODUCTION_CONTRACT.json")
@@ -33,7 +33,7 @@ FX_REGISTRY = Path("general/reusable/fx_v2/registry.json")
 
 
 def _core_ref() -> str:
-    value = os.environ.get("AIVE_CORE_REF", "main").strip()
+    value = os.environ.get("GODRENDER_CORE_REF", "main").strip()
     return value or "main"
 
 
@@ -92,7 +92,7 @@ class CoreAdapter:
 
     def _session_valid(self, session: dict) -> bool:
         return (
-            session.get("schema") == "aivideoedit.session.v1"
+            session.get("schema") == "godrender.session.v1"
             and session.get("branch") == "main"
             and session.get("guard_result") == "PASS"
             and bool(session.get("session_id"))
@@ -124,7 +124,7 @@ class CoreAdapter:
         if not shutil.which("git"):
             raise RuntimeError("git is required for canonical production boot")
         ref = _core_ref()
-        if ref != "main" and os.environ.get("AIVIDEOEDIT_VALIDATION_MODE") != "1":
+        if ref != "main" and os.environ.get("GODRENDER_VALIDATION_MODE") != "1":
             raise RuntimeError("non-main core ref requires explicit validation mode")
         # Never execute an external historical repository. Only GodRender itself
         # can supply executable bootstrap/guards; a missing local engine fails closed.
@@ -188,8 +188,8 @@ class CoreAdapter:
                 env = dict(os.environ)
                 requested_ref = _core_ref()
                 if requested_ref != "main":
-                    env["AIVIDEOEDIT_AUTHORITY_REF"] = requested_ref
-                    env["AIVIDEOEDIT_VALIDATION_MODE"] = "1"
+                    env["GODRENDER_AUTHORITY_REF"] = requested_ref
+                    env["GODRENDER_VALIDATION_MODE"] = "1"
                 cmd = [
                     sys.executable, str(bootstrap), "boot",
                     "--repo-root", str(CORE_REPO), "--branch", "main",
