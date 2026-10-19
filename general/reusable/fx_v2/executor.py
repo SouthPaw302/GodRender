@@ -13,7 +13,7 @@ def _load_module(path):
     mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);return mod
 class FXExecutor:
     def __init__(self,seed=302,ledger_path=None,consumer="fx_executor"):
-        self.runtime=FXRuntime(seed=seed);self.registry=json.loads(REGISTRY.read_text(encoding="utf-8"));self.ledger_path=ledger_path or os.environ.get("AIVE_EXECUTION_LEDGER");self.consumer=consumer;self._recorded=set()
+        self.runtime=FXRuntime(seed=seed);self.registry=json.loads(REGISTRY.read_text(encoding="utf-8"));self.ledger_path=ledger_path or os.environ.get("GODRENDER_EXECUTION_LEDGER");self.consumer=consumer;self._recorded=set()
     def _rec(self,eid):
         rec=(self.registry.get("effects") or {}).get(eid)
         if not isinstance(rec,dict):raise KeyError(f"unknown canonical FX id: {eid}")
