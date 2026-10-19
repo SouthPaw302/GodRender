@@ -76,13 +76,13 @@
     },
     {
       "path": "studio/core_adapter.py",
-      "git_blob_sha": "08e1d8fb62b6e111e85d34c13d9b55ab6bf95634",
+      "git_blob_sha": "9283a113b41b40211151eea6ed38b082efbc1ad9",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/core_adapter.py",
       "upstream_blob_sha": "230d33a63cceac3b257ac22daa7edef50b1b675e",
-      "delta": "Intentional GodRender-native runtime identity migration; historical upstream source retained in archive"
+      "delta": "GodRender-native runtime migration; original historical blob retained under upstream/"
     },
     {
       "path": "studio/deepseek_harness/README.md",
@@ -234,13 +234,13 @@
     },
     {
       "path": "studio/production_project.py",
-      "git_blob_sha": "a4a1194a1765f7c6dd5109cf74fd3a5e16e6cc93",
+      "git_blob_sha": "1f715663e4394fa7960be5f0908c5ae1e3708b71",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/production_project.py",
       "upstream_blob_sha": "0f295c9f5a5bbfe0733ae6efe9eed3eed6cb5401",
-      "delta": "GodRender native seven-system runtime integration; upstream source blob preserved under source_commit/source_path; new source verified by GitHub Actions."
+      "delta": "GodRender-native runtime migration; original historical blob retained under upstream/"
     },
     {
       "path": "studio/production_proofs.py",
