@@ -73,7 +73,7 @@ class CoreRefreshTests(unittest.TestCase):
                 }), encoding="utf-8")
             return subprocess.CompletedProcess(
                 cmd, boot_return,
-                "AIVideoEdit OS BOOTSTRAP: PASS" if boot_return == 0 else "",
+                "GODRENDER OS BOOTSTRAP: PASS" if boot_return == 0 else "",
                 "boot failed" if boot_return else "",
             )
         return run
