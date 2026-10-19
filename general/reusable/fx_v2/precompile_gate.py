@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed precompile gate for AIVideoEdit FX v2.
+"""Fail-closed precompile gate for GodRender FX v2.
 
 The gate proves more than registry membership. It binds a production render to:
 - the exact manifest, FX registry, runtime and declared renderer inputs;
@@ -27,7 +27,7 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 BAD_TOKENS = ("TODO", "FIXME", "PLACEHOLDER", "NotImplementedError", "pass #", "raise NotImplemented")
 GOOD_QC = ("KEEP", "APPROVED", "PASS")
 SCHEMA_VERSION = 2
-GATE_NAME = "aivideoedit-fx-precompile-v2"
+GATE_NAME = "godrender-fx-precompile-v2"
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -76,7 +76,7 @@ def resolve_repo_path(repo_root: Path, raw: str, label: str) -> Path:
 
 
 def load_runtime(runtime_path: Path):
-    name = "aivideoedit_fx_v2_runtime_gate"
+    name = "godrender_fx_v2_runtime_gate"
     spec = importlib.util.spec_from_file_location(name, runtime_path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot import runtime from {runtime_path}")
