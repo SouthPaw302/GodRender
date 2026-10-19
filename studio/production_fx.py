@@ -22,7 +22,7 @@ def _project(pid):
     s=production_project.status(pid)
     if not s.get("initialized"):raise RuntimeError("production workspace is not initialized")
     return s,Path(s["engine_root"]),Path(s["project_dir"])
-def _session(engine):return _read(engine/".aivideoedit"/"session.json",{})
+def _session(engine):return _read(engine/".godrender"/"session.json",{})
 
 def _ledger(engine,project_dir,component,subject,stage,*,required_execution=False,required_consumption=False,reason=None):
     tool=engine/"general/reusable/tools/execution_ledger.py"
@@ -77,7 +77,7 @@ def set_requirements(pid,*,effects:list[dict],transitions:list[dict],seed:int=30
     root=project_dir/"shot_packages"
     if root.is_dir():
         for p in sorted(root.glob("*/package.json")):render_inputs.append(p.relative_to(engine).as_posix())
-    req={"schema":"aivideoedit.fx-requirements.v1","project":project_dir.name,"runtime":reg.get("runtime"),"seed":int(seed),"effects":fx,"transitions":tr,"render_inputs":render_inputs,"allow_conditional":list(allow_conditional or []),"conditional_preflight":dict(conditional_preflight or {}),"execution_entrypoint":"general/reusable/fx_v2/executor.py","created_at":base.now()}
+    req={"schema":"godrender.fx-requirements.v1","project":project_dir.name,"runtime":reg.get("runtime"),"seed":int(seed),"effects":fx,"transitions":tr,"render_inputs":render_inputs,"allow_conditional":list(allow_conditional or []),"conditional_preflight":dict(conditional_preflight or {}),"execution_entrypoint":"general/reusable/fx_v2/executor.py","created_at":base.now()}
     path=project_dir/"FX_REQUIREMENTS.json";_write(path,req)
     for item in fx+tr:_ledger(engine,project_dir,"fx",item["id"],"selected",required_execution=True)
     state_path=project_dir/"PROJECT_STATE.json";state=_read(state_path,{});state["fx_lock_verified"]=False;_write(state_path,state)
