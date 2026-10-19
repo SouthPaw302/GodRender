@@ -70,7 +70,7 @@ def _approval_from_github(repo, comment_id, token):
         headers={
             "Accept": "application/vnd.github+json",
             "Authorization": "Bearer " + token,
-            "User-Agent": "AIVideoEdit-release-gate",
+            "User-Agent": "GodRender-release-gate",
         },
     )
     with urllib.request.urlopen(req, timeout=20) as r:
@@ -87,8 +87,8 @@ def preflight(manifest, receipt, review, contract, *, source_sha, engine_sha, au
                  "temporal_motion_evidence_required", "transition_continuity_evidence_required",
                  "numeric_qc_cannot_grant_artistic_approval"):
         require(policy.get(name) is True, "production contract missing mandatory " + name)
-    require(contract.get("schema") == "aivideoedit.production-contract.v3", "unknown production contract")
-    require(manifest.get("schema") == "aivideoedit.real-render.v1", "unknown source manifest")
+    require(contract.get("schema") == "godrender.production-contract.v3", "unknown production contract")
+    require(manifest.get("schema") == "godrender.real-render.v1", "unknown source manifest")
     require(manifest.get("render_authorization") == "explicit_user_render_request", "unauthorized render")
     production_id = manifest.get("production_id")
     require(isinstance(production_id, str) and bool(production_id.strip()), "production ID required")
@@ -100,7 +100,7 @@ def preflight(manifest, receipt, review, contract, *, source_sha, engine_sha, au
     require(receipt.get("source_commit_sha") == source_sha and
             receipt.get("engine_commit_sha") == engine_sha, "stale source or runtime lineage")
     if receipt.get("lineage_schema") is not None:
-        require(receipt.get("lineage_schema") == "aivideoedit.render-lineage.v1",
+        require(receipt.get("lineage_schema") == "godrender.render-lineage.v1",
                 "unknown parallel render lineage")
         for name in ("lineage_sha256", "manifest_sha256", "staged_manifest_sha256",
                      "toolchain_sha256", "runtime_toolchain_sha256", "media_bundle_sha256"):
@@ -110,13 +110,13 @@ def preflight(manifest, receipt, review, contract, *, source_sha, engine_sha, au
                 "missing immutable project tree identity")
     require(review.get("source_commit_sha") == source_sha and
             review.get("engine_commit_sha") == engine_sha, "review not bound to current commits")
-    require(receipt.get("schema") == "aivideoedit.real-render-receipt.v1", "unknown render receipt")
+    require(receipt.get("schema") == "godrender.real-render-receipt.v1", "unknown render receipt")
     require(receipt.get("production_id") == production_id and
             review.get("production_id") == production_id, "contradictory production identities")
     require(receipt.get("status") == "TECHNICAL_RENDER_PASS_VISUAL_REVIEW_PENDING" and
             receipt.get("production_complete") is False and
             receipt.get("human_visual_approval") is False, "technical proof must not self-certify release")
-    require(visual_qc.get("schema") == "aivideoedit.visual-qc-evidence.v1" and
+    require(visual_qc.get("schema") == "godrender.visual-qc-evidence.v1" and
             visual_qc.get("status") == "PASS", "technical visual QC evidence did not pass")
     require(visual_qc.get("candidate_sha256") == receipt.get("render_sha256"),
             "technical visual QC targets different export bytes")
@@ -222,7 +222,7 @@ def gate(args):
     manifest_path, receipt_path, export, review_path = map(Path,
         (args.manifest, args.receipt, args.export, args.review))
     manifest, receipt, review = load(manifest_path), load(receipt_path), load(review_path)
-    require(args.repository == "SouthPaw302/AIVideoEdit-MainV2-Lab", "release restricted to Lab repository")
+    require(args.repository == "SouthPaw302/GodRender-MainV2-Lab", "release restricted to Lab repository")
     require(review.get("source_branch") == args.source_branch, "wrong checked out production branch")
     require(sha(manifest_path) == receipt.get("manifest_sha256"), "stale manifest/render mismatch")
     require(export.is_file() and sha(export) == receipt.get("render_sha256"), "missing or changed actual export")
@@ -232,7 +232,7 @@ def gate(args):
     require(sha(args.fx_proof) == receipt.get("fx_visibility_proof_sha256"), "paired FX proof bundle changed")
     validate_parallel_lineage(receipt, args.lineage)
     ledger = load(args.ledger)
-    require(ledger.get("schema") == "aivideoedit.production-execution-ledger.v1" and
+    require(ledger.get("schema") == "godrender.production-execution-ledger.v1" and
             isinstance(ledger.get("events"), list) and bool(ledger["events"]),
             "valid executed component evidence required")
     from general.reusable.tools.execution_ledger import verify_ledger
@@ -277,7 +277,7 @@ def gate(args):
     # -xerror makes decode errors fatal. No metadata flag can bypass this actual media inspection.
     command(["ffmpeg", "-hide_banner", "-v", "error", "-xerror", "-i", str(export), "-f", "null", "-"])
     evidence.update({
-        "schema": "aivideoedit.release-gate.v1", "status": "PASS",
+        "schema": "godrender.release-gate.v1", "status": "PASS",
         "export_sha256": sha(export), "manifest_sha256": sha(manifest_path),
         "contract_sha256": sha(ROOT / "general/reusable/PRODUCTION_CONTRACT.json"),
         "fx_lock_sha256": sha(args.fx_lock), "ledger_sha256": sha(args.ledger),
