@@ -13,7 +13,7 @@ ROOTS = {"bootstrap.py", "godrender_boot.py", "general/reusable/PRODUCTION_CONTR
          "general/reusable/STANDARD_WORKFLOW_REGISTRY.json",
          "general/reusable/PRODUCTION_MODES.json"}
 SKIP = ("/proofs/", "/tests/", "studio/static/", "studio/probes/")
-PATTERN = re.compile(r"(?:aivideoedit|AIVIDEOEDIT|AIVE_|aive://|\\.aivideoedit)", re.I)
+PATTERN = re.compile(r"(?:aivideoedit|AIVIDEOEDIT|AIVE_|aive://|aive_|\\.aivideoedit)", re.I)
 
 def main() -> int:
     p = subprocess.run(["git", "-C", str(ROOT), "ls-files", "-z"], capture_output=True)
