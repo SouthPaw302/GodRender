@@ -34,7 +34,7 @@ class GodRenderIdentityTests(unittest.TestCase):
 
     def test_native_boot_keeps_versioned_wire_compatibility(self):
         src = (ROOT / "studio/core_adapter.py").read_text(encoding="utf-8")
-        self.assertIn("AIVideoEdit OS BOOTSTRAP: PASS", src)
+        self.assertIn("GODRENDER OS BOOTSTRAP: PASS", src)
         self.assertIn("SouthPaw302/GodRender.git", src)
         self.assertNotIn("SouthPaw302/AIVideoEdit-MainV2-Lab.git", src)
         self.assertTrue((ROOT / "bootstrap.py").is_file())
