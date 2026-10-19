@@ -86,7 +86,7 @@ def _recipe_paths(recipe: dict, errors: list[str]) -> dict[str, Path]:
 
 
 def _validate_control_map(data: dict, errors: list[str]) -> dict[str, dict]:
-    if data.get("schema") != "aivideoedit.music-control-map.v1":
+    if data.get("schema") != "godrender.music-control-map.v1":
         errors.append("MUSIC_CONTROL_MAP.json has invalid schema")
     if not _sha(data.get("audio_sha256")):
         errors.append("MUSIC_CONTROL_MAP.audio_sha256 must be a SHA-256")
@@ -115,7 +115,7 @@ def _validate_control_map(data: dict, errors: list[str]) -> dict[str, dict]:
 
 
 def _validate_section_manifest(data: dict, section_ids: set[str], stage: str, states: list[str], errors: list[str]) -> None:
-    if data.get("schema") != "aivideoedit.section-render-manifest.v1":
+    if data.get("schema") != "godrender.section-render-manifest.v1":
         errors.append("SECTION_RENDER_MANIFEST.json has invalid schema")
     sections = data.get("sections")
     if not isinstance(sections, list) or not sections:
@@ -155,7 +155,7 @@ def _validate_section_manifest(data: dict, section_ids: set[str], stage: str, st
 def _validate_application_proof(data: dict, section_ids: set[str], project: Path, stage: str, states: list[str], errors: list[str]) -> None:
     if not _at(stage, states, "FX_LOCKED"):
         return
-    if data.get("schema") != "aivideoedit.fx-application-proof.v1":
+    if data.get("schema") != "godrender.fx-application-proof.v1":
         errors.append("FX_APPLICATION_PROOF.json has invalid schema")
     applications = data.get("applications")
     if not isinstance(applications, list) or not applications:
