@@ -2,7 +2,7 @@
 """GodRender portable production OS bootstrap (legacy serialized schema read-compat).
 
 Every session materializes the entire exact current `main` commit into
-`.aivideoedit/os/`, runs current-main fail-closed guards against the active
+`.godrender/os/`, runs current-main fail-closed guards against the active
 workspace, attests critical OS hashes, and generates the session Second Brain.
 GitHub `main` remains the operating-system authority.
 """
@@ -25,18 +25,18 @@ from pathlib import Path
 REPOSITORY = "SouthPaw302/GodRender"
 DEFAULT_REF = "main"
 API_MAIN = f"https://api.github.com/repos/{REPOSITORY}/commits/{DEFAULT_REF}"
-SESSION_DIRNAME = ".aivideoedit"
-SESSION_SCHEMA = "aivideoedit.session.v1"
-BOOT_CAPSULE_SCHEMA = "aivideoedit.boot-capsule.v1"
-ATTESTATION_SCHEMA = "aivideoedit.session-attestation.v1"
-MANIFEST_PATH = "general/reusable/AIVIDEOEDIT_OS_MANIFEST.json"
+SESSION_DIRNAME = ".godrender"
+SESSION_SCHEMA = "godrender.session.v1"
+BOOT_CAPSULE_SCHEMA = "godrender.boot-capsule.v1"
+ATTESTATION_SCHEMA = "godrender.session-attestation.v1"
+MANIFEST_PATH = "general/reusable/GODRENDER_OS_MANIFEST.json"
 CACHE_ARCHIVE = "cache/main.tar.gz"
 CACHE_META = "cache/main.json"
 
 
 def authority_ref() -> str:
-    ref = os.environ.get("AIVIDEOEDIT_AUTHORITY_REF", DEFAULT_REF).strip() or DEFAULT_REF
-    if ref != DEFAULT_REF and os.environ.get("AIVIDEOEDIT_VALIDATION_MODE") != "1":
+    ref = os.environ.get("GODRENDER_AUTHORITY_REF", DEFAULT_REF).strip() or DEFAULT_REF
+    if ref != DEFAULT_REF and os.environ.get("GODRENDER_VALIDATION_MODE") != "1":
         raise SystemExit("BOOTSTRAP FAIL: non-main authority ref requires explicit validation mode.")
     return ref
 
@@ -72,7 +72,7 @@ def git(repo: Path, *args: str) -> str:
 
 
 def find_repo_root(start: Path | None = None) -> Path:
-    env = os.environ.get("AIVIDEOEDIT_REPO_ROOT")
+    env = os.environ.get("GODRENDER_REPO_ROOT")
     if env:
         p = Path(env).expanduser().resolve()
         if p.is_dir():
@@ -87,7 +87,7 @@ def find_repo_root(start: Path | None = None) -> Path:
 def detect_branch(repo: Path, explicit: str | None) -> str:
     if explicit:
         return explicit
-    for key in ("AIVIDEOEDIT_BRANCH", "GITHUB_HEAD_REF", "GITHUB_REF_NAME"):
+    for key in ("GODRENDER_BRANCH", "GITHUB_HEAD_REF", "GITHUB_REF_NAME"):
         if os.environ.get(key):
             return os.environ[key]
     branch = git(repo, "branch", "--show-current")
@@ -123,7 +123,7 @@ def detect_project_dir(repo: Path, branch: str, explicit: str | None) -> Path | 
     if explicit:
         p = Path(explicit)
         return p.resolve() if p.is_absolute() else (repo / p).resolve()
-    env = os.environ.get("AIVIDEOEDIT_PROJECT_DIR")
+    env = os.environ.get("GODRENDER_PROJECT_DIR")
     if env:
         p = Path(env)
         return p.resolve() if p.is_absolute() else (repo / p).resolve()
@@ -200,7 +200,7 @@ def _write_main_cache(repo: Path, main_sha: str, data: bytes) -> None:
     archive.parent.mkdir(parents=True, exist_ok=True)
     archive.write_bytes(data)
     meta.write_text(json.dumps({
-        "schema": "aivideoedit.main-cache.v1",
+        "schema": "godrender.main-cache.v1",
         "main_commit": main_sha,
         "archive_sha256": sha256_bytes(data),
         "cached_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
@@ -283,11 +283,11 @@ def run_guard(path: Path, args: list[str], env: dict[str, str], label: str) -> N
 
 def run_bootstrap_guards(repo: Path, os_root: Path, branch: str, project: Path | None) -> None:
     env = os.environ.copy()
-    env["AIVIDEOEDIT_REPO_ROOT"] = str(repo)
-    env["AIVIDEOEDIT_OS_ROOT"] = str(os_root)
-    env["AIVIDEOEDIT_BOOTSTRAP_PHASE"] = "1"
+    env["GODRENDER_REPO_ROOT"] = str(repo)
+    env["GODRENDER_OS_ROOT"] = str(os_root)
+    env["GODRENDER_BOOTSTRAP_PHASE"] = "1"
     if project:
-        env["AIVIDEOEDIT_PROJECT_DIR"] = str(project.relative_to(repo))
+        env["GODRENDER_PROJECT_DIR"] = str(project.relative_to(repo))
     run_guard(os_root / "general/reusable/tools/production_guard.py",
               ["--branch", branch, "--bootstrap-phase"], env, "production contract")
     recut = os_root / "general/reusable/tools/recut_guard.py"
@@ -299,7 +299,7 @@ def run_bootstrap_guards(repo: Path, os_root: Path, branch: str, project: Path |
 
 
 def handoff_to_current_main_bootstrap(repo: Path, os_root: Path, branch: str, args: argparse.Namespace) -> None:
-    if branch == "main" or os.environ.get("AIVIDEOEDIT_BOOTSTRAP_REEXEC") == "1":
+    if branch == "main" or os.environ.get("GODRENDER_BOOTSTRAP_REEXEC") == "1":
         return
     canonical = os_root / "bootstrap.py"
     if not canonical.is_file():
@@ -316,7 +316,7 @@ def handoff_to_current_main_bootstrap(repo: Path, os_root: Path, branch: str, ar
     if args.offline:
         cmd.append("--offline")
     env = os.environ.copy()
-    env["AIVIDEOEDIT_BOOTSTRAP_REEXEC"] = "1"
+    env["GODRENDER_BOOTSTRAP_REEXEC"] = "1"
     os.execve(sys.executable, cmd, env)
 
 
@@ -639,7 +639,7 @@ def status(args: argparse.Namespace) -> int:
     repo = find_repo_root(Path(args.repo_root) if args.repo_root else None)
     path = repo / SESSION_DIRNAME / "session.json"
     if not path.is_file():
-        raise SystemExit("AIVideoEdit OS SESSION: MISSING — run `python bootstrap.py boot`.")
+        raise SystemExit("GodRender OS SESSION: MISSING — run `python bootstrap.py boot`.")
     print(path.read_text(encoding="utf-8"))
     return 0
 
