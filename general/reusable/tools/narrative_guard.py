@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed directing/music/media evidence validator for AIVideoEdit."""
+"""Fail-closed directing/music/media evidence validator for GodRender."""
 from __future__ import annotations
 
 import argparse
@@ -10,9 +10,9 @@ from pathlib import Path
 from branch_policy import resolve_production_project
 
 SCRIPT_ROOT = Path(__file__).resolve().parents[3]
-if os.environ.get("AIVIDEOEDIT_REPO_ROOT"):
-    ROOT = Path(os.environ["AIVIDEOEDIT_REPO_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_REPO_ROOT"):
+    ROOT = Path(os.environ["GODRENDER_REPO_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     ROOT = SCRIPT_ROOT.parent.parent.resolve()
 else:
     ROOT = SCRIPT_ROOT.resolve()
@@ -51,8 +51,8 @@ def validate_music_analysis(project: Path, state: dict, errors: list[str]):
         return None
     music = load_json(music_path)
 
-    if music.get("schema") != "aivideoedit.music-analysis.v1":
-        fail("MUSIC_ANALYSIS.json schema must be aivideoedit.music-analysis.v1", errors)
+    if music.get("schema") != "godrender.music-analysis.v1":
+        fail("MUSIC_ANALYSIS.json schema must be godrender.music-analysis.v1", errors)
     if not truthy(music.get("analysis_complete")):
         fail("MUSIC_ANALYSIS.analysis_complete must be true before REFERENCES_ANALYZED", errors)
 
@@ -166,8 +166,8 @@ def validate_script(project: Path, state: dict, music: dict | None, errors: list
         fail("STORYBOARD_LOCKED requires SCRIPT.json", errors)
         return
     script = load_json(js)
-    if script.get("schema") != "aivideoedit.video-script.v1":
-        fail("SCRIPT.json schema must be aivideoedit.video-script.v1", errors)
+    if script.get("schema") != "godrender.video-script.v1":
+        fail("SCRIPT.json schema must be godrender.video-script.v1", errors)
     if not truthy(script.get("locked")) or not truthy(state.get("script_locked")):
         fail("storyboard/script stage requires locked script evidence", errors)
     if not truthy(script.get("based_on_storyboard")):
@@ -361,18 +361,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--branch",
-        default=os.environ.get("GITHUB_REF_NAME") or os.environ.get("AIVIDEOEDIT_BRANCH") or "",
+        default=os.environ.get("GITHUB_REF_NAME") or os.environ.get("GODRENDER_BRANCH") or "",
     )
     args = ap.parse_args()
     if not args.branch:
         raise SystemExit("FAIL: branch required (--branch or GITHUB_REF_NAME)")
     errors = validate(args.branch)
     if errors:
-        print("AIVideoEdit directing contract: FAIL")
+        print("GodRender directing contract: FAIL")
         for e in errors:
             print("- " + e)
         raise SystemExit(1)
-    print("AIVideoEdit directing contract: PASS")
+    print("GodRender directing contract: PASS")
 
 
 if __name__ == "__main__":
