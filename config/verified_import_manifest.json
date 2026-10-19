@@ -96,12 +96,13 @@
     },
     {
       "path": "studio/deepseek_harness/production_probe.py",
-      "git_blob_sha": "23266dab398b680da087c7cbe1368d5d6ba8db1d",
+      "git_blob_sha": "4a419f3f88c1b67cd2e3311a2eb0c60691a64f5c",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/deepseek_harness/production_probe.py",
-      "upstream_blob_sha": "23266dab398b680da087c7cbe1368d5d6ba8db1d"
+      "upstream_blob_sha": "23266dab398b680da087c7cbe1368d5d6ba8db1d",
+      "delta": "Native GodRender production runtime migration; historical imported sources retained as immutable archive"
     },
     {
       "path": "studio/delivery_archive.py",
@@ -313,13 +314,13 @@
     },
     {
       "path": "studio/selftest.py",
-      "git_blob_sha": "6a9e4d13239806b24085ba171908b296ca827694",
+      "git_blob_sha": "9dc598618cc8765f8018cce7c492f3b5667affa6",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/selftest.py",
       "upstream_blob_sha": "a18c7e061803a41aeb10aea16d713f2af2f9ffb5",
-      "delta": "Ported Studio code adapted to GodRender root; source version retained in upstream Lab SHA."
+      "delta": "Native GodRender production runtime migration; historical imported sources retained as immutable archive"
     },
     {
       "path": "studio/server.py",
@@ -343,13 +344,13 @@
     },
     {
       "path": "studio/start_termux.sh",
-      "git_blob_sha": "9fb4c590c93a18e31410cb6d70e36c2894fd6b11",
+      "git_blob_sha": "b0426ae2ab01df0f123f955386725649611c3f38",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/start_termux.sh",
       "upstream_blob_sha": "4209ddf7b585ee4ecfe854e7f746638d50a9e3f4",
-      "delta": "GodRender active-product name pass; legacy wire contracts remain compatible"
+      "delta": "Native GodRender production runtime migration; historical imported sources retained as immutable archive"
     },
     {
       "path": "studio/start_windows.bat",
