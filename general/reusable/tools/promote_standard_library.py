@@ -117,7 +117,7 @@ def promote_effects_into_canonical_registry(promoted, name_registry: dict) -> No
 
 
 def ensure_manifest_files() -> None:
-    path = REUSABLE / "AIVIDEOEDIT_OS_MANIFEST.json"
+    path = REUSABLE / "GODRENDER_OS_MANIFEST.json"
     manifest = read_json(path)
     additions = [
         {"path": "general/reusable/fx_v2/promoted_effects.py", "role": "neutral_standard_effect_runtime"},
@@ -167,7 +167,7 @@ def verify_integration() -> None:
 
 
 def main() -> None:
-    promoted = load_module(FX / "promoted_effects.py", "aivideoedit_promoted_effects_standardization")
+    promoted = load_module(FX / "promoted_effects.py", "godrender_promoted_effects_standardization")
     name_registry = read_json(FX / "effect_name_registry.json")
     aliases = read_json(FX / "effect_aliases.json")
     verify_effect_identity(promoted, name_registry, aliases)
@@ -209,7 +209,7 @@ def main() -> None:
     # Replace the old mixed project-labelled catalog with a neutral compatibility
     # index. Historical production names are neither identities nor selection inputs.
     write_json(REUSABLE / "CANONICAL_EFFECT_REGISTRY.json", {
-        "schema": "aivideoedit.capability-index.v2",
+        "schema": "godrender.capability-index.v2",
         "status": "compatibility_index",
         "effect_authority": "general/reusable/fx_v2/registry.json",
         "effect_name_authority": "general/reusable/fx_v2/effect_name_registry.json",
