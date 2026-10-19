@@ -108,7 +108,7 @@ def _head(engine: Path) -> str | None:
 
 
 def _guard_marker_path(engine: Path) -> Path:
-    return engine / ".aivideoedit" / "workstation_guard.json"
+    return engine / ".godrender" / "workstation_guard.json"
 
 
 def _clear_guard_marker(engine: Path) -> None:
@@ -125,7 +125,7 @@ def _write_guard_marker(project_id: str) -> None:
     if not engine.is_dir() or not state_path.is_file():
         return
     marker = {
-        "schema": "aivideoedit.workstation-guard.v1",
+        "schema": "godrender.workstation-guard.v1",
         "project_id": project_id,
         "branch": _branch(project_id),
         "verified_head": _head(engine),
@@ -158,7 +158,7 @@ def _scaffold(project_id: str, name: str, engine: Path) -> Path:
         (project_dir / filename).write_text(content, encoding="utf-8")
 
     _write_json(project_dir / "PROJECT_STATE.json", {
-        "schema": "aivideoedit.project-state.v1",
+        "schema": "godrender.project-state.v1",
         "branch": branch,
         "stage": "INITIALIZED",
         "source_ingest_complete": False,
@@ -177,13 +177,13 @@ def _scaffold(project_id: str, name: str, engine: Path) -> Path:
         "archive_complete": False,
     })
     _write_json(project_dir / "SOURCE_AUTHORITY.json", {
-        "schema": "aivideoedit.source-authority.v1",
+        "schema": "godrender.source-authority.v1",
         "allow": {key: False for key in denied},
         "explicit_user_authorizations": [],
     })
-    _write_json(project_dir / "REFERENCE_MANIFEST.json", {"schema": "aivideoedit.reference-manifest.v1", "videos": [], "images": [], "audio": []})
+    _write_json(project_dir / "REFERENCE_MANIFEST.json", {"schema": "godrender.reference-manifest.v1", "videos": [], "images": [], "audio": []})
     _write_json(project_dir / "MEDIA_PLAN.json", {
-        "schema": "aivideoedit.media-plan.v1",
+        "schema": "godrender.media-plan.v1",
         "selected_capabilities": [],
         "user_approach_established": False,
         "production_mode": "hybrid",
@@ -191,7 +191,7 @@ def _scaffold(project_id: str, name: str, engine: Path) -> Path:
         "production_mode_locked": False,
         "bootstrap_note": "Provisional resolver input only; no creative direction is implied. Replace through Director Brain after current-production analysis.",
     })
-    _write_json(project_dir / "ASSET_MANIFEST.json", {"schema": "aivideoedit.asset-manifest.v1", "assets": []})
+    _write_json(project_dir / "ASSET_MANIFEST.json", {"schema": "godrender.asset-manifest.v1", "assets": []})
     _write_json(project_dir / "MUSIC_ANALYSIS.json", {})
     _write_json(project_dir / "SCRIPT.json", {"entries": []})
     return project_dir
@@ -236,17 +236,17 @@ def initialize(project_id: str) -> dict:
         raise RuntimeError((commit.stderr or commit.stdout or "initial project commit failed")[-1200:])
 
     boot_env = dict(os.environ)
-    core_ref = os.environ.get("AIVE_CORE_REF", "main").strip() or "main"
+    core_ref = os.environ.get("GODRENDER_CORE_REF", "main").strip() or "main"
     if core_ref != "main":
-        boot_env["AIVIDEOEDIT_AUTHORITY_REF"] = core_ref
-        boot_env["AIVIDEOEDIT_VALIDATION_MODE"] = "1"
+        boot_env["GODRENDER_AUTHORITY_REF"] = core_ref
+        boot_env["GODRENDER_VALIDATION_MODE"] = "1"
     boot_cmd = [
         sys.executable, str(engine / "bootstrap.py"), "boot",
         "--repo-root", str(engine),
         "--branch", branch,
         "--project-dir", f"projects/{project_dir.name}",
     ]
-    if os.environ.get("AIVE_OFFLINE", "").strip().lower() in {"1", "true", "yes", "on"}:
+    if os.environ.get("GODRENDER_OFFLINE", "").strip().lower() in {"1", "true", "yes", "on"}:
         boot_cmd.append("--offline")
     boot = _run(boot_cmd, engine, timeout=300, env=boot_env)
     if boot.returncode != 0:
@@ -270,14 +270,14 @@ def _manifest_records(project_id: str) -> tuple[list[dict], dict]:
         assets = [dict(a) for a in base.STATE["assets"] if a.get("project") == project_id]
 
     asset_records: list[dict] = []
-    refs = {"schema": "aivideoedit.reference-manifest.v1", "videos": [], "images": [], "audio": []}
+    refs = {"schema": "godrender.reference-manifest.v1", "videos": [], "images": [], "audio": []}
     for asset in assets:
         meta = asset.get("metadata") or {}
         content_type = str(asset.get("content_type") or "application/octet-stream")
         record = {
             "id": asset.get("id"),
             "name": asset.get("filename"),
-            "uri": f"aive://asset/{asset.get('id')}",
+            "uri": f"godrender://asset/{asset.get('id')}",
             "sha256": asset.get("sha256"),
             "content_type": content_type,
             "size_bytes": asset.get("size_bytes"),
@@ -345,8 +345,8 @@ def sync_assets(project_id: str) -> dict:
     project_dir = Path(current["project_dir"])
     records, refs = _manifest_records(project_id)
     manifest = {
-        "schema": "aivideoedit.asset-manifest.v1",
-        "source": "aivideoedit-workstation",
+        "schema": "godrender.asset-manifest.v1",
+        "source": "godrender-workstation",
         "project_id": project_id,
         "synced_at": base.now(),
         "assets": records,
@@ -385,7 +385,7 @@ def status(project_id: str) -> dict:
         raise ValueError("project not found")
     engine = _engine_root(project_id)
     project_dir = _canonical_project_dir(engine, project_id)
-    session_path = engine / ".aivideoedit" / "session.json"
+    session_path = engine / ".godrender" / "session.json"
     state_path = project_dir / "PROJECT_STATE.json"
     session = _read_json(session_path, {})
     state = _read_json(state_path, {})
@@ -428,7 +428,7 @@ def run_guard(project_id: str) -> dict:
     if not current.get("initialized"):
         raise RuntimeError("production workspace is not initialized")
     engine = Path(current["engine_root"])
-    session = engine / ".aivideoedit" / "session.json"
+    session = engine / ".godrender" / "session.json"
     rec = _read_json(session, {})
     if not rec:
         raise RuntimeError("production bootstrap session is missing")
@@ -437,9 +437,9 @@ def run_guard(project_id: str) -> dict:
     if not guard.is_file():
         raise RuntimeError("bootstrapped production guard is missing")
     env = dict(os.environ)
-    env["AIVIDEOEDIT_REPO_ROOT"] = str(engine)
-    env["AIVIDEOEDIT_OS_ROOT"] = str(os_root)
-    env["AIVIDEOEDIT_PROJECT_DIR"] = f"projects/{_song_slug(project_id)}"
+    env["GODRENDER_REPO_ROOT"] = str(engine)
+    env["GODRENDER_OS_ROOT"] = str(os_root)
+    env["GODRENDER_PROJECT_DIR"] = f"projects/{_song_slug(project_id)}"
     proc = subprocess.run(
         [sys.executable, str(guard), "--branch", _branch(project_id)],
         cwd=str(engine), env=env, capture_output=True, text=True, timeout=120, check=False,
@@ -495,7 +495,7 @@ def advance(project_id: str, target_stage: str) -> dict:
         state["source_ingest_complete"] = True
 
     state["stage"] = target_stage
-    state["stage_requested_by"] = "aivideoedit-workstation"
+    state["stage_requested_by"] = "godrender-workstation"
     state["stage_requested_at"] = base.now()
     _write_json(state_path, state)
     status_path.write_text(f"# Status\n\nStage: {target_stage}\n\nPending canonical guard verification.\n", encoding="utf-8")
