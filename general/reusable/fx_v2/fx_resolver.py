@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic FX resolver for AIVideoEdit.
+"""Deterministic FX resolver for GodRender.
 
 Reads the canonical FX registry plus reusable recipe catalog and produces a
 bounded, stable recommendation from explicit batch/scene/still semantics.
@@ -120,7 +120,7 @@ def resolve(context:dict,registry_path:Path=DEFAULT_REGISTRY,recipes_path:Path=D
         for x in recipe.get("steps",[]):
             if x not in steps: steps.append(x)
     return {
-        "schema":"aivideoedit.fx-resolution.v1",
+        "schema":"godrender.fx-resolution.v1",
         "level":str(context.get("level") or "scene"),
         "tokens":sorted(tokens),
         "selection_policy":recipes_doc.get("policy",{}).get("selection_order",[]),
