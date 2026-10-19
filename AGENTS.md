@@ -2,6 +2,8 @@
 
 GodRender is the only **active video repository**. Work on its exact checked-out branch and identify the GitHub commit in every handoff. Other repository names in import metadata are historical lineage or temporary compatibility internals, **not instructions to switch repositories or resume a second video stack**.
 
+See [native GodRender guardrails](docs/NATIVE_GUARDRAILS.md) for binding processing, provenance, acceptance and independent-operation rules.
+
 ## Mandatory startup
 1. Check the actual `SouthPaw302/GodRender` ref and `HEAD`. Read this file and `README.md`.
 2. Run `python tools/verify_consolidation.py` to verify pinned source integrity. Run `python godrender_boot.py` before guarded production work. **Only** a genuine `GODRENDER BOOT PASS` with the underlying compatibility runtime's exact PASS string, main SHA and session attestation permits production operations.
@@ -14,6 +16,6 @@ GodRender is the only **active video repository**. Work on its exact checked-out
 
 ## Truthful implementation status
 
-The engine still has a **legacy checkout/schema dependency** for bootstrap and project-workspace compatibility. GodRender owns the work, but this dependency has **not yet** been migrated to self-hosted GodRender code. See `docs/COMPATIBILITY_DEBT.md`. Do not call it a native independent boot until a tested cutover succeeds.
+PR #6 cut over the active checked-in production core and Studio bootstrap to GodRender. The runtime retains historical `.aivideoedit` storage paths, schema IDs and literal PASS strings for compatibility, but must not execute another repository as its production authority. See `docs/COMPATIBILITY_DEBT.md` and `docs/NATIVE_GUARDRAILS.md`. Treat CI and boot checks as technical evidence, not creative or release acceptance.
 
 `tools/verify_consolidation.py` audits imported blobs. GitHub Actions test Studio and bootstrap separately from real film acceptance.
