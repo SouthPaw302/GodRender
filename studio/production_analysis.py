@@ -82,7 +82,7 @@ def _analyze_video(ref: dict, asset: dict, analysis_root: Path, contract: dict) 
             "sampling_description": "Every decodable frame extracted for canonical short-reference analysis.",
             "coverage": [{"start_seconds": 0.0, "end_seconds": duration, "frames": len(files)}],
             "analysis_complete": True,
-            "analysis_evidence_uri": f"aive://analysis/{asset['id']}/frames",
+            "analysis_evidence_uri": f"godrender://analysis/{asset['id']}/frames",
         })
         return result
 
@@ -118,7 +118,7 @@ def _analyze_video(ref: dict, asset: dict, analysis_root: Path, contract: dict) 
         "sampling_description": f"{len(broad_files)} evenly distributed coverage frames plus {len(scene_files)} scene-change frames at threshold 0.35.",
         "coverage": coverage,
         "analysis_complete": True,
-        "analysis_evidence_uri": f"aive://analysis/{asset['id']}/frames",
+        "analysis_evidence_uri": f"godrender://analysis/{asset['id']}/frames",
     })
     return result
 
@@ -221,9 +221,9 @@ def _music_analysis(asset: dict, analysis_root: Path) -> dict:
                           "error":type(exc).__name__+": "+str(exc)[:360],
                           "used_fallback":True}
     return {
-        "schema": "aivideoedit.music-analysis.v1",
+        "schema": "godrender.music-analysis.v1",
         "source_asset_id": asset["id"],
-        "source_uri": f"aive://asset/{asset['id']}",
+        "source_uri": f"godrender://asset/{asset['id']}",
         "analysis_method": "FFmpeg PCM RMS + bounded model-worker inference with explicit fallback",
         "model_evidence": model_evidence,
         "model_engine": model_evidence.get("engine"),
@@ -277,7 +277,7 @@ def analyze_project(project_id: str, progress=None) -> dict:
         if not asset or not asset.get("sha256"):
             raise RuntimeError(f"image reference is not ready: {ref.get('name')}")
         rec = dict(ref)
-        rec.update({"analysis_complete": True, "analysis_method": "decoded metadata + SHA-256 identity", "analysis_evidence_uri": f"aive://asset/{asset['id']}"})
+        rec.update({"analysis_complete": True, "analysis_method": "decoded metadata + SHA-256 identity", "analysis_evidence_uri": f"godrender://asset/{asset['id']}"})
         analyzed_images.append(rec)
         done += 1
         if progress:
@@ -303,7 +303,7 @@ def analyze_project(project_id: str, progress=None) -> dict:
         music = _music_analysis(audio_candidates[0], analysis_root)
         _write_json(music_path, music)
     else:
-        music = {"schema": "aivideoedit.music-analysis.v1", "analysis_complete": False, "status": "no_audio_source"}
+        music = {"schema": "godrender.music-analysis.v1", "analysis_complete": False, "status": "no_audio_source"}
         _write_json(music_path, music)
 
     state_path = project_dir / "PROJECT_STATE.json"
