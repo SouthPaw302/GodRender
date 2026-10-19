@@ -55,7 +55,9 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - name: Boot GodRender's validated legacy compatibility engine (fail closed)
+      - name: Boot native GodRender source and production guards (fail closed)
         env:
           AIVE_RUNTIME: ${{ runner.temp }}/godrender-core
-        run: python3 godrender_boot.py
+          AIVE_CORE_REF: ${{ github.event_name == 'pull_request' && github.sha || 'main' }}
+          AIVIDEOEDIT_VALIDATION_MODE: "1"
+        run: python3 godrender_boot.py --offline

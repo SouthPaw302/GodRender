@@ -32,10 +32,13 @@ class GodRenderIdentityTests(unittest.TestCase):
         self.assertTrue((ROOT / "config/brain_source_index.json").is_file())
         self.assertTrue((ROOT / "docs/COMPATIBILITY_DEBT.md").is_file())
 
-    def test_legacy_boot_contract_not_relabelled_as_native(self):
+    def test_native_boot_keeps_versioned_wire_compatibility(self):
         src = (ROOT / "studio/core_adapter.py").read_text(encoding="utf-8")
         self.assertIn("AIVideoEdit OS BOOTSTRAP: PASS", src)
-        self.assertIn("CANONICAL_REMOTE", src)
+        self.assertIn("SouthPaw302/GodRender.git", src)
+        self.assertNotIn("SouthPaw302/AIVideoEdit-MainV2-Lab.git", src)
+        self.assertTrue((ROOT / "bootstrap.py").is_file())
+        self.assertTrue((ROOT / "general/reusable/PRODUCTION_CONTRACT.json").is_file())
         self.assertIn("legacy", (ROOT / "docs/COMPATIBILITY_DEBT.md").read_text(encoding="utf-8").lower())
 
 if __name__ == "__main__":
