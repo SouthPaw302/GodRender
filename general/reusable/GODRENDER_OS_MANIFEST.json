@@ -244,5 +244,5 @@
   ],
   "purpose": "Critical files whose exact current-main hashes are attested at every agent-session bootstrap. The bootstrap materializes the entire main branch, not only this list.",
   "repository": "SouthPaw302/GodRender",
-  "schema": "aivideoedit.os-manifest.v2"
+  "schema": "godrender.os-manifest.v2"
 }

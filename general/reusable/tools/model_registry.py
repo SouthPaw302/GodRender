@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-REGISTRY_SCHEMA = "aivideoedit.model-registry.v1"
+REGISTRY_SCHEMA = "godrender.model-registry.v1"
 DEFAULT_REGISTRY = Path(__file__).resolve().parents[1] / "intelligence" / "MODEL_REGISTRY.json"
 
 

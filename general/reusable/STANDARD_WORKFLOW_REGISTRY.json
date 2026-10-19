@@ -1,6 +1,6 @@
 {
   "overrides": "OPERATING_ORDER.standard_workflow_overrides may include/exclude neutral workflow IDs or names; current user direction remains highest authority.",
-  "schema": "aivideoedit.standard-workflows.v1",
+  "schema": "godrender.standard-workflows.v1",
   "selection_policy": "Resolve from the active production mode and MEDIA_PLAN selected capabilities. Names and IDs are project-neutral; no production provenance participates in selection.",
   "workflows": [
     {

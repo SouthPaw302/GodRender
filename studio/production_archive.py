@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Content-addressed archive manifest for completed AIVideoEdit productions."""
+"""Content-addressed archive manifest for completed GodRender productions."""
 from __future__ import annotations
 import hashlib,json
 from pathlib import Path
@@ -34,7 +34,7 @@ def build(pid,*,note:str=""):
     # cannot substitute for a full-song release certificate bound to the exact bytes.
     state=_read(project_dir/"PROJECT_STATE.json",{})
     gate=_read(project_dir/"RELEASE_GATE.json",{})
-    if (gate.get("schema")!="aivideoedit.release-gate.v1" or gate.get("status")!="PASS" or
+    if (gate.get("schema")!="godrender.release-gate.v1" or gate.get("status")!="PASS" or
         gate.get("human_visual_approval") is not True or gate.get("decoded_full_export") is not True or
         state.get("release_gate_status")!="PASS" or state.get("human_visual_approval") is not True or
         not gate.get("approval_comment_url") or not gate.get("reviewer")):
@@ -67,7 +67,7 @@ def build(pid,*,note:str=""):
     ]}
     artifacts=[{"id":"accepted-artistic-master","role":"accepted_artistic_master","sha256":media.get("sha256"),"size_bytes":media.get("size_bytes"),"locator":media.get("browser_url") or media.get("uri"),"access":"directly_playable"}]
     artifacts.extend({"id":f"record-{index:04d}","role":"production_record","sha256":rec["sha256"],"size_bytes":rec["size_bytes"],"locator":rec["path"],"access":"evidence"} for index,rec in enumerate(records,1))
-    manifest={"schema":"aivideoedit.archive-manifest.v2","project_id":pid,"branch":current.get("branch"),"core_main_commit":current.get("main_commit"),"production_stage":"FINAL_QC_PASSED","delivery_lifecycle":lifecycle,"release_approval":{"authenticated":True,"reviewer":gate.get("reviewer"),"comment_url":gate.get("approval_comment_url"),"approved_sha256":media.get("sha256")},"project_state_snapshot":state_before_archive,"records":records,"artifacts":artifacts,"final_media":media,"final_qc_sha256":_sha(project_dir/"FINAL_QC.json"),"assembly_record_sha256":_sha(project_dir/"ASSEMBLY.json"),"note":str(note or "").strip() or None,"created_at":base.now()}
+    manifest={"schema":"godrender.archive-manifest.v2","project_id":pid,"branch":current.get("branch"),"core_main_commit":current.get("main_commit"),"production_stage":"FINAL_QC_PASSED","delivery_lifecycle":lifecycle,"release_approval":{"authenticated":True,"reviewer":gate.get("reviewer"),"comment_url":gate.get("approval_comment_url"),"approved_sha256":media.get("sha256")},"project_state_snapshot":state_before_archive,"records":records,"artifacts":artifacts,"final_media":media,"final_qc_sha256":_sha(project_dir/"FINAL_QC.json"),"assembly_record_sha256":_sha(project_dir/"ASSEMBLY.json"),"note":str(note or "").strip() or None,"created_at":base.now()}
     archive_path=project_dir/"ARCHIVE_MANIFEST.json";_write(archive_path,manifest)
     state_path=project_dir/"PROJECT_STATE.json";state=_read(state_path,{});state.update({"archive_complete":True,"archive_manifest_sha256":_sha(archive_path),"archive_record_count":len(records),"archived_at":base.now()});_write(state_path,state)
     commit=production_project._git_commit_paths(engine,[archive_path,state_path],"Create content-addressed production archive manifest");production_project._clear_guard_marker(engine)
@@ -76,7 +76,7 @@ def verify(pid):
     current,_engine,project_dir=_project(pid);manifest_path=project_dir/"ARCHIVE_MANIFEST.json";manifest=_read(manifest_path,{})
     if not manifest:return {"ok":False,"error":"archive manifest missing"}
     problems=[]
-    if manifest.get("schema")!="aivideoedit.archive-manifest.v2":problems.append("unsupported archive schema")
+    if manifest.get("schema")!="godrender.archive-manifest.v2":problems.append("unsupported archive schema")
     problems.extend(delivery_archive.validate_lifecycle(manifest.get("delivery_lifecycle") or {}))
     for rec in manifest.get("records",[]) if isinstance(manifest.get("records"),list) else []:
         path=project_dir/str(rec.get("path") or "")

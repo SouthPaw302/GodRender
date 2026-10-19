@@ -25,6 +25,6 @@ def verify():
         results[name]={'status':'PASS','source_delta_max':round(source,6),'temporal_delta_max':round(temporal,6),'sample_sha256':digest}
     missing=sorted(set(LEGACY_ALIASES.values())-set(EFFECT_NAMES))
     if missing: raise RuntimeError('alias targets missing: '+','.join(missing))
-    return {'schema':'aivideoedit.promoted-effects-verification.v1','result':'PASS','effect_count':len(EFFECT_NAMES),'legacy_alias_count':len(LEGACY_ALIASES),'effects':results,'aggregate_sample_sha256':hashlib.sha256(b''.join(all_bytes)).hexdigest()}
+    return {'schema':'godrender.promoted-effects-verification.v1','result':'PASS','effect_count':len(EFFECT_NAMES),'legacy_alias_count':len(LEGACY_ALIASES),'effects':results,'aggregate_sample_sha256':hashlib.sha256(b''.join(all_bytes)).hexdigest()}
 
 if __name__=='__main__': print(json.dumps(verify(),indent=2,sort_keys=True))

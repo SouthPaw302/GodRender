@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed AIVideoEdit production-state validator.
+"""Fail-closed GodRender production-state validator.
 
 Normal mode requires a valid bootstrap session attestation. The portable
 bootstrap invokes `--bootstrap-phase` once to validate the active branch using
@@ -22,15 +22,15 @@ from execution_ledger import verify_ledger
 from director_checkpoint import verify_checkpoints
 
 SCRIPT_ROOT = Path(__file__).resolve().parents[3]
-if os.environ.get("AIVIDEOEDIT_REPO_ROOT"):
-    ROOT = Path(os.environ["AIVIDEOEDIT_REPO_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_REPO_ROOT"):
+    ROOT = Path(os.environ["GODRENDER_REPO_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     ROOT = SCRIPT_ROOT.parent.parent.resolve()
 else:
     ROOT = SCRIPT_ROOT.resolve()
-if os.environ.get("AIVIDEOEDIT_OS_ROOT"):
-    OS_ROOT = Path(os.environ["AIVIDEOEDIT_OS_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_OS_ROOT"):
+    OS_ROOT = Path(os.environ["GODRENDER_OS_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     OS_ROOT = SCRIPT_ROOT.resolve()
 else:
     OS_ROOT = ROOT
@@ -38,7 +38,7 @@ else:
 CONTRACT_PATH = OS_ROOT / "general/reusable/PRODUCTION_CONTRACT.json"
 MEDIA_PATH = OS_ROOT / "general/reusable/MEDIA_CAPABILITY_MATRIX.json"
 MODES_PATH = OS_ROOT / "general/reusable/PRODUCTION_MODES.json"
-SESSION_PATH = ROOT / ".aivideoedit/session.json"
+SESSION_PATH = ROOT / ".godrender/session.json"
 
 
 def load_json(path: Path):
@@ -100,7 +100,7 @@ def verify_bootstrap_session(branch: str):
         ]
     session = load_json(SESSION_PATH)
     errors = []
-    if session.get("schema") != "aivideoedit.session.v1":
+    if session.get("schema") != "godrender.session.v1":
         fail("invalid bootstrap session schema", errors)
     if session.get("guard_result") != "PASS":
         fail("bootstrap session does not contain guard_result=PASS", errors)
@@ -152,7 +152,7 @@ def verify_bootstrap_session(branch: str):
         if this_hash != os_hash and Path(__file__).resolve() != os_guard.resolve():
             fail(
                 "stale branch production_guard.py invoked; run the guard from "
-                ".aivideoedit/os/general/reusable/tools/production_guard.py",
+                ".godrender/os/general/reusable/tools/production_guard.py",
                 errors,
             )
     return errors
@@ -351,7 +351,7 @@ def validate_operating_order(project, state, stage, states, modes, errors):
         return None
 
     order = load_json(path)
-    if order.get("schema") != "aivideoedit.operating-order.v1":
+    if order.get("schema") != "godrender.operating-order.v1":
         fail("OPERATING_ORDER.json has invalid schema", errors)
 
     valid_authorities = set(modes.get("direction_authorities", []))
@@ -546,7 +546,7 @@ def validate(branch: str):
             "SOUL.md",
             "BIBLE.md",
             "SYSTEM_INDEX.md",
-            "general/reusable/AIVIDEOEDIT_OS_MANIFEST.json",
+            "general/reusable/GODRENDER_OS_MANIFEST.json",
             "general/reusable/PRODUCTION_CONTRACT.json",
             "general/reusable/PRODUCTION_MODES.json",
             "general/reusable/PRODUCTION_MODES.md",
@@ -691,7 +691,7 @@ def validate(branch: str):
                 "release_gate_source_commit_sha": "source_sha",
                 "release_gate_engine_commit_sha": "engine_sha",
             }
-            if report.get("schema") != "aivideoedit.release-gate.v1" or report.get("status") != "PASS":
+            if report.get("schema") != "godrender.release-gate.v1" or report.get("status") != "PASS":
                 fail("invalid or failed production release gate report", errors)
             for key, counterpart in must_equal.items():
                 if not state.get(key) or state.get(key) != report.get(counterpart):
@@ -722,7 +722,7 @@ def main():
     ap.add_argument(
         "--branch",
         default=os.environ.get("GITHUB_REF_NAME")
-        or os.environ.get("AIVIDEOEDIT_BRANCH")
+        or os.environ.get("GODRENDER_BRANCH")
         or "",
     )
     ap.add_argument(
@@ -736,10 +736,10 @@ def main():
         raise SystemExit("FAIL: branch required (--branch or GITHUB_REF_NAME)")
 
     errors = []
-    if not args.bootstrap_phase and os.environ.get("AIVIDEOEDIT_BOOTSTRAP_PHASE") != "1":
+    if not args.bootstrap_phase and os.environ.get("GODRENDER_BOOTSTRAP_PHASE") != "1":
         errors.extend(verify_bootstrap_session(args.branch))
         if errors:
-            print("AIVideoEdit production contract: FAIL", file=sys.stderr)
+            print("GodRender production contract: FAIL", file=sys.stderr)
             for e in errors:
                 print("- " + e, file=sys.stderr)
             raise SystemExit(1)
@@ -748,16 +748,16 @@ def main():
         os_root = Path(session.get("os_root") or "")
         if not os_root.is_absolute():
             os_root = (ROOT / os_root).resolve()
-        os.environ["AIVIDEOEDIT_OS_ROOT"] = str(os_root)
+        os.environ["GODRENDER_OS_ROOT"] = str(os_root)
 
     errors.extend(validate(args.branch))
     if errors:
-        print("AIVideoEdit production contract: FAIL", file=sys.stderr)
+        print("GodRender production contract: FAIL", file=sys.stderr)
         for e in errors:
             print("- " + e, file=sys.stderr)
         raise SystemExit(1)
 
-    print("AIVideoEdit production contract: PASS")
+    print("GodRender production contract: PASS")
 
 
 if __name__ == "__main__":

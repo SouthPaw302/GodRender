@@ -36,7 +36,7 @@ class Ctx:
 
 
 def load_module(path: Path):
-    spec = importlib.util.spec_from_file_location("aivideoedit_living_still_fx_verify", path)
+    spec = importlib.util.spec_from_file_location("godrender_living_still_fx_verify", path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot load {path}")
     module = importlib.util.module_from_spec(spec)

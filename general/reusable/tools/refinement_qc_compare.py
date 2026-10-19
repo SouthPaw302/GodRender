@@ -11,8 +11,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-SNAPSHOT_SCHEMA = "aivideoedit.refinement-qc-snapshot.v1"
-COMPARISON_SCHEMA = "aivideoedit.refinement-qc.v1"
+SNAPSHOT_SCHEMA = "godrender.refinement-qc-snapshot.v1"
+COMPARISON_SCHEMA = "godrender.refinement-qc.v1"
 REQUIRED_OBJECTS = ("black_freeze", "framing_aspect", "audio_sync", "mode_aware_qc", "source_canon_integrity")
 
 
@@ -105,7 +105,7 @@ def main() -> int:
     data = compare_snapshots(before, after)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
-    print(f"AIVideoEdit before/after refinement QC: PASS ({args.output})")
+    print(f"GodRender before/after refinement QC: PASS ({args.output})")
     return 0
 
 

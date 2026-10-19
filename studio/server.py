@@ -22,11 +22,11 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent
 STATIC = ROOT / "static"
-RUNTIME = Path(os.environ.get("AIVE_RUNTIME", str(ROOT / ".runtime"))).resolve()
+RUNTIME = Path(os.environ.get("GODRENDER_RUNTIME", str(ROOT / ".runtime"))).resolve()
 ASSET_ROOT = RUNTIME / "assets"
 PROJECT_ROOT = RUNTIME / "projects"
 STATE_FILE = RUNTIME / "state.json"
-MAX_UPLOAD = int(os.environ.get("AIVE_MAX_UPLOAD", str(2 * 1024 * 1024 * 1024)))
+MAX_UPLOAD = int(os.environ.get("GODRENDER_MAX_UPLOAD", str(2 * 1024 * 1024 * 1024)))
 MAX_JOBS = 250
 MAX_ASSETS = 500
 
@@ -335,7 +335,7 @@ def project_manifest(project_id: str) -> dict:
     project = find_project(project_id)
     assets = [public_asset(a) for a in STATE["assets"] if a.get("project") == project_id]
     jobs = [j for j in STATE["jobs"] if j.get("project") == project_id]
-    return {"schema": "aivideoedit.backend-project.v1", "generated_at": now(), "project": project, "assets": assets, "jobs": jobs[-100:]}
+    return {"schema": "godrender.backend-project.v1", "generated_at": now(), "project": project, "assets": assets, "jobs": jobs[-100:]}
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -619,9 +619,9 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     load_state()
-    host = os.environ.get("AIVE_HOST", "127.0.0.1")
+    host = os.environ.get("GODRENDER_HOST", "127.0.0.1")
     studio_security.validate_bind(host)
-    port = int(os.environ.get("AIVE_PORT", "8080"))
+    port = int(os.environ.get("GODRENDER_PORT", "8080"))
     print(f"GodRender Studio: http://127.0.0.1:{port}")
     print(f"LAN bind: {host}:{port}")
     print(f"Workspace: {RUNTIME}")

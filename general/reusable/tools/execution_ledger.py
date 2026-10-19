@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse, hashlib, json, os, tempfile
 from datetime import datetime, timezone
 from pathlib import Path
-SCHEMA="aivideoedit.production-execution-ledger.v1"
+SCHEMA="godrender.production-execution-ledger.v1"
 VALID_STAGES={"selected","verified","executed","consumed","waived"}
 def _now(): return datetime.now(timezone.utc).isoformat().replace("+00:00","Z")
 def sha256_file(path):

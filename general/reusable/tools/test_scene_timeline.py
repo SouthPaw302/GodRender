@@ -13,7 +13,7 @@ from scene_timeline import audio_anchors, snap_timeline, validate  # noqa: E402
 class SceneTimelineTests(unittest.TestCase):
     def setUp(self):
         self.plan = {
-            "schema": "aivideoedit.scene-timeline.v1",
+            "schema": "godrender.scene-timeline.v1",
             "duration_sec": 20.0,
             "scenes": [
                 {"id": "scene-01", "start": 0.0, "end": 8.1},
@@ -24,7 +24,7 @@ class SceneTimelineTests(unittest.TestCase):
             ],
         }
         self.audiomap = {
-            "schema": "aivideoedit.audiomap.v1",
+            "schema": "godrender.audiomap.v1",
             "source": {"sha256": "abc123"},
             "rhythm": {"beats_sec": [8.0], "downbeats_sec": [8.0]},
             "energy": {"key_moments": [{"t": 8.0, "kind": "surge"}]},

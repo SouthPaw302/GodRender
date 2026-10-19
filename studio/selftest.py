@@ -105,7 +105,7 @@ def main() -> int:
     if analysis.is_file() and "preserve" not in analysis.read_text(encoding="utf-8").lower():
         print("WARN: music analysis explicit-context preservation still needs hardening")
 
-    print(json.dumps({"schema":"aivideoedit.workstation-selftest.v1","result":"PASS" if not failures else "FAIL","failures":failures}, indent=2))
+    print(json.dumps({"schema":"godrender.workstation-selftest.v1","result":"PASS" if not failures else "FAIL","failures":failures}, indent=2))
     return 0 if not failures else 1
 
 

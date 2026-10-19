@@ -14,7 +14,7 @@ spec.loader.exec_module(scan)
 
 def sample():
     return {
-        "schema": "aivideoedit.director-scan.v1",
+        "schema": "godrender.director-scan.v1",
         "candidate": {
             "locator": "durable://review/current.mp4", "sha256": "a" * 64,
             "branch": "song/example", "commit_sha": "b" * 40,

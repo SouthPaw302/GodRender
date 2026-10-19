@@ -7,7 +7,7 @@ import json
 import re
 from pathlib import Path
 
-SCHEMA = "aivideoedit.delivery-archive.v1"
+SCHEMA = "godrender.delivery-archive.v1"
 LIFECYCLE_STATES = (
     "DIRECTOR_REJECTED",
     "REVISION_REQUIRED",

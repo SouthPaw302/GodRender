@@ -3,7 +3,7 @@
 
 The canonical MainV2 checkout is supplied separately by the workflow.  This
 gate reads the branch director package, boots the isolated main core through
-the AIVideoEdit MCP bridge, exercises the Harness surface, resolves FX, runs
+the GodRender MCP bridge, exercises the Harness surface, resolves FX, runs
 the pinned music model, and writes a receipt consumed by every render shard.
 """
 from __future__ import annotations
@@ -38,7 +38,7 @@ def call(proc, request_id: int, method: str, params: dict):
     while True:
         line = proc.stdout.readline()
         if not line:
-            raise RuntimeError("AIVideoEdit MCP bridge exited before replying")
+            raise RuntimeError("GodRender MCP bridge exited before replying")
         value = json.loads(line)
         if value.get("id") == request_id:
             if "error" in value:
@@ -125,10 +125,10 @@ def main() -> int:
     runtime = out / "harness-runtime"
     env = dict(os.environ)
     env.update({
-        "AIVE_RUNTIME": str(runtime),
-        "AIVE_CORE_REF": "main",
-        "AIVE_OFFLINE": "1",
-        "AIVE_HARNESS_ENABLED": "1",
+        "GODRENDER_RUNTIME": str(runtime),
+        "GODRENDER_CORE_REF": "main",
+        "GODRENDER_OFFLINE": "1",
+        "GODRENDER_HARNESS_ENABLED": "1",
     })
     bridge = engine / "prototype" / "backend_gui" / "aivideo_mcp.py"
     proc = subprocess.Popen(
@@ -137,7 +137,7 @@ def main() -> int:
         text=True, env=env, bufsize=1,
     )
     try:
-        init = call(proc, 1, "initialize", {"protocolVersion": "2025-11-25", "capabilities": {}, "clientInfo": {"name": "aivideoedit-director-gate", "version": "1"}})
+        init = call(proc, 1, "initialize", {"protocolVersion": "2025-11-25", "capabilities": {}, "clientInfo": {"name": "godrender-director-gate", "version": "1"}})
         proc.stdin.write(json.dumps({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}) + "\n")
         proc.stdin.flush()
         listed = call(proc, 3, "tools/list", {})
@@ -234,7 +234,7 @@ def main() -> int:
             raise RuntimeError("canonical FX lock is empty")
         director_fx_disposition = manifest_fx_disposition(manifest)
         receipt = {
-            "schema": "aivideoedit.director-harness-receipt.v1",
+            "schema": "godrender.director-harness-receipt.v1",
             "branch": os.environ.get("SOURCE_REF") or os.environ.get("GITHUB_REF_NAME") or "production/unknown",
             "source_project": str(project),
             "manifest_sha256": sha(manifest_path),

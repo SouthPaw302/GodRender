@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AIVideoEdit deterministic music analysis.
+"""GodRender deterministic music analysis.
 
 Produces a canonical audiomap.json used by directors, storyboard planners, effects,
 and render/QC tooling. This module is additive: it does not participate in agent
@@ -7,7 +7,7 @@ boot and is only invoked when a production asks for audio-grounded timing.
 
 Design lineage: incorporates ideas from the Apache-2.0 heygen-com/hyperframes
 music analysis workflow (single trusted analysis pass, energy/onset/roll/silence
-layers), adapted to the AIVideoEdit production contract and naming.
+layers), adapted to the GodRender production contract and naming.
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-SCHEMA = "aivideoedit.audiomap.v1"
+SCHEMA = "godrender.audiomap.v1"
 SR = 22050
 HOP = 512
 
@@ -308,7 +308,7 @@ def validate(doc: dict) -> list[str]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Build canonical AIVideoEdit audiomap.json")
+    ap = argparse.ArgumentParser(description="Build canonical GodRender audiomap.json")
     ap.add_argument("input", type=Path)
     ap.add_argument("-o", "--output", type=Path, default=Path("audiomap.json"))
     ap.add_argument("--print", action="store_true", dest="print_summary")

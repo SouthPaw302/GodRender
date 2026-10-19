@@ -12,7 +12,7 @@ GUARD_PATH = HERE / "production_guard.py"
 MODES_PATH = HERE.parent / "PRODUCTION_MODES.json"
 CONTRACT_PATH = HERE.parent / "PRODUCTION_CONTRACT.json"
 
-spec = importlib.util.spec_from_file_location("aivideoedit_production_guard", GUARD_PATH)
+spec = importlib.util.spec_from_file_location("godrender_production_guard", GUARD_PATH)
 if spec is None or spec.loader is None:
     raise SystemExit("TEST FAIL: cannot import production_guard.py")
 guard = importlib.util.module_from_spec(spec)
@@ -30,7 +30,7 @@ def write_json(path: Path, data: dict) -> None:
 
 def base_order(mode: str = "living_scene") -> dict:
     return {
-        "schema": "aivideoedit.operating-order.v1",
+        "schema": "godrender.operating-order.v1",
         "mission": "Create the selected visual experience and preserve approved work.",
         "direction_authority": "music_led",
         "production_mode": mode,

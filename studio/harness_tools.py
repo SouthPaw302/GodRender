@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Agent-harness read model for AIVideoEdit Studio.
+"""Agent-harness read model for GodRender Studio.
 
 This module deliberately adds only read-oriented orchestration helpers.
 Production mutations continue to flow through the existing provider-neutral
-Tool API and its canonical AIVideoEdit guards.
+Tool API and its canonical GodRender guards.
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ import production_project
 from core_adapter import CORE
 def harness_enabled() -> bool:
     """Optional advisory harness flag; production still requires canonical OS."""
-    return os.environ.get("AIVE_HARNESS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
+    return os.environ.get("GODRENDER_HARNESS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
 
 SCHEMAS = [
     {
@@ -104,7 +104,7 @@ def status() -> dict:
     dsh = shutil.which("dsh")
     npx = shutil.which("npx")
     return {
-        "schema": "aivideoedit.harness-status.v1",
+        "schema": "godrender.harness-status.v1",
         "ok": True,
         "bridge": "mcp-stdio",
         "bridge_ready": True,
@@ -114,7 +114,7 @@ def status() -> dict:
         "launcher": dsh or npx,
         "canonical_core": CORE.status(),
         "policy": {
-            "production_authority": "canonical-aivideoedit-core",
+            "production_authority": "canonical-godrender-core",
             "main_mutation": False,
             "guard_bypass": False,
             "project_context_required": True,
@@ -160,7 +160,7 @@ def context(project_id: str) -> dict:
         ]
 
     return {
-        "schema": "aivideoedit.harness-context.v1",
+        "schema": "godrender.harness-context.v1",
         "project": {
             "id": project.get("id"),
             "name": project.get("name"),
@@ -194,8 +194,8 @@ def context(project_id: str) -> dict:
         "active_jobs": active_jobs,
         "agent_rules": [
             "Treat the current project branch and current explicit user instruction as project authority.",
-            "Run through existing AIVideoEdit tools; do not bypass canonical production guards.",
-            "Harness is optional orchestration only; AIVideoEdit production state remains authoritative.",
+            "Run through existing GodRender tools; do not bypass canonical production guards.",
+            "Harness is optional orchestration only; GodRender production state remains authoritative.",
             "Refresh harness.context after a stage-changing operation before choosing the next action.",
             "Resolve FX through harness.fx_resolve before authoring batch/scene/still FX requirements and after material scene changes.",
         ],
@@ -212,7 +212,7 @@ def fx_resolve(project_id: str, request: dict) -> dict:
     if not production.get("initialized"):
         raise RuntimeError("production workspace is not initialized")
     engine = Path(str(production.get("engine_root") or ""))
-    session = _read_json(engine / ".aivideoedit" / "session.json", {})
+    session = _read_json(engine / ".godrender" / "session.json", {})
     os_root = Path(str(session.get("os_root") or ""))
     fx_root = os_root / "general" / "reusable" / "fx_v2"
     resolver_path = fx_root / "fx_resolver.py"
@@ -221,7 +221,7 @@ def fx_resolve(project_id: str, request: dict) -> dict:
     for required in (resolver_path, registry_path, recipes_path):
         if not required.is_file():
             raise RuntimeError(f"canonical FX resolver dependency missing: {required.name}")
-    spec = importlib.util.spec_from_file_location("aivideoedit_fx_resolver", resolver_path)
+    spec = importlib.util.spec_from_file_location("godrender_fx_resolver", resolver_path)
     if not spec or not spec.loader:
         raise RuntimeError("cannot load canonical FX resolver")
     module = importlib.util.module_from_spec(spec)
@@ -239,7 +239,7 @@ def fx_resolve(project_id: str, request: dict) -> dict:
         max_effects=request.get("max_effects"),
     )
     return {
-        "schema": "aivideoedit.harness-fx-resolution.v1",
+        "schema": "godrender.harness-fx-resolution.v1",
         "project": {"id": project.get("id"), "name": project.get("name")},
         "production": {
             "branch": production.get("branch"),
@@ -253,12 +253,12 @@ def fx_resolve(project_id: str, request: dict) -> dict:
 
 def specialist_fixture(args: dict | None = None) -> dict:
     if not harness_enabled():
-        raise RuntimeError("optional Harness is disabled; set AIVE_HARNESS_ENABLED=1 to use specialist routing")
+        raise RuntimeError("optional Harness is disabled; set GODRENDER_HARNESS_ENABLED=1 to use specialist routing")
     args = args or {}
     task = str(args.get("task") or "bounded specialist fixture").strip()
     evidence = args.get("evidence") if isinstance(args.get("evidence"), dict) else {}
     return {
-        "schema": "aivideoedit.harness-specialist-fixture.v1",
+        "schema": "godrender.harness-specialist-fixture.v1",
         "status": "COMPLETE",
         "task": task,
         "evidence_keys": sorted(str(k) for k in evidence),

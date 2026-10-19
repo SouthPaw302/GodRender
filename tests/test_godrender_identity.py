@@ -1,4 +1,4 @@
-"""GodRender product identity tests; legacy wire schemas and imported history remain unchanged."""
+"""GodRender product identity tests; native runtime and preserved historic provenance."""
 from __future__ import annotations
 import importlib
 import unittest
@@ -13,10 +13,9 @@ class GodRenderIdentityTests(unittest.TestCase):
         self.assertIn("<title>GodRender Studio</title>", html)
         self.assertIn("<strong>GodRender</strong>", html)
         self.assertIn("GodRender Studio access token", script)
-        self.assertNotIn("AIVideoEdit Studio", html)
 
     def test_mcp_identity(self):
-        mcp = importlib.import_module("aivideo_mcp")
+        mcp = importlib.import_module("godrender_mcp")
         self.assertEqual(mcp.SERVER_NAME, "godrender")
         self.assertTrue((ROOT / "studio/godrender_mcp.py").is_file())
         profile = (ROOT / "studio/deepseek_harness/cordis.patch.yml.example").read_text(encoding="utf-8")
@@ -34,9 +33,9 @@ class GodRenderIdentityTests(unittest.TestCase):
 
     def test_native_boot_keeps_versioned_wire_compatibility(self):
         src = (ROOT / "studio/core_adapter.py").read_text(encoding="utf-8")
-        self.assertIn("AIVideoEdit OS BOOTSTRAP: PASS", src)
+        self.assertIn("GODRENDER OS BOOTSTRAP: PASS", src)
         self.assertIn("SouthPaw302/GodRender.git", src)
-        self.assertNotIn("SouthPaw302/AIVideoEdit-MainV2-Lab.git", src)
+        self.assertIn("GODRENDER_RUNTIME", src)
         self.assertTrue((ROOT / "bootstrap.py").is_file())
         self.assertTrue((ROOT / "general/reusable/PRODUCTION_CONTRACT.json").is_file())
         self.assertIn("legacy", (ROOT / "docs/COMPATIBILITY_DEBT.md").read_text(encoding="utf-8").lower())

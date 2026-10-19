@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and compile an AIVideoEdit audio mix plan.
+"""Validate and compile an GodRender audio mix plan.
 
 The plan is project-neutral and carries track/bus effects plus deterministic
 voice-over ducking. It does not source audio, infer creative intent, or replace
@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "aivideoedit.audio-mix.v1"
+SCHEMA = "godrender.audio-mix.v1"
 ROLES = {"voice", "music", "sfx", "ambience", "other"}
 FX_TYPES = {
     "gain", "highpass", "lowpass", "peaking", "lowshelf", "highshelf",
@@ -275,8 +275,8 @@ def compile_ducking(plan: dict[str, Any]) -> dict[str, Any]:
         automation = target.setdefault("automation", {"version": 1, "lanes": []})
         automation.setdefault("version", 1)
         lanes = automation.setdefault("lanes", [])
-        lanes[:] = [x for x in lanes if x.get("target") != "volume" or not x.get("generated_by") == "aivideoedit_ducking"]
-        lane["generated_by"] = "aivideoedit_ducking"
+        lanes[:] = [x for x in lanes if x.get("target") != "volume" or not x.get("generated_by") == "godrender_ducking"]
+        lane["generated_by"] = "godrender_ducking"
         lanes.append(lane)
         compiled.append({"target": target["id"], "sources": relation["sources"], "intervals": intervals})
 
@@ -288,7 +288,7 @@ def compile_ducking(plan: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Validate/compile AIVideoEdit audio mix plan")
+    ap = argparse.ArgumentParser(description="Validate/compile GodRender audio mix plan")
     ap.add_argument("mix", type=Path)
     ap.add_argument("-o", "--output", type=Path)
     ap.add_argument("--check-only", action="store_true")

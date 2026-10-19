@@ -37,7 +37,7 @@ def main() -> int:
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     fps, width, height, counts = canonical.validate_manifest(manifest)
     gate = json.loads(args.director_gate.read_text(encoding="utf-8"))
-    if gate.get("schema") != "aivideoedit.director-harness-receipt.v1":
+    if gate.get("schema") != "godrender.director-harness-receipt.v1":
         raise RuntimeError("director/harness receipt is missing or invalid")
     if gate.get("jev", {}).get("decision") not in {"PASS", "CONTINUE"}:
         raise RuntimeError("director/harness gate did not authorize shard rendering")
@@ -144,7 +144,7 @@ def main() -> int:
     if not video or video.get("width") != width or video.get("height") != height:
         raise RuntimeError("shard geometry or decode verification failed")
     receipt = {
-        "schema": "aivideoedit.real-render-shard-receipt.v1",
+        "schema": "godrender.real-render-shard-receipt.v1",
         "production_id": lineage.get("production_id"),
         "start_index": (manifest.get("shard") or {}).get("start_index"),
         "end_index": (manifest.get("shard") or {}).get("end_index"),

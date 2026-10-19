@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Storage adapter for the AIVideoEdit alpha stack.
+"""Storage adapter for the GodRender alpha stack.
 
 Local workspace is always authoritative during alpha. An optional rclone
 remote can mirror project media to R2, B2, S3 or any other rclone-supported
@@ -16,7 +16,7 @@ from pathlib import Path
 
 
 def remote_name() -> str | None:
-    value = os.environ.get("AIVE_RCLONE_REMOTE", "").strip().rstrip("/")
+    value = os.environ.get("GODRENDER_RCLONE_REMOTE", "").strip().rstrip("/")
     return value or None
 
 
@@ -30,7 +30,7 @@ def status() -> dict:
         "rclone_available": bool(rclone),
         "detail": (
             "External mirror ready" if remote and rclone
-            else "Set AIVE_RCLONE_REMOTE and install rclone to enable external storage"
+            else "Set GODRENDER_RCLONE_REMOTE and install rclone to enable external storage"
             if remote or rclone
             else "Local workspace only"
         ),
@@ -54,7 +54,7 @@ def _copy(local: Path, destination: str) -> None:
 def sync_project(project_id: str, assets: list[dict], project_root: Path, progress=None) -> dict:
     remote = remote_name()
     if not remote:
-        raise RuntimeError("AIVE_RCLONE_REMOTE is not configured")
+        raise RuntimeError("GODRENDER_RCLONE_REMOTE is not configured")
     if not shutil.which("rclone"):
         raise RuntimeError("rclone is not installed")
 
@@ -89,7 +89,7 @@ def sync_project(project_id: str, assets: list[dict], project_root: Path, progre
             progress(index, total, local.name)
 
     manifest = {
-        "schema": "aivideoedit.external-storage.v1",
+        "schema": "godrender.external-storage.v1",
         "project": project_id,
         "remote": remote,
         "synced_at": time.time(),

@@ -25,6 +25,8 @@ jobs:
         run: python3 -m compileall -q render studio tools
       - name: Assert GodRender has no external legacy repository dependency
         run: python3 tools/verify_independence.py
+      - name: Assert fully native GodRender runtime identifiers
+        run: python3 tools/verify_native_identity.py
       - name: Run Studio regression and compatibility tests
         run: PYTHONPATH=studio python3 -m unittest discover -s tests -p 'test_*.py' -v
       - name: Run existing structural Studio self-test
@@ -35,7 +37,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export AIVE_RUNTIME="$RUNNER_TEMP/godrender-studio"
+          export GODRENDER_RUNTIME="$RUNNER_TEMP/godrender-studio"
           python3 studio/stack.py > /tmp/godrender-studio.log 2>&1 &
           pid=$!
           trap 'kill "$pid" 2>/dev/null || true; cat /tmp/godrender-studio.log' EXIT
@@ -59,7 +61,7 @@ jobs:
           persist-credentials: false
       - name: Boot native GodRender source and production guards (fail closed)
         env:
-          AIVE_RUNTIME: ${{ runner.temp }}/godrender-core
-          AIVE_CORE_REF: ${{ github.event_name == 'pull_request' && github.sha || 'main' }}
-          AIVIDEOEDIT_VALIDATION_MODE: "1"
+          GODRENDER_RUNTIME: ${{ runner.temp }}/godrender-core
+          GODRENDER_CORE_REF: ${{ github.event_name == 'pull_request' && github.sha || 'main' }}
+          GODRENDER_VALIDATION_MODE: "1"
         run: python3 godrender_boot.py --offline

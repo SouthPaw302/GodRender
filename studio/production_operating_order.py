@@ -26,7 +26,7 @@ def _modes():
     if not status.get("bootstrapped"):raise RuntimeError("canonical core is not loaded")
     path=Path(status.get("os_root") or "")/"general/reusable/PRODUCTION_MODES.json"
     data=_read(path,{})
-    if data.get("schema") not in {"aivideoedit.production-modes.v1","aivideoedit.production-modes.v2"}:raise RuntimeError("canonical production modes are unavailable")
+    if data.get("schema") not in {"godrender.production-modes.v1","godrender.production-modes.v2"}:raise RuntimeError("canonical production modes are unavailable")
     return data
 def configure(pid,*,direction_authority:str,production_mode:str,mission:str,current_user_direction:str,exact_next_action:str):
     current,engine,project_dir=_project(pid)
@@ -45,7 +45,7 @@ def configure(pid,*,direction_authority:str,production_mode:str,mission:str,curr
         if missing:raise RuntimeError("selected visual route(s) need production_mode before enabling Director Brain v3: "+", ".join(missing))
         selected_modes={x.get("production_mode") for x in options}
         if mode!="hybrid" and any(x!=mode for x in selected_modes):raise RuntimeError("overall production_mode conflicts with selected visual route")
-    order={"schema":"aivideoedit.operating-order.v1","mission":mission,"current_user_direction":direction,"exact_next_action":next_action,"direction_authority":authority,"production_mode":mode,"canon_lock":{"locked":False,"picture_language":None,"items":[]},"accepted_baseline":{"status":"none","file_or_locator":None,"sha256":None,"user_acceptance_statement":None},"refinement_scope":{"active":False,"goal":None,"allowed_changes":[],"forbidden_changes":[],"restart_authorized":False},"configured_at":base.now(),"authority_source":"explicit_current_user_or_agent_input"}
+    order={"schema":"godrender.operating-order.v1","mission":mission,"current_user_direction":direction,"exact_next_action":next_action,"direction_authority":authority,"production_mode":mode,"canon_lock":{"locked":False,"picture_language":None,"items":[]},"accepted_baseline":{"status":"none","file_or_locator":None,"sha256":None,"user_acceptance_statement":None},"refinement_scope":{"active":False,"goal":None,"allowed_changes":[],"forbidden_changes":[],"restart_authorized":False},"configured_at":base.now(),"authority_source":"explicit_current_user_or_agent_input"}
     order_path=project_dir/"OPERATING_ORDER.json";_write(order_path,order)
     state_path=project_dir/"PROJECT_STATE.json";state=_read(state_path,{});state["director_brain_version"]=3;state["direction_authority_resolved"]=True;state["production_mode_resolved"]=True;state["production_mode"]=mode;state["direction_authority"]=authority;_write(state_path,state)
     commit=production_project._git_commit_paths(engine,[order_path,state_path],"Enable Director Brain v3 operating order");production_project._clear_guard_marker(engine)
@@ -55,7 +55,7 @@ def configure(pid,*,direction_authority:str,production_mode:str,mission:str,curr
     return {**status(pid),"commit":commit,"guard":"PASS"}
 def update_next_action(pid,*,exact_next_action:str,current_user_direction:str=""):
     current,engine,project_dir=_project(pid);order_path=project_dir/"OPERATING_ORDER.json";order=_read(order_path,{})
-    if order.get("schema")!="aivideoedit.operating-order.v1":raise RuntimeError("Director Brain v3 operating order is not configured")
+    if order.get("schema")!="godrender.operating-order.v1":raise RuntimeError("Director Brain v3 operating order is not configured")
     action=str(exact_next_action or "").strip()
     if not action:raise ValueError("exact_next_action is required")
     order["exact_next_action"]=action
@@ -63,7 +63,7 @@ def update_next_action(pid,*,exact_next_action:str,current_user_direction:str=""
     order["updated_at"]=base.now();_write(order_path,order);commit=production_project._git_commit_paths(engine,[order_path],"Update Director Brain operating order");production_project._clear_guard_marker(engine);return {**status(pid),"commit":commit}
 def lock_canon(pid,*,picture_language:str,items:list[str],baseline_asset_id:str="",acceptance_statement:str=""):
     current,engine,project_dir=_project(pid);order_path=project_dir/"OPERATING_ORDER.json";order=_read(order_path,{})
-    if order.get("schema")!="aivideoedit.operating-order.v1":raise RuntimeError("Director Brain v3 operating order is not configured")
+    if order.get("schema")!="godrender.operating-order.v1":raise RuntimeError("Director Brain v3 operating order is not configured")
     language=str(picture_language or "").strip();canon_items=[str(x).strip() for x in items if str(x).strip()]
     if not language or not canon_items:raise ValueError("picture_language and at least one canon item are required")
     order["canon_lock"]={"locked":True,"picture_language":language,"items":canon_items,"locked_at":base.now()}
@@ -74,7 +74,7 @@ def lock_canon(pid,*,picture_language:str,items:list[str],baseline_asset_id:str=
         with base.LOCK:
             asset=base.find_asset(aid);asset=dict(asset) if asset else None
         if not asset or asset.get("project")!=pid or asset.get("status")!="ready" or not asset.get("sha256"):raise ValueError("accepted baseline asset must be a ready hashed project asset")
-        order["accepted_baseline"]={"status":"accepted","file_or_locator":f"aive://asset/{aid}","sha256":asset.get("sha256"),"user_acceptance_statement":statement,"asset_id":aid,"accepted_at":base.now()}
+        order["accepted_baseline"]={"status":"accepted","file_or_locator":f"godrender://asset/{aid}","sha256":asset.get("sha256"),"user_acceptance_statement":statement,"asset_id":aid,"accepted_at":base.now()}
     _write(order_path,order);commit=production_project._git_commit_paths(engine,[order_path],"Lock Director Brain visual canon");production_project._clear_guard_marker(engine);return {**status(pid),"commit":commit}
 def set_refinement(pid,*,goal:str,allowed_changes:list[str],forbidden_changes:list[str],restart_authorized:bool=False):
     current,engine,project_dir=_project(pid);order_path=project_dir/"OPERATING_ORDER.json";order=_read(order_path,{})
@@ -84,4 +84,4 @@ def set_refinement(pid,*,goal:str,allowed_changes:list[str],forbidden_changes:li
     order["refinement_scope"]={"active":True,"goal":goal,"allowed_changes":allowed,"forbidden_changes":forbidden,"restart_authorized":bool(restart_authorized),"updated_at":base.now()};_write(order_path,order);commit=production_project._git_commit_paths(engine,[order_path],"Set bounded Director Brain refinement scope");production_project._clear_guard_marker(engine);return {**status(pid),"commit":commit}
 def status(pid):
     current,_engine,project_dir=_project(pid);order=_read(project_dir/"OPERATING_ORDER.json",{});state=_read(project_dir/"PROJECT_STATE.json",{})
-    return {**current,"director_brain_version":int(state.get("director_brain_version") or 0),"configured":order.get("schema")=="aivideoedit.operating-order.v1","direction_authority":order.get("direction_authority"),"production_mode":order.get("production_mode"),"mission":order.get("mission"),"current_user_direction":order.get("current_user_direction"),"exact_next_action":order.get("exact_next_action"),"canon_lock":order.get("canon_lock"),"accepted_baseline":order.get("accepted_baseline"),"refinement_scope":order.get("refinement_scope"),"available_modes":_modes()}
+    return {**current,"director_brain_version":int(state.get("director_brain_version") or 0),"configured":order.get("schema")=="godrender.operating-order.v1","direction_authority":order.get("direction_authority"),"production_mode":order.get("production_mode"),"mission":order.get("mission"),"current_user_direction":order.get("current_user_direction"),"exact_next_action":order.get("exact_next_action"),"canon_lock":order.get("canon_lock"),"accepted_baseline":order.get("accepted_baseline"),"refinement_scope":order.get("refinement_scope"),"available_modes":_modes()}

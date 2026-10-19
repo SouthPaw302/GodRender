@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic bounded decision hook for AIVideoEdit."""
+"""Deterministic bounded decision hook for GodRender."""
 from __future__ import annotations
 
 from typing import Any
@@ -11,7 +11,7 @@ def _result(decision: str, reason: str) -> dict[str, Any]:
     if decision not in ALLOWED:
         raise ValueError("invalid Jev decision")
     return {
-        "schema": "aivideoedit.jev-decision.v1",
+        "schema": "godrender.jev-decision.v1",
         "decision": decision,
         "reason": reason,
     }

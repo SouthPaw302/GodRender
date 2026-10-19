@@ -299,7 +299,7 @@ def inspect_source_media(manifest: dict, paths: list[Path], width: int, height: 
             "entry_preroll_seconds": round(preroll, 6), "fit_scale": round(scale, 6), "pass": True,
         })
     return {
-        "schema": "aivideoedit.source-media-qc.v1", "status": "PASS", "sources": records,
+        "schema": "godrender.source-media-qc.v1", "status": "PASS", "sources": records,
         "loop_substitution": False, "low_resolution_substitution": False,
         "human_visual_approval": False, "artistic_approval": False, "release_authority": False,
     }
@@ -393,7 +393,7 @@ def combine_visual_evidence(manifest: dict, shard_receipts: list[dict], gate: di
         "transition_seams_continuous": all(x["pass"] for x in seams),
     }
     return {
-        "schema": "aivideoedit.visual-qc-evidence.v1", "status": "PASS" if all(checks.values()) else "FAIL",
+        "schema": "godrender.visual-qc-evidence.v1", "status": "PASS" if all(checks.values()) else "FAIL",
         "candidate_sha256": render_sha256, "fx_visibility_proof_sha256": fx_proof_sha256,
         "checks": checks, "source_media_qc": source_qc, "director_fx_disposition": dispositions,
         "music_controls": controls, "effects": sorted(effect_rows, key=lambda item: (item["id"], item["kind"])),

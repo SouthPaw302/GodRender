@@ -69,8 +69,8 @@ def build_packages(project_id,assignments):
             if asset.get("status")!="ready" or not str(asset.get("sha256") or "").strip():raise RuntimeError(f"{shot_id} asset {asset.get('filename') or asset_id} is not ready/hashed")
             if asset.get("creative_status")=="rejected":raise RuntimeError(f"{shot_id} cannot use rejected asset {asset.get('filename') or asset_id}")
             origin=str(asset.get("origin") or "ingested"); evidence_status="generated" if origin=="generated" else str(assignment.get("status") or "ingested")
-            used_assets.add(str(asset_id));evidence.append({"asset_id":str(asset_id),"uri":f"aive://asset/{asset_id}","name":asset.get("filename"),"sha256":asset.get("sha256"),"status":evidence_status,"role":str(assignment.get("role") or asset.get("role") or "scripted_visual_media"),"content_type":asset.get("content_type"),"origin":origin,"creative_status":asset.get("creative_status") or "available"})
-        prepared.append((shot_id,{"schema":"aivideoedit.shot-package.v1","shot_id":shot_id,"script_entry":entry,"media_evidence":evidence,"build_notes":str(assignment.get("notes") or "").strip(),"built_at":base.now()}))
+            used_assets.add(str(asset_id));evidence.append({"asset_id":str(asset_id),"uri":f"godrender://asset/{asset_id}","name":asset.get("filename"),"sha256":asset.get("sha256"),"status":evidence_status,"role":str(assignment.get("role") or asset.get("role") or "scripted_visual_media"),"content_type":asset.get("content_type"),"origin":origin,"creative_status":asset.get("creative_status") or "available"})
+        prepared.append((shot_id,{"schema":"godrender.shot-package.v1","shot_id":shot_id,"script_entry":entry,"media_evidence":evidence,"build_notes":str(assignment.get("notes") or "").strip(),"built_at":base.now()}))
 
     package_root=project_dir/"shot_packages";state_path=project_dir/"PROJECT_STATE.json"
     staging=Path(tempfile.mkdtemp(prefix=".shot_packages.staging-",dir=str(project_dir)))

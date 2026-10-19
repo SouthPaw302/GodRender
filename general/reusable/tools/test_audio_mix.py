@@ -13,7 +13,7 @@ from audio_mix import compile_ducking, validate  # noqa: E402
 class AudioMixTests(unittest.TestCase):
     def setUp(self):
         self.plan = {
-            "schema": "aivideoedit.audio-mix.v1",
+            "schema": "godrender.audio-mix.v1",
             "tracks": [
                 {"id": "music", "role": "music", "start": 0, "duration": 20, "volume": 0.8},
                 {"id": "vo-1", "role": "voice", "start": 4, "duration": 3},
@@ -32,7 +32,7 @@ class AudioMixTests(unittest.TestCase):
         result = compile_ducking(self.plan)
         lane = result["tracks"][0]["automation"]["lanes"][0]
         self.assertEqual(lane["target"], "volume")
-        self.assertEqual(lane["generated_by"], "aivideoedit_ducking")
+        self.assertEqual(lane["generated_by"], "godrender_ducking")
         self.assertTrue(any(point["v"] == 0.5 for point in lane["points"]))
         self.assertEqual(len(result["ducking_compiled"]["relations"][0]["intervals"]), 2)
 

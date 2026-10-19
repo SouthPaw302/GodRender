@@ -16,7 +16,7 @@ RUNTIME_PATH = HERE / "promoted_effects.py"
 
 
 def load_runtime():
-    spec = importlib.util.spec_from_file_location("aivideoedit_standard_effects", RUNTIME_PATH)
+    spec = importlib.util.spec_from_file_location("godrender_standard_effects", RUNTIME_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError("cannot load promoted_effects.py")
     mod = importlib.util.module_from_spec(spec)
@@ -91,8 +91,8 @@ def verify_effects():
         })
 
     report = {
-        "schema": "aivideoedit.standard-effects-verification.v1",
-        "runtime": "aivideoedit-fx-v2",
+        "schema": "godrender.standard-effects-verification.v1",
+        "runtime": "godrender-fx-v2",
         "effect_count": len(names),
         "alias_count": len(aliases),
         "sample_frames_per_effect": len(times),

@@ -17,7 +17,7 @@ import production_render
 import production_project
 from core_adapter import CORE
 
-WORKER_COUNT=max(1,int(os.environ.get("AIVE_WORKERS","2")))
+WORKER_COUNT=max(1,int(os.environ.get("GODRENDER_WORKERS","2")))
 JOB_QUEUE:queue.Queue[dict]=queue.Queue()
 def all_tool_schemas():return tool_api.schemas()+operating_tools.schemas()+harness_tools.schemas()
 
@@ -142,7 +142,7 @@ class StackHandler(base.Handler):
         if path=="/api/remote/health":
             if not remote_bridge.enabled():
                 return self.send_json({"ok":False,"error":"remote bridge disabled"},404)
-            return self.send_json({"ok":True,"schema":"aivideoedit.remote-health.v1","bridge":"existing_stack_adapter"})
+            return self.send_json({"ok":True,"schema":"godrender.remote-health.v1","bridge":"existing_stack_adapter"})
         if path=="/api/remote/capabilities":
             ok,reason,rid=_remote_auth(self)
             if not ok:return self.send_json({"ok":False,"error":reason,"request_id":rid},401)
@@ -153,7 +153,7 @@ class StackHandler(base.Handler):
         if path=="/api/system":return self.send_json(system_snapshot())
         if path=="/api/storage":return self.send_json(storage.status())
         if path=="/api/core":return self.send_json(CORE.status())
-        if path=="/api/tools":return self.send_json({"schema":"aivideoedit.tools.v1","tools":all_tool_schemas()})
+        if path=="/api/tools":return self.send_json({"schema":"godrender.tools.v1","tools":all_tool_schemas()})
         return super().do_GET()
     def do_POST(self):
         path=urlparse(self.path).path
@@ -194,6 +194,6 @@ class StackHandler(base.Handler):
         return super().do_POST()
 
 if __name__=="__main__":
-    base.load_state();base.dispatch_job=dispatch_job;start_workers();host=os.environ.get("AIVE_HOST","127.0.0.1");base.studio_security.validate_bind(host);port=int(os.environ.get("AIVE_PORT","8080"));print(f"GodRender Studio: http://127.0.0.1:{port}");print(f"Bind: {host}:{port}");print(f"Workspace: {base.RUNTIME}");print(f"Workers: {WORKER_COUNT}");print(f"Storage: {storage.status()['detail']}");print(f"Canonical core: {'loaded' if CORE.status().get('bootstrapped') else 'not bootstrapped'}");print(f"Tool API: {len(all_tool_schemas())} tools")
-    if os.environ.get("AIVE_CORE_AUTOBOOT","").strip().lower() in {"1","true","yes"}:threading.Thread(target=CORE.bootstrap,name="godrender-core-bootstrap",daemon=True).start()
+    base.load_state();base.dispatch_job=dispatch_job;start_workers();host=os.environ.get("GODRENDER_HOST","127.0.0.1");base.studio_security.validate_bind(host);port=int(os.environ.get("GODRENDER_PORT","8080"));print(f"GodRender Studio: http://127.0.0.1:{port}");print(f"Bind: {host}:{port}");print(f"Workspace: {base.RUNTIME}");print(f"Workers: {WORKER_COUNT}");print(f"Storage: {storage.status()['detail']}");print(f"Canonical core: {'loaded' if CORE.status().get('bootstrapped') else 'not bootstrapped'}");print(f"Tool API: {len(all_tool_schemas())} tools")
+    if os.environ.get("GODRENDER_CORE_AUTOBOOT","").strip().lower() in {"1","true","yes"}:threading.Thread(target=CORE.bootstrap,name="godrender-core-bootstrap",daemon=True).start()
     ThreadingHTTPServer((host,port),StackHandler).serve_forever()

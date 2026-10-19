@@ -24,11 +24,11 @@ def load_module(path: Path, name: str):
 
 
 def load_guard():
-    return load_module(GUARD, "aivideoedit_workflow_guard_test")
+    return load_module(GUARD, "godrender_workflow_guard_test")
 
 
 def load_resolver():
-    return load_module(RESOLVER, "aivideoedit_workflow_resolver_test")
+    return load_module(RESOLVER, "godrender_workflow_resolver_test")
 
 
 def test_optional_runtime_cannot_become_workflow_authority():
@@ -43,7 +43,7 @@ def test_optional_runtime_cannot_become_workflow_authority():
     assert "forbidden in STANDARD_WORKFLOW_REGISTRY" in errors[0]
 
 
-def test_existing_aivideoedit_defaults_remain_mandatory():
+def test_existing_godrender_defaults_remain_mandatory():
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     default_ids = {
         wf["id"]
@@ -101,7 +101,7 @@ def test_runtime_entry_points_are_gated():
 
 if __name__ == "__main__":
     test_optional_runtime_cannot_become_workflow_authority()
-    test_existing_aivideoedit_defaults_remain_mandatory()
+    test_existing_godrender_defaults_remain_mandatory()
     test_optional_runtime_requires_explicit_project_opt_in()
     test_runtime_entry_points_are_gated()
     print("workflow authority regression: PASS")

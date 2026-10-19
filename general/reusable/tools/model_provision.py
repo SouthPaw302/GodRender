@@ -42,7 +42,7 @@ def provision(model_id:str, *, repo_root:Path|None=None, force:bool=False)->dict
     destination.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.NamedTemporaryFile(dir=destination.parent,delete=False,suffix=".partial") as tmp:
         tmp_path=Path(tmp.name)
-        req=urllib.request.Request(url,headers={"User-Agent":"AIVideoEdit-MainV2-clean"})
+        req=urllib.request.Request(url,headers={"User-Agent":"GodRender-MainV2-clean"})
         with urllib.request.urlopen(req,timeout=180) as response:
             while True:
                 block=response.read(1024*1024)
@@ -60,7 +60,7 @@ def provision(model_id:str, *, repo_root:Path|None=None, force:bool=False)->dict
         tmp_path.unlink(missing_ok=True)
 
     receipt={
-        "schema":"aivideoedit.model-provision.v1",
+        "schema":"godrender.model-provision.v1",
         "model":model_id,
         "path":str(destination),
         "source_commit":rec.get("source_commit"),

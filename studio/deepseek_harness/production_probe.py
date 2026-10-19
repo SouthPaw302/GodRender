@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one isolated AIVideoEdit production-direction probe through the existing Tool API.
+"""Run one isolated GodRender production-direction probe through the existing Tool API.
 
 This is a prototype/deepseek-harness test helper. It does not mutate repository main
 and does not bypass canonical production guards.
@@ -112,9 +112,9 @@ def main() -> int:
     evidence = Path(args.evidence_dir).resolve()
     evidence.mkdir(parents=True, exist_ok=True)
 
-    runtime = Path(os.environ.get("AIVE_RUNTIME") or (evidence / "runtime")).resolve()
+    runtime = Path(os.environ.get("GODRENDER_RUNTIME") or (evidence / "runtime")).resolve()
     env = dict(os.environ)
-    env.update({"AIVE_HOST": "127.0.0.1", "AIVE_PORT": "8080", "AIVE_RUNTIME": str(runtime)})
+    env.update({"GODRENDER_HOST": "127.0.0.1", "GODRENDER_PORT": "8080", "GODRENDER_RUNTIME": str(runtime)})
 
     stack_log = (evidence / "aive-stack.log").open("w", encoding="utf-8")
     proc = subprocess.Popen([sys.executable, str(STACK)], cwd=str(BACKEND), env=env, stdout=stack_log, stderr=subprocess.STDOUT)

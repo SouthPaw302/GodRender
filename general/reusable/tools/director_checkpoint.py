@@ -8,7 +8,7 @@ try:
     from .execution_ledger import sha256_file
 except ImportError:
     from execution_ledger import sha256_file
-SCHEMA="aivideoedit.director-checkpoints.v1"
+SCHEMA="godrender.director-checkpoints.v1"
 ORDER=["media_selection","representative_proof","rough_cut","fx_pass","final_review"]
 def _now():return datetime.now(timezone.utc).isoformat().replace("+00:00","Z")
 def save(path,d):

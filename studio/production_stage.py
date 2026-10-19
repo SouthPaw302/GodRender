@@ -45,7 +45,7 @@ def _generic_guarded_advance(project_id,target_stage,*,narrative=False):
     current=production_project.status(project_id);_validate_next_stage(current,target_stage)
     engine=Path(current["engine_root"]);project_dir=Path(current["project_dir"]);state_path=project_dir/"PROJECT_STATE.json";status_path=project_dir/"STATUS.md"
     old_state=state_path.read_text(encoding="utf-8");old_status=status_path.read_text(encoding="utf-8") if status_path.is_file() else ""
-    state=_read_json(state_path,{});state["stage"]=target_stage;state["stage_requested_by"]="aivideoedit-workstation";state["stage_requested_at"]=base.now();_write_json(state_path,state)
+    state=_read_json(state_path,{});state["stage"]=target_stage;state["stage_requested_by"]="godrender-workstation";state["stage_requested_at"]=base.now();_write_json(state_path,state)
     status_path.write_text(f"# Status\n\nStage: {target_stage}\n\nPending canonical guard verification.\n",encoding="utf-8");production_project._clear_guard_marker(engine)
     guard=production_project.run_guard(project_id);ng={"ok":True,"stdout":"","stderr":""}
     if guard.get("guard_pass") and narrative:ng=production_storyboard.run_narrative_guard(project_id)

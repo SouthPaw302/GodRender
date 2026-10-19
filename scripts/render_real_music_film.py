@@ -75,16 +75,16 @@ def stage(media, *, input_root, cache):
         return target
     tmp = target.with_suffix(target.suffix + ".partial")
     try:
-        headers = {"User-Agent": "AIVideoEdit-Lab-RealRenderer/1.0"}
+        headers = {"User-Agent": "GodRender-Lab-RealRenderer/1.0"}
         auth_hosts = {
-            item.strip().lower() for item in os.getenv("AIVE_MEDIA_AUTH_HOSTS", "").split(",")
+            item.strip().lower() for item in os.getenv("GODRENDER_MEDIA_AUTH_HOSTS", "").split(",")
             if item.strip()
         }
         host = (urllib.parse.urlsplit(url).hostname or "").lower()
         if host in auth_hosts:
-            token = os.getenv("AIVE_MEDIA_TOKEN", "")
+            token = os.getenv("GODRENDER_MEDIA_TOKEN", "")
             if not token:
-                raise RuntimeError("authenticated media host requires AIVE_MEDIA_TOKEN")
+                raise RuntimeError("authenticated media host requires GODRENDER_MEDIA_TOKEN")
             headers["Authorization"] = "Bearer " + token
         request = urllib.request.Request(url, headers=headers)
         try:
@@ -116,7 +116,7 @@ def stage(media, *, input_root, cache):
 
 
 def validate_manifest(m):
-    if m.get("schema") != "aivideoedit.real-render.v1":
+    if m.get("schema") != "godrender.real-render.v1":
         raise ValueError("unsupported render manifest schema")
     if m.get("render_authorization") != "explicit_user_render_request":
         raise ValueError("missing explicit user authorization to render; no agent self-approval")
@@ -241,9 +241,9 @@ def fx_lock(manifest, out):
     if not fx and not transitions:
         return None, fx, transitions
     req = {
-        "schema": "aivideoedit.fx-requirements.v2",
+        "schema": "godrender.fx-requirements.v2",
         "project": manifest.get("production_id"),
-        "runtime": "aivideoedit-fx-v2",
+        "runtime": "godrender-fx-v2",
         "seed": int(manifest.get("fx_seed", 302)),
         "effects": fx,
         "transitions": transitions,
@@ -414,7 +414,7 @@ def render(manifest_path, input_root, out, *, require_onnx=False):
         return value if p.returncode == 0 and len(value) == 40 and all(c in "0123456789abcdef" for c in value) else None
 
     receipt = {
-        "schema": "aivideoedit.real-render-receipt.v1", "production_id": m.get("production_id"),
+        "schema": "godrender.real-render-receipt.v1", "production_id": m.get("production_id"),
         "status": "TECHNICAL_RENDER_PASS_VISUAL_REVIEW_PENDING", "human_visual_approval": False,
         "production_complete": False, "manifest_sha256": digest(manifest_path),
         "source_commit_sha": _commit(input_root), "engine_commit_sha": _commit(REPO),
@@ -429,7 +429,7 @@ def render(manifest_path, input_root, out, *, require_onnx=False):
         "fx_visibility_proof_sha256": fx_proof_sha,
         "model": music_evidence.get("engine") if music_evidence else "not_requested",
         "jev": jev,
-        "source_lineage": "AIVideoEdit/main -> AIVideoEdit/MainV2 -> AIVideoEdit-MainV2-Lab/main",
+        "source_lineage": "GodRender/main -> GodRender/MainV2 -> GodRender-MainV2-Lab/main",
     }
     (out / "render_receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", target,

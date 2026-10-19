@@ -9,7 +9,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MODULE_PATH = HERE / "recipe_execution_guard.py"
-spec = importlib.util.spec_from_file_location("aivideoedit_recipe_execution_guard", MODULE_PATH)
+spec = importlib.util.spec_from_file_location("godrender_recipe_execution_guard", MODULE_PATH)
 if spec is None or spec.loader is None:
     raise SystemExit("TEST FAIL: cannot load recipe execution guard")
 guard = importlib.util.module_from_spec(spec)
@@ -40,12 +40,12 @@ def fixture(project: Path) -> None:
         }
     })
     write(project / "MUSIC_CONTROL_MAP.json", {
-        "schema": "aivideoedit.music-control-map.v1", "audio_sha256": SHA,
+        "schema": "godrender.music-control-map.v1", "audio_sha256": SHA,
         "sections": [{"id": "S01", "start_frame": 0, "end_frame": 240, "controls": {"rms": "bounded"}}],
     })
     proof = {"file_or_locator": "artifact://proof", "sha256": SHA}
     write(project / "SECTION_RENDER_MANIFEST.json", {
-        "schema": "aivideoedit.section-render-manifest.v1",
+        "schema": "godrender.section-render-manifest.v1",
         "sections": [{"id": "S01", "scene_profile": "reflection_drift", "passes": {
             "base": {"status": "rendered", "proof": proof},
             "reactive": {"status": "rendered", "proof": proof},
@@ -55,7 +55,7 @@ def fixture(project: Path) -> None:
     })
     write(project / "fx.lock.json", {"effects": [{"id": "FX2-MOTION-002"}]})
     write(project / "FX_APPLICATION_PROOF.json", {
-        "schema": "aivideoedit.fx-application-proof.v1",
+        "schema": "godrender.fx-application-proof.v1",
         "applications": [{
             "section_id": "S01", "effect_id": "FX2-MOTION-002",
             "output": {"file_or_locator": "artifact://section", "sha256": SHA},

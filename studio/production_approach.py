@@ -28,7 +28,7 @@ def set_capabilities(project_id,capabilities,approach_summary):
     if unknown:raise ValueError("unknown media capabilities: "+", ".join(unknown))
     summary=str(approach_summary or "").strip()
     if not summary:raise ValueError("approach_summary is required")
-    plan_path=project_dir/"MEDIA_PLAN.json";plan=_read_json(plan_path,{});plan["schema"]=plan.get("schema") or "aivideoedit.media-plan.v1";plan["selected_capabilities"]=selected;plan["approach_summary"]=summary;plan["approach_authority"]="explicit_current_user_or_agent_input";plan["capabilities_locked_at"]=base.now();_write_json(plan_path,plan)
+    plan_path=project_dir/"MEDIA_PLAN.json";plan=_read_json(plan_path,{});plan["schema"]=plan.get("schema") or "godrender.media-plan.v1";plan["selected_capabilities"]=selected;plan["approach_summary"]=summary;plan["approach_authority"]="explicit_current_user_or_agent_input";plan["capabilities_locked_at"]=base.now();_write_json(plan_path,plan)
     state_path=project_dir/"PROJECT_STATE.json";state=_read_json(state_path,{});state["media_plan_valid"]=True;state["selected_capability_count"]=len(selected);refs=_read_json(project_dir/"REFERENCE_MANIFEST.json",{"videos":[],"images":[]})
     if _visual_refs(refs):state["visual_approach_established"]=True;plan["user_approach_established"]=True;_write_json(plan_path,plan)
     _write_json(state_path,state);commit=production_project._git_commit_paths(engine,[plan_path,state_path],"Record canonical media approach");production_project._clear_guard_marker(engine)

@@ -1,5 +1,5 @@
 {
-  "schema": "aivideoedit.production-modes.v2",
+  "schema": "godrender.production-modes.v2",
   "direction_authorities": ["reference_led","music_led","user_directed"],
   "production_modes": {
     "living_scene": {

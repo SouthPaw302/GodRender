@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared fail-closed production branch resolution for AIVideoEdit."""
+"""Shared fail-closed production branch resolution for GodRender."""
 from __future__ import annotations
 
 import os
@@ -40,7 +40,7 @@ def declared_project_scene_dir(root: Path, branch: str) -> tuple[Path | None, st
 
 
 def env_project_dir(root: Path) -> Path | None:
-    value = os.environ.get("AIVIDEOEDIT_PROJECT_DIR")
+    value = os.environ.get("GODRENDER_PROJECT_DIR")
     if not value:
         return None
     p = Path(value)
@@ -61,14 +61,14 @@ def resolve_production_project(root: Path, branch: str) -> tuple[Path | None, st
             return candidates[0], None
         if not candidates:
             return None, "no projects/*/PROJECT_STATE.json found for song branch"
-        return None, "multiple project states found for song branch; set AIVIDEOEDIT_PROJECT_DIR"
+        return None, "multiple project states found for song branch; set GODRENDER_PROJECT_DIR"
 
     project_scene, error = declared_project_scene_dir(root, branch)
     if error:
         return None, error
     if project_scene is not None:
         if env_project is not None and env_project != project_scene:
-            return None, f"AIVIDEOEDIT_PROJECT_DIR does not match declared scene directory: {env_project} != {project_scene}"
+            return None, f"GODRENDER_PROJECT_DIR does not match declared scene directory: {env_project} != {project_scene}"
         return project_scene, None
 
     return None, f"production work must use song/<slug> or an explicitly declared project/<slug>/scene-XX branch; got {branch}"

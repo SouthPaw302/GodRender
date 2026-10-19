@@ -230,7 +230,7 @@ def analyze_onnx(path:Path,model:Path)->dict[str,Any]:
     if beats:
         downs=sorted(set(min(beats,key=lambda b:abs(b-d)) for d in downs))
     return {
-        "schema":"aivideoedit.music-analysis-evidence.v1",
+        "schema":"godrender.music-analysis-evidence.v1",
         "engine":"beat_this_onnx",
         "provider":"Beat This!",
         "providers":session.get_providers(),
@@ -262,7 +262,7 @@ def analyze_dsp(path:Path)->dict[str,Any]:
             hits.append(i); last=i
     beats=[round(i*(hop/rate),4) for i in hits]
     return {
-        "schema":"aivideoedit.music-analysis-evidence.v1",
+        "schema":"godrender.music-analysis-evidence.v1",
         "engine":"deterministic_micro_dsp",
         "sample_rate":rate,
         "bpm":_bpm(beats),

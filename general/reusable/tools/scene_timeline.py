@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and optionally music-snap an AIVideoEdit scene timeline.
+"""Validate and optionally music-snap an GodRender scene timeline.
 
 This tool does not invent scenes or directing decisions. It preserves scene order
 and only moves explicit internal boundaries/transitions to nearby anchors from the
@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "aivideoedit.scene-timeline.v1"
+SCHEMA = "godrender.scene-timeline.v1"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -210,7 +210,7 @@ def snap_timeline(
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Validate/snap AIVideoEdit scene timeline JSON")
+    ap = argparse.ArgumentParser(description="Validate/snap GodRender scene timeline JSON")
     ap.add_argument("timeline", type=Path)
     ap.add_argument("-o", "--output", type=Path)
     ap.add_argument("--audio-map", type=Path)
@@ -230,8 +230,8 @@ def main() -> int:
     result = plan
     if args.audio_map:
         audiomap = load_json(args.audio_map)
-        if audiomap.get("schema") != "aivideoedit.audiomap.v1":
-            raise SystemExit("--audio-map must use aivideoedit.audiomap.v1")
+        if audiomap.get("schema") != "godrender.audiomap.v1":
+            raise SystemExit("--audio-map must use godrender.audiomap.v1")
         if args.snap_window < 0:
             raise SystemExit("--snap-window must be >= 0")
         result = snap_timeline(plan, audiomap, args.snap_window, args.snap_all_boundaries)

@@ -66,7 +66,7 @@ def compare_reports(before: dict, after: dict) -> dict:
     bm = b["metrics"].get("mean_adjacent_similarity")
     am = a["metrics"].get("mean_adjacent_similarity")
     return {
-        "schema": "aivideoedit.export-variety-comparison.v1",
+        "schema": "godrender.export-variety-comparison.v1",
         "before": b,
         "after": a,
         "delta": {
@@ -115,7 +115,7 @@ def analyze(video: Path, interval: float, threshold: float, max_run: int, sheet:
         sheet.parent.mkdir(parents=True, exist_ok=True)
         cv2.imwrite(str(sheet), canvas)
     report = {
-        "schema": "aivideoedit.export-variety-qc.v2",
+        "schema": "godrender.export-variety-qc.v2",
         "video": str(video),
         "video_sha256": sha256_file(video) if video.is_file() else None,
         "duration_seconds": duration,

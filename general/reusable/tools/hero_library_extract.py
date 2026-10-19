@@ -14,7 +14,7 @@ import math
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "aivideoedit.hero-library.v1"
+SCHEMA = "godrender.hero-library.v1"
 LIFECYCLE = {"candidate", "approved", "canonical", "derived", "retired"}
 
 

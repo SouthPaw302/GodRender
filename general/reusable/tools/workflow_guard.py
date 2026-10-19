@@ -11,16 +11,16 @@ from pathlib import Path
 from branch_policy import resolve_production_project
 
 SCRIPT_ROOT = Path(__file__).resolve().parents[3]
-if os.environ.get("AIVIDEOEDIT_REPO_ROOT"):
-    ROOT = Path(os.environ["AIVIDEOEDIT_REPO_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_REPO_ROOT"):
+    ROOT = Path(os.environ["GODRENDER_REPO_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     ROOT = SCRIPT_ROOT.parent.parent.resolve()
 else:
     ROOT = SCRIPT_ROOT.resolve()
 
-if os.environ.get("AIVIDEOEDIT_OS_ROOT"):
-    OS_ROOT = Path(os.environ["AIVIDEOEDIT_OS_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_OS_ROOT"):
+    OS_ROOT = Path(os.environ["GODRENDER_OS_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     OS_ROOT = SCRIPT_ROOT.resolve()
 else:
     OS_ROOT = ROOT
@@ -30,22 +30,22 @@ RESOLVER = OS_ROOT / "general/reusable/tools/workflow_resolver.py"
 MEDIA = OS_ROOT / "general/reusable/MEDIA_CAPABILITY_MATRIX.json"
 CONTRACT = OS_ROOT / "general/reusable/PRODUCTION_CONTRACT.json"
 
-# Optional execution engines may extend an already-resolved AIVideoEdit workflow,
+# Optional execution engines may extend an already-resolved GodRender workflow,
 # but they may never register themselves as workflow authority. This protects the
 # existing director/bootstrap/guard machinery from being silently replaced by an
 # implementation-specific renderer, transition package, or audio bridge.
 OPTIONAL_RUNTIME_MARKERS = {
     "render_runtime",
     "render_scene.mjs",
-    "aivideoedit-render-core",
-    "aivideoedit-render-cli",
+    "godrender-render-core",
+    "godrender-render-cli",
     "transition_bridge.js",
     "audio_mix_bridge.js",
 }
 
 
 def load_module(path: Path):
-    spec = importlib.util.spec_from_file_location("aivideoedit_workflow_resolver_guard", path)
+    spec = importlib.util.spec_from_file_location("godrender_workflow_resolver_guard", path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot import {path}")
     mod = importlib.util.module_from_spec(spec)
@@ -65,7 +65,7 @@ def validate_optional_runtime_boundary(registry: dict):
         if marker.lower() in serialized:
             errors.append(
                 f"optional runtime implementation marker {marker!r} is forbidden in STANDARD_WORKFLOW_REGISTRY; "
-                "resolve the AIVideoEdit workflow first, then invoke optional runtime tools as subordinate capabilities"
+                "resolve the GodRender workflow first, then invoke optional runtime tools as subordinate capabilities"
             )
     return errors
 
@@ -121,18 +121,18 @@ def validate(branch: str):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--branch", default=os.environ.get("GITHUB_REF_NAME") or os.environ.get("AIVIDEOEDIT_BRANCH") or "")
+    ap.add_argument("--branch", default=os.environ.get("GITHUB_REF_NAME") or os.environ.get("GODRENDER_BRANCH") or "")
     args = ap.parse_args()
     if not args.branch:
-        print("AIVideoEdit standard workflow contract: FAIL\n- branch required")
+        print("GodRender standard workflow contract: FAIL\n- branch required")
         return 2
     errors = validate(args.branch)
     if errors:
-        print("AIVideoEdit standard workflow contract: FAIL")
+        print("GodRender standard workflow contract: FAIL")
         for e in errors:
             print("- " + e)
         return 2
-    print("AIVideoEdit standard workflow contract: PASS")
+    print("GodRender standard workflow contract: PASS")
     return 0
 
 
