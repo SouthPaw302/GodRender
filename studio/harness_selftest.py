@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Smoke-test the dependency-free AIVideoEdit MCP stdio bridge."""
+"""Smoke-test the dependency-free GodRender MCP stdio bridge."""
 from __future__ import annotations
 
 import json
@@ -20,7 +20,7 @@ def main() -> int:
             "params": {
                 "protocolVersion": "2025-11-25",
                 "capabilities": {},
-                "clientInfo": {"name": "aivideoedit-selftest", "version": "1"},
+                "clientInfo": {"name": "godrender-selftest", "version": "1"},
             },
         },
         {"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}},
@@ -43,7 +43,7 @@ def main() -> int:
         cwd=str(HERE),
         timeout=20,
         check=False,
-        env={**os.environ, "AIVE_HARNESS_ENABLED": "1"},
+        env={**os.environ, "GODRENDER_HARNESS_ENABLED": "1"},
     )
     if proc.returncode != 0:
         print(proc.stderr or proc.stdout)
@@ -56,8 +56,8 @@ def main() -> int:
     names = {x.get("name") for x in listed.get("tools", []) if isinstance(x, dict)}
 
     failures = []
-    if init.get("serverInfo", {}).get("name") != "aivideoedit":
-        failures.append("initialize did not identify the AIVideoEdit MCP server")
+    if init.get("serverInfo", {}).get("name") != "godrender":
+        failures.append("initialize did not identify the GodRender MCP server")
     if init.get("protocolVersion") != "2025-11-25":
         failures.append("legacy MCP protocol negotiation did not settle on 2025-11-25")
     for required in {"harness__status", "harness__context", "harness__specialist_fixture", "production__status", "production__guard"}:
@@ -70,7 +70,7 @@ def main() -> int:
         failures.append("specialist fixture did not return MCP content")
 
     result = {
-        "schema": "aivideoedit.harness-selftest.v1",
+        "schema": "godrender.harness-selftest.v1",
         "result": "PASS" if not failures else "FAIL",
         "tool_count": len(names),
         "failures": failures,
