@@ -50,7 +50,7 @@ def sha256_file(path: Path) -> str:
 
 
 def load_runtime(path: Path):
-    name = "aivideoedit_fx2_proof_runtime"
+    name = "godrender_fx2_proof_runtime"
     spec = importlib.util.spec_from_file_location(name, path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot load runtime: {path}")
