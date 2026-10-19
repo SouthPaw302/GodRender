@@ -76,13 +76,13 @@
     },
     {
       "path": "studio/core_adapter.py",
-      "git_blob_sha": "e42298e9cf8eff617a2b5a2234edf297ef00d08c",
+      "git_blob_sha": "df2a92d6516909c80e72776d0016327cd20d918f",
       "role": "studio_port",
       "source_repo": "SouthPaw302/AIVideoEdit-MainV2-Lab",
       "source_commit": "900e3e5749ed6fa13ad91524975a9e64661e6649",
       "source_path": "prototype/backend_gui/core_adapter.py",
       "upstream_blob_sha": "230d33a63cceac3b257ac22daa7edef50b1b675e",
-      "delta": "GodRender active-product name pass; imported compatibility source remains preserved and cited"
+      "delta": "Native GodRender cutover: core clones exclusively the current local GodRender Git checkout; legacy serialized schemas kept readable. Source provenance retained."
     },
     {
       "path": "studio/deepseek_harness/README.md",

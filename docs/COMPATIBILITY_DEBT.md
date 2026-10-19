@@ -1,22 +1,13 @@
-# GodRender — Legacy Runtime Compatibility
+# GodRender — Native Core Cutover
 
-**This is a technical migration record, not a second product or a second active video repository.** GodRender is the sole active development and film project.
+GodRender contains its own checked-in `bootstrap.py`, `general/reusable/` production guards, FX runtime, model registry and `scripts/` utilities. The Studio boot adapter clones **only its own current local GodRender Git checkout** into an isolated attested runtime. No other repository is cloned or treated as an executable authority.
 
-## What was renamed in the GodRender name pass
+## Versioned compatibility (not active legacy infrastructure)
 
-- Browser title/header, Studio HTTP service identity, startup scripts, application errors, agent instructions, MCP handshake name and GodRender-created production workspace labels.
-- Agent documentation and README now direct every new change and handoff to GodRender.
-- Prior-production names, source Git URLs, SHA hashes and render histories are preserved because they are evidence.
+Old `.aivideoedit` directories, `aivideoedit.*` JSON schemas, `AIVE_*` configuration keys, `aive://` links and the literal bootstrap PASS are kept as wire/storage compatibility formats. Their presence does not mean GodRender depends on a historical repository. Existing projects, receipts, and older production records continue to use those formats.
 
-## What is intentionally still compatible
+The 175 original core files were restored from the historical MainV2-Lab main source, including the exact original FX proof MP4 and contact sheet. The Git source history remains provenance only. Native bootstrap `REPOSITORY` and the current-main source manifest now point to `SouthPaw302/GodRender`; all original code/FX files remain traceable to their Git SHA. `upstream/` history is never executed as the primary core.
 
-- `studio/core_adapter.py` currently installs/boots an **external legacy production OS checkout** and checks its literal `AIVideoEdit OS BOOTSTRAP: PASS`. Its remote points to the older implementation; changing the display name does not change this fact.
-- `.aivideoedit` directories, `aivideoedit.*` serialized schemas, `aive://asset` URIs and `AIVE_*` environment keys are versioned compatibility interfaces. Renaming them without migrating readers, writers, guards and existing project manifests can damage old projects.
-- `upstream/`, legacy branch indexes, technical proof reports and pinned import manifests are historical source evidence; do not rename paths or modify byte hashes to hide provenance.
-- The legacy MCP Python module filename is retained for existing harness clients, while `studio/godrender_mcp.py` is the preferred new entrypoint.
+## Cutover acceptance
 
-## Separate future cutover gate
-
-To remove the last external checkout dependency, **first** implement and independently prove a GodRender-native versioned bootstrap, checked-in runtime snapshot, schema migration/read-compat, guards and per-song workspace initialization. Then test both existing productions and a fresh authorized song in GitHub Actions and with human visual QC. Until that passes, do **not** silently point the legacy bootstrap at GodRender or fabricate a successful session.
-
-The name pass changes identity; it **does not claim** this core boot migration is complete.
+The change is not qualified for production until both GitHub Studio integration verification and parallel processing checks pass on the native cutover branch, the real native boot attests its snapshot, the source integrity manifest passes, and an independent production review confirms existing song state is preserved. Approval for releasing a film remains manual.
