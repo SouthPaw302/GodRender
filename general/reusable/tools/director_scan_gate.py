@@ -11,7 +11,7 @@ import json
 import re
 from pathlib import Path
 
-SCHEMA = "aivideoedit.director-scan.v1"
+SCHEMA = "godrender.director-scan.v1"
 CHECKS = (
     "inventory", "duplicates_and_provenance", "source_fidelity",
     "semantic_motion", "fx_actual_and_relevance", "music_and_audio",
@@ -205,7 +205,7 @@ def main() -> int:
     except (OSError, ValueError) as e:
         errs = [str(e)]
     print(json.dumps({
-        "schema": "aivideoedit.director-scan-validation.v1",
+        "schema": "godrender.director-scan-validation.v1",
         "result": "EVIDENCE_COMPLETE" if not errs else "FAIL",
         "human_visual_approval": "NOT_GRANTED_BY_THIS_TOOL",
         "errors": errs,
