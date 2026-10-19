@@ -117,7 +117,7 @@ def test_backend_substitution_requires_equivalence():
     with tempfile.TemporaryDirectory() as td:
         project = Path(td)
         (project / "RENDER_RECIPE.json").write_text(json.dumps({
-            "schema": "aivideoedit.render-recipe.v1",
+            "schema": "godrender.render-recipe.v1",
             "recipe_identity": "r1",
             "proof_backend": "python_opencv",
             "production_backend": "ffmpeg",
@@ -132,7 +132,7 @@ def test_backend_substitution_with_equivalence_passes():
     with tempfile.TemporaryDirectory() as td:
         project = Path(td)
         (project / "RENDER_RECIPE.json").write_text(json.dumps({
-            "schema": "aivideoedit.render-recipe.v1",
+            "schema": "godrender.render-recipe.v1",
             "recipe_identity": "r1",
             "proof_backend": "python_opencv",
             "production_backend": "ffmpeg",
