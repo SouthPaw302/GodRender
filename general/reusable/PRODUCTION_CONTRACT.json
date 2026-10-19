@@ -1,5 +1,5 @@
 {
-  "schema": "aivideoedit.production-contract.v3",
+  "schema": "godrender.production-contract.v3",
   "authority": [
     "current_user_instruction",
     "active_song_branch_state",
@@ -199,7 +199,7 @@
     "review_proxies_are_never_release_masters": true,
     "release_eligible_4k_parent_must_be_exact_accepted_artistic_master": true,
     "4k_derivative_must_preserve_edit_frame_count_fps_duration_and_audio_identity": true,
-    "delivery_archive_schema": "aivideoedit.delivery-archive.v1",
+    "delivery_archive_schema": "godrender.delivery-archive.v1",
     "delivery_archive_validator": "prototype/backend_gui/delivery_archive.py"
   },
   "delivery_lifecycle_policy": {
