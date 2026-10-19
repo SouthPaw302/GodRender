@@ -1,5 +1,5 @@
 {
-  "schema": "aivideoedit.operating-order.v1",
+  "schema": "godrender.operating-order.v1",
   "mission": "One sentence describing what this production is making now.",
   "direction_authority": "music_led",
   "production_mode": "living_scene",
