@@ -72,6 +72,20 @@ SCHEMAS = [
             },
         },
     },
+    {
+        "name": "harness.route",
+        "description": "Bounded Jev decision, authenticated project context and live FX/model specialist resolution. Produces evidence; never grants creative approval.",
+        "input_schema": {
+            "type": "object",
+            "required": ["project_id", "evidence", "specialist"],
+            "properties": {
+                "project_id": {"type": "string"},
+                "evidence": {"type": "object"},
+                "specialist": {"type": "string", "enum": ["fx", "model", "production"]},
+                "request": {"type": "object"}
+            }
+        },
+    },
 ]
 
 
@@ -253,6 +267,67 @@ def specialist_fixture(args: dict | None = None) -> dict:
     }
 
 
+
+def route(project_id: str, args: dict | None = None) -> dict:
+    """Real Jev -> authorized specialist -> evidence -> operator decision loop.
+
+    Failure/retry never dispatches. ESCALATE returns grounded specialist evidence
+    but cannot approve itself; an authorized agent or Director must review it.
+    """
+    from tool_api import jev_decide
+    import model_runtime
+    import hashlib
+    args = args or {}
+    pid = str(project_id or "").strip()
+    if not base.find_project(pid):
+        raise ValueError("project not found")
+    production = production_project.status(pid)
+    if not production.get("initialized") or not CORE.status().get("bootstrapped"):
+        raise RuntimeError("GodRender production must be bootstrapped before specialist routing")
+    evidence = args.get("evidence")
+    if not isinstance(evidence, dict):
+        raise ValueError("Jev requires structured evidence")
+    requested = str(args.get("specialist") or "")
+    if requested not in {"fx", "model", "production"}:
+        raise ValueError("unsupported specialist")
+    initial = jev_decide(evidence)
+    observations = []
+    if initial["decision"] in {"CONTINUE", "PASS", "ESCALATE"}:
+        params = args.get("request") if isinstance(args.get("request"), dict) else {}
+        try:
+            if requested == "fx":
+                result = fx_resolve(pid, params)
+            elif requested == "model":
+                result = model_runtime.select(str(params.get("capability") or ""),
+                                              requested=params.get("provider"))
+            else:
+                result = production_project.status(pid)
+            observations.append({"specialist": requested, "ok": True,
+                                 "result": result, "authority": "evidence_only"})
+        except Exception as exc:
+            observations.append({"specialist": requested, "ok": False,
+                                 "error": type(exc).__name__ + ": " + str(exc)[:400],
+                                 "authority": "evidence_only"})
+    requires_review = (initial["decision"] == "ESCALATE"
+                       or any(not x["ok"] for x in observations)
+                       or (requested == "model" and observations and
+                           observations[0].get("result", {}).get("available") is False))
+    final = "ESCALATE" if requires_review else initial["decision"]
+    document = {
+        "schema": "godrender.jev-specialist-route.v1",
+        "project_id": pid,
+        "branch": production.get("branch"),
+        "initial_decision": initial,
+        "final_decision": final,
+        "specialist_observations": observations,
+        "requires_authorized_review": requires_review,
+        "production_mutation": False,
+        "rule": "Evidence-only routing. No specialist may override Jev FAIL or approve creative work."
+    }
+    digest = hashlib.sha256(json.dumps(document, sort_keys=True, default=str).encode()).hexdigest()
+    document["receipt_sha256"] = digest
+    return document
+
 def call(name: str, args: dict | None = None):
     args = args or {}
     if name == "harness.status":
@@ -261,6 +336,8 @@ def call(name: str, args: dict | None = None):
         return context(str(args.get("project_id") or ""))
     if name == "harness.specialist_fixture":
         return specialist_fixture(args)
+    if name == "harness.route":
+        return route(str(args.get("project_id") or ""), args)
     if name == "harness.fx_resolve":
         return fx_resolve(str(args.get("project_id") or ""), args)
     raise ValueError(f"unknown harness tool: {name}")

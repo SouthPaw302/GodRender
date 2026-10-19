@@ -25,6 +25,9 @@ import production_fx
 import production_assembly
 import production_final_qc
 import production_archive
+import native_workspaces
+import github_actions
+import model_runtime
 import runtime_gatekeeper
 import operating_tools
 import importlib.util
@@ -49,6 +52,13 @@ TOOL_SCHEMAS=[
 {"name":"core.bootstrap","description":"Install and attest the current GodRender-compatible production engine.","input_schema":{"type":"object","properties":{"offline":{"type":"boolean"}}}},
 {"name":"capabilities.list","description":"List canonical media capabilities from the bootstrapped OS.","input_schema":{"type":"object","properties":{}}},
 {"name":"fx.list","description":"List reusable effects from the canonical FX registry.","input_schema":{"type":"object","properties":{}}},
+{"name":"models.catalog","description":"Show installed ONNX/DSP and real image/video/3D providers; unavailable generation models are explicit.","input_schema":{"type":"object","properties":{}}},
+{"name":"models.select","description":"Resolve an actual model/provider by capability, never invent a generator.","input_schema":{"type":"object","required":["capability"],"properties":{"capability":{"type":"string"},"provider":{"type":"string"}}}},
+{"name":"native.status","description":"Show GodRender native production Git branch and whether it was published.","input_schema":{"type":"object","required":["project_id"],"properties":{"project_id":{"type":"string"}}}},
+{"name":"native.publish","description":"Explicitly push the hash-verified native GodRender song branch; never force-push.","input_schema":{"type":"object","required":["project_id","approve_push"],"properties":{"project_id":{"type":"string"},"approve_push":{"type":"boolean"}}}},
+{"name":"github.runs","description":"Read recent native GodRender parallel production render jobs.","input_schema":{"type":"object","properties":{}}},
+{"name":"github.dispatch","description":"Explicitly dispatch native GitHub Actions render from a published song branch.","input_schema":{"type":"object","required":["project_id","approve_dispatch"],"properties":{"project_id":{"type":"string"},"approve_dispatch":{"type":"boolean"},"manifest":{"type":"string"},"fixture":{"type":"boolean"}}}},
+{"name":"render.local_shot","description":"Queue a real source/Godot shot rendered through FXExecutor into a reviewable but unapproved proof asset.","input_schema":{"type":"object","required":["project_id","shot_id","fx_ids"],"properties":{"project_id":{"type":"string"},"shot_id":{"type":"string"},"asset_id":{"type":"string"},"mode":{"type":"string","enum":["still_fx","video_fx","godot"]},"scene":{"type":"string"},"seconds":{"type":"number"},"fps":{"type":"integer"},"width":{"type":"integer"},"height":{"type":"integer"},"fx_ids":{"type":"array","items":{"type":"string"}}}}},
 {"name":"project.list","description":"List local workstation projects.","input_schema":{"type":"object","properties":{}}},
 {"name":"project.create","description":"Create a local workstation project.","input_schema":{"type":"object","required":["name"],"properties":{"name":{"type":"string"}}}},
 {"name":"project.status","description":"Return project media and QC summary.","input_schema":{"type":"object","required":["project_id"],"properties":{"project_id":{"type":"string"}}}},
@@ -136,6 +146,31 @@ def _call_tool_unchecked(name,arguments,*,dispatch_job:Callable[[dict],None],pre
         s=CORE.status();return {"core":s,"capabilities":CORE.capabilities() if s.get("bootstrapped") else []}
     if name=="fx.list":
         s=CORE.status();return {"core":s,"effects":CORE.effects() if s.get("bootstrapped") else []}
+    if name=="models.catalog":return model_runtime.options()
+    if name=="models.select":return model_runtime.select(str(a.get("capability") or ""),requested=a.get("provider"))
+    if name=="native.status":_project(pid);return native_workspaces.status(pid)
+    if name=="native.publish":_project(pid);return native_workspaces.publish(pid,explicit_approval=a.get("approve_push") is True)
+    if name=="github.runs":return github_actions.runs()
+    if name=="github.dispatch":
+        _project(pid)
+        native=native_workspaces.status(pid)
+        return github_actions.dispatch(project_id=pid,ref=native["branch"],
+             manifest=str(a.get("manifest") or ""),fixture=a.get("fixture") is True,
+             approval=a.get("approve_dispatch") is True,native_status=native)
+    if name=="render.local_shot":
+        _project(pid)
+        mode=str(a.get("mode") or "still_fx")
+        if mode in {"still_fx","video_fx"}:
+            asset=_asset(str(a.get("asset_id") or ""))
+            if asset.get("project")!=pid:raise ValueError("source asset belongs to another project")
+        job=base.add_job("render_local_shot",pid,str(a.get("asset_id") or ""))
+        values={"shot_id":str(a.get("shot_id") or ""),"mode":mode,
+                "scene":str(a.get("scene") or ""),"fx_ids":list(a.get("fx_ids") or []),
+                "width":int(a.get("width") or 640),"height":int(a.get("height") or 360),
+                "fps":int(a.get("fps") or 24),"seconds":float(a.get("seconds") or 3)}
+        base.update_job(job["id"],**values)
+        dispatch_job(job)
+        return {"job":job,"creative_approval":False}
     if name=="project.list":
         with base.LOCK:return {"projects":[dict(p) for p in base.STATE["projects"]]}
     if name=="project.create":return {"project":_create_project(str(a.get("name") or ""))}
@@ -209,7 +244,7 @@ _READ_ONLY_TOOLS = {
     "shots.status", "shots.template", "generated.status", "proofs.status",
     "fx.status", "fx.registry", "fx.verify", "assembly.status", "final_qc.status",
     "archive.status", "archive.verify", "production.guard", "media.list",
-    "storage.status",
+    "storage.status", "models.catalog", "models.select", "native.status", "github.runs",
 }
 
 _UNGATED_BOOTSTRAP_TOOLS = {
@@ -248,6 +283,9 @@ _CHANGE_TAGS = {
     "production.advance": ["stage advance"],
     "media.prepare": ["media derivative"],
     "storage.sync": ["external backup"],
+    "render.local_shot": ["moving shot proof"],
+    "native.publish": ["native GodRender branch publish"],
+    "github.dispatch": ["GitHub render job dispatch"],
 }
 
 

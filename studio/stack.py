@@ -13,6 +13,7 @@ import harness_tools
 import remote_bridge
 import production_analysis
 import production_assembly
+import production_render
 import production_project
 from core_adapter import CORE
 
@@ -71,7 +72,7 @@ def assemble_production_job(job):
         result=production_assembly.assemble(pid,width=int(job.get("width") or 1280),height=int(job.get("height") or 720));asset=result.get("asset") or {};base.update_job(job["id"],status="complete",progress=100,result=f"Assembly ready · {asset.get('metadata',{}).get('duration_seconds','?')}s · {asset.get('id','')}",finished_at=base.now())
     except Exception as exc:base.update_job(job["id"],status="failed",progress=100,result=str(exc)[:900],finished_at=base.now())
 def execute_job(job):
-    handlers={"ffmpeg_check":lambda:base.run_ffmpeg_check(job["id"]),"analyze_media":lambda:base.analyze_asset(job["id"],job["asset_id"]),"make_proxy":lambda:base.make_proxy(job["id"],job["asset_id"]),"extract_review_frames":lambda:base.extract_review_frames(job["id"],job["asset_id"]),"qc_media":lambda:base.qc_asset(job["id"],job["asset_id"]),"sync_project":lambda:sync_project_job(job),"analyze_production":lambda:analyze_production_job(job),"assemble_production":lambda:assemble_production_job(job)}
+    handlers={"ffmpeg_check":lambda:base.run_ffmpeg_check(job["id"]),"analyze_media":lambda:base.analyze_asset(job["id"],job["asset_id"]),"make_proxy":lambda:base.make_proxy(job["id"],job["asset_id"]),"extract_review_frames":lambda:base.extract_review_frames(job["id"],job["asset_id"]),"qc_media":lambda:base.qc_asset(job["id"],job["asset_id"]),"sync_project":lambda:sync_project_job(job),"analyze_production":lambda:analyze_production_job(job),"assemble_production":lambda:assemble_production_job(job),"render_local_shot":lambda:production_render.execute(job)}
     fn=handlers.get(job.get("type"))
     if not fn:return base.update_job(job["id"],status="failed",progress=100,result=f"unknown job type: {job.get('type')}",finished_at=base.now())
     try:fn()
