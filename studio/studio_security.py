@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Mapping
 from urllib.parse import unquote, urlparse
 
-STUDIO_TOKEN_ENV = "AIVE_STUDIO_TOKEN"
+STUDIO_TOKEN_ENV = "GODRENDER_STUDIO_TOKEN"
 SESSION_COOKIE = "aive_studio_session"
-_SESSION_CONTEXT = b"aivideoedit-studio-session-v1"
+_SESSION_CONTEXT = b"godrender-studio-session-v1"
 
 
 def configured_token() -> str | None:
