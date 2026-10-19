@@ -19,15 +19,15 @@ from typing import Any
 from branch_policy import resolve_production_project
 
 SCRIPT_ROOT = Path(__file__).resolve().parents[3]
-if os.environ.get("AIVIDEOEDIT_REPO_ROOT"):
-    ROOT = Path(os.environ["AIVIDEOEDIT_REPO_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_REPO_ROOT"):
+    ROOT = Path(os.environ["GODRENDER_REPO_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     ROOT = SCRIPT_ROOT.parent.parent.resolve()
 else:
     ROOT = SCRIPT_ROOT.resolve()
-if os.environ.get("AIVIDEOEDIT_OS_ROOT"):
-    OS_ROOT = Path(os.environ["AIVIDEOEDIT_OS_ROOT"]).resolve()
-elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".aivideoedit":
+if os.environ.get("GODRENDER_OS_ROOT"):
+    OS_ROOT = Path(os.environ["GODRENDER_OS_ROOT"]).resolve()
+elif SCRIPT_ROOT.name == "os" and SCRIPT_ROOT.parent.name == ".godrender":
     OS_ROOT = SCRIPT_ROOT.resolve()
 else:
     OS_ROOT = ROOT
@@ -148,7 +148,7 @@ def validate_render_recipe(project: Path, errors: list[str]) -> None:
     except ValueError as exc:
         errors.append(str(exc))
         return
-    if recipe.get("schema") != "aivideoedit.render-recipe.v1":
+    if recipe.get("schema") != "godrender.render-recipe.v1":
         errors.append("RENDER_RECIPE.json has invalid schema")
     for key in ("recipe_identity", "proof_backend", "production_backend"):
         if not nonempty(recipe.get(key)):
@@ -223,7 +223,7 @@ def validate_hero_library(project: Path, plan: dict, scope: dict, source: dict, 
         errors.append("canonical hero-library workflow requires HERO_LIBRARY.json")
         return
     try:
-        module = import_module(TOOLS / "hero_library_extract.py", "aivideoedit_hero_library_extract")
+        module = import_module(TOOLS / "hero_library_extract.py", "godrender_hero_library_extract")
         manifest = load_json(path)
         errors.extend("HERO_LIBRARY: " + e for e in module.validate_library_manifest(manifest))
         warnings.extend("HERO_LIBRARY: " + w for w in module.library_warnings(manifest))
@@ -240,7 +240,7 @@ def validate_project_local_fx(project: Path, errors: list[str]) -> None:
     if not root.is_dir():
         return
     try:
-        gate = import_module(FX / "project_local_fx_gate.py", "aivideoedit_project_local_fx_gate")
+        gate = import_module(FX / "project_local_fx_gate.py", "godrender_project_local_fx_gate")
     except Exception as exc:
         errors.append(f"cannot load project-local FX gate: {exc}")
         return
@@ -267,7 +267,7 @@ def validate_refinement_qc(project: Path, source: dict, scope: dict, stage: str,
         errors.append("recut FINAL_QC_PASSED requires REFINEMENT_QC.json with before/after evidence")
         return
     try:
-        tool = import_module(TOOLS / "refinement_qc_compare.py", "aivideoedit_refinement_qc_compare")
+        tool = import_module(TOOLS / "refinement_qc_compare.py", "godrender_refinement_qc_compare")
         data = load_json(path)
         errors.extend("REFINEMENT_QC: " + e for e in tool.validate_comparison(data, source.get("sha256")))
     except Exception as exc:
@@ -320,20 +320,20 @@ def validate(branch: str) -> tuple[list[str], list[str]]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--branch", default=os.environ.get("GITHUB_REF_NAME") or os.environ.get("AIVIDEOEDIT_BRANCH") or "")
+    ap.add_argument("--branch", default=os.environ.get("GITHUB_REF_NAME") or os.environ.get("GODRENDER_BRANCH") or "")
     args = ap.parse_args()
     if not args.branch:
-        print("AIVideoEdit recut contract: FAIL\n- branch required")
+        print("GodRender recut contract: FAIL\n- branch required")
         return 1
     errors, warnings = validate(args.branch)
     for warning in warnings:
-        print("AIVideoEdit recut contract: WARN - " + warning)
+        print("GodRender recut contract: WARN - " + warning)
     if errors:
-        print("AIVideoEdit recut contract: FAIL")
+        print("GodRender recut contract: FAIL")
         for error in errors:
             print("- " + error)
         return 1
-    print("AIVideoEdit recut contract: PASS")
+    print("GodRender recut contract: PASS")
     return 0
 
 
