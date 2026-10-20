@@ -17,7 +17,9 @@ try{
   return {len:run.snapshots.length,manifest:run.manifest_sha256,runSha:run.run_sha256,
    people:Object.keys(run.snapshots[4].people),trust:Object.keys(run.snapshots[4].trust).length,
    knowledge:run.snapshots.some(y=>y.people.neda.knowledge.includes("Her hospital's survival will be used to force her city into the first foreign accession.")),
-   identical:run.run_sha256===base.run_sha256};
+   identical:run.run_sha256===base.run_sha256,
+   caleb2026:run.snapshots[0].people.caleb.knowledge.length,
+   caleb2027:run.snapshots[1].people.caleb.knowledge.length};
  });
  assert.equal(state.len,12);
  assert.equal(state.trust,30);
@@ -25,6 +27,8 @@ try{
  assert.equal(state.manifest.length,64);
  assert.equal(state.knowledge,false,'sealed canon ignorance must never leak');
  assert.equal(state.identical,true);
+ assert.equal(state.caleb2026,0,'cannot know Dollar Night during 2026');
+ assert.ok(state.caleb2027>0,'established knowledge released no earlier than 2027');
  await page.locator('#peopleYear').evaluate(el=>{el.value='2030';el.dispatchEvent(new Event('input',{bubbles:true}));});
  await page.locator('#personPriority').selectOption('order');
  await page.locator('#personApply').click();

@@ -60,7 +60,7 @@ function memoryFeed(){
  $('personLocal').textContent=frame.places[p.place].service;
  const anchor=agentProfile();
  $('personCanonKnows').textContent=anchor.kind==='character'?
-    source.knows:'Institution goal: '+source.goal;
+    (p.knowledge.includes(source.knows)?source.knows:'This established knowledge is not yet available to the character in '+S.year+'.'):'Institution goal: '+source.goal;
  const known=$('personKnowledge');known.replaceChildren();
  const accepted=p.knowledge.filter(k=>k!==source.knows);
  if(!accepted.length)known.textContent='No public reports received in this simulation.';

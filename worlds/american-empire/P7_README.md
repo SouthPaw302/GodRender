@@ -6,7 +6,7 @@
 
 The browser's **Living Inhabitants** tab now runs ten modeled actors: five original P1 viewpoint characters (Mara Venn, Caleb Reed, Neda Farzan, Lin Meiyu, Jonah Vale) and five existing political institutions (Keepers, Ascendants, Continental Clearing Union, Plural League, Unbound).
 
-The original Reality Matrix establishes only their names, roles, goals, known facts and sealed unknowns. **Agent locations except explicitly established story settings, starting resources, goals as numbers, trust scores, policy rules, decisions, communications and memories are hypotheses and do not create canon.** The model never automatically reveals the explicit `does_not_know` passages.
+The original Reality Matrix establishes only their names, roles, goals, known facts and sealed unknowns. Established knowledge is released at explicit modeled earliest possible years, so Caleb cannot remember Dollar Night during 2026. **Agent locations except explicitly established story settings, starting resources, goals as numbers, trust scores, policy rules, decisions, communications and memories are hypotheses and do not create canon.** The model never automatically reveals the explicit `does_not_know` passages.
 
 ## Causal mechanics
 

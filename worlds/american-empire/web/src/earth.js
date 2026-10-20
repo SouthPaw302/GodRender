@@ -207,5 +207,5 @@ function init({geo,land,live}){
  drawMap();render();
  note('Natural Earth basemap verified; '+geo.nodes.length+' source-mentioned cities; '+geo.routes.length+' explicitly hypothetical dependencies. No geography changes the canon.');
 }
-global.AE_Geo={init,render,setYear,select,getSnapshot:()=>localNow(),getBase:()=>baselineNow(),model:()=>state.model};
+global.AE_Geo={init,render,setYear,select,getSnapshot:()=>localNow(),getBase:()=>baselineNow(),model:()=>state.model,getRun:()=>state.run,getEvents:()=>state.run?.events||[]};
 })(window);

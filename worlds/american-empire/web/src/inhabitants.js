@@ -53,8 +53,9 @@ class InhabitantEngine{
  async run(interventions=[]){
   const spec=this.validate(interventions);
   let people=Object.fromEntries(this.agents.map(a=>[a.id,{
-   id:a.id,place:a.place,budget:a.initial_budget,standing:50,knowledge:a.kind==='character'?[a.canon_knows]:[],
-   memory:a.kind==='character'?[{year:2026,type:'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer}]:[],
+   id:a.id,place:a.place,budget:a.initial_budget,standing:50,
+   knowledge:a.kind==='character'&&a.known_from_year===2026?[a.canon_knows]:[],
+   memory:a.kind==='character'&&a.known_from_year===2026?[{year:2026,type:'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer}]:[],
    last_action:null
   }]));
   let trust=clone(this.linkSeed),shift=Object.fromEntries(this.geo.nodes.map(n=>[n.id,{service:0,independence:0}]));
@@ -69,6 +70,10 @@ class InhabitantEngine{
    const delivered=delayedMessages.filter(m=>m.year===year);
    for(const a of this.agents){
     const p=people[a.id],base=geo.places[a.place],carry=shift[a.place];
+    if(a.kind==='character'&&year===a.known_from_year&&!p.knowledge.includes(a.canon_knows)){
+     p.knowledge.push(a.canon_knows);
+     p.memory.push({year,type:'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer});
+    }
     const local={service:clamp(base.service+carry.service),independence:clamp(base.independence+carry.independence)};
     const messages=delivered.filter(m=>m.to===a.id&&trust[m.from+'>'+a.id]>=42).slice(0,4);
     for(const m of messages){

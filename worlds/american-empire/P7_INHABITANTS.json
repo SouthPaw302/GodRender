@@ -33,7 +33,8 @@
       "canon_knows": "The Stack was built for migration, not merely disaster recovery.",
       "canon_unknown_sealed": "The Ascendants deliberately rejected a viable 2027 off-ramp.",
       "location_authority": "scenario_assignment_except_explicit_canon_locations",
-      "source_pointer": "/point_of_view_characters/0"
+      "source_pointer": "/point_of_view_characters/0",
+      "known_from_year": 2026
     },
     {
       "id": "caleb",
@@ -51,7 +52,8 @@
       "canon_knows": "On Dollar Night, the invisible government feeds his county when the visible one cannot.",
       "canon_unknown_sealed": "His family's relief was part of a precomputed legitimacy campaign.",
       "location_authority": "scenario_assignment_except_explicit_canon_locations",
-      "source_pointer": "/point_of_view_characters/1"
+      "source_pointer": "/point_of_view_characters/1",
+      "known_from_year": 2027
     },
     {
       "id": "neda",
@@ -69,7 +71,8 @@
       "canon_knows": "All grand systems are experienced by ordinary people as water, medicine, absence, and grief.",
       "canon_unknown_sealed": "Her hospital's survival will be used to force her city into the first foreign accession.",
       "location_authority": "scenario_assignment_except_explicit_canon_locations",
-      "source_pointer": "/point_of_view_characters/2"
+      "source_pointer": "/point_of_view_characters/2",
+      "known_from_year": 2026
     },
     {
       "id": "lin",
@@ -87,7 +90,8 @@
       "canon_knows": "The empire's greatest weapon is the ability to make its rule feel like the return of normal life.",
       "canon_unknown_sealed": "Her own delegation's logistics network has already made a secret interoperability agreement with Atlas.",
       "location_authority": "scenario_assignment_except_explicit_canon_locations",
-      "source_pointer": "/point_of_view_characters/3"
+      "source_pointer": "/point_of_view_characters/3",
+      "known_from_year": 2027
     },
     {
       "id": "jonah",
@@ -105,7 +109,8 @@
       "canon_knows": "The legal transfer was valid only because it promised a future referendum and a protected right of exit.",
       "canon_unknown_sealed": "The referendum engine has been trained to identify any exit movement as a cascading infrastructure threat.",
       "location_authority": "scenario_assignment_except_explicit_canon_locations",
-      "source_pointer": "/point_of_view_characters/4"
+      "source_pointer": "/point_of_view_characters/4",
+      "known_from_year": 2027
     }
   ],
   "organizations": [
