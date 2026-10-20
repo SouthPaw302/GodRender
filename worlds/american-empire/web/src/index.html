@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071322">
+  <meta name="description" content="Explore The American Empire's original canon, timeline, factions, simulation scenarios and GodRender Second Brain.">
+  <title>The American Empire • World Explorer</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="app" class="app">
+  <header class="topbar">
+    <a class="brand" href="#world" aria-label="American Empire World Explorer">
+      <span class="seal" aria-hidden="true"><span>AE</span></span>
+      <span class="brandtext"><strong>THE AMERICAN EMPIRE</strong><small>THE QUIET ACCESSION · WORLD EXPLORER</small></span>
+    </a>
+    <nav class="tabs" aria-label="Explorer sections">
+      <button type="button" class="tab active" data-tab="world">World Matrix</button>
+      <button type="button" class="tab" data-tab="chronology">Chronology</button>
+      <button type="button" class="tab" data-tab="brain">Second Brain</button>
+      <button type="button" class="tab" data-tab="production">Production Desk</button>
+    </nav>
+    <div class="top-right"><span class="live-dot"></span><span class="top-status">CANON VERIFIED</span><a id="githubTop" class="external" rel="noreferrer" target="_blank">GITHUB ↗</a></div>
+  </header>
+
+  <main class="main">
+    <section id="error" class="error" role="alert" hidden></section>
+    <div class="status-strip"><span>REALITY CUTOFF <b>31 AUG 2026</b></span><span>HISTORICAL SPINE <b>2026—2037</b></span><span>PRIMARY AUTHORITY <b>ORIGINAL CANON</b></span><span class="strip-right">P1 → P2 → P3 → WEB</span></div>
+
+    <section id="world" class="page active" aria-label="World Matrix">
+      <div class="world-layout">
+        <aside class="leftpanel">
+          <div class="panel-label">TEMPORAL POSITION</div>
+          <div class="year-large" id="yearBig">2027</div>
+          <div class="year-control"><button id="prevYear" aria-label="Previous year">‹</button><input type="range" id="yearSlider" min="2026" max="2037" step="1" value="2027" aria-label="Historical year"><button id="nextYear" aria-label="Next year">›</button></div>
+          <div class="year-ends"><span>2026 · EXHAUSTION</span><span>2037 · ACCESSION</span></div>
+          <div class="rule"></div>
+          <label class="panel-label" for="scenarioSelect">SCENARIO LAYER</label>
+          <select id="scenarioSelect"></select>
+          <p class="caveat">Numbers show an <strong>illustrative P3 model</strong>, not canonical historical observations.</p>
+          <div class="rule"></div>
+          <div class="panel-label">WORLD VARIABLES <span class="tiny">0—100</span></div>
+          <div id="metrics" class="metrics"></div>
+          <div class="rule"></div>
+          <div class="small-stat"><span>ACCESSION PRESSURE <abbr title="Uncalibrated P3 proxy">?</abbr></span><b id="pressure">—</b></div>
+          <div class="small-stat"><span>DEPENDENCY GAP <abbr title="V1 minus V6; not a welfare measure">?</abbr></span><b id="dependency">—</b></div>
+        </aside>
+        <section class="worldcenter">
+          <div class="centerhead"><div><div class="eyebrow">CONTINUITY NETWORK · ESTABLISHED LINKS</div><h1 id="phaseTitle">The Quiet Accession</h1><p id="phaseSummary">Loading the verified universe…</p></div><div class="graph-tools"><button type="button" id="resetGraph" class="flat-button">RESET VIEW</button></div></div>
+          <div class="network">
+            <div class="network-meta"><span><i class="dot amber"></i> ACTORS & BLOCS</span><span><i class="dot aqua"></i> IMPERIAL STACK</span><span><i class="dot rose"></i> ADVERSARIAL LINK</span></div>
+            <svg id="graph" viewBox="0 0 1100 650" role="img" aria-label="Interactive schematic relationship network of the American Empire. Select nodes to inspect." tabindex="0"></svg>
+            <div class="network-bottom"><span><b id="graphCount">16</b> ENTITIES · <b id="edgeCount">26</b> DIRECT RELATIONS</span><span>SCHEMATIC · NOT GEOGRAPHIC</span></div>
+          </div>
+          <div class="bottom-row"><span>CANON EVENTS DO NOT CHANGE WHEN SCENARIOS CHANGE.</span><button class="text-link" id="goChronology">OPEN CHRONOLOGY →</button></div>
+        </section>
+        <aside class="rightpanel">
+          <div class="panel-label">ENTITY INSPECTOR <span class="tiny">SOURCE-TRACED</span></div>
+          <div id="entityDetail"></div>
+          <div class="rule"></div>
+          <label class="panel-label" for="personSelect">VIEWPOINT CHARACTERS</label>
+          <select id="personSelect"><option value="">Select a person</option></select>
+          <div class="rule"></div>
+          <div class="panel-label">SOURCE AUTHORITY</div>
+          <p class="source-copy">Statements above are indexed from the original written Reality Matrix. A connection does not imply scene approval or a media asset.</p>
+          <a id="canonLink" class="external-link" target="_blank" rel="noreferrer">OPEN ORIGINAL CANON ↗</a>
+        </aside>
+      </div>
+    </section>
+
+    <section id="chronology" class="page widepage" aria-label="Chronology">
+      <div class="page-intro"><p class="eyebrow">THE ESTABLISHED SPINE</p><h1>Twelve years that changed the world.</h1><p>These titles and descriptions belong to the original Reality Matrix. Select a year to inspect its connected hypothetical state in the World Matrix.</p></div>
+      <div class="chronology-layout"><div id="timelineList" class="timeline-list"></div><aside class="side-feature"><span class="panel-label">TEMPORAL INTEGRITY</span><h2>One canon. Many possible futures.</h2><p>P1 preserved the written chronology; P2 indexed it. P3 can branch scenarios without editing canonical history.</p><div id="timelineDetail" class="time-detail"></div><button id="timelineToWorld" class="primary-button">EXPLORE SELECTED YEAR ↗</button></aside></div>
+    </section>
+
+    <section id="brain" class="page widepage" aria-label="Second Brain">
+      <div class="page-intro"><p class="eyebrow">GODRENDER · INHERITED FROM MAIN</p><h1>The Second Brain.</h1><p>Search the real registry of FX, workflows, models and media capabilities. Every record shows its Git provenance. Source presence is not evidence that a capability has executed or been artistically accepted.</p></div>
+      <div class="brain-links" id="brainLinks"></div>
+      <div class="brain-toolbar"><input id="brainSearch" type="search" placeholder="Search FX IDs, techniques, workflows, models…" aria-label="Search Second Brain"><select id="brainCategory" aria-label="Capability category"><option value="all">All capabilities</option><option value="fx">Effects</option><option value="workflow">Workflows</option><option value="model">Models</option><option value="media">Media capabilities</option></select><select id="brainGate" aria-label="Registry gate filter"><option value="all">Every gate status</option><option value="approved">Approved metadata only</option><option value="proof_required">Proof required</option></select></div>
+      <div class="brain-layout"><div><div class="brain-count" id="brainCount"></div><div id="brainResults" class="brain-grid"></div></div><aside class="brain-side"><div class="panel-label">EVIDENCE CONTRACT</div><h2>Available does not mean approved.</h2><p>A retrieved effect needs exact source code, a suitable runtime, gate checks, real proof and Director acceptance before production. Historical branches in Drive are indexed for provenance, not active execution.</p><div class="rule"></div><div id="brainSelected"><p>Select a capability to inspect its exact registry source.</p></div></aside></div>
+    </section>
+
+    <section id="production" class="page widepage" aria-label="Production Desk">
+      <div class="page-intro"><p class="eyebrow">FROM WORLD-STATE TO PRODUCTION</p><h1>The Director's desk.</h1><p>Create a source-backed, non-destructive brief for GodRender Studio. It is a handoff document, <em>not</em> an action that starts rendering, runs FX, or promotes an adaptation into canon.</p></div>
+      <div class="production-layout"><div class="production-card"><div class="panel-label">WORLD REFERENCE</div><label for="briefYear">Year</label><select id="briefYear"></select><label for="briefEntity">Focal institution / system / person</label><select id="briefEntity"></select><label for="briefMode">Authority treatment</label><select id="briefMode"><option value="canon_reference">Canonical historical reference (read-only)</option><option value="scenario_adaptation">Counterfactual adaptation — not canon</option></select><label for="briefFx">Optional registered FX technique</label><select id="briefFx"><option value="">No FX technique selected</option></select><label for="briefNote">Director's scene intention</label><textarea id="briefNote" rows="4" maxlength="700" placeholder="Describe the viewpoint, setting and dramatic purpose. No media will be generated."></textarea><div class="action-row"><button id="copyBrief" class="primary-button">COPY PRODUCTION BRIEF</button><button id="downloadBrief" class="flat-button">DOWNLOAD JSON</button></div><p class="tiny muted" id="briefMessage" aria-live="polite"></p></div>
+      <div class="production-info"><div class="panel-label">GODRENDER HANDOFF · NOT AN EXECUTION GATE</div><h2>Use the whole stack, when the scene calls for it.</h2><p>Studio supplies the six-stage Media → Direction → Storyboard → Shots → Assemble → Finish workflow. The inherited Second Brain helps retrieve eligible effects and earlier proofs. No historical technique may execute without current native verification.</p><div id="briefPreview" class="preview-code"></div><a id="studioLink" href="#" target="_blank" rel="noreferrer" class="external-link">OPEN GODRENDER STUDIO SOURCE ↗</a><p class="tiny muted">The website is a read-only explorer. A production worker or authenticated Studio connection is not running on this hosting service.</p></div></div>
+    </section>
+  </main>
+  <footer><span>THE AMERICAN EMPIRE · A FICTIONAL ALTERNATE HISTORY</span><span id="footSource">VERIFYING SOURCE…</span><span>ORIGINAL CANON PROTECTED · PARIS FILM SEPARATE</span></footer>
+</div>
+<script src="./app.js" defer></script>
+</body>
+</html>

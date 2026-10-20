@@ -1,0 +1,62 @@
+name: American Empire Web + Second Brain
+on:
+  push:
+    branches: [world/american-empire]
+    paths:
+      - 'worlds/american-empire/**'
+      - 'general/reusable/fx_v2/registry.json'
+      - 'general/reusable/STANDARD_WORKFLOW_REGISTRY.json'
+      - 'general/reusable/MEDIA_CAPABILITY_MATRIX.json'
+      - 'general/reusable/intelligence/MODEL_REGISTRY.json'
+      - 'config/brain_source_index.json'
+      - 'docs/BRAIN_INTEGRATION.md'
+      - '.github/workflows/american-empire-web.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-explorer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - name: Check out exact world branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify canon and source-aligned world engines
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/verify_canon.py
+          python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
+      - name: Assemble reproducible static browser app from verified canon and native Brain registries
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/build_web.py --repro
+          node --check worlds/american-empire/web/src/app.js
+      - name: Install Playwright Chromium for actual browser interaction
+        run: |
+          npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
+          npx --prefix worlds/american-empire/web/tests playwright install --with-deps chromium
+      - name: Run UI interaction smoke against served browser build
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd worlds/american-empire/web
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory dist >/tmp/american-empire-web-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          for _ in $(seq 1 30); do if curl -fsS http://127.0.0.1:8765/data/world.json >/dev/null; then break; fi; sleep 1; done
+          AE_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/explorer-preview.png" node tests/browser_smoke.mjs
+      - name: Upload verified browser deliverable
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: american-empire-browser-explorer
+          path: |
+            worlds/american-empire/web/dist/index.html
+            worlds/american-empire/web/dist/app.js
+            worlds/american-empire/web/dist/styles.css
+            worlds/american-empire/web/dist/data/*.json
+            worlds/american-empire/web/dist/explorer-preview.png
+          if-no-files-found: error
+          retention-days: 30
