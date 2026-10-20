@@ -21,6 +21,7 @@
       <button type="button" class="tab" data-tab="simulation">Simulation Lab</button>
       <button type="button" class="tab" data-tab="earth">Earth Network</button>
       <button type="button" class="tab" data-tab="inhabitants">Living Inhabitants</button>
+      <button type="button" class="tab" data-tab="cinema">Observer Cinema</button>
       <button type="button" class="tab" data-tab="brain">Second Brain</button>
       <button type="button" class="tab" data-tab="production">Production Desk</button>
     </nav>
@@ -247,6 +248,42 @@
       </div>
     </section>
 
+
+    <section id="cinema" class="page widepage" aria-label="Observer Cinema media library">
+      <div class="page-intro"><p class="eyebrow">AMERICAN EMPIRE · OBSERVER CINEMA · SAME WORLD</p>
+      <h1>Watch their world unfold.</h1>
+      <p>Scenes from <em>Paris Act I</em> follow Claire Delacroix and Daniel living inside the same American Empire reality as the Quiet Accession. This is <strong>our cinematic view into that world</strong>, not a separate universe and not a fictional TV program broadcast to the characters.</p></div>
+      <div class="sim-status" id="cinemaStatus" aria-live="polite">Reading the Drive-backed media inventory…</div>
+      <div class="cinema-layout">
+       <aside class="cinema-catalog">
+        <div class="panel-label">CURATED MOVIE &amp; SOURCE MEDIA</div>
+        <div id="cinemaItems" class="cinema-list"></div>
+        <div class="rule"></div>
+        <p class="caveat">Only the four copied movie titles are held in the curated film collection. Other indexed score and storyboard assets remain in their original AE source folders. Rejected media is not featured.</p>
+       </aside>
+       <div class="cinema-stage">
+        <div class="panel-label">OBSERVER SCREEN · SELECTED PRODUCTION ASSET</div>
+        <div id="cinemaFrame" class="cinema-frame" aria-live="polite"></div>
+        <div class="cinema-actions">
+          <button id="cinemaPlay" class="primary-button">Preview this media</button>
+          <a id="cinemaOpen" class="flat-button" target="_blank" rel="noreferrer" href="#">Open original in Drive ↗</a>
+        </div>
+        <h2 id="cinemaTitle">Paris Act I</h2>
+        <div class="cinema-meta" id="cinemaType"></div>
+        <p id="cinemaSource" class="tiny muted"></p>
+        <p id="cinemaRights" class="caveat"></p>
+        <p id="cinemaNotice" class="tiny muted" role="status"></p>
+        <div class="rule"></div>
+        <div class="panel-label">INSIDE THE WORLD · FILM CHARACTER DOSSIER</div>
+        <div class="cinema-character-list">
+          <div><strong>Claire Delacroix</strong><span>Paris · Act I · Scene 01–03</span><p>Her story advances from a warning and domestic decision into a visibly changing public order. Her accepted film appearance and timeline require continuity.</p></div>
+          <div><strong>Daniel</strong><span>Paris/American source · Act I · Scene 01–03</span><p>His warning to Claire, “Claire. You need to move,” is a continuity anchor. His full simulation agent state has not yet been instantiated.</p></div>
+        </div>
+        <p class="caveat">These characters belong to the shared American Empire world. They are indexed for P7/P8 population integration; they are not yet among P7’s ten simulated agents. Story authority and media approval remain separately tracked.</p>
+       </div>
+      </div>
+    </section>
+
     <section id="chronology" class="page widepage" aria-label="Chronology">
       <div class="page-intro"><p class="eyebrow">THE ESTABLISHED SPINE</p><h1>Twelve years that changed the world.</h1><p>These titles and descriptions belong to the original Reality Matrix. Select a year to inspect its connected hypothetical state in the World Matrix.</p></div>
       <div class="chronology-layout"><div id="timelineList" class="timeline-list"></div><aside class="side-feature"><span class="panel-label">TEMPORAL INTEGRITY</span><h2>One canon. Many possible futures.</h2><p>P1 preserved the written chronology; P2 indexed it. P3 can branch scenarios without editing canonical history.</p><div id="timelineDetail" class="time-detail"></div><button id="timelineToWorld" class="primary-button">EXPLORE SELECTED YEAR ↗</button></aside></div>
@@ -265,7 +302,7 @@
       <div class="production-info"><div class="panel-label">GODRENDER HANDOFF · NOT AN EXECUTION GATE</div><h2>Use the whole stack, when the scene calls for it.</h2><p>Studio supplies the six-stage Media → Direction → Storyboard → Shots → Assemble → Finish workflow. The inherited Second Brain helps retrieve eligible effects and earlier proofs. No historical technique may execute without current native verification.</p><div id="briefPreview" class="preview-code"></div><a id="studioLink" href="#" target="_blank" rel="noreferrer" class="external-link">OPEN GODRENDER STUDIO SOURCE ↗</a><p class="tiny muted">The website is a read-only explorer. A production worker or authenticated Studio connection is not running on this hosting service.</p></div></div>
     </section>
   </main>
-  <footer><span>THE AMERICAN EMPIRE · A FICTIONAL ALTERNATE HISTORY</span><span id="footSource">VERIFYING SOURCE…</span><span>ORIGINAL CANON PROTECTED · PARIS FILM SEPARATE</span></footer>
+  <footer><span>THE AMERICAN EMPIRE · A FICTIONAL ALTERNATE HISTORY</span><span id="footSource">VERIFYING SOURCE…</span><span>ORIGINAL CANON PROTECTED · PARIS FILM SAME WORLD</span></footer>
 </div>
 <script src="./simulator.js" defer></script>
 <script src="./app.js" defer></script>
@@ -274,5 +311,6 @@
 <script src="./earth.js" defer></script>
 <script src="./inhabitants.js" defer></script>
 <script src="./people.js" defer></script>
+<script src="./cinema.js" defer></script>
 </body>
 </html>

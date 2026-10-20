@@ -39,6 +39,7 @@ jobs:
           node --check worlds/american-empire/web/src/earth.js
           node --check worlds/american-empire/web/src/inhabitants.js
           node --check worlds/american-empire/web/src/people.js
+          node --check worlds/american-empire/web/src/cinema.js
       - name: Install Playwright Chromium for actual browser interaction
         run: |
           npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
@@ -52,9 +53,7 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" || true' EXIT
           for _ in $(seq 1 30); do if curl -fsS http://127.0.0.1:8765/data/world.json >/dev/null; then break; fi; sleep 1; done
-          AE_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/explorer-preview.png
-            worlds/american-empire/web/dist/earth-preview.png
-            worlds/american-empire/web/dist/inhabitants-preview.png" node tests/browser_smoke.mjs
+          AE_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/explorer-preview.png" node tests/browser_smoke.mjs
           node tests/p5_live.mjs
           AE_P6_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/earth-preview.png" node tests/p6_earth.mjs
           AE_P7_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/inhabitants-preview.png" node tests/p7_people.mjs
@@ -77,8 +76,11 @@ jobs:
             worlds/american-empire/web/dist/earth.js
             worlds/american-empire/web/dist/inhabitants.js
             worlds/american-empire/web/dist/people.js
+            worlds/american-empire/web/dist/cinema.js
             worlds/american-empire/web/dist/styles.css
             worlds/american-empire/web/dist/data/*.json
             worlds/american-empire/web/dist/explorer-preview.png
+            worlds/american-empire/web/dist/earth-preview.png
+            worlds/american-empire/web/dist/inhabitants-preview.png
           if-no-files-found: error
           retention-days: 30

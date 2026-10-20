@@ -143,6 +143,14 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     inhabitants["source_manifest_sha256"] = hashlib.sha256(json.dumps(inhabitants,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
     people_source = {"point_of_view_characters":p1matrix["point_of_view_characters"],"actors":p1matrix["actors"],
                      "authority":"locked_original_p1_quoted_reference_only"}
+    media_inventory = _load("worlds/american-empire/MEDIA_INVENTORY.json")
+    if media_inventory.get("schema") != "american-empire.media-inventory.v1" or len(media_inventory["media"]) < 10:
+        raise ValueError("Observer Cinema source catalog not verified")
+    if media_inventory.get("fictional_world_membership") != "shared_american_empire_timeline":
+        raise ValueError("World membership was changed; deny silent source drift")
+    if any(not x.get("drive_file_id") or x.get("visibility") != "private_drive_requires_permission"
+           for x in media_inventory["media"]):
+        raise ValueError("Unverified media visibility status")
     model = _load("worlds/american-empire/P3_MODEL.json")
     references = [_load("worlds/american-empire/scenarios/examples/"+name+".json")
                   for name in ("baseline","independent-corridor","high-integration")]
@@ -154,11 +162,11 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
+            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "cinema.js", "media_inventory.json", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js","inhabitants.js","people.js"):
+    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js","inhabitants.js","people.js","cinema.js"):
         shutil.copy2(SOURCE / name, out / name)
     _write(out / "data" / "world.json",bundle)
     _write(out / "data" / "brain.json",brain)
@@ -168,6 +176,7 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     _write(out / "data" / "land.geojson",land)
     _write(out / "data" / "inhabitants.json",inhabitants)
     _write(out / "data" / "people_source.json",people_source)
+    _write(out / "data" / "media_inventory.json",media_inventory)
     # One-file offline artifact: embed signed/source-pinned P3 rules and inputs.
     # Less-than escaping prevents an embedded JSON value from closing its script.
     html = (SOURCE / "index.html").read_text(encoding="utf-8")
@@ -180,12 +189,14 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         ("earth.js", (SOURCE / "earth.js").read_text(encoding="utf-8")),
         ("inhabitants.js", (SOURCE / "inhabitants.js").read_text(encoding="utf-8")),
         ("people.js", (SOURCE / "people.js").read_text(encoding="utf-8")),
+        ("cinema.js", (SOURCE / "cinema.js").read_text(encoding="utf-8")),
     )
     html = html.replace('<link rel="stylesheet" href="./styles.css">', '<style>'+css+'</style>')
     inline_data = (("embeddedWorld",bundle),("embeddedBrain",brain),
                    ("embeddedModel",model),("embeddedReference",references),
                    ("embeddedGeo",geo),("embeddedLand",land),
-                   ("embeddedInhabitants",inhabitants),("embeddedPeopleSource",people_source))
+                   ("embeddedInhabitants",inhabitants),("embeddedPeopleSource",people_source),
+                   ("embeddedMediaInventory",media_inventory))
     payload = "".join('<script type="application/json" id="'+label+'">'
                       +json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(",",":")).replace("<","\\u003c")
                       +"</script>\n" for label,data in inline_data)

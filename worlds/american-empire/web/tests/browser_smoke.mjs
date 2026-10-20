@@ -42,6 +42,15 @@ try{
  await page.locator('#downloadBrief').click();
  const download=await downloadPromise;
  assert.ok(download.suggestedFilename().endsWith('.json'));
+ await page.getByRole('button',{name:'Observer Cinema'}).click();
+ await page.waitForFunction(()=>document.querySelector('#cinemaStatus')?.textContent?.includes('Catalog ready'),null,{timeout:15000});
+ assert.equal(await page.locator('.cinema-item').count(),10);
+ assert.match(await page.locator('#cinemaTitle').textContent(),/Scenes 01–02/);
+ assert.match(await page.locator('#cinemaRights').textContent(),/same|cinematic depictions/);
+ assert.match(await page.locator('#cinemaOpen').getAttribute('href'),/^https:\/\/drive\.google\.com\/file\/d\//);
+ assert.equal(await page.locator('#cinemaFrame iframe').count(),0,'no involuntary private-media playback');
+ await page.locator('.cinema-item').nth(2).click();
+ assert.match(await page.locator('#cinemaTitle').textContent(),/Scene 02/);
  if(errors.length)throw new Error('Browser runtime errors: '+errors.join('; '));
  const out=process.env.AE_SCREENSHOT;
  if(out){await page.locator('[data-tab="world"]').click();await page.screenshot({path:out,fullPage:true});}

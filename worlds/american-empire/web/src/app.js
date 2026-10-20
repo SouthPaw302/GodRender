@@ -10,10 +10,10 @@ const nodeLookup = ()=>[...state.world.nodes,...state.world.people].find(n=>n.id
 const getSnapshot = ()=>state.world.scenarios[state.scenario].snapshots[state.year-2026];
 const shortText=(value,n=19)=>String(value||'').length>n?String(value).slice(0,n-1)+'…':String(value||'');
 function setTab(name){
-  if(!['world','chronology','brain','production','simulation','earth','inhabitants'].includes(name))name='world';
+  if(!['world','chronology','brain','production','simulation','earth','inhabitants','cinema'].includes(name))name='world';
   state.tab=name;document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===name));
   document.querySelectorAll('[data-tab]').forEach(el=>{el.classList.toggle('active',el.dataset.tab===name);el.setAttribute('aria-selected',String(el.dataset.tab===name));});
-  if(name==='production') renderBrief(); if(name==='brain') renderBrainList(); if(name==='simulation') window.AE_Live?.render(); if(name==='earth') window.AE_Geo?.render(); if(name==='inhabitants') window.AE_People?.refresh();
+  if(name==='production') renderBrief(); if(name==='brain') renderBrainList(); if(name==='simulation') window.AE_Live?.render(); if(name==='earth') window.AE_Geo?.render(); if(name==='inhabitants') window.AE_People?.refresh(); if(name==='cinema') window.AE_Cinema?.render();
   if(location.protocol!=='file:')history.replaceState(null,'','#'+name);
 }
 function updateYear(y){state.year=Math.max(2026,Math.min(2037,Number(y)));$('yearSlider').value=state.year;$('yearBig').textContent=state.year;
@@ -198,10 +198,10 @@ function bindEvents(){
  $('downloadBrief').addEventListener('click',()=>{const b=makeBrief();downloadJSON('american-empire-'+b.year+'-director-brief.json',b);$('briefMessage').textContent='Draft brief downloaded; original canon untouched.';});
  window.addEventListener('hashchange',()=>setTab(location.hash.slice(1)));
 }
-async function loadJSON(url){const tag={'world.json':'embeddedWorld','brain.json':'embeddedBrain','model.json':'embeddedModel','reference_scenarios.json':'embeddedReference','geo.json':'embeddedGeo','land.geojson':'embeddedLand','inhabitants.json':'embeddedInhabitants','people_source.json':'embeddedPeopleSource'}[url.split('/').pop()];const embedded=$(tag);if(embedded)return JSON.parse(embedded.textContent);const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error(url+' returned HTTP '+res.status);return res.json();}
+async function loadJSON(url){const tag={'world.json':'embeddedWorld','brain.json':'embeddedBrain','model.json':'embeddedModel','reference_scenarios.json':'embeddedReference','geo.json':'embeddedGeo','land.geojson':'embeddedLand','inhabitants.json':'embeddedInhabitants','people_source.json':'embeddedPeopleSource','media_inventory.json':'embeddedMediaInventory'}[url.split('/').pop()];const embedded=$(tag);if(embedded)return JSON.parse(embedded.textContent);const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error(url+' returned HTTP '+res.status);return res.json();}
 async function init(){
  try{
- const [world,brain,model,references,geo,land,inhabitants,peopleSource]=await Promise.all([loadJSON('./data/world.json'),loadJSON('./data/brain.json'),loadJSON('./data/model.json'),loadJSON('./data/reference_scenarios.json'),loadJSON('./data/geo.json'),loadJSON('./data/land.geojson'),loadJSON('./data/inhabitants.json'),loadJSON('./data/people_source.json')]);
+ const [world,brain,model,references,geo,land,inhabitants,peopleSource,mediaInventory]=await Promise.all([loadJSON('./data/world.json'),loadJSON('./data/brain.json'),loadJSON('./data/model.json'),loadJSON('./data/reference_scenarios.json'),loadJSON('./data/geo.json'),loadJSON('./data/land.geojson'),loadJSON('./data/inhabitants.json'),loadJSON('./data/people_source.json'),loadJSON('./data/media_inventory.json')]);
  if(world.schema!=='american-empire.godot-explorer-bundle.v1'||brain.schema!=='american-empire.browser-brain.v1'
  ||world.bundle_sha256!==brain.world_bundle_sha256||world.source.world_graph_sha256!==brain.world_source.world_graph_sha256)
  throw Error('World and Second Brain provenance mismatch. Refusing unverified bundle.');
@@ -218,6 +218,8 @@ async function init(){
  window.AE_Geo.init({geo,land,live:window.AE_Live});
  if(!window.AE_People||!window.AE_Inhabitants)throw Error('P7 inhabitants runtime missing');
  await window.AE_People.init({manifest:inhabitants,geo,canon:peopleSource});
+ if(!window.AE_Cinema)throw Error('Observer Cinema runtime missing');
+ window.AE_Cinema.init(mediaInventory);
  setTab(location.hash.slice(1)||'world');$('error').hidden=true;
  }catch(e){$('error').hidden=false;$('error').textContent='World Explorer unavailable: '+e.message+'. Check the verified browser build.';console.error(e);}
 }
