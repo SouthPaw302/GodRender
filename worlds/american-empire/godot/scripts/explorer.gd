@@ -167,8 +167,12 @@ func _build_view() -> void:
     time_slider.custom_minimum_size.x = 240
     time_slider.value_changed.connect(_on_time_slide)
     toolbar.add_child(time_slider)
-    toolbar.add_child(_label("SCENARIO", 13, MUTED))
+    var scenario_caption = _label("SCENARIO", 13, MUTED)
+    scenario_caption.autowrap_mode = TextServer.AUTOWRAP_OFF
+    scenario_caption.custom_minimum_size.x = 90
+    toolbar.add_child(scenario_caption)
     scenario_select = OptionButton.new()
+    scenario_select.custom_minimum_size.y = 42
     scenario_select.custom_minimum_size.x = 220
     for item in bundle["scenarios"]:
         scenario_select.add_item(str(item["name"]))
