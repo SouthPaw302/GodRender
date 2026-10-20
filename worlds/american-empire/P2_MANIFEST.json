@@ -1,7 +1,7 @@
 {
   "schema": "american-empire.phase-manifest.v1",
   "phase": "P2",
-  "status": "IMPLEMENTED_PENDING_CI",
+  "status": "IMPLEMENTED",
   "repository": "SouthPaw302/GodRender",
   "branch": "world/american-empire",
   "canon_lock": "CANON_LOCK.json",
@@ -28,5 +28,5 @@
     "faction_membership": "derived_from_typed_actor",
     "proposal_status": "candidate_unapproved"
   },
-  "status_note": "CI result, not this static manifest, is execution authority"
+  "status_note": "Current commit's GitHub Actions conclusion is the authoritative verification result; this file is descriptive only."
 }
