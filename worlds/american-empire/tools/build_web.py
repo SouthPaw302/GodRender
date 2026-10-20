@@ -127,7 +127,7 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "world.json", "brain.json"}:
+            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "world.json", "brain.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
@@ -135,6 +135,19 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         shutil.copy2(SOURCE / name, out / name)
     _write(out / "data" / "world.json",bundle)
     _write(out / "data" / "brain.json",brain)
+    # Produce a self-contained file:// browser edition without a web server.
+    # Escape every '<' in embedded JSON so it cannot terminate a script tag.
+    html = (SOURCE / "index.html").read_text(encoding="utf-8")
+    css = (SOURCE / "styles.css").read_text(encoding="utf-8")
+    js = (SOURCE / "app.js").read_text(encoding="utf-8")
+    world_inline = json.dumps(bundle,sort_keys=True,ensure_ascii=False,separators=(",",":")).replace("<","\\\\u003c")
+    brain_inline = json.dumps(brain,sort_keys=True,ensure_ascii=False,separators=(",",":")).replace("<","\\\\u003c")
+    html = html.replace('<link rel="stylesheet" href="./styles.css">', '<style>'+css+'</style>')
+    html = html.replace('<script src="./app.js" defer></script>',
+        '<script id="embeddedWorld" type="application/json">'+world_inline+'</script>'
+        +'<script id="embeddedBrain" type="application/json">'+brain_inline+'</script>'
+        +'<script>'+js+'</script>')
+    (out / "standalone.html").write_text(html,encoding="utf-8")
     return {"schema":"american-empire.web-build.v1","world_bundle_sha256":bundle["bundle_sha256"],
             "brain_fx":brain["counts"]["fx"],"brain_workflows":brain["counts"]["workflows"],
             "brain_models":brain["counts"]["models"],"source_hashes":{x["path"]:x["git_blob_sha1"]

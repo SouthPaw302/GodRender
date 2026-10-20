@@ -60,6 +60,11 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertTrue((output/"index.html").is_file())
             self.assertTrue((output/"app.js").is_file())
             self.assertTrue((output/"styles.css").is_file())
+            standalone = (output/"standalone.html").read_text(encoding="utf-8")
+            self.assertIn('id="embeddedWorld"', standalone)
+            self.assertIn('id="embeddedBrain"', standalone)
+            self.assertIn('<style>', standalone)
+            self.assertIn('counterfactual_adaptation_not_canon', standalone)
             first={str(p.relative_to(output)):p.read_bytes() for p in output.rglob("*") if p.is_file()}
             mod.build(output)
             second={str(p.relative_to(output)):p.read_bytes() for p in output.rglob("*") if p.is_file()}

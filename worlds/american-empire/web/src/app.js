@@ -14,7 +14,7 @@ function setTab(name){
   state.tab=name;document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===name));
   document.querySelectorAll('[data-tab]').forEach(el=>{el.classList.toggle('active',el.dataset.tab===name);el.setAttribute('aria-selected',String(el.dataset.tab===name));});
   if(name==='production') renderBrief(); if(name==='brain') renderBrainList();
-  history.replaceState(null,'','#'+name);
+  if(location.protocol!=='file:')history.replaceState(null,'','#'+name);
 }
 function updateYear(y){state.year=Math.max(2026,Math.min(2037,Number(y)));$('yearSlider').value=state.year;$('yearBig').textContent=state.year;
   $('briefYear').value=state.year;renderYear();renderTimeline();renderBrief();}
@@ -198,7 +198,7 @@ function bindEvents(){
  $('downloadBrief').addEventListener('click',()=>{const b=makeBrief();downloadJSON('american-empire-'+b.year+'-director-brief.json',b);$('briefMessage').textContent='Draft brief downloaded; original canon untouched.';});
  window.addEventListener('hashchange',()=>setTab(location.hash.slice(1)));
 }
-async function loadJSON(url){const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error(url+' returned HTTP '+res.status);return res.json();}
+async function loadJSON(url){const embedded=$(url.endsWith('/world.json')?'embeddedWorld':'embeddedBrain');if(embedded)return JSON.parse(embedded.textContent);const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error(url+' returned HTTP '+res.status);return res.json();}
 async function init(){
  try{
  const [world,brain]=await Promise.all([loadJSON('./data/world.json'),loadJSON('./data/brain.json')]);

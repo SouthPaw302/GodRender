@@ -39,6 +39,19 @@ Open http://127.0.0.1:8765. On Windows use \`py\` instead of \`python3\` where n
 
 Vercel-compatible project settings (for the GodRender Git repository branch \`world/american-empire\`): **Framework Other; root repository root; build command** \`python3 worlds/american-empire/tools/build_web.py --repro\`; **output directory** \`worlds/american-empire/web/dist\`. Deploy as a preview first, not by changing GodRender \`main\`. Live URL exists only after a real completed provider deployment.
 
+
+## Open the self-contained version without installing anything
+
+The build also produces \`web/dist/standalone.html\`. It embeds the exact verified world graph,
+three hypothetical scenarios, source-indexed GodRender Second Brain capability metadata,
+CSS and the application JavaScript. Open it directly in Opera, Chrome or Firefox as a
+local \`file://\` document: **no Python web server, Vercel deployment, Godot, Node or network required**.
+Optional GitHub and Drive links still require internet and the user's existing permissions.
+
+The standalone edition is also tested in real Chromium using \`file://\`, independently
+of the HTTP-served version. Regenerate it after updates to P1/P2/P3, or GodRender's
+registries; a downloaded standalone copy is a dated offline snapshot, not live Drive access.
+
 ## First browser capabilities
 
 - Interactive source-provenanced faction/Stack relationship canvas, source inspector and viewpoint characters.
