@@ -141,6 +141,11 @@ func _build_view() -> void:
     heading.add_child(_label("THE AMERICAN EMPIRE", 30, GOLD))
     heading.add_child(_label("THE QUIET ACCESSION  /  P4 WORLD EXPLORER", 15, MUTED))
     var authority = _label("ORIGINAL CANON   |   P3 NUMBERS ARE HYPOTHETICAL", 14, TEAL)
+    # Fixed horizontal space prevents wrapping into a tall vertical column,
+    # which would push the interactive graph and toolbar outside the viewport.
+    authority.autowrap_mode = TextServer.AUTOWRAP_OFF
+    authority.custom_minimum_size = Vector2(425, 34)
+    authority.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
     header.add_child(authority)
 
     var controls = _panel(Color("#1c3145"))
