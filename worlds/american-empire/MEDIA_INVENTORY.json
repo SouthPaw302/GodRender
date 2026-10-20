@@ -1,0 +1,188 @@
+{
+  "schema": "american-empire.media-inventory.v1",
+  "snapshot_date": "2026-10-20",
+  "authority_layer": "production_media_provenance",
+  "project": "American Empire",
+  "fictional_world_membership": "shared_american_empire_timeline",
+  "canon_rule": "The film depicts lives inside the same fictional world. Written canon controls macro-history. Unapproved film detail is not silently promoted to literary canon.",
+  "viewer_rule": "Film and media are observer-facing presentation assets. They are not in-world broadcasts or documentary recordings unless separately authored as such.",
+  "project_folder_id": "1hnRyqWuHGxBdRI5zeegNs2wDZ5N8SHTz",
+  "curated_films_folder_id": "1vCnDalBcMB24fBWIEumTvhmhBFOkFvMG",
+  "legacy_archive_folder_id": "1z_eppUB98uuncVXQ6mMboLx2vJPwNyPO",
+  "subbrain_folder_id": "1p3JGvFKfkX7hYOOjJGdUKaRt7K0LAHsI",
+  "brain_sheet_id": "1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c",
+  "brain_tab": "AE PROJECT SUBBRAIN",
+  "characters": [
+    {
+      "id": "claire-delacroix",
+      "name": "Claire Delacroix",
+      "media_scope": "Paris Act I Scenes 01-03",
+      "world_membership": "same_world",
+      "p7_status": "not_yet_instantiated",
+      "evidence": "original Act I screenplay/storyboards and scene continuity"
+    },
+    {
+      "id": "daniel",
+      "name": "Daniel",
+      "media_scope": "Paris Act I Scenes 01-03",
+      "world_membership": "same_world",
+      "p7_status": "not_yet_instantiated",
+      "evidence": "original Act I screenplay/storyboards and accepted dialogue"
+    }
+  ],
+  "media": [
+    {
+      "id": "act1-s1s2-master",
+      "kind": "video",
+      "title": "Act I — Scenes 01–02 720p master",
+      "status": "master_named",
+      "scene": "01-02",
+      "drive_file_id": "1FCvNWwBq-aVUFChLZuEwFG2mwZcz7xlK",
+      "source_drive_file_id": "1bs1mU03AiuLK-I6zAePKj_tSc6YXATmU",
+      "world_role": "observer_cinematic_view",
+      "drive_url": "https://drive.google.com/file/d/1FCvNWwBq-aVUFChLZuEwFG2mwZcz7xlK/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "act1-scene01-accepted",
+      "kind": "video",
+      "title": "Scene 01 — accepted assembly",
+      "status": "accepted",
+      "scene": "01",
+      "drive_file_id": "1gOBZcA0HIVl7Sprg2-BB6gdQBdjtCNlA",
+      "source_drive_file_id": "1KLr0OdvM_DMoxqrsVmF1Q4Sz3sLJ8zJB",
+      "world_role": "observer_cinematic_view",
+      "drive_url": "https://drive.google.com/file/d/1gOBZcA0HIVl7Sprg2-BB6gdQBdjtCNlA/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "act1-scene02-approved",
+      "kind": "video",
+      "title": "Scene 02 — double-hero approved FX",
+      "status": "approved",
+      "scene": "02",
+      "drive_file_id": "17rLR0r7OR1K2wI-x23q5QpGs6jnUNJ7Z",
+      "source_drive_file_id": "1WLX7cgLT5CKg4w35fgyzIsCoS1pRMxeg",
+      "world_role": "observer_cinematic_view",
+      "drive_url": "https://drive.google.com/file/d/17rLR0r7OR1K2wI-x23q5QpGs6jnUNJ7Z/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "act1-scene03-final-named",
+      "kind": "video",
+      "title": "Scene 03 — S1/S2 match remaster",
+      "status": "final_named_review_unverified",
+      "scene": "03",
+      "drive_file_id": "1FlaS0NfpuTCxYaJjU95rKPIbD1ilikuk",
+      "source_drive_file_id": "1tvUpSxx8X47vtLXdJdusIfMKOSCdg0vD",
+      "world_role": "observer_cinematic_view",
+      "drive_url": "https://drive.google.com/file/d/1FlaS0NfpuTCxYaJjU95rKPIbD1ilikuk/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "scene01-score",
+      "kind": "audio",
+      "title": "Scene 01 — Pre-dawn in Paris",
+      "status": "source_media",
+      "scene": "01",
+      "drive_file_id": "1bMLrOPFSiOqabEXzQQQfmZwQFpL1AuA9",
+      "world_role": "cinematic_score",
+      "drive_url": "https://drive.google.com/file/d/1bMLrOPFSiOqabEXzQQQfmZwQFpL1AuA9/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "scene02-score",
+      "kind": "audio",
+      "title": "Scene 02 — Synchronized Silence",
+      "status": "source_media",
+      "scene": "02",
+      "drive_file_id": "1HDI2V5P9q-hXgVi9nZYq6KppxZSFqlos",
+      "world_role": "cinematic_score",
+      "drive_url": "https://drive.google.com/file/d/1HDI2V5P9q-hXgVi9nZYq6KppxZSFqlos/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "scene03-score",
+      "kind": "audio",
+      "title": "Scene 03 — LAtmosphere master",
+      "status": "source_media",
+      "scene": "03",
+      "drive_file_id": "1hOhmd5xt6nQvslYE-271Yg2SUskCJ64E",
+      "world_role": "cinematic_score",
+      "drive_url": "https://drive.google.com/file/d/1hOhmd5xt6nQvslYE-271Yg2SUskCJ64E/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "scene03-stems",
+      "kind": "archive",
+      "title": "Scene 03 — LAtmosphere stems",
+      "status": "source_media",
+      "scene": "03",
+      "drive_file_id": "1Rv-60STTQY_kOZ91O01p8GaJP_ib0170",
+      "world_role": "production_source",
+      "drive_url": "https://drive.google.com/file/d/1Rv-60STTQY_kOZ91O01p8GaJP_ib0170/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "paris-board-s1",
+      "kind": "image",
+      "title": "Scene 01 — hero contact sheet",
+      "status": "production_reference",
+      "scene": "01",
+      "drive_file_id": "1r6N3b4Psxop5eP4sytP0Eu_sjtIT72mo",
+      "world_role": "storyboard_reference",
+      "drive_url": "https://drive.google.com/file/d/1r6N3b4Psxop5eP4sytP0Eu_sjtIT72mo/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    },
+    {
+      "id": "paris-board-s2",
+      "kind": "image",
+      "title": "Scene 02 — generated contact sheet",
+      "status": "production_reference",
+      "scene": "02",
+      "drive_file_id": "1je6tIsXUymiNnHcTK9Qg_hPPiHQzPIU0",
+      "world_role": "storyboard_reference",
+      "drive_url": "https://drive.google.com/file/d/1je6tIsXUymiNnHcTK9Qg_hPPiHQzPIU0/view",
+      "visibility": "private_drive_requires_permission",
+      "literal_footage_of_real_events": false
+    }
+  ],
+  "source_folders": [
+    {
+      "id": "1rhVD_6HiUG2VMZAl8EAavd4OfVGdRETF",
+      "kind": "act1_source_tree",
+      "status": "preserved_under_project"
+    },
+    {
+      "id": "1GUGCM1MHoVfpXvBvd4b0aW6bbmIdkcAI",
+      "kind": "legacy_section_renders",
+      "status": "preserved_under_legacy_archive"
+    },
+    {
+      "id": "10V0wcDVX1R_SgY4JMza1k8pdZHb-ru4O",
+      "kind": "review_and_qc",
+      "status": "preserved_under_legacy_archive"
+    },
+    {
+      "id": "1xBACngE0hMK6RiMx1HEMlS0boki8SuXs",
+      "kind": "rejected",
+      "status": "preserved_not_promoted"
+    }
+  ],
+  "limitations": [
+    "Index is a verified metadata snapshot, not an automatic Drive sync",
+    "Curated copies are not SHA-byte-verified against originals; drive.copy retained source name and size",
+    "Legacy source folders contain additional proofs/images/variants not enumerated individually here",
+    "No live media proxy; private Drive player may require sign-in",
+    "The 2037 fictional historical arc and media Act I are linked by shared world membership, not by silent alteration of the literary canon"
+  ]
+}
