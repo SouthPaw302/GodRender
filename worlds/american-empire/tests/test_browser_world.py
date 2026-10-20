@@ -80,10 +80,15 @@ class BrowserExplorerTests(unittest.TestCase):
             actors=json.loads((output/"data/inhabitants.json").read_text())
             self.assertEqual(len(actors["protagonists"]),5)
             self.assertEqual(len(actors["organizations"]),5)
-            self.assertEqual(len(actors["trust_links"]),30)
+            self.assertEqual(len(actors["trust_links"]),36)
             self.assertEqual(len(actors["source_manifest_sha256"]),64)
-            self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["nodes"]),12)
-            self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["routes"]),16)
+            self.assertEqual(len(actors["film_cast"]),2)
+            self.assertTrue((output/"data/film_bridge.json").is_file())
+            film=json.loads((output/"data/film_bridge.json").read_text())
+            self.assertEqual(film["film_event"]["story_year"],"undated_in_checked_scripts")
+            self.assertEqual({x["id"] for x in film["agents"]},{"claire","daniel"})
+            self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["nodes"]),13)
+            self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["routes"]),18)
             self.assertTrue((output/"data/reference_scenarios.json").is_file())
             sources=json.loads((output/"data/reference_scenarios.json").read_text())
             self.assertEqual([s["id"] for s in sources],["baseline","independent-corridor","high-integration"])
@@ -98,6 +103,7 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertIn('id="embeddedInhabitants"', standalone)
             self.assertIn('id="embeddedPeopleSource"', standalone)
             self.assertIn('id="embeddedMediaInventory"', standalone)
+            self.assertIn('id="embeddedFilmBridge"', standalone)
             self.assertIn('P5 browser-native deterministic P3 simulation', standalone)
             self.assertIn('<style>', standalone)
             self.assertIn('counterfactual_adaptation_not_canon', standalone)
@@ -118,7 +124,7 @@ class BrowserExplorerTests(unittest.TestCase):
         html=(ROOT/"web/src/index.html").read_text()
         js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text() + (ROOT/"web/src/cinema.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["world","chronology","brain","production","simulation","earth","inhabitants","cinema","cinemaItems","cinemaPlay","cinemaOpen","cinemaFrame","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
+        for ident in ["world","chronology","brain","production","simulation","earth","inhabitants","cinema","cinemaItems","cinemaPlay","cinemaOpen","cinemaFrame","cinemaFindClaire","cinemaFindDaniel","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)

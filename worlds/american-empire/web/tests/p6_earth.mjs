@@ -11,8 +11,8 @@ try{
  await page.waitForFunction(()=>document.querySelector('#liveStatus')?.textContent?.includes('P3 parity PASS'));
  await page.locator('[data-tab="earth"]').click();
  await page.locator('#geoPins .geo-pin').first().waitFor();
- assert.equal(await page.locator('#geoPins .geo-pin').count(),12);
- assert.equal(await page.locator('#geoRoutes path').count(),16);
+ assert.equal(await page.locator('#geoPins .geo-pin').count(),13);
+ assert.equal(await page.locator('#geoRoutes path').count(),18);
  assert.ok((await page.locator('#geoLand path').count())>100);
  assert.match(await page.locator('#geoStatus').textContent(),/Natural Earth basemap verified/);
  assert.match(await page.locator('#geoScenarioText').textContent(),/baseline/);
@@ -50,7 +50,7 @@ try{
  await page.evaluate(()=>window.AE_Live.select('high-integration'));
  await page.locator('[data-tab="earth"]').click();
  assert.equal((await page.locator('#geoScenarioText').textContent()).trim(),'high-integration');
- assert.equal(await page.locator('#geoPins .geo-pin').count(),12);
+ assert.equal(await page.locator('#geoPins .geo-pin').count(),13);
  assert.deepEqual(errors,[]);
  if(process.env.AE_P6_SCREENSHOT)await page.screenshot({path:process.env.AE_P6_SCREENSHOT,fullPage:true});
  console.log('P6 EARTH PASS: public-domain land, 12 canonical name anchors, 16 explicit what-if links, shock diffusion 2030→2031, export, undo, zoom, live P5 selection');

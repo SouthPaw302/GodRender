@@ -20,8 +20,8 @@ class InhabitantEngine{
    throw Error('P7 requires P6 driven by same verified P3 run');
   if(geo?.schema!=="american-empire.geography.v1")throw Error('P7 geographic source missing');
   this.manifest=manifest;this.p3=p3;this.p6=p6;this.geo=geo;
-  this.agents=[...manifest.protagonists,...manifest.organizations];this.byId=new Map(this.agents.map(a=>[a.id,a]));
-  if(this.agents.length!==10||this.byId.size!==10)throw Error('P7 actor roster drift');
+  this.agents=[...manifest.protagonists,...manifest.organizations,...(manifest.film_cast||[])];this.byId=new Map(this.agents.map(a=>[a.id,a]));
+  if(this.agents.length!==12||this.byId.size!==12||manifest.film_cast?.length!==2)throw Error('AE actor roster drift');
   this.places=new Set(geo.nodes.map(n=>n.id));this.edges=geo.routes;
   for(const a of this.agents){
    if(!this.places.has(a.place)||!validateInt(a.initial_budget,0,100))throw Error('Invalid agent location/resources');
@@ -54,8 +54,8 @@ class InhabitantEngine{
   const spec=this.validate(interventions);
   let people=Object.fromEntries(this.agents.map(a=>[a.id,{
    id:a.id,place:a.place,budget:a.initial_budget,standing:50,
-   knowledge:a.kind==='character'&&a.known_from_year===2026?[a.canon_knows]:[],
-   memory:a.kind==='character'&&a.known_from_year===2026?[{year:2026,type:'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer}]:[],
+   knowledge:(a.kind==='character'||a.kind==='film_character')&&a.known_from_year===2026?[a.canon_knows]:[],
+   memory:(a.kind==='character'||a.kind==='film_character')&&a.known_from_year===2026?[{year:2026,type:a.kind==='film_character'?'film_scene_anchor':'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer}]:[],
    last_action:null
   }]));
   let trust=clone(this.linkSeed),shift=Object.fromEntries(this.geo.nodes.map(n=>[n.id,{service:0,independence:0}]));
@@ -70,9 +70,9 @@ class InhabitantEngine{
    const delivered=delayedMessages.filter(m=>m.year===year);
    for(const a of this.agents){
     const p=people[a.id],base=geo.places[a.place],carry=shift[a.place];
-    if(a.kind==='character'&&year===a.known_from_year&&!p.knowledge.includes(a.canon_knows)){
+    if((a.kind==='character'||a.kind==='film_character')&&year===a.known_from_year&&!p.knowledge.includes(a.canon_knows)){
      p.knowledge.push(a.canon_knows);
-     p.memory.push({year,type:'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer});
+     p.memory.push({year,type:a.kind==='film_character'?'film_scene_anchor':'canon_knowledge_anchor',text:a.canon_knows,source:a.source_pointer});
     }
     const local={service:clamp(base.service+carry.service),independence:clamp(base.independence+carry.independence)};
     const messages=delivered.filter(m=>m.to===a.id&&trust[m.from+'>'+a.id]>=42).slice(0,4);

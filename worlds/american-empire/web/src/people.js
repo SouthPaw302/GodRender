@@ -27,10 +27,11 @@ function load(){
   }
  }catch{}
 }
-function agentProfile(){return S.manifest.protagonists.concat(S.manifest.organizations).find(a=>a.id===S.selected);}
+function agentProfile(){return [...S.manifest.protagonists,...S.manifest.organizations,...(S.manifest.film_cast||[])].find(a=>a.id===S.selected);}
 function canonicalRecord(){
  const a=agentProfile();
  if(a.kind==='character')return S.canon.point_of_view_characters.find(p=>p.id===a.source_id);
+ if(a.kind==='film_character')return S.canon.film_characters.find(p=>p.id===a.source_id);
  return S.canon.actors.find(p=>p.id===a.source_id);
 }
 function currentFrame(){return S.run.snapshots[S.year-2026];}
@@ -38,10 +39,10 @@ function actorState(){return currentFrame().people[S.selected];}
 function indexCards(){
  const host=$('peopleCards');host.replaceChildren();
  const frame=currentFrame();
- for(const profile of [...S.manifest.protagonists,...S.manifest.organizations]){
+ for(const profile of [...S.manifest.protagonists,...S.manifest.organizations,...(S.manifest.film_cast||[])]){
   const source=profile.kind==='character'?
-   S.canon.point_of_view_characters.find(v=>v.id===profile.source_id):
-   S.canon.actors.find(v=>v.id===profile.source_id);
+   S.canon.point_of_view_characters.find(v=>v.id===profile.source_id):profile.kind==='film_character'?
+   S.canon.film_characters.find(v=>v.id===profile.source_id):S.canon.actors.find(v=>v.id===profile.source_id);
   const person=frame.people[profile.id],action=person.last_action||'Observing';
   const el=document.createElement('button');el.type='button';
   el.className='people-card'+(profile.id===S.selected?' selected':'');
@@ -59,7 +60,7 @@ function memoryFeed(){
  $('personStanding').textContent=p.standing;
  $('personLocal').textContent=frame.places[p.place].service;
  const anchor=agentProfile();
- $('personCanonKnows').textContent=anchor.kind==='character'?
+ $('personCanonKnows').textContent=(anchor.kind==='character'||anchor.kind==='film_character')?
     (p.knowledge.includes(source.knows)?source.knows:'This established knowledge is not yet available to the character in '+S.year+'.'):'Institution goal: '+source.goal;
  const known=$('personKnowledge');known.replaceChildren();
  const accepted=p.knowledge.filter(k=>k!==source.knows);
@@ -166,6 +167,12 @@ async function init({manifest,geo,canon}){
   if(!match||match.knows!==p.canon_knows||match.does_not_know!==p.canon_unknown_sealed)
    throw Error('P7 protagonist drift from immutable canon');
  }
+ if(manifest.film_cast?.length!==2||canon.film_characters?.length!==2)throw Error('Film cast manifest not present');
+ for(const p of manifest.film_cast){
+  const source=canon.film_characters.find(x=>x.id===p.source_id);
+  if(!source||source.knows!==p.canon_knows||source.does_not_know!==p.canon_unknown_sealed)
+   throw Error('P8 same-world film source drift');
+ }
  load();
  $('peopleYear').addEventListener('input',e=>moveYear(e.target.value));
  $('peoplePrev').addEventListener('click',()=>moveYear(S.year-1));
@@ -176,5 +183,5 @@ async function init({manifest,geo,canon}){
  $('personExport').addEventListener('click',download);
  await refresh();
 }
-root.AE_People={init,refresh,moveYear,select(id){if(S.manifest?.protagonists.concat(S.manifest.organizations).some(a=>a.id===id)){S.selected=id;paint();}},getRun:()=>S.run,getBaseline:()=>S.baseline,getEngine:()=>S.engine};
+root.AE_People={init,refresh,moveYear,select(id){if([...(S.manifest?.protagonists||[]),...(S.manifest?.organizations||[]),...(S.manifest?.film_cast||[])].some(a=>a.id===id)){S.selected=id;paint();}},getRun:()=>S.run,getBaseline:()=>S.baseline,getEngine:()=>S.engine};
 })(window);

@@ -1,0 +1,174 @@
+{
+  "schema": "american-empire.p8-film-bridge.v1",
+  "authority_layer": "same_world_film_production_with_scenario_only_simulation_binding",
+  "source_provenance": {
+    "repo": "SouthPaw302/AIVideoEdit",
+    "scene01": {
+      "ref": "project/american-empire-act1/scene-01",
+      "path": "projects/american-empire-act1/scenes/scene-01/STORYBOARD.md"
+    },
+    "scene02": {
+      "ref": "project/american-empire-act1/scene-02",
+      "path": "projects/american-empire-act1/scenes/scene-02/SCRIPT.json"
+    },
+    "scene03": {
+      "ref": "project/american-empire-act1/scene-03",
+      "path": "projects/american-empire-act1/scenes/scene-03/SCRIPT.json"
+    }
+  },
+  "film_event": {
+    "id": "film:paris-act1",
+    "title": "Paris Act I — The continuity warning and departure",
+    "story_year": "undated_in_checked_scripts",
+    "simulation_year": 2027,
+    "year_authority": "scenario_only_provisional_placement_not_literal_film_date",
+    "first_scene": "Scene 01 — 5:47 AM, Paris",
+    "continuity": [
+      "Daniel phones Claire and warns her that the continuity government has been waiting to replace the visible one.",
+      "Claire witnesses a coordinated change in ordinary systems across her apartment building.",
+      "Claire leaves the apartment, descends in the elevator, and encounters coordinated street systems."
+    ],
+    "dialogue_lock": "No generated or simulated speech may overwrite the locked film dialogue."
+  },
+  "location": {
+    "id": "paris",
+    "name": "Paris",
+    "country": "FR",
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "kind": "film_lived_location",
+    "initial": {
+      "service": 57,
+      "independence": 72
+    },
+    "source": {
+      "type": "locked_film_storyboard_not_literary_canon",
+      "path": "SouthPaw302/AIVideoEdit@project/american-empire-act1/scene-01:projects/american-empire-act1/scenes/scene-01/STORYBOARD.md",
+      "locator": "# Scene 01 — 5:47 AM, Paris"
+    },
+    "location_status": "approximate_real_city_centre_not_facility",
+    "numeric_authority": "scenario_only"
+  },
+  "routes": [
+    {
+      "id": "film-p01",
+      "from": "paris",
+      "to": "geneva",
+      "type": "hypothetical administrative coordination",
+      "weight": 2,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "film-p02",
+      "from": "philadelphia",
+      "to": "paris",
+      "type": "hypothetical informational support",
+      "weight": 2,
+      "authority": "proposed_model_connection_only"
+    }
+  ],
+  "source_people": [
+    {
+      "id": "F01",
+      "name": "Claire Delacroix",
+      "role": "Paris resident warned by Daniel during the continuity transition",
+      "knows": "Daniel told her the hidden continuity government was waiting to replace the visible one.",
+      "source": "Scene 01 storyboard and locked screenplay",
+      "does_not_know": "Events after her current film scene unless they are observed or communicated later."
+    },
+    {
+      "id": "F02",
+      "name": "Daniel",
+      "role": "American source who warns Claire remotely",
+      "knows": "He has information about the continuity government and warns Claire to move.",
+      "source": "Scenes 01–03 locked screenplays",
+      "does_not_know": "Any future event not shown to him or communicated to him."
+    }
+  ],
+  "agents": [
+    {
+      "id": "claire",
+      "source_id": "F01",
+      "kind": "film_character",
+      "place": "paris",
+      "initial_budget": 66,
+      "priorities": {
+        "relief": 3,
+        "liberty": 5,
+        "order": 1,
+        "truth": 5,
+        "trade": 1
+      },
+      "canon_knows": "Daniel told her the hidden continuity government was waiting to replace the visible one.",
+      "canon_unknown_sealed": "Events after her current film scene unless they are observed or communicated later.",
+      "known_from_year": 2027,
+      "location_authority": "Paris supported by film source; numeric priorities and 2027 anchor scenario-only",
+      "source_pointer": "P8_FILM_BRIDGE.json/source_people/0"
+    },
+    {
+      "id": "daniel",
+      "source_id": "F02",
+      "kind": "film_character",
+      "place": "philadelphia",
+      "initial_budget": 71,
+      "priorities": {
+        "relief": 3,
+        "liberty": 5,
+        "order": 2,
+        "truth": 5,
+        "trade": 2
+      },
+      "canon_knows": "He has information about the continuity government and warns Claire to move.",
+      "canon_unknown_sealed": "Any future event not shown to him or communicated to him.",
+      "known_from_year": 2027,
+      "location_authority": "His American origin is film sourced; Philadelphia assignment scenario-only, not actual film location",
+      "source_pointer": "P8_FILM_BRIDGE.json/source_people/1"
+    }
+  ],
+  "trust_links": [
+    {
+      "from": "claire",
+      "to": "daniel",
+      "trust": 77,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "daniel",
+      "to": "claire",
+      "trust": 81,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "claire",
+      "to": "mara",
+      "trust": 42,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "mara",
+      "to": "claire",
+      "trust": 45,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "jonah",
+      "to": "daniel",
+      "trust": 43,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "daniel",
+      "to": "jonah",
+      "trust": 43,
+      "authority": "scenario_seed_only"
+    }
+  ],
+  "limits": [
+    "No specific film calendar date was verified; 2027 is a modeling proposal only.",
+    "Daniel's simulation location in Philadelphia is not established by film.",
+    "Link/trust/starting resources are not film canon or real historical observations.",
+    "Original film script wording/performances must remain unchanged.",
+    "World events are fiction, not claims about real-world continuity government."
+  ],
+  "model_execution": "The deterministic social engine includes these people. No text-generating or autonomous language model is invoked by this bridge."
+}

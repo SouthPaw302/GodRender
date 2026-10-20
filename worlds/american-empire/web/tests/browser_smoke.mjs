@@ -45,6 +45,10 @@ try{
  await page.getByRole('button',{name:'Observer Cinema'}).click();
  await page.waitForFunction(()=>document.querySelector('#cinemaStatus')?.textContent?.includes('Catalog ready'),null,{timeout:15000});
  assert.equal(await page.locator('.cinema-item').count(),10);
+ await page.locator('#cinemaFindClaire').click();
+ assert.match(page.url(),/#inhabitants/);
+ assert.equal(await page.locator('#personFullName').textContent(),'Claire Delacroix');
+ await page.locator('[data-tab="cinema"]').click();
  assert.match(await page.locator('#cinemaTitle').textContent(),/Scenes 01–02/);
  assert.match(await page.locator('#cinemaRights').textContent(),/same|cinematic depictions/);
  assert.match(await page.locator('#cinemaOpen').getAttribute('href'),/^https:\/\/drive\.google\.com\/file\/d\//);

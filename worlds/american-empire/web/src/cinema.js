@@ -70,6 +70,14 @@ function init(manifest){
  }
  state.manifest=manifest;state.active=manifest.media[0].id;
  $('cinemaPlay').addEventListener('click',preview);
+ for(const [id,person] of [['cinemaFindClaire','claire'],['cinemaFindDaniel','daniel']]){
+   $(id).addEventListener('click',()=>{
+     if(!root.AE_People?.getRun()?.snapshots?.length)throw Error('Simulation has not initialized');
+     root.AE_People.moveYear(2027);
+     root.AE_People.select(person);
+     document.querySelector('[data-tab="inhabitants"]').click();
+   });
+ }
  render();
  $('cinemaStatus').textContent='Catalog ready · '+manifest.media.length+' indexed source records · 4 curated film copies · no embedded media loaded automatically.';
 }

@@ -128,7 +128,6 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         raise ValueError("P6 graph input has drifted")
     if land.get("type") != "FeatureCollection" or len(land["features"]) < 100:
         raise ValueError("Natural Earth coastline source is invalid")
-    geo["source_geo_sha256"] = hashlib.sha256(json.dumps(geo,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
     inhabitants = _load("worlds/american-empire/P7_INHABITANTS.json")
     p1matrix = _load("worlds/american-empire/archive/01_CANON_SOURCE/REALITY_MATRIX.json")
     if inhabitants.get("schema") != "american-empire.p7-inhabitants.v1" or len(inhabitants["protagonists"]) != 5 or len(inhabitants["organizations"]) != 5:
@@ -140,9 +139,26 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     original_orgs = {a["id"]:a for a in p1matrix["actors"]}
     if any(a["source_id"] not in original_orgs for a in inhabitants["organizations"]):
         raise ValueError("P7 institutional agent not in P1 source")
-    inhabitants["source_manifest_sha256"] = hashlib.sha256(json.dumps(inhabitants,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
     people_source = {"point_of_view_characters":p1matrix["point_of_view_characters"],"actors":p1matrix["actors"],
                      "authority":"locked_original_p1_quoted_reference_only"}
+    # P8 adds the film's actual people to the same simulated Earth without
+    # rewriting the original P6 geography or P7 ten-actor source files.
+    film_bridge = _load("worlds/american-empire/P8_FILM_BRIDGE.json")
+    if film_bridge.get("schema") != "american-empire.p8-film-bridge.v1" or len(film_bridge.get("agents",[])) != 2:
+        raise ValueError("P8 film cast source validation failed")
+    if film_bridge["film_event"]["story_year"] != "undated_in_checked_scripts":
+        raise ValueError("Do not invent a confirmed film year")
+    film_ids = {a["id"] for a in film_bridge["agents"]}
+    if film_ids != {"claire","daniel"}:
+        raise ValueError("Unexpected film cast replacement")
+    geo["nodes"].append(film_bridge["location"])
+    geo["routes"].extend(film_bridge["routes"])
+    inhabitants["film_cast"] = film_bridge["agents"]
+    inhabitants["trust_links"].extend(film_bridge["trust_links"])
+    people_source["film_characters"] = film_bridge["source_people"]
+    people_source["film_event"] = film_bridge["film_event"]
+    geo["source_geo_sha256"] = hashlib.sha256(json.dumps(geo,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
+    inhabitants["source_manifest_sha256"] = hashlib.sha256(json.dumps(inhabitants,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
     media_inventory = _load("worlds/american-empire/MEDIA_INVENTORY.json")
     if media_inventory.get("schema") != "american-empire.media-inventory.v1" or len(media_inventory["media"]) < 10:
         raise ValueError("Observer Cinema source catalog not verified")
@@ -162,7 +178,7 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "cinema.js", "media_inventory.json", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
+            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "cinema.js", "media_inventory.json", "film_bridge.json", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
@@ -177,6 +193,7 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     _write(out / "data" / "inhabitants.json",inhabitants)
     _write(out / "data" / "people_source.json",people_source)
     _write(out / "data" / "media_inventory.json",media_inventory)
+    _write(out / "data" / "film_bridge.json",film_bridge)
     # One-file offline artifact: embed signed/source-pinned P3 rules and inputs.
     # Less-than escaping prevents an embedded JSON value from closing its script.
     html = (SOURCE / "index.html").read_text(encoding="utf-8")
@@ -196,7 +213,7 @@ def build(out: Path = DEFAULT_DEST) -> dict:
                    ("embeddedModel",model),("embeddedReference",references),
                    ("embeddedGeo",geo),("embeddedLand",land),
                    ("embeddedInhabitants",inhabitants),("embeddedPeopleSource",people_source),
-                   ("embeddedMediaInventory",media_inventory))
+                   ("embeddedMediaInventory",media_inventory),("embeddedFilmBridge",film_bridge))
     payload = "".join('<script type="application/json" id="'+label+'">'
                       +json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(",",":")).replace("<","\\u003c")
                       +"</script>\n" for label,data in inline_data)

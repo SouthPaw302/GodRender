@@ -1,4 +1,4 @@
-// P7 E2E: 10 independent rule-based agents, memory/knowledge boundaries,
+// P7 E2E: 12 rule-based agents (including 2 same-world film characters), memory/knowledge boundaries,
 // branching behavior, P5/P6 propagation, exact replay, local persistence and export.
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -10,8 +10,8 @@ try{
  await page.goto(process.env.AE_BASE_URL||'http://127.0.0.1:8765',{waitUntil:'load'});
  await page.waitForFunction(()=>document.querySelector('#peopleStatus')?.textContent?.includes('P7 VERIFIED'),null,{timeout:30000});
  await page.locator('[data-tab="inhabitants"]').click();
- assert.equal(await page.locator('.people-card').count(),10);
- assert.equal(await page.locator('.people-decision').count(),10);
+ assert.equal(await page.locator('.people-card').count(),12);
+ assert.equal(await page.locator('.people-decision').count(),12);
  const state=await page.evaluate(()=>{
   const run=window.AE_People.getRun(),base=window.AE_People.getBaseline();
   return {len:run.snapshots.length,manifest:run.manifest_sha256,runSha:run.run_sha256,
@@ -19,16 +19,20 @@ try{
    knowledge:run.snapshots.some(y=>y.people.neda.knowledge.includes("Her hospital's survival will be used to force her city into the first foreign accession.")),
    identical:run.run_sha256===base.run_sha256,
    caleb2026:run.snapshots[0].people.caleb.knowledge.length,
-   caleb2027:run.snapshots[1].people.caleb.knowledge.length};
+   caleb2027:run.snapshots[1].people.caleb.knowledge.length,
+   claire2026:run.snapshots[0].people.claire.knowledge.length,
+   claire2027:run.snapshots[1].people.claire.knowledge.length};
  });
  assert.equal(state.len,12);
- assert.equal(state.trust,30);
- assert.equal(state.people.length,10);
+ assert.equal(state.trust,36);
+ assert.equal(state.people.length,12);
  assert.equal(state.manifest.length,64);
  assert.equal(state.knowledge,false,'sealed canon ignorance must never leak');
  assert.equal(state.identical,true);
  assert.equal(state.caleb2026,0,'cannot know Dollar Night during 2026');
  assert.ok(state.caleb2027>0,'established knowledge released no earlier than 2027');
+ assert.equal(state.claire2026,0,'film Scene 01 has not been placed before the 2027 simulation anchor');
+ assert.ok(state.claire2027>0,'film anchor available at explicitly provisional year');
  await page.locator('#peopleYear').evaluate(el=>{el.value='2030';el.dispatchEvent(new Event('input',{bubbles:true}));});
  await page.locator('#personPriority').selectOption('order');
  await page.locator('#personApply').click();
