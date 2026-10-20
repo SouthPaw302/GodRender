@@ -10,14 +10,14 @@ const nodeLookup = ()=>[...state.world.nodes,...state.world.people].find(n=>n.id
 const getSnapshot = ()=>state.world.scenarios[state.scenario].snapshots[state.year-2026];
 const shortText=(value,n=19)=>String(value||'').length>n?String(value).slice(0,n-1)+'…':String(value||'');
 function setTab(name){
-  if(!['world','chronology','brain','production'].includes(name))name='world';
+  if(!['world','chronology','brain','production','simulation'].includes(name))name='world';
   state.tab=name;document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===name));
   document.querySelectorAll('[data-tab]').forEach(el=>{el.classList.toggle('active',el.dataset.tab===name);el.setAttribute('aria-selected',String(el.dataset.tab===name));});
-  if(name==='production') renderBrief(); if(name==='brain') renderBrainList();
+  if(name==='production') renderBrief(); if(name==='brain') renderBrainList(); if(name==='simulation') window.AE_Live?.render();
   if(location.protocol!=='file:')history.replaceState(null,'','#'+name);
 }
 function updateYear(y){state.year=Math.max(2026,Math.min(2037,Number(y)));$('yearSlider').value=state.year;$('yearBig').textContent=state.year;
-  $('briefYear').value=state.year;renderYear();renderTimeline();renderBrief();}
+  $('briefYear').value=state.year;renderYear();renderTimeline();renderBrief();window.AE_Live?.syncYear(state.year);}
 function renderYear(){const event=state.world.years[state.year-2026], snapshot=getSnapshot();
  $('phaseTitle').textContent=event.title;
  $('phaseSummary').textContent=event.summary;
@@ -187,7 +187,7 @@ function bindEvents(){
  $('prevYear').addEventListener('click',()=>updateYear(state.year-1));
  $('nextYear').addEventListener('click',()=>updateYear(state.year+1));
  $('yearSlider').addEventListener('input',e=>updateYear(e.target.value));
- $('scenarioSelect').addEventListener('change',e=>{state.scenario=Number(e.target.value);renderYear();renderBrief();});
+ $('scenarioSelect').addEventListener('change',e=>{state.scenario=Number(e.target.value);renderYear();renderBrief();window.AE_Live?.syncScenario(state.scenario);});
  $('resetGraph').addEventListener('click',()=>selectEntity('system:S1'));
  $('goChronology').addEventListener('click',()=>setTab('chronology'));
  $('timelineToWorld').addEventListener('click',()=>setTab('world'));
@@ -198,10 +198,10 @@ function bindEvents(){
  $('downloadBrief').addEventListener('click',()=>{const b=makeBrief();downloadJSON('american-empire-'+b.year+'-director-brief.json',b);$('briefMessage').textContent='Draft brief downloaded; original canon untouched.';});
  window.addEventListener('hashchange',()=>setTab(location.hash.slice(1)));
 }
-async function loadJSON(url){const embedded=$(url.endsWith('/world.json')?'embeddedWorld':'embeddedBrain');if(embedded)return JSON.parse(embedded.textContent);const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error(url+' returned HTTP '+res.status);return res.json();}
+async function loadJSON(url){const tag={'world.json':'embeddedWorld','brain.json':'embeddedBrain','model.json':'embeddedModel','reference_scenarios.json':'embeddedReference'}[url.split('/').pop()];const embedded=$(tag);if(embedded)return JSON.parse(embedded.textContent);const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw Error(url+' returned HTTP '+res.status);return res.json();}
 async function init(){
  try{
- const [world,brain]=await Promise.all([loadJSON('./data/world.json'),loadJSON('./data/brain.json')]);
+ const [world,brain,model,references]=await Promise.all([loadJSON('./data/world.json'),loadJSON('./data/brain.json'),loadJSON('./data/model.json'),loadJSON('./data/reference_scenarios.json')]);
  if(world.schema!=='american-empire.godot-explorer-bundle.v1'||brain.schema!=='american-empire.browser-brain.v1'
  ||world.bundle_sha256!==brain.world_bundle_sha256||world.source.world_graph_sha256!==brain.world_source.world_graph_sha256)
  throw Error('World and Second Brain provenance mismatch. Refusing unverified bundle.');
@@ -212,6 +212,8 @@ async function init(){
  for(const [i,s] of world.scenarios.entries()){const o=document.createElement('option');o.value=i;o.textContent=s.name+' · hypothetical';$('scenarioSelect').append(o);}
  for(const p of world.people){const o=document.createElement('option');o.value=p.id;o.textContent=p.name;$('personSelect').append(o);}
  setupBrain();populateBrief();bindEvents();updateYear(state.year);renderGraph();renderEntity();renderBrainList();renderBrainSelected();
+ if(!window.AE_Live||!window.AE_Sim)throw Error('P5 native simulation runtime missing');
+ await window.AE_Live.init({world,model,state,api:{updateYear,renderYear,AE_Sim:window.AE_Sim,referenceScenarios:references}});
  setTab(location.hash.slice(1)||'world');$('error').hidden=true;
  }catch(e){$('error').hidden=false;$('error').textContent='World Explorer unavailable: '+e.message+'. Check the verified browser build.';console.error(e);}
 }

@@ -4,3 +4,44 @@
 @media(max-width:1280px){.world-layout{grid-template-columns:220px minmax(360px,1fr) 275px}.topbar{gap:15px}.brand{min-width:255px}.tab{padding:12px 9px}.status-strip{gap:16px}.worldcenter{padding:19px}.leftpanel,.rightpanel{padding:20px 14px}#graph{min-height:340px}}
 @media(max-width:1030px){.topbar{flex-wrap:wrap}.brand{flex:1}.tabs{order:3;flex-basis:100%;justify-content:space-between}.top-right{margin-left:auto}.world-layout{grid-template-columns:225px minmax(400px,1fr)}.rightpanel{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}.worldcenter{min-height:700px}.entity-list{grid-template-columns:repeat(2,1fr)}.chronology-layout,.brain-layout{grid-template-columns:1fr}.brain-side,.side-feature{position:static}.brain-grid{max-height:none}}
 @media(max-width:700px){.topbar{padding:12px}.brand{min-width:0}.brandtext strong{font-size:12px}.seal{width:43px;height:43px}.top-right{font-size:8px}.tabs{overflow:auto}.tab{font-size:9px;padding:12px 9px}.status-strip{gap:10px;flex-wrap:wrap;padding:10px 13px}.strip-right{margin:0}.world-layout{display:flex;flex-direction:column}.leftpanel{order:2;border-right:0;border-top:1px solid var(--line)}.worldcenter{order:1;padding:16px;min-height:0}.rightpanel{order:3}.centerhead{flex-direction:column}.centerhead h1{font-size:23px}.network-meta{gap:8px;flex-wrap:wrap;font-size:8px}.network{min-height:0}#graph{min-height:300px;height:55vh}.year-large{font-size:40px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.widepage{padding:25px 16px 50px}.page-intro h1{font-size:28px}.timeline-list,.brain-grid,.production-layout{grid-template-columns:1fr}.chronology-layout{display:block}.side-feature{margin-top:15px}.brain-toolbar{grid-template-columns:1fr 1fr}.brain-toolbar input{grid-column:1/-1}.action-row{flex-wrap:wrap}footer{padding:15px;font-size:8px;flex-wrap:wrap}.network-bottom{font-size:8px}.status-strip span{font-size:8px}}
+
+/* P5 LIVE SCENARIO LAB — browser-local deterministic P3 engine. */
+.sim-status{padding:14px 19px;background:#123d43;border:1px solid #287b76;color:#b6e8dd;border-radius:6px;margin-bottom:22px;font-size:12px;line-height:1.6}
+.sim-status.error-state{background:#3e2129;color:#ffbdc0;border-color:#9b525f}
+.sim-grid{display:grid;grid-template-columns:minmax(265px,.88fr) minmax(360px,1.35fr) minmax(265px,.82fr);gap:17px;align-items:start}
+.sim-panel{background:#102436;border:1px solid #2e4a60;border-radius:9px;padding:21px;min-width:0}
+.sim-center{background:#0d1f30}
+.sim-panel label{font-size:10px;letter-spacing:.045em;font-weight:700;color:#b9cbd5;display:block;margin:18px 0 7px}
+.sim-panel input[type="text"]{background:#142b3e;color:#e6eef4;border:1px solid #3b596e;border-radius:5px;padding:12px;width:100%}
+.sim-panel input[type="range"]{width:100%;accent-color:var(--gold)}
+.sim-side-controls{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.sim-side-controls button{flex:1;white-space:normal;min-width:130px}
+.full-button{width:100%;text-align:center;margin-top:13px}
+.sim-year-heading{display:flex;align-items:center;gap:12px;margin-top:10px;color:#97aebd}
+.sim-year-heading strong{font-family:Georgia,serif;font-size:34px;color:var(--gold);font-weight:400}
+.sim-year-heading span{font-size:12px}
+.sim-hero-metric{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding-bottom:19px;border-bottom:1px solid #2b4b61}
+.sim-hero-metric span{font-family:Georgia,serif;color:var(--gold);font-size:40px}
+.sim-hero-metric h2{margin:4px 0;font-family:Georgia,serif;font-size:22px;color:#e9d6b1;font-weight:400}
+.sim-hero-metric p{font-size:11px;color:#91b0c2}
+.sim-authority{padding:8px;border:1px solid #638379;color:#b7e0d6;font-size:8px;text-align:center;line-height:1.8;letter-spacing:.04em;white-space:nowrap}
+.sim-metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 15px;margin:24px 0}
+.sim-variable>div:first-child{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#c1d3da;margin-bottom:7px}
+.sim-variable b{color:#e5c48c;font-size:13px}
+.sim-proxies{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-bottom:25px}
+.sim-proxies>div{padding:16px;background:#172e40;border:1px solid #294657;border-radius:6px}
+.sim-proxies small{display:block;color:#95b2c3;font-size:9px;line-height:1.6;margin-bottom:7px}
+.sim-proxies b{font-family:Georgia,serif;font-size:28px;color:#e2c695}
+.sim-event-list{min-height:42px;max-height:175px;overflow-y:auto;color:#9aafbb;font-size:11px;line-height:1.7}
+.sim-event{border-left:2px solid var(--gold);padding:5px 10px;margin:7px 0;background:#173045}
+.sim-event strong{display:block;color:#dfcba9;font-size:11px}
+.sim-event span{font-size:10px;color:#afc3cc}
+.sim-comparison{min-height:170px;background:#112b3c;border:1px solid #2a4b5d;padding:11px;border-radius:5px;margin-top:14px;color:#b8cbd4;line-height:1.7}
+.sim-comparison p{margin:4px 0 9px;font-size:11px}
+.sim-delta-list{display:grid;gap:6px;margin:10px 0}
+.sim-delta-list div{display:flex;justify-content:space-between;padding:5px 9px;background:#1b3547}
+.sim-delta-list b{color:#e0bf81}
+.sim-saved-list{display:flex;flex-direction:column;gap:8px;font-size:11px;color:#95aebb;max-height:160px;overflow-y:auto}
+.sim-save-item{padding:8px;text-align:left;background:#183145;color:#dbc89f;border:1px solid #345569;border-radius:4px}
+@media(max-width:1150px){.sim-grid{grid-template-columns:minmax(265px,1fr) minmax(350px,1.5fr)}.sim-grid>aside{grid-column:1/-1}}
+@media(max-width:760px){.sim-grid{grid-template-columns:1fr}.sim-grid>aside{grid-column:1}.sim-metric-grid{grid-template-columns:1fr 1fr}.sim-hero-metric{flex-wrap:wrap}}

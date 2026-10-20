@@ -60,9 +60,19 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertTrue((output/"index.html").is_file())
             self.assertTrue((output/"app.js").is_file())
             self.assertTrue((output/"styles.css").is_file())
+            self.assertTrue((output/"simulator.js").is_file())
+            self.assertTrue((output/"live.js").is_file())
+            self.assertTrue((output/"data/model.json").is_file())
+            self.assertTrue((output/"data/reference_scenarios.json").is_file())
+            sources=json.loads((output/"data/reference_scenarios.json").read_text())
+            self.assertEqual([s["id"] for s in sources],["baseline","independent-corridor","high-integration"])
+            self.assertEqual(json.loads((output/"data/model.json").read_text())["schema"],"american-empire.simulation-model.v1")
             standalone = (output/"standalone.html").read_text(encoding="utf-8")
             self.assertIn('id="embeddedWorld"', standalone)
             self.assertIn('id="embeddedBrain"', standalone)
+            self.assertIn('id="embeddedModel"', standalone)
+            self.assertIn('id="embeddedReference"', standalone)
+            self.assertIn('P5 browser-native deterministic P3 simulation', standalone)
             self.assertIn('<style>', standalone)
             self.assertIn('counterfactual_adaptation_not_canon', standalone)
             first={str(p.relative_to(output)):p.read_bytes() for p in output.rglob("*") if p.is_file()}
@@ -82,7 +92,7 @@ class BrowserExplorerTests(unittest.TestCase):
         html=(ROOT/"web/src/index.html").read_text()
         js=(ROOT/"web/src/app.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["world","chronology","brain","production","scenarioSelect","yearSlider",
+        for ident in ["world","chronology","brain","production","simulation","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)

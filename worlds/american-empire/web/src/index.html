@@ -18,6 +18,7 @@
     <nav class="tabs" aria-label="Explorer sections">
       <button type="button" class="tab active" data-tab="world">World Matrix</button>
       <button type="button" class="tab" data-tab="chronology">Chronology</button>
+      <button type="button" class="tab" data-tab="simulation">Simulation Lab</button>
       <button type="button" class="tab" data-tab="brain">Second Brain</button>
       <button type="button" class="tab" data-tab="production">Production Desk</button>
     </nav>
@@ -69,6 +70,61 @@
       </div>
     </section>
 
+
+    <section id="simulation" class="page widepage" aria-label="Live simulation">
+      <div class="page-intro"><p class="eyebrow">P5 · LIVE BROWSER-NATIVE SIMULATION</p><h1>Decisions have consequences.</h1>
+        <p>Make an intervention, fork history, advance time and compare outcomes using the exact P3 rule set. All calculations run in this browser. These are <strong>hypothetical world-state variables</strong>, not changes to the original novel or real world.</p></div>
+      <div id="liveStatus" class="sim-status" role="status" aria-live="polite">Verifying simulation rules against the source model…</div>
+      <div class="sim-grid">
+        <section class="sim-panel">
+          <div class="panel-label">01 / SELECT A WORLD</div>
+          <label for="liveScenario">Scenario</label><select id="liveScenario"></select>
+          <div class="sim-side-controls"><button type="button" id="liveBack" class="flat-button">← Previous year</button>
+            <button type="button" id="liveAdvance" class="primary-button">Advance one year →</button></div>
+          <label for="liveYear">Simulation observation year</label><input id="liveYear" type="range" min="2026" max="2037" value="2027" step="1">
+          <div class="sim-year-heading"><strong id="liveYearDisplay">2027</strong><span id="livePhase">Dollar Night</span></div>
+          <div class="rule"></div>
+          <div class="panel-label">02 / INTERVENE AND FORK</div>
+          <label for="liveAction">Decision or intervention</label><select id="liveAction"></select>
+          <label for="liveSubject">Associated faction or system (provenance only)</label><select id="liveSubject"></select>
+          <label for="liveIntensity">Intensity: <strong id="liveIntensityText">1</strong> of 3</label>
+          <input type="range" id="liveIntensity" min="1" max="3" step="1" value="1">
+          <label for="liveForkName">New alternative history ID</label><input type="text" id="liveForkName" value="atlas-alternative" maxlength="64" pattern="[a-z][a-z0-9-]*" autocomplete="off">
+          <button id="liveApply" class="primary-button full-button">Branch &amp; apply decision</button>
+          <p class="caveat">A fork starts at the selected year, retaining the parent's prior years. Parent decisions from this year onward are replaced, not copied. No original canon file is modified.</p>
+        </section>
+        <section class="sim-panel sim-center">
+          <div class="panel-label">03 / OBSERVE THE OUTCOME</div>
+          <div class="sim-hero-metric"><div><span id="liveHeroYear">2027</span><h2 id="liveHeroTitle">Dollar Night</h2><p id="liveScenarioCaption">Initial state</p></div><div class="sim-authority">SCENARIO ONLY<br>NOT ESTABLISHED CANON</div></div>
+          <div id="liveMetrics" class="sim-metric-grid"></div>
+          <div class="sim-proxies"><div><small>ACCESSION PRESSURE · PROXY</small><b id="livePressure">—</b></div><div><small>DEPENDENCY GAP · PROXY</small><b id="liveDependency">—</b></div></div>
+          <div class="panel-label">RECORDED DECISIONS</div>
+          <div id="liveEvents" class="sim-event-list">None yet.</div>
+          <div class="sim-side-controls">
+            <button id="liveReplay" class="flat-button">Verify replay</button>
+            <button id="liveExport" class="flat-button">Export complete run</button>
+          </div>
+          <p class="tiny muted">SHA-256 snapshot chain, model digest, source-world digest and exact event receipts are included in each exported run.</p>
+        </section>
+        <aside class="sim-panel">
+          <div class="panel-label">04 / COMPARE HISTORIES</div>
+          <label for="liveCompare">Compare against</label><select id="liveCompare"></select>
+          <button id="liveCompareButton" class="flat-button full-button">Compare timelines</button>
+          <div id="liveComparison" class="sim-comparison"><p>Choose another history to inspect divergence and variable deltas.</p></div>
+          <div class="rule"></div>
+          <div class="panel-label">05 / SAVE AND RECOVER</div>
+          <button id="liveSave" class="primary-button full-button">Save this scenario locally</button>
+          <div id="liveSavedList" class="sim-saved-list"></div>
+          <div class="sim-side-controls">
+            <button id="liveImportButton" class="flat-button">Import JSON</button>
+            <button id="liveDelete" class="flat-button">Forget local branch</button>
+          </div>
+          <input type="file" id="liveImportFile" accept=".json,application/json" hidden>
+          <p class="caveat">Saved only in this browser's local storage. Export JSON for backup or to transfer devices. No GodRender worker, Vercel server, or Drive write is performed.</p>
+        </aside>
+      </div>
+    </section>
+
     <section id="chronology" class="page widepage" aria-label="Chronology">
       <div class="page-intro"><p class="eyebrow">THE ESTABLISHED SPINE</p><h1>Twelve years that changed the world.</h1><p>These titles and descriptions belong to the original Reality Matrix. Select a year to inspect its connected hypothetical state in the World Matrix.</p></div>
       <div class="chronology-layout"><div id="timelineList" class="timeline-list"></div><aside class="side-feature"><span class="panel-label">TEMPORAL INTEGRITY</span><h2>One canon. Many possible futures.</h2><p>P1 preserved the written chronology; P2 indexed it. P3 can branch scenarios without editing canonical history.</p><div id="timelineDetail" class="time-detail"></div><button id="timelineToWorld" class="primary-button">EXPLORE SELECTED YEAR ↗</button></aside></div>
@@ -89,6 +145,8 @@
   </main>
   <footer><span>THE AMERICAN EMPIRE · A FICTIONAL ALTERNATE HISTORY</span><span id="footSource">VERIFYING SOURCE…</span><span>ORIGINAL CANON PROTECTED · PARIS FILM SEPARATE</span></footer>
 </div>
+<script src="./simulator.js" defer></script>
 <script src="./app.js" defer></script>
+<script src="./live.js" defer></script>
 </body>
 </html>

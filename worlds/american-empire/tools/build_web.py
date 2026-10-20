@@ -122,31 +122,47 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         raise ValueError("Missing browser application source")
     bundle = build_bundle()
     brain = brain_index()
+    model = _load("worlds/american-empire/P3_MODEL.json")
+    references = [_load("worlds/american-empire/scenarios/examples/"+name+".json")
+                  for name in ("baseline","independent-corridor","high-integration")]
+    canonical_model = json.dumps(model,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    if hashlib.sha256(canonical_model).hexdigest() != bundle["source"]["simulation_model_sha256"]:
+        raise ValueError("P3 model has drifted from verified world bundle")
     # Explicit binding between the visual browser and P4/P3/P2/P1 evidence.
     brain["world_source"] = bundle["source"]
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "world.json", "brain.json", "standalone.html", "explorer-preview.png"}:
+            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html","app.js","styles.css"):
+    for name in ("index.html","app.js","styles.css","simulator.js","live.js"):
         shutil.copy2(SOURCE / name, out / name)
     _write(out / "data" / "world.json",bundle)
     _write(out / "data" / "brain.json",brain)
-    # Produce a self-contained file:// browser edition without a web server.
-    # Escape every '<' in embedded JSON so it cannot terminate a script tag.
+    _write(out / "data" / "model.json",model)
+    _write(out / "data" / "reference_scenarios.json",references)
+    # One-file offline artifact: embed signed/source-pinned P3 rules and inputs.
+    # Less-than escaping prevents an embedded JSON value from closing its script.
     html = (SOURCE / "index.html").read_text(encoding="utf-8")
     css = (SOURCE / "styles.css").read_text(encoding="utf-8")
-    js = (SOURCE / "app.js").read_text(encoding="utf-8")
-    world_inline = json.dumps(bundle,sort_keys=True,ensure_ascii=False,separators=(",",":")).replace("<","\\\\u003c")
-    brain_inline = json.dumps(brain,sort_keys=True,ensure_ascii=False,separators=(",",":")).replace("<","\\\\u003c")
+    script_map = (
+        ("simulator.js", (SOURCE / "simulator.js").read_text(encoding="utf-8")),
+        ("app.js", (SOURCE / "app.js").read_text(encoding="utf-8")),
+        ("live.js", (SOURCE / "live.js").read_text(encoding="utf-8")),
+    )
     html = html.replace('<link rel="stylesheet" href="./styles.css">', '<style>'+css+'</style>')
-    html = html.replace('<script src="./app.js" defer></script>',
-        '<script id="embeddedWorld" type="application/json">'+world_inline+'</script>'
-        +'<script id="embeddedBrain" type="application/json">'+brain_inline+'</script>'
-        +'<script>'+js+'</script>')
+    inline_data = (("embeddedWorld",bundle),("embeddedBrain",brain),
+                   ("embeddedModel",model),("embeddedReference",references))
+    payload = "".join('<script type="application/json" id="'+label+'">'
+                      +json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(",",":")).replace("<","\\u003c")
+                      +"</script>\n" for label,data in inline_data)
+    for filename,js in script_map:
+        html = html.replace('<script src="./'+filename+'" defer></script>',
+                            '<script>'+js+'</script>')
+    # Parsed before app startup in file:// mode (no fetch fallback permitted).
+    html = html.replace('<script>',payload+'<script>',1)
     (out / "standalone.html").write_text(html,encoding="utf-8")
     return {"schema":"american-empire.web-build.v1","world_bundle_sha256":bundle["bundle_sha256"],
             "brain_fx":brain["counts"]["fx"],"brain_workflows":brain["counts"]["workflows"],
