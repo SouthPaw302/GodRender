@@ -10,7 +10,11 @@ page.on('pageerror',e=>errors.push(e.message));
 try{
  await page.goto(base,{waitUntil:'networkidle',timeout:30000});
  await page.locator('#graph .node').first().waitFor();
- await page.waitForFunction(()=>document.querySelector('#liveStatus')?.textContent?.includes('P3 parity PASS'),{timeout:25000});
+ try { await page.waitForFunction(()=>document.querySelector('#liveStatus')?.textContent?.includes('P3 parity PASS'),null,{timeout:9000}); }
+ catch(e) {
+   console.error('P5 OFFLINE DIAGNOSTIC:',JSON.stringify({url:page.url(),errorBanner:await page.locator('#error').textContent(),status:await page.locator('#liveStatus').textContent(),exceptions:errors,embedded:await page.evaluate(()=>['embeddedWorld','embeddedBrain','embeddedModel','embeddedReference'].map(x=>[x,!!document.getElementById(x)]))}));
+   throw e;
+ }
  assert.equal(await page.locator('#graph .node').count(),16);
  assert.equal(await page.locator('#scenarioSelect option').count(),3);
  assert.equal(await page.locator('#metrics .metric').count(),7);
