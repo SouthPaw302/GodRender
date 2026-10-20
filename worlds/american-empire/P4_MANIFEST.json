@@ -1,0 +1,22 @@
+{
+  "schema": "american-empire.phase-manifest.v1",
+  "phase": "P4",
+  "status": "IMPLEMENTED_PENDING_CI",
+  "repository": "SouthPaw302/GodRender",
+  "branch": "world/american-empire",
+  "source_authority": "original P1 canon + P2 world graph",
+  "numbers": "P3 hypothetical scenarios only",
+  "app": "godot/project.godot",
+  "scene": "godot/scenes/world_explorer.tscn",
+  "bridge": "tools/build_explorer_bundle.py",
+  "launcher": "tools/launch_explorer.py",
+  "tests": [
+    "tests/test_explorer_bridge.py",
+    "tools/verify_godot_proof.py"
+  ],
+  "source_protection": "No P1/P2/P3 files modified",
+  "visualization": "interactive Godot 4 relationship schematic, not world geographic map",
+  "technical_proof": "A passing GitHub Actions P4 run with Xvfb/Mesa-rendered frames, state change logs and verification report is required",
+  "production_approval": false,
+  "web_deployed": false
+}

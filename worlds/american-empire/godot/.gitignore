@@ -1,0 +1,4 @@
+# Produced only by tools/build_explorer_bundle.py from verified P1/P2/P3 sources.
+data/world_bundle.json
+.godot/
+*.tmp
