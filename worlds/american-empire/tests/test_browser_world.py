@@ -90,7 +90,7 @@ class BrowserExplorerTests(unittest.TestCase):
 
     def test_interface_references_existing_controls(self):
         html=(ROOT/"web/src/index.html").read_text()
-        js=(ROOT/"web/src/app.js").read_text()
+        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
         for ident in ["world","chronology","brain","production","simulation","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
