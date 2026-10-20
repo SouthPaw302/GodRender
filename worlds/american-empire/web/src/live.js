@@ -277,5 +277,5 @@ async function init({world,model,state,api}){
  selectOptions();render();setYear(state.year);status('P3 parity PASS · 3 Python reference scenarios · all 12 snapshot digests · model '+sim.modelHash.slice(0,12)+'…');
  return true;
 }
-global.AE_Live={init,render,syncYear,syncScenario,select,createFork,compare,runReplay};
+global.AE_Live={init,render,syncYear,syncScenario,select,createFork,compare,runReplay,current:()=>({run:moduleState.lastRun,year:moduleState.year,scenario_id:moduleState.selected})};
 })(window);

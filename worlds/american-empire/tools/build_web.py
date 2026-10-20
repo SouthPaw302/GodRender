@@ -122,6 +122,13 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         raise ValueError("Missing browser application source")
     bundle = build_bundle()
     brain = brain_index()
+    geo = _load("worlds/american-empire/P6_GEOGRAPHY.json")
+    land = _load("worlds/american-empire/geo/natural_earth_110m_land.geojson")
+    if geo.get("schema") != "american-empire.geography.v1" or len(geo["nodes"]) != 12 or len(geo["routes"]) != 16:
+        raise ValueError("P6 graph input has drifted")
+    if land.get("type") != "FeatureCollection" or len(land["features"]) < 100:
+        raise ValueError("Natural Earth coastline source is invalid")
+    geo["source_geo_sha256"] = hashlib.sha256(json.dumps(geo,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
     model = _load("worlds/american-empire/P3_MODEL.json")
     references = [_load("worlds/american-empire/scenarios/examples/"+name+".json")
                   for name in ("baseline","independent-corridor","high-integration")]
@@ -133,16 +140,18 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
+            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html","app.js","styles.css","simulator.js","live.js"):
+    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js"):
         shutil.copy2(SOURCE / name, out / name)
     _write(out / "data" / "world.json",bundle)
     _write(out / "data" / "brain.json",brain)
     _write(out / "data" / "model.json",model)
     _write(out / "data" / "reference_scenarios.json",references)
+    _write(out / "data" / "geo.json",geo)
+    _write(out / "data" / "land.geojson",land)
     # One-file offline artifact: embed signed/source-pinned P3 rules and inputs.
     # Less-than escaping prevents an embedded JSON value from closing its script.
     html = (SOURCE / "index.html").read_text(encoding="utf-8")
@@ -151,10 +160,13 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         ("simulator.js", (SOURCE / "simulator.js").read_text(encoding="utf-8")),
         ("app.js", (SOURCE / "app.js").read_text(encoding="utf-8")),
         ("live.js", (SOURCE / "live.js").read_text(encoding="utf-8")),
+        ("regions.js", (SOURCE / "regions.js").read_text(encoding="utf-8")),
+        ("earth.js", (SOURCE / "earth.js").read_text(encoding="utf-8")),
     )
     html = html.replace('<link rel="stylesheet" href="./styles.css">', '<style>'+css+'</style>')
     inline_data = (("embeddedWorld",bundle),("embeddedBrain",brain),
-                   ("embeddedModel",model),("embeddedReference",references))
+                   ("embeddedModel",model),("embeddedReference",references),
+                   ("embeddedGeo",geo),("embeddedLand",land))
     payload = "".join('<script type="application/json" id="'+label+'">'
                       +json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(",",":")).replace("<","\\u003c")
                       +"</script>\n" for label,data in inline_data)

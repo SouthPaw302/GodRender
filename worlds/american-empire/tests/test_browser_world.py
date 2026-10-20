@@ -63,6 +63,12 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertTrue((output/"simulator.js").is_file())
             self.assertTrue((output/"live.js").is_file())
             self.assertTrue((output/"data/model.json").is_file())
+            self.assertTrue((output/"data/geo.json").is_file())
+            self.assertTrue((output/"data/land.geojson").is_file())
+            self.assertTrue((output/"regions.js").is_file())
+            self.assertTrue((output/"earth.js").is_file())
+            self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["nodes"]),12)
+            self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["routes"]),16)
             self.assertTrue((output/"data/reference_scenarios.json").is_file())
             sources=json.loads((output/"data/reference_scenarios.json").read_text())
             self.assertEqual([s["id"] for s in sources],["baseline","independent-corridor","high-integration"])
@@ -72,6 +78,8 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertIn('id="embeddedBrain"', standalone)
             self.assertIn('id="embeddedModel"', standalone)
             self.assertIn('id="embeddedReference"', standalone)
+            self.assertIn('id="embeddedGeo"', standalone)
+            self.assertIn('id="embeddedLand"', standalone)
             self.assertIn('P5 browser-native deterministic P3 simulation', standalone)
             self.assertIn('<style>', standalone)
             self.assertIn('counterfactual_adaptation_not_canon', standalone)
@@ -90,9 +98,9 @@ class BrowserExplorerTests(unittest.TestCase):
 
     def test_interface_references_existing_controls(self):
         html=(ROOT/"web/src/index.html").read_text()
-        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text()
+        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["world","chronology","brain","production","simulation","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
+        for ident in ["world","chronology","brain","production","simulation","earth","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)

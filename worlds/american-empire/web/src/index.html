@@ -19,6 +19,7 @@
       <button type="button" class="tab active" data-tab="world">World Matrix</button>
       <button type="button" class="tab" data-tab="chronology">Chronology</button>
       <button type="button" class="tab" data-tab="simulation">Simulation Lab</button>
+      <button type="button" class="tab" data-tab="earth">Earth Network</button>
       <button type="button" class="tab" data-tab="brain">Second Brain</button>
       <button type="button" class="tab" data-tab="production">Production Desk</button>
     </nav>
@@ -125,6 +126,62 @@
       </div>
     </section>
 
+
+    <section id="earth" class="page widepage earth-page" aria-label="P6 Geographic Earth">
+      <div class="page-intro"><p class="eyebrow">P6 · REAL GEOGRAPHY / HYPOTHETICAL SYSTEMS</p>
+        <h1>The world beneath the Empire.</h1>
+        <p>Locations named in the original story, placed against public-domain Natural Earth coastlines. Connections, influence, local service indices and decisions are <strong>illustrative simulations</strong>, not documented transport routes, real economic data, or new canon.</p>
+      </div>
+      <div id="geoStatus" class="sim-status" role="status" aria-live="polite">Loading the geographic index…</div>
+      <div class="geo-layout">
+        <div class="geo-main">
+          <div class="geo-control-strip">
+            <div><label for="geoYear">WORLD YEAR</label><strong id="geoYearText">2030</strong></div>
+            <input type="range" id="geoYear" min="2026" max="2037" value="2030" step="1" aria-label="Geographic simulation year">
+            <button type="button" id="geoPrev" class="flat-button">←</button><button type="button" id="geoNext" class="flat-button">→</button>
+            <div class="geo-scenario"><small>ACTIVE P5 HISTORY</small><strong id="geoScenarioText">baseline</strong></div>
+          </div>
+          <div class="geo-map-container">
+            <div class="geo-map-top">
+              <span><i class="dot aqua"></i> CITY REFERENCE</span><span><i class="dot amber"></i> SELECTED LOCATION</span><span><i class="dot rose"></i> HYPOTHETICAL LINK</span>
+              <div class="geo-map-buttons"><button id="geoZoomIn" aria-label="Zoom in">＋</button><button id="geoZoomOut" aria-label="Zoom out">－</button><button id="geoZoomReset" aria-label="Reset map">RESET</button></div>
+            </div>
+            <svg id="earthMap" viewBox="0 0 1200 620" role="img" aria-label="World map showing fictional American Empire story locations and modeled regional connections"></svg>
+            <div class="geo-map-foot"><span id="geoCounter">12 CITY REFERENCE POINTS · 16 MODEL EDGES</span><span>PUBLIC-DOMAIN LAND GEOMETRY · GEOGRAPHY IS NOT A SOVEREIGNTY CLAIM</span></div>
+          </div>
+          <div class="geo-city-strip" id="geoCityStrip"></div>
+          <p class="caveat">Land shapes: Natural Earth 1:110m public-domain dataset. Location coordinates are approximate city centers; no exact hospital, port facility, civic boundary, or future imperial border is asserted.</p>
+        </div>
+        <aside class="geo-sidebar">
+          <div class="panel-label">SELECTED GEOGRAPHIC NODE</div>
+          <h2 id="geoSelectedName">Bandar Abbas</h2>
+          <p id="geoSelectedNote" class="source-copy"></p>
+          <div class="geo-stats">
+            <div><small>SERVICE RELIABILITY · MODEL</small><strong id="geoService">—</strong></div>
+            <div><small>INDEPENDENT CAPACITY · MODEL</small><strong id="geoAutonomy">—</strong></div>
+            <div><small>INCOMING NETWORK PRESSURE · MODEL</small><strong id="geoPressure">—</strong></div>
+          </div>
+          <div id="geoSource" class="source-citation"></div>
+          <div class="rule"></div>
+          <div class="panel-label">LOCAL DECISION · ALTERNATIVE HISTORY</div>
+          <label for="geoAction">Intervention at this location</label><select id="geoAction"></select>
+          <label for="geoIntensity">Intensity <strong id="geoIntensityLabel">1</strong> of 3</label><input id="geoIntensity" type="range" min="1" max="3" value="1" step="1">
+          <button id="geoApply" class="primary-button full-button">Apply to geographic scenario</button>
+          <p class="caveat">Interventions propagate along modeled directed links with a one-year lag. Global variables are inherited from the active P5 scenario and never overwritten.</p>
+          <div class="rule"></div>
+          <div class="panel-label">NETWORK CONSEQUENCES</div>
+          <div id="geoConsequences" class="geo-consequences"></div>
+          <div id="geoEventList" class="geo-events"></div>
+          <div class="geo-button-row">
+            <button id="geoUndo" class="flat-button">Undo latest</button>
+            <button id="geoExport" class="flat-button">Export scenario</button>
+          </div>
+          <button id="geoClear" class="flat-button full-button">Clear local interventions</button>
+          <p class="tiny muted">Local scenario data stays in your browser, not Drive. Export it before clearing storage. GodRender FX, Godot, ONNX and processing workers are not invoked by moving a map marker.</p>
+        </aside>
+      </div>
+    </section>
+
     <section id="chronology" class="page widepage" aria-label="Chronology">
       <div class="page-intro"><p class="eyebrow">THE ESTABLISHED SPINE</p><h1>Twelve years that changed the world.</h1><p>These titles and descriptions belong to the original Reality Matrix. Select a year to inspect its connected hypothetical state in the World Matrix.</p></div>
       <div class="chronology-layout"><div id="timelineList" class="timeline-list"></div><aside class="side-feature"><span class="panel-label">TEMPORAL INTEGRITY</span><h2>One canon. Many possible futures.</h2><p>P1 preserved the written chronology; P2 indexed it. P3 can branch scenarios without editing canonical history.</p><div id="timelineDetail" class="time-detail"></div><button id="timelineToWorld" class="primary-button">EXPLORE SELECTED YEAR ↗</button></aside></div>
@@ -148,5 +205,7 @@
 <script src="./simulator.js" defer></script>
 <script src="./app.js" defer></script>
 <script src="./live.js" defer></script>
+<script src="./regions.js" defer></script>
+<script src="./earth.js" defer></script>
 </body>
 </html>

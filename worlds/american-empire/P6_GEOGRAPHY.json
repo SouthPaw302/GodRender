@@ -1,0 +1,416 @@
+{
+  "schema": "american-empire.geography.v1",
+  "phase": "P6",
+  "classification": "georeferenced_story_locations_plus_explicit_what_if_connections",
+  "basemap": {
+    "dataset": "Natural Earth 1:110m land",
+    "data_path": "geo/natural_earth_110m_land.geojson",
+    "source_url": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson",
+    "license": "Public domain (Natural Earth)",
+    "coordinates": "WGS84 [longitude,latitude]"
+  },
+  "policy": {
+    "geo": "Real modern city-center reference coordinates; not borders, facilities or 2037 geopolitical boundaries",
+    "mention": "Story names anchored to original locked P1 text, not a new canon designation",
+    "initial": "All local numeric indices invented exclusively for illustrative P6 modeling and never canonical facts",
+    "links": "All connections are proposed simulation graph edges, not verified physical shipments or operative Corridor Treaties",
+    "p3": "P5/P3 seven global variables drive shared macro trends; local P6 decisions only affect local and connected modeled locations",
+    "simulated": "Never conflate approval or source mention with fictional Stack integration"
+  },
+  "nodes": [
+    {
+      "id": "anderson",
+      "name": "Anderson, South Carolina",
+      "country": "US",
+      "lat": 34.5034,
+      "lon": -82.6501,
+      "kind": "emergency_dispatch",
+      "initial": {
+        "service": 49,
+        "independence": 76
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+        "locator": "## II. Dollar Night — Anderson, South Carolina, August 2027"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "washington",
+      "name": "Washington, D.C.",
+      "country": "US",
+      "lat": 38.9072,
+      "lon": -77.0369,
+      "kind": "governance",
+      "initial": {
+        "service": 47,
+        "independence": 79
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+        "locator": "## 4. Dollar Night: August 2027"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "philadelphia",
+      "name": "Philadelphia",
+      "country": "US",
+      "lat": 39.9526,
+      "lon": -75.1636,
+      "kind": "covenant",
+      "initial": {
+        "service": 52,
+        "independence": 71
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "### Philadelphia, United States World Empire — March 18, 2030"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "bandar-abbas",
+      "name": "Bandar Abbas",
+      "country": "IR",
+      "lat": 27.1865,
+      "lon": 56.2808,
+      "kind": "port_hospital",
+      "initial": {
+        "service": 31,
+        "independence": 66
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "### Bandar Abbas, Iran — February 3, 2030"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "tehran",
+      "name": "Tehran",
+      "country": "IR",
+      "lat": 35.6892,
+      "lon": 51.389,
+      "kind": "governance",
+      "initial": {
+        "service": 38,
+        "independence": 81
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "Tehran ordered the Corridor dissolved."
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "karachi",
+      "name": "Karachi",
+      "country": "PK",
+      "lat": 24.8607,
+      "lon": 67.0011,
+      "kind": "port",
+      "initial": {
+        "service": 42,
+        "independence": 74
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+        "locator": "imperial Corridor around Karachi"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "gwadar",
+      "name": "Gwadar",
+      "country": "PK",
+      "lat": 25.1264,
+      "lon": 62.3225,
+      "kind": "port",
+      "initial": {
+        "service": 33,
+        "independence": 80
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "Gwadar requested technical terms"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "basra",
+      "name": "Basra",
+      "country": "IQ",
+      "lat": 30.515,
+      "lon": 47.81,
+      "kind": "port",
+      "initial": {
+        "service": 35,
+        "independence": 80
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "Basra wanted the instrument"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "mombasa",
+      "name": "Mombasa",
+      "country": "KE",
+      "lat": -4.0435,
+      "lon": 39.6682,
+      "kind": "port",
+      "initial": {
+        "service": 41,
+        "independence": 85
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "Municipal councils in Mombasa"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "thessaloniki",
+      "name": "Thessaloniki",
+      "country": "GR",
+      "lat": 40.6401,
+      "lon": 22.9444,
+      "kind": "port",
+      "initial": {
+        "service": 53,
+        "independence": 84
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "Thessaloniki"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "guayaquil",
+      "name": "Guayaquil",
+      "country": "EC",
+      "lat": -2.17099,
+      "lon": -79.92236,
+      "kind": "port",
+      "initial": {
+        "service": 47,
+        "independence": 81
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+        "locator": "Guayaquil"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    },
+    {
+      "id": "geneva",
+      "name": "Geneva",
+      "country": "CH",
+      "lat": 46.2044,
+      "lon": 6.1432,
+      "kind": "governance",
+      "initial": {
+        "service": 61,
+        "independence": 89
+      },
+      "source": {
+        "type": "story_mention",
+        "path": "archive/01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+        "locator": "Geneva Administrative District, 2037"
+      },
+      "location_status": "approximate_real_city_centre_not_facility",
+      "numeric_authority": "scenario_only"
+    }
+  ],
+  "routes": [
+    {
+      "id": "r01",
+      "from": "tehran",
+      "to": "bandar-abbas",
+      "type": "civil services",
+      "weight": 4,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r02",
+      "from": "bandar-abbas",
+      "to": "gwadar",
+      "type": "provisioning",
+      "weight": 5,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r03",
+      "from": "gwadar",
+      "to": "karachi",
+      "type": "shipping",
+      "weight": 5,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r04",
+      "from": "bandar-abbas",
+      "to": "basra",
+      "type": "regional trade",
+      "weight": 4,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r05",
+      "from": "bandar-abbas",
+      "to": "mombasa",
+      "type": "maritime corridor",
+      "weight": 3,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r06",
+      "from": "basra",
+      "to": "thessaloniki",
+      "type": "maritime trade",
+      "weight": 2,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r07",
+      "from": "karachi",
+      "to": "mombasa",
+      "type": "maritime trade",
+      "weight": 3,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r08",
+      "from": "mombasa",
+      "to": "thessaloniki",
+      "type": "maritime trade",
+      "weight": 3,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r09",
+      "from": "thessaloniki",
+      "to": "geneva",
+      "type": "settlement access",
+      "weight": 3,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r10",
+      "from": "guayaquil",
+      "to": "philadelphia",
+      "type": "freight trade",
+      "weight": 3,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r11",
+      "from": "washington",
+      "to": "philadelphia",
+      "type": "governance logistics",
+      "weight": 4,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r12",
+      "from": "philadelphia",
+      "to": "anderson",
+      "type": "domestic provisioning",
+      "weight": 4,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r13",
+      "from": "philadelphia",
+      "to": "geneva",
+      "type": "financial cooperation",
+      "weight": 2,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r14",
+      "from": "gwadar",
+      "to": "basra",
+      "type": "coastal freight",
+      "weight": 2,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r15",
+      "from": "geneva",
+      "to": "tehran",
+      "type": "administrative coordination",
+      "weight": 1,
+      "authority": "proposed_model_connection_only"
+    },
+    {
+      "id": "r16",
+      "from": "basra",
+      "to": "tehran",
+      "type": "regional trade",
+      "weight": 2,
+      "authority": "proposed_model_connection_only"
+    }
+  ],
+  "actions": {
+    "port_disruption": {
+      "label": "Interrupt port / service access",
+      "deltas": {
+        "service": -18,
+        "independence": 3
+      }
+    },
+    "corridor_relief": {
+      "label": "Deliver Stack-linked emergency relief",
+      "deltas": {
+        "service": 14,
+        "independence": -7
+      }
+    },
+    "independent_supply": {
+      "label": "Build independent local supply",
+      "deltas": {
+        "service": 8,
+        "independence": 10
+      }
+    },
+    "civic_exit": {
+      "label": "Strengthen practical exit rights",
+      "deltas": {
+        "service": -2,
+        "independence": 12
+      }
+    }
+  },
+  "limitations": [
+    "Not actual rail/road/sea routes; links are hypothetical directed dependencies",
+    "No populations, traffic observations, local elections, physical capacity units or actual trade estimates",
+    "City-center coordinates are approximate and cannot locate canon fictional facilities",
+    "Political borders remain real-world basemap context; imperial accessions are not drawn as territorial claims"
+  ]
+}

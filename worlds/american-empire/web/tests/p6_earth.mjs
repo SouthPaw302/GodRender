@@ -1,0 +1,57 @@
+// P6 actual Chromium geography and causal propagation (served + file://).
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import {chromium} from 'playwright';
+const base=process.env.AE_BASE_URL||'http://127.0.0.1:8765';
+const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+const page=await browser.newPage({viewport:{width:1512,height:1000},acceptDownloads:true});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+try{
+ await page.goto(base,{waitUntil:'load'});
+ await page.waitForFunction(()=>document.querySelector('#liveStatus')?.textContent?.includes('P3 parity PASS'));
+ await page.locator('[data-tab="earth"]').click();
+ await page.locator('#geoPins .geo-pin').first().waitFor();
+ assert.equal(await page.locator('#geoPins .geo-pin').count(),12);
+ assert.equal(await page.locator('#geoRoutes path').count(),16);
+ assert.ok((await page.locator('#geoLand path').count())>100);
+ assert.match(await page.locator('#geoStatus').textContent(),/Natural Earth basemap verified/);
+ assert.match(await page.locator('#geoScenarioText').textContent(),/baseline/);
+ await page.locator('#earthMap .geo-pin[data-place="bandar-abbas"]').dispatchEvent('click');
+ assert.match(await page.locator('#geoSelectedName').textContent(),/Bandar Abbas/);
+ await page.locator('#geoYear').evaluate(el=>{el.value='2030';el.dispatchEvent(new Event('input',{bubbles:true}));});
+ const pre=await page.evaluate(()=>({now:window.AE_Geo.getSnapshot().places.gwadar.service,
+  next:(window.AE_Geo.model().run([]).snapshots[5].places.gwadar.service)}));
+ await page.locator('#geoAction').selectOption('port_disruption');
+ await page.locator('#geoApply').click();
+ await page.getByText(/Scenario-only decision applied/).waitFor();
+ const cur=await page.evaluate(()=>window.AE_Geo.getSnapshot().places.gwadar.service);
+ assert.equal(cur,pre.now,'one-year lag required: Gwadar may not change in shock year');
+ await page.locator('#geoNext').click();
+ const after=await page.evaluate(()=>window.AE_Geo.getSnapshot().places.gwadar.service);
+ assert.ok(after<pre.next,'modeled disruption must causally reach Gwadar in 2031');
+ await page.locator('#geoNext').click();
+ assert.equal(await page.locator('#geoYearText').textContent(),'2032');
+ assert.ok((await page.locator('#geoConsequences').textContent()).includes('Gwadar'));
+ const exported=page.waitForEvent('download');
+ await page.locator('#geoExport').click();
+ const receipt=await exported;const doc=JSON.parse(await fs.readFile(await receipt.path(),'utf8'));
+ assert.equal(doc.schema,'american-empire.p6-scenario.v1');
+ assert.equal(doc.authority_layer,'scenario_only');
+ assert.equal(doc.events[0].place,'bandar-abbas');
+ assert.equal(doc.events[0].year,2030);
+ assert.equal(doc.events[0].type,'port_disruption');
+ assert.equal(doc.source_p3_run_sha256.length,64);
+ await page.locator('#geoZoomIn').click();
+ assert.match(await page.locator('#geoAll').getAttribute('transform'),/scale\(1.5\)/);
+ await page.locator('#geoZoomReset').click();
+ assert.match(await page.locator('#geoAll').getAttribute('transform'),/scale\(1\)/);
+ await page.locator('#geoUndo').click();
+ assert.match(await page.locator('#geoConsequences').textContent(),/No local interventions yet/);
+ await page.evaluate(()=>window.AE_Live.select('high-integration'));
+ await page.locator('[data-tab="earth"]').click();
+ assert.equal((await page.locator('#geoScenarioText').textContent()).trim(),'high-integration');
+ assert.equal(await page.locator('#geoPins .geo-pin').count(),12);
+ assert.deepEqual(errors,[]);
+ if(process.env.AE_P6_SCREENSHOT)await page.screenshot({path:process.env.AE_P6_SCREENSHOT,fullPage:true});
+ console.log('P6 EARTH PASS: public-domain land, 12 canonical name anchors, 16 explicit what-if links, shock diffusion 2030→2031, export, undo, zoom, live P5 selection');
+}finally{await browser.close();}
