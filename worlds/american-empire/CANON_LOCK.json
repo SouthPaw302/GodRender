@@ -1,0 +1,89 @@
+{
+  "schema": "american-empire.canon-lock.v1",
+  "title": "The Quiet Accession / The American Empire — P1 recovered written source",
+  "status": "P1_SOURCE_LOCKED",
+  "source": {
+    "repository": "SouthPaw302/AIVideoEdit",
+    "branch": "archive/american-empire-quiet-accession-canon",
+    "commit": "d768ee1684ebddd06af249f3a366181c929bc80c",
+    "root": "projects/american-empire-canon-archive/",
+    "browser_url": "https://github.com/SouthPaw302/AIVideoEdit/tree/d768ee1684ebddd06af249f3a366181c929bc80c/projects/american-empire-canon-archive"
+  },
+  "mirror": {
+    "repository": "SouthPaw302/GodRender",
+    "branch": "world/american-empire",
+    "root": "worlds/american-empire/archive/"
+  },
+  "written_canon_drive_mirror": "https://drive.google.com/drive/folders/1UYyGfYE4bhd5fqh8QdOQWgqmpTc2TA0z",
+  "read_order": [
+    "01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+    "01_CANON_SOURCE/REALITY_MATRIX.json",
+    "02_CHRONICLES/CHRONICLE_02_THE_FIRST_WINTER.md",
+    "02_CHRONICLES/CHRONICLE_03_THE_MEASURE.md",
+    "02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md"
+  ],
+  "fictional_reality_cutoff": "2026-08-31",
+  "historical_spine": {
+    "first_year": 2026,
+    "last_year": 2037,
+    "authority": "recovered source reality matrix"
+  },
+  "policy": {
+    "original_bytes": "preserve_verbatim",
+    "git_blob_sha1": "all_pinned",
+    "canon_authority": "universe_bible_and_reality_matrix_with_recovered_chronicles",
+    "proposals_auto_promoted": false,
+    "adaptation_authority": "non_canon",
+    "simulations_modify_originals": false,
+    "timeline_change_requires": "explicit_user_authorization",
+    "proposed_additions": "sections explicitly labeled Additive canon proposed or Proposed additive canon are review candidates, not automatic established canon",
+    "promotion_requires": "explicit_user_approval_and_separate_versioned_addendum_with_canon_check"
+  },
+  "files": [
+    {
+      "path": "00_READ_FIRST/README.md",
+      "git_blob_sha1": "840942fad12d7f8bc7b28d0d086456fe75d2bb56",
+      "classification": "archive_guidance"
+    },
+    {
+      "path": "01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+      "git_blob_sha1": "7dd9055467315f51a1af434ea9c4d3023055b45c",
+      "classification": "source_canon"
+    },
+    {
+      "path": "01_CANON_SOURCE/REALITY_MATRIX.json",
+      "git_blob_sha1": "575e8c1b20bc6e9bf5c61ac32e32536256abcab0",
+      "classification": "source_canon"
+    },
+    {
+      "path": "02_CHRONICLES/CHRONICLE_02_THE_FIRST_WINTER.md",
+      "git_blob_sha1": "2e0479e29062f6ff85ce3fb128c1044a0f4595d3",
+      "classification": "source_chronicle_with_proposed_additions"
+    },
+    {
+      "path": "02_CHRONICLES/CHRONICLE_03_THE_MEASURE.md",
+      "git_blob_sha1": "02514a52931cfeaf48876799ee49abfb000a2e06",
+      "classification": "source_chronicle_with_proposed_additions"
+    },
+    {
+      "path": "02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md",
+      "git_blob_sha1": "873f316e6042b08b46e114180d1ef72fe3ed2d90",
+      "classification": "source_chronicle_with_proposed_additions"
+    },
+    {
+      "path": "03_PRODUCTION_LINK/PRODUCTION_MAP.md",
+      "git_blob_sha1": "5f9e9ab74732981c9a9795a7424d2efcd3123129",
+      "classification": "historical_adaptation_reference_only"
+    },
+    {
+      "path": "04_RECOVERY/FUTURE_AGENT_HANDOFF.md",
+      "git_blob_sha1": "0684954d95016f21448dda82fa72bc5430e59a09",
+      "classification": "archive_guidance"
+    },
+    {
+      "path": "04_RECOVERY/RECOVERY_MANIFEST.json",
+      "git_blob_sha1": "325a369531c63ea01f2bd8a82ea9884e23c35d70",
+      "classification": "archive_metadata"
+    }
+  ]
+}

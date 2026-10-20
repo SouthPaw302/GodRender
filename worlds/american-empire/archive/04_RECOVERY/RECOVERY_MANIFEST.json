@@ -1,0 +1,33 @@
+{
+  "project": "The Quiet Accession / American Empire",
+  "archive_purpose": "future reproducibility and canon recovery",
+  "source_files": [
+    "01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+    "01_CANON_SOURCE/REALITY_MATRIX.json",
+    "02_CHRONICLES/CHRONICLE_02_THE_FIRST_WINTER.md",
+    "02_CHRONICLES/CHRONICLE_03_THE_MEASURE.md",
+    "02_CHRONICLES/CHRONICLE_04_CORRIDOR_TREATIES.md"
+  ],
+  "timeline": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031,
+    2032,
+    2033,
+    2034,
+    2035,
+    2036,
+    2037
+  ],
+  "production_repo": "SouthPaw302/AIVideoEdit",
+  "production_root_branch": "project/american-empire-act1/main",
+  "scene_branches": [
+    "project/american-empire-act1/scene-01",
+    "project/american-empire-act1/scene-02",
+    "project/american-empire-act1/scene-03"
+  ],
+  "canon_policy": "Recovered source canon is immutable; adaptations and continuations must be additive."
+}

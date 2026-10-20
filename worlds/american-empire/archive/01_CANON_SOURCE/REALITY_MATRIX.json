@@ -1,0 +1,388 @@
+{
+  "title": "The Quiet Accession — Reality Matrix",
+  "version": "0.1",
+  "status": "fictional alternate-history model",
+  "reality_cutoff": "2026-08-31",
+  "branch_point": "The 2026 Iran war ends in an exhausted armistice, but the Strait of Hormuz and the financial sanctions regime do not normalize quickly enough to prevent a monetary cascade.",
+  "design_rules": [
+    "The hidden order is a distributed self-replacing institution, not an omnipotent cabal.",
+    "Its members can shape systems and exploit crises, but cannot predict every human response.",
+    "The dollar collapse must require several mutually reinforcing failures; debt alone is insufficient.",
+    "The American transfer of power is bloodless because the replacement system delivers continuity before it asks for legitimacy.",
+    "World conquest occurs mainly through infrastructural accession, not territorial occupation.",
+    "Every imperial benefit has a corresponding loss of agency, privacy, or exit.",
+    "No technology is magic; each is an extrapolation of existing autonomy, tokenization, sensing, energy, or manufacturing systems.",
+    "The empire's deepest conflict is not empire versus resistance, but stewardship versus permanent dominion inside the victorious order."
+  ],
+  "reality_anchors": [
+    {
+      "id": "R1",
+      "fact": "The 2026 Iran war has sharply reduced energy transit through Hormuz and remains unresolved at the reality cutoff.",
+      "story_use": "Supplies the energy, insurance, trade, and political shock that makes a monetary cascade possible."
+    },
+    {
+      "id": "R2",
+      "fact": "The dollar remains the leading reserve currency rather than already being in free fall.",
+      "story_use": "Requires a sudden confidence break and policy error; avoids treating gradual diversification as collapse."
+    },
+    {
+      "id": "R3",
+      "fact": "US debt and net interest costs are on an unsustainable long-range path.",
+      "story_use": "Creates fiscal fragility when emergency war, energy, and banking costs arrive together."
+    },
+    {
+      "id": "R4",
+      "fact": "Tokenized settlement, instant payments, AI command systems, and mass autonomous platforms already exist as programs or prototypes.",
+      "story_use": "Lets the Directorate unveil a mature parallel stack without resorting to supernatural technology."
+    }
+  ],
+  "hidden_history": {
+    "organization": "The Continuity Directorate",
+    "public_name_after_reveal": "Continuity",
+    "origin": "A permanent coordination cell formed from wartime logistics, Bretton Woods planning, intelligence reorganization, and continuity-of-government work between 1944 and 1949.",
+    "actual_reach": "It did not secretly issue every presidential order. It controlled selection, standards, procurement, emergency authorities, classified infrastructure, and the boundaries inside which elected governments made choices.",
+    "founding_belief": "The constitutional republic could govern a nation, but industrial civilization had become a planetary machine with no planetary operator.",
+    "long_plan": "Build a dormant replacement operating system for civilization, wait until the dollar order could no longer carry its own contradictions, then migrate essential life into the replacement during a crisis.",
+    "complicity_in_collapse": "Continuity did not start the Iran war, but its Ascendant faction prolonged the sanctions architecture, suppressed off-ramps, and timed the Treasury response so that a containable crisis became an irreversible migration event.",
+    "public_revelation": "The Archive Address releases authenticated records demonstrating eight decades of influence. The revelation is both confession and legitimacy claim: the public is told that the visible republic had been the user interface, not the operating system."
+  },
+  "actors": [
+    {
+      "id": "A1",
+      "name": "The Surveyors",
+      "type": "Continuity faction",
+      "controls": ["forecasting", "population-scale simulation", "standards", "strategic archives"],
+      "goal": "Keep civilization inside survivable boundaries.",
+      "fear": "Unmodeled human behavior.",
+      "internal_flaw": "They confuse what can be measured with what matters."
+    },
+    {
+      "id": "A2",
+      "name": "The Factors",
+      "type": "Continuity faction",
+      "controls": ["clearing", "sovereign debt plumbing", "insurance", "commodity contracts", "critical logistics"],
+      "goal": "Replace debt-backed money with capacity-backed settlement.",
+      "fear": "A rival ledger becoming the new center.",
+      "internal_flaw": "They engineered dependency and call it efficiency."
+    },
+    {
+      "id": "A3",
+      "name": "The Wardens",
+      "type": "Continuity faction",
+      "controls": ["strategic intelligence", "autonomous defense", "continuity sites", "orbital sensing"],
+      "goal": "Make organized resistance militarily futile without mass killing.",
+      "fear": "Fragmentation of command.",
+      "internal_flaw": "They treat dissent as a systems fault."
+    },
+    {
+      "id": "A4",
+      "name": "The Keepers",
+      "type": "Continuity faction",
+      "controls": ["constitutional doctrine", "succession files", "archives", "civic covenants"],
+      "goal": "Return extraordinary power to a lawful human polity after stabilization.",
+      "fear": "That the emergency will become permanent.",
+      "internal_flaw": "They helped build the very machine they hope to restrain."
+    },
+    {
+      "id": "A5",
+      "name": "The Ascendants",
+      "type": "Continuity faction",
+      "controls": ["executive coordination", "imperial strategy", "elite recruitment", "accession negotiations"],
+      "goal": "Create one irreversible planetary sovereignty.",
+      "fear": "A restored republic with the power to dismantle the Stack.",
+      "internal_flaw": "They believe a peaceful outcome retroactively justifies coercion."
+    },
+    {
+      "id": "A6",
+      "name": "The Federal Shell",
+      "type": "visible US government",
+      "controls": ["public law", "elections", "taxation", "legacy agencies"],
+      "goal": "Preserve recognizable constitutional government during collapse.",
+      "fear": "Civil disorder and institutional irrelevance.",
+      "internal_flaw": "Its legal authority outlives its practical capacity by only hours."
+    },
+    {
+      "id": "A7",
+      "name": "The American Public",
+      "type": "population",
+      "controls": ["social legitimacy", "labor", "local institutions", "cultural memory"],
+      "goal": "Food, power, safety, savings, and a future that still feels free.",
+      "fear": "Both chaos and invisible government.",
+      "internal_flaw": "Relief arrives faster than collective judgment."
+    },
+    {
+      "id": "A8",
+      "name": "The Continental Clearing Union",
+      "type": "China-centered rival bloc",
+      "controls": ["industrial supply chains", "regional payment rails", "rare-earth processing", "port finance"],
+      "goal": "Prevent American control of the post-dollar monetary center.",
+      "fear": "Exclusion from the Stack's maritime and compute guarantees.",
+      "internal_flaw": "Its members distrust one another more than they distrust the empire."
+    },
+    {
+      "id": "A9",
+      "name": "The Plural League",
+      "type": "India-, African-, Latin American-, and European-led nonalignment forum",
+      "controls": ["population", "resource corridors", "regulatory legitimacy", "swing markets"],
+      "goal": "Use competition between systems to preserve regional sovereignty.",
+      "fear": "Being forced to choose between famine and accession.",
+      "internal_flaw": "Coordination fails under unequal crisis pressure."
+    },
+    {
+      "id": "A10",
+      "name": "The Unbound",
+      "type": "transnational resistance",
+      "controls": ["offline communities", "smuggling", "open-source systems", "forbidden archives"],
+      "goal": "Preserve the human right to exist outside the planetary system.",
+      "fear": "A world in which exit is medically, economically, and socially impossible.",
+      "internal_flaw": "Some cells defend freedom; others become predatory states in miniature."
+    }
+  ],
+  "imperial_stack": [
+    {
+      "id": "S1",
+      "name": "Atlas",
+      "domain": "money and settlement",
+      "function": "A programmable clearing network whose unit, the Measure, is redeemable against a basket of verified electricity, computation, staple calories, water treatment, and freight capacity.",
+      "benefit": "Stops the currency panic and settles trade without sovereign debt as the primary reserve asset.",
+      "control_surface": "Every large transaction becomes permissioned, traceable, and conditionable.",
+      "prerequisites": ["S2", "S3", "S4"]
+    },
+    {
+      "id": "S2",
+      "name": "Mesh",
+      "domain": "identity and communication",
+      "function": "A satellite-terrestrial network combining cryptographic civil identity, resilient communications, records, and verified public information.",
+      "benefit": "Restores communications, property records, benefits, and coordination during institutional failure.",
+      "control_surface": "An unmeshed person can speak, but cannot participate fully in organized society.",
+      "prerequisites": ["S3"]
+    },
+    {
+      "id": "S3",
+      "name": "Grid",
+      "domain": "energy and water",
+      "function": "Federated microgrids using renewables, storage, geothermal, advanced fission, demand control, and desalination where needed.",
+      "benefit": "Makes accession visibly improve daily life within weeks.",
+      "control_surface": "Energy priority becomes a direct instrument of governance.",
+      "prerequisites": ["S4"]
+    },
+    {
+      "id": "S4",
+      "name": "Forge",
+      "domain": "production and logistics",
+      "function": "Autonomous ports, warehouses, trucks, machine shops, agricultural systems, and standardized modular factories coordinated as one supply web.",
+      "benefit": "Prevents famine and restores essential goods even when prices and firms fail.",
+      "control_surface": "Regions outside the production schedule become materially obsolete.",
+      "prerequisites": ["S2", "S3"]
+    },
+    {
+      "id": "S5",
+      "name": "Sentinel",
+      "domain": "security",
+      "function": "Persistent sensing, cyber defense, drone interception, nonlethal area denial, precision disabling of weapons, and automated treaty verification.",
+      "benefit": "Allows the empire to defeat armed forces without destroying cities.",
+      "control_surface": "No meaningful privacy remains for organized political resistance.",
+      "prerequisites": ["S2", "S3", "S4"]
+    },
+    {
+      "id": "S6",
+      "name": "Covenant",
+      "domain": "law and welfare",
+      "function": "A common floor of food, shelter, medicine, education, movement, due process, and local cultural autonomy in exchange for Stack law and demilitarization.",
+      "benefit": "Turns imperial membership into a tangible social contract rather than a flag change.",
+      "control_surface": "Rights are guaranteed by the same system capable of suspending them."
+    }
+  ],
+  "key_relationships": [
+    {"from": "A1", "to": "A2", "relation": "provides crisis timing and behavioral forecasts", "strength": 5},
+    {"from": "A2", "to": "S1", "relation": "designed and prepositioned", "strength": 5},
+    {"from": "A3", "to": "S5", "relation": "commands until imperial charter", "strength": 5},
+    {"from": "A4", "to": "A5", "relation": "contests permanent emergency rule", "strength": -4},
+    {"from": "A5", "to": "A6", "relation": "uses lawful emergency succession to obtain signatures", "strength": 4},
+    {"from": "A6", "to": "A7", "relation": "retains symbolic legitimacy", "strength": 3},
+    {"from": "S3", "to": "A7", "relation": "restores power and water", "strength": 5},
+    {"from": "S4", "to": "A7", "relation": "delivers essentials during market failure", "strength": 5},
+    {"from": "S2", "to": "A7", "relation": "restores identity and communications while mapping association", "strength": 4},
+    {"from": "S1", "to": "A8", "relation": "competes for global settlement", "strength": -5},
+    {"from": "S4", "to": "A9", "relation": "offers rescue corridors conditioned on accession", "strength": 5},
+    {"from": "S5", "to": "A8", "relation": "neutralizes conventional escalation", "strength": -4},
+    {"from": "S2", "to": "A10", "relation": "detects and excludes", "strength": -5},
+    {"from": "A10", "to": "A4", "relation": "supplies proof that emergency restrictions persist", "strength": 3},
+    {"from": "S6", "to": "A9", "relation": "creates popular pressure for accession", "strength": 4},
+    {"from": "A8", "to": "A9", "relation": "offers industrial alternative but limited security and reserve depth", "strength": 2}
+  ],
+  "collapse_chain": [
+    {
+      "order": 1,
+      "event": "The Iran armistice ends open combat but leaves Hormuz transit, maritime insurance, and regional production far below normal.",
+      "effects": ["energy inflation", "Asian dollar demand", "sovereign subsidy costs", "shipping failures"]
+    },
+    {
+      "order": 2,
+      "event": "Secondary sanctions force neutral states and firms to choose between US finance and essential Iranian-linked trade.",
+      "effects": ["counter-clearing systems", "accelerated reserve diversification", "retaliatory export controls"]
+    },
+    {
+      "order": 3,
+      "event": "Energy importers sell Treasuries to defend currencies and purchase scarce fuel while emergency US borrowing expands.",
+      "effects": ["failed auctions", "yield spike", "dealer insolvency", "collateral stress"]
+    },
+    {
+      "order": 4,
+      "event": "The Federal Reserve caps Treasury yields and guarantees core banks, creating an explicit fiscal-dominance signal.",
+      "effects": ["dollar flight", "commodity repricing", "domestic inflation expectations unanchor"]
+    },
+    {
+      "order": 5,
+      "event": "A coordinated cyberattack and ordinary liquidity failures become indistinguishable; exchanges and payment networks close for seventy-two hours.",
+      "effects": ["payroll failure", "food distribution interruption", "state emergency declarations"]
+    },
+    {
+      "order": 6,
+      "event": "Continuity activates the Stack under dormant emergency compacts and restores essential settlement, communications, energy priority, and logistics.",
+      "effects": ["public relief", "practical displacement of federal agencies", "loss of elite alternatives"]
+    },
+    {
+      "order": 7,
+      "event": "At 03:00 Eastern, elected leaders sign the Continuity Instrument. At sunrise, the Archive Address reveals the Directorate and proclaims the United States World Empire.",
+      "effects": ["bloodless domestic transfer", "global shock", "immediate legitimacy contest"]
+    }
+  ],
+  "simulation_variables": [
+    {"id": "V1", "name": "material reliability", "initial": 35, "imperial_target": 90, "legitimacy_weight": 0.25},
+    {"id": "V2", "name": "public consent", "initial": 44, "imperial_target": 68, "legitimacy_weight": 0.20},
+    {"id": "V3", "name": "elite defection", "initial": 22, "imperial_target": 75, "legitimacy_weight": 0.15},
+    {"id": "V4", "name": "rival interoperability", "initial": 70, "imperial_target": 20, "legitimacy_weight": -0.10},
+    {"id": "V5", "name": "military futility", "initial": 28, "imperial_target": 92, "legitimacy_weight": 0.10},
+    {"id": "V6", "name": "right of exit", "initial": 86, "imperial_target": 18, "legitimacy_weight": 0.20},
+    {"id": "V7", "name": "directorate cohesion", "initial": 91, "imperial_target": 55, "legitimacy_weight": 0.10}
+  ],
+  "accession_logic": {
+    "offer": "Immediate Grid, Forge, Atlas, and Covenant access; debt conversion; food and medical guarantees; external defense.",
+    "price": "Demilitarization, Stack settlement, Mesh identity, resource-floor contributions, imperial judicial supremacy, and treaty-based limits on secession.",
+    "coercion": "Nonmembers face no invasion at first. They face capital flight, insurance exclusion, logistical inferiority, elite defection, and citizens comparing their shortages with neighboring accession zones.",
+    "military_endgame": "Sentinel demonstrates that missiles, fleets, and command networks can be disabled faster than political leaders can authorize their use.",
+    "legitimacy_formula": "accession pressure = service gap + elite defection + security futility - local trust - viable alternatives",
+    "hidden_instability": "As the service gap closes, people regain the safety and time required to question whether rescue was consent."
+  },
+  "ten_year_phases": [
+    {
+      "year": "2026",
+      "name": "The Exhaustion",
+      "turn": "Iran war ends without true normalization; the peace exports financial and energy instability instead of resolving it."
+    },
+    {
+      "year": "2027",
+      "name": "Dollar Night",
+      "turn": "Treasury and payment crisis; Stack activation; bloodless Continuity takeover; Archive Address; empire proclaimed."
+    },
+    {
+      "year": "2028",
+      "name": "The First Winter",
+      "turn": "US stabilization proves the Stack works. Canada, Mexico, Caribbean states, and selected Pacific partners enter emergency compacts."
+    },
+    {
+      "year": "2029",
+      "name": "The Measure",
+      "turn": "Atlas becomes the preferred settlement asset for food, energy, insurance, and freight. Dollar notes remain domestic relics while the Measure becomes imperial money."
+    },
+    {
+      "year": "2030",
+      "name": "The Corridor Treaties",
+      "turn": "Cities and provinces gain the power to accede through humanitarian corridors even when national governments refuse, beginning sovereignty's hollowing-out."
+    },
+    {
+      "year": "2031",
+      "name": "The Thirty-Day War That Did Not Happen",
+      "turn": "A multinational fleet prepares to break an accession blockade. Sentinel disables navigation, targeting, fuel control, and launch systems without sinking a ship."
+    },
+    {
+      "year": "2032",
+      "name": "The Great Defection",
+      "turn": "Insurers, port authorities, hospitals, universities, and regional governments join the Stack faster than national capitals can prohibit them."
+    },
+    {
+      "year": "2033",
+      "name": "The Two Earths",
+      "turn": "Humanity is divided between reliable imperial zones and sovereign zones with greater formal freedom but worsening access to trade and technology."
+    },
+    {
+      "year": "2034",
+      "name": "The Keeper Crisis",
+      "turn": "Evidence surfaces that Continuity converted a survivable 2027 crisis into Dollar Night. Keepers demand restoration of meaningful exit; Ascendants classify the evidence."
+    },
+    {
+      "year": "2035",
+      "name": "The Last Coalition",
+      "turn": "The Continental Clearing Union and Plural League attempt a shared alternative. Their compromise arrives just as member populations demand imperial guarantees."
+    },
+    {
+      "year": "2036",
+      "name": "The Silent Encirclement",
+      "turn": "Remaining great powers retain flags and armies but lose settlement, shipping, component supply, orbital access, and the loyalty of border regions."
+    },
+    {
+      "year": "2037",
+      "name": "World Accession",
+      "turn": "The last sovereign coalition signs. There is one clearing system, one strategic security authority, and one enforceable floor of rights. The empire conquers the world—and immediately confronts the question it was built to postpone: can humanity leave?"
+    }
+  ],
+  "point_of_view_characters": [
+    {
+      "id": "P1",
+      "name": "Mara Venn",
+      "role": "Atlas systems architect and fourth-generation Continuity member",
+      "knows": "The Stack was built for migration, not merely disaster recovery.",
+      "does_not_know": "The Ascendants deliberately rejected a viable 2027 off-ramp.",
+      "dramatic_question": "Can a person expose the crime without destroying the system keeping billions alive?"
+    },
+    {
+      "id": "P2",
+      "name": "Caleb Reed",
+      "role": "County emergency dispatcher in Anderson, South Carolina",
+      "knows": "On Dollar Night, the invisible government feeds his county when the visible one cannot.",
+      "does_not_know": "His family's relief was part of a precomputed legitimacy campaign.",
+      "dramatic_question": "Was accepting rescue the same thing as consenting to rule?"
+    },
+    {
+      "id": "P3",
+      "name": "Dr. Neda Farzan",
+      "role": "Iranian trauma surgeon and later Corridor commissioner",
+      "knows": "All grand systems are experienced by ordinary people as water, medicine, absence, and grief.",
+      "does_not_know": "Her hospital's survival will be used to force her city into the first foreign accession.",
+      "dramatic_question": "Can she reject the empire without rejecting the lives its system will save?"
+    },
+    {
+      "id": "P4",
+      "name": "Lin Meiyu",
+      "role": "Continental Clearing Union negotiator",
+      "knows": "The empire's greatest weapon is the ability to make its rule feel like the return of normal life.",
+      "does_not_know": "Her own delegation's logistics network has already made a secret interoperability agreement with Atlas.",
+      "dramatic_question": "What remains of sovereignty when every institution defects before the state does?"
+    },
+    {
+      "id": "P5",
+      "name": "Jonah Vale",
+      "role": "Keeper jurist and author of the Continuity Instrument's sunset clause",
+      "knows": "The legal transfer was valid only because it promised a future referendum and a protected right of exit.",
+      "does_not_know": "The referendum engine has been trained to identify any exit movement as a cascading infrastructure threat.",
+      "dramatic_question": "Can law bind a sovereign that controls the conditions under which law is possible?"
+    }
+  ],
+  "story_constraints": {
+    "tone": "intimate, lucid, morally ambiguous, documentary in its dates but human in its consequences",
+    "narrative_form": "short mosaic told through people who never possess the whole truth",
+    "opening_image": "A hospital in Iran hears silence after months of war, then discovers that peace has not restored the machines.",
+    "domestic_takeover_image": "At 03:00 Eastern no tanks enter Washington; passwords, routing tables, authority certificates, and freight priorities simply change owners.",
+    "final_image": "A child born on World Accession Day asks a forbidden civic question: where can a citizen go if the whole world is home?",
+    "avoid": [
+      "villain monologues",
+      "omniscient conspiracy claims presented as real history",
+      "magical superintelligence",
+      "effortless cultural homogenization",
+      "equating material prosperity with moral legitimacy",
+      "making every resistor heroic or every imperial official evil"
+    ]
+  },
+  "core_paradox": "Continuity saves civilization using a crisis it chose not to prevent. Its empire may be the first government capable of guaranteeing every human a material minimum—and the first from which no human can meaningfully exit."
+}
