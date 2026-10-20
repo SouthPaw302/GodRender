@@ -10,7 +10,7 @@ const nodeLookup = ()=>[...state.world.nodes,...state.world.people].find(n=>n.id
 const getSnapshot = ()=>state.world.scenarios[state.scenario].snapshots[state.year-2026];
 const shortText=(value,n=19)=>String(value||'').length>n?String(value).slice(0,n-1)+'…':String(value||'');
 function setTab(name){
-  if(!['world','chronology','brain','production','simulation','earth','inhabitants','cinema'].includes(name))name='world';
+  if(!['home','world','chronology','brain','production','simulation','earth','inhabitants','cinema'].includes(name))name='world';
   state.tab=name;document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===name));
   document.querySelectorAll('[data-tab]').forEach(el=>{el.classList.toggle('active',el.dataset.tab===name);el.setAttribute('aria-selected',String(el.dataset.tab===name));});
   if(name==='production') renderBrief(); if(name==='brain') renderBrainList(); if(name==='simulation') window.AE_Live?.render(); if(name==='earth') window.AE_Geo?.render(); if(name==='inhabitants') window.AE_People?.refresh(); if(name==='cinema') window.AE_Cinema?.render();
@@ -188,6 +188,11 @@ function bindEvents(){
  $('nextYear').addEventListener('click',()=>updateYear(state.year+1));
  $('yearSlider').addEventListener('input',e=>updateYear(e.target.value));
  $('scenarioSelect').addEventListener('change',e=>{state.scenario=Number(e.target.value);renderYear();renderBrief();window.AE_Live?.syncScenario(state.scenario);});
+ $('startCinema').addEventListener('click',()=>setTab('cinema'));
+ $('startFilmAgain').addEventListener('click',()=>setTab('cinema'));
+ $('startSimulation').addEventListener('click',()=>setTab('simulation'));
+ $('startClaire').addEventListener('click',()=>{window.AE_People.moveYear(2027);window.AE_People.select('claire');setTab('inhabitants')});
+ $('startEarth').addEventListener('click',()=>{window.AE_Geo.setYear(2027);window.AE_Geo.select('paris');setTab('earth')});
  $('resetGraph').addEventListener('click',()=>selectEntity('system:S1'));
  $('goChronology').addEventListener('click',()=>setTab('chronology'));
  $('timelineToWorld').addEventListener('click',()=>setTab('world'));
@@ -220,7 +225,7 @@ async function init(){
  await window.AE_People.init({manifest:inhabitants,geo,canon:peopleSource});
  if(!window.AE_Cinema)throw Error('Observer Cinema runtime missing');
  window.AE_Cinema.init(mediaInventory);
- setTab(location.hash.slice(1)||'world');$('error').hidden=true;
+ setTab(location.hash.slice(1)||'home');$('error').hidden=true;
  }catch(e){$('error').hidden=false;$('error').textContent='World Explorer unavailable: '+e.message+'. Check the verified browser build.';console.error(e);}
 }
 // Inline standalone scripts must all initialize before asynchronous data parity.

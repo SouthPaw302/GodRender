@@ -9,6 +9,20 @@ const errors=[];
 page.on('pageerror',e=>errors.push(e.message));
 try{
  await page.goto(base,{waitUntil:'networkidle',timeout:30000});
+ await page.locator('#home.active').waitFor();
+ assert.equal(await page.locator('#startCinema').count(),1);
+ await page.waitForFunction(()=>document.querySelector('#peopleStatus')?.textContent?.includes('P7 VERIFIED'),null,{timeout:30000});
+ await page.locator('#startClaire').click();
+ assert.equal(await page.locator('section.page.active').getAttribute('id'),'inhabitants');
+ assert.equal(await page.locator('#personFullName').textContent(),'Claire Delacroix');
+ await page.locator('[data-tab="home"]').click();
+ await page.locator('#startEarth').click();
+ assert.equal(await page.locator('section.page.active').getAttribute('id'),'earth');
+ assert.equal(await page.locator('#geoSelectedName').textContent(),'Paris');
+ await page.locator('[data-tab="home"]').click();
+ await page.locator('#startCinema').click();
+ assert.equal(await page.locator('section.page.active').getAttribute('id'),'cinema');
+ await page.locator('[data-tab="world"]').click();
  await page.locator('#graph .node').first().waitFor();
  try { await page.waitForFunction(()=>document.querySelector('#liveStatus')?.textContent?.includes('P3 parity PASS'),null,{timeout:9000});
  await page.waitForFunction(()=>document.querySelector('#peopleStatus')?.textContent?.includes('P7 VERIFIED'),null,{timeout:30000}); }

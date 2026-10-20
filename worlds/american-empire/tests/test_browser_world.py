@@ -124,7 +124,7 @@ class BrowserExplorerTests(unittest.TestCase):
         html=(ROOT/"web/src/index.html").read_text()
         js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text() + (ROOT/"web/src/cinema.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["world","chronology","brain","production","simulation","earth","inhabitants","cinema","cinemaItems","cinemaPlay","cinemaOpen","cinemaFrame","cinemaFindClaire","cinemaFindDaniel","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
+        for ident in ["home","startCinema","startClaire","startEarth","startSimulation","world","chronology","brain","production","simulation","earth","inhabitants","cinema","cinemaItems","cinemaPlay","cinemaOpen","cinemaFrame","cinemaFindClaire","cinemaFindDaniel","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)

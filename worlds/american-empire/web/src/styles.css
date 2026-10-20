@@ -140,3 +140,22 @@
 .cinema-character-list p{font-size:11px;line-height:1.65;color:#c3d4db}
 @media(max-width:950px){.cinema-layout{grid-template-columns:1fr}.cinema-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.cinema-list,.cinema-character-list{grid-template-columns:1fr}}
+
+/* Observer entrance: progressive disclosure, not another tool dashboard. */
+.ae-start-hero{background:radial-gradient(circle at 76% 28%,#19475a 0,#102b3a 41%,#0b2030 100%);border:1px solid #406077;border-radius:11px;padding:45px 42px;position:relative;overflow:hidden}
+.ae-start-hero::after{content:"AE";font:130px Georgia,serif;opacity:.045;position:absolute;right:4%;top:8%;pointer-events:none}
+.ae-start-hero h1{font:400 clamp(32px,4.4vw,56px)/1.14 Georgia,serif;color:#e8d2a9;letter-spacing:-.02em;margin:15px 0 21px;max-width:760px}
+.ae-start-hero p{max-width:800px;color:#c1d3dc;font-size:14px;line-height:1.85}
+.ae-start-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:29px}
+.ae-start-buttons button{min-width:0;padding:17px 19px;display:flex;flex-direction:column;text-align:left;gap:10px;border-radius:7px}
+.ae-start-buttons span{font-size:9px;letter-spacing:.12em;opacity:.84}
+.ae-start-buttons strong{font:21px Georgia,serif}
+.ae-start-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+.ae-start-grid>div{background:#102638;border:1px solid #30516a;border-radius:8px;padding:22px}
+.ae-start-grid h2{font:400 23px Georgia,serif;color:#e3cda8;margin:12px 0}
+.ae-start-grid p{font-size:12px;line-height:1.8;color:#b4c5cf;min-height:111px}
+.ae-start-grid button{margin-top:9px}
+.ae-start-status{display:flex;gap:15px;flex-wrap:wrap;border-top:1px solid #37546a;border-bottom:1px solid #37546a;padding:20px 8px;margin:22px 0;color:#a8c4d2;font-size:11px}
+.ae-start-status span{flex:1;min-width:190px;line-height:1.7}
+.ae-start-status strong{display:block;letter-spacing:.08em;color:#dfc99e}
+@media(max-width:840px){.ae-start-buttons,.ae-start-grid{grid-template-columns:1fr}.ae-start-hero{padding:30px 25px}.ae-start-grid p{min-height:0}}
