@@ -1,0 +1,23 @@
+{
+  "schema": "american-empire.phase-manifest.v1",
+  "phase": "P3",
+  "status": "IMPLEMENTED_PENDING_CI",
+  "repository": "SouthPaw302/GodRender",
+  "branch": "world/american-empire",
+  "canon_lock": "CANON_LOCK.json",
+  "world_graph": "engine/world_matrix.py",
+  "model": "P3_MODEL.json",
+  "scenario_schema": "P3_SCENARIO.schema.json",
+  "engine": "engine/simulation.py",
+  "cli": "tools/simulate.py",
+  "tests": "tests/test_simulation.py",
+  "authority_layer": "scenario_only",
+  "scope": "deterministic global seven-variable hypothetical model with typed events, annual feedback, forking, comparison, receipt chains and full replay",
+  "excludes": [
+    "canon mutation",
+    "regional or character-level simulation",
+    "Godot media processing",
+    "imported adaptation as canon"
+  ],
+  "status_note": "Static manifest status does not replace executable GitHub Actions evidence."
+}

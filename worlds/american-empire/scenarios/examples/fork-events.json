@@ -1,0 +1,16 @@
+[
+  {
+    "id": "new-exit-2032",
+    "year": 2032,
+    "type": "exit_guarantee",
+    "intensity": 2,
+    "subject": "system:S6"
+  },
+  {
+    "id": "new-oversight-2034",
+    "year": 2034,
+    "type": "civic_oversight",
+    "intensity": 2,
+    "subject": "actor:A4"
+  }
+]

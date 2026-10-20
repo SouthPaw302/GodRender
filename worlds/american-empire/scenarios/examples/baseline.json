@@ -1,0 +1,6 @@
+{
+  "schema": "american-empire.scenario.v1",
+  "id": "baseline",
+  "description": "Model-only no-intervention baseline; explicitly NOT the canonical 2026–2037 outcome.",
+  "events": []
+}

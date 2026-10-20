@@ -1,0 +1,142 @@
+{
+  "schema": "american-empire.simulation-model.v1",
+  "id": "p3-causal-prototype-1",
+  "phase": "P3",
+  "source_authority": "P1 original canon / P2 indexed Reality Matrix",
+  "classification": "illustrative_mechanics_not_established_history",
+  "seeded_from": "simulation_variables[].initial; these are canonical numeric seeds but NOT canon year-end observations",
+  "initial_year": 2026,
+  "last_year": 2037,
+  "deterministic_policy": "integer fixed-step, signed event deltas, simultaneous annual feedback and bounded 0..100 states",
+  "variable_ids": [
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7"
+  ],
+  "annual_feedback_algorithm": "simultaneous_p3_feedback_v1",
+  "actions": {
+    "crisis_shock": {
+      "label": "Compound system disruption",
+      "deltas": {
+        "V1": -6,
+        "V2": -4,
+        "V3": 3,
+        "V4": -2,
+        "V5": 1,
+        "V6": -3,
+        "V7": -1
+      }
+    },
+    "stack_relief": {
+      "label": "Grid and Forge service restoration",
+      "deltas": {
+        "V1": 7,
+        "V2": 3,
+        "V3": 2,
+        "V4": -2,
+        "V6": -2,
+        "V7": 1
+      }
+    },
+    "atlas_expansion": {
+      "label": "Atlas settlement integration",
+      "deltas": {
+        "V1": 2,
+        "V2": 1,
+        "V3": 3,
+        "V4": -5,
+        "V6": -3
+      }
+    },
+    "sentinel_demonstration": {
+      "label": "Sentinel deterrence display",
+      "deltas": {
+        "V5": 8,
+        "V2": -2,
+        "V4": -2,
+        "V6": -4,
+        "V7": -1
+      }
+    },
+    "covenant_enforcement": {
+      "label": "Covenant material guarantee",
+      "deltas": {
+        "V1": 3,
+        "V2": 4,
+        "V6": -4,
+        "V7": -1
+      }
+    },
+    "corridor_accession": {
+      "label": "Corridor service integration",
+      "deltas": {
+        "V1": 5,
+        "V2": 1,
+        "V3": 4,
+        "V4": -3,
+        "V6": -3
+      }
+    },
+    "civic_oversight": {
+      "label": "Independent legal and civic oversight",
+      "deltas": {
+        "V2": 3,
+        "V6": 4,
+        "V7": -3
+      }
+    },
+    "independent_alternative": {
+      "label": "Independent trade and interoperability investment",
+      "deltas": {
+        "V4": 5,
+        "V6": 4,
+        "V2": -1,
+        "V1": -1
+      }
+    },
+    "directorate_split": {
+      "label": "Continuity factional fracture",
+      "deltas": {
+        "V7": -8,
+        "V2": -3,
+        "V6": 2
+      }
+    },
+    "exit_guarantee": {
+      "label": "Practical independent exit guarantee",
+      "deltas": {
+        "V6": 5,
+        "V2": 3,
+        "V1": -2,
+        "V7": -2
+      }
+    }
+  },
+  "annual_feedback_notes": [
+    "Simultaneous rule: all feedback conditions see pre-feedback state; clamp after sum.",
+    "Cohesion V7>=65 improves V1 by 1; V7<35 reduces V1 by 1.",
+    "V1>=60 improves V2 by 2; V1<40 reduces V2 by 2; V6<30 further reduces V2 by 1.",
+    "V1>=65 improves V3 by 1; V4>60 reduces V3 by 1.",
+    "V3>65 reduces V4 by 2; V5>60 increases V5 by 1; V3>60 reduces V6 by 1.",
+    "V2<30 reduces V7 by 1, and V6<20 reduces V7 by 1.",
+    "The accession pressure calculation is a modeling proxy, not a fact, referendum, or exact original formula."
+  ],
+  "proxy_mapping": {
+    "service_gap": "100 - V1 material reliability",
+    "elite_defection": "V3",
+    "security_futility": "V5",
+    "local_trust": "100 - V2 public consent (illustrative inverse proxy)",
+    "viable_alternatives": "V4 rival interoperability (illustrative proxy)",
+    "accession_pressure_raw": "service_gap + elite_defection + security_futility - local_trust - viable_alternatives",
+    "dependency_gap": "V1 material reliability - V6 right of exit"
+  },
+  "limitations": [
+    "No geographical or per-citizen resolution; subject is provenance context, not a hidden regional mechanic.",
+    "No baseline from 2027-2037 purports to recreate the novel or prove outcomes; authored canon events stay independent.",
+    "No numerical parameters calibrated to reality; events do not alter P1 or P2."
+  ]
+}

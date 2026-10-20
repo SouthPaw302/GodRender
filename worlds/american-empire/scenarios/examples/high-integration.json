@@ -1,0 +1,35 @@
+{
+  "schema": "american-empire.scenario.v1",
+  "id": "high-integration",
+  "description": "Counterfactual strong relief and rapid Stack accession pressures; not the original timeline's numeric history.",
+  "events": [
+    {
+      "id": "relief-2027",
+      "year": 2027,
+      "type": "stack_relief",
+      "intensity": 3,
+      "subject": "system:S3"
+    },
+    {
+      "id": "atlas-2029",
+      "year": 2029,
+      "type": "atlas_expansion",
+      "intensity": 2,
+      "subject": "system:S1"
+    },
+    {
+      "id": "corridor-2030",
+      "year": 2030,
+      "type": "corridor_accession",
+      "intensity": 3,
+      "subject": "system:S4"
+    },
+    {
+      "id": "sentinel-2031",
+      "year": 2031,
+      "type": "sentinel_demonstration",
+      "intensity": 2,
+      "subject": "system:S5"
+    }
+  ]
+}

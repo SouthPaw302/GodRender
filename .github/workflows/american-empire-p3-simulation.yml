@@ -1,0 +1,67 @@
+name: American Empire P3 Simulation Integrity
+
+on:
+  push:
+    branches:
+      - world/american-empire
+    paths:
+      - 'worlds/american-empire/**'
+      - '.github/workflows/american-empire-p3-simulation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-scenarios:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact American Empire development branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify P1 immutable original canon
+        run: python3 worlds/american-empire/tools/verify_canon.py
+      - name: Run P1 P2 and P3 regression tests
+        run: python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
+      - name: Run independent scenario, fork, compare and audit replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/american-empire-p3-evidence
+          W=worlds/american-empire
+          python3 "$W/tools/simulate.py" status > /tmp/american-empire-p3-evidence/status.json
+          python3 "$W/tools/simulate.py" run --scenario "$W/scenarios/examples/baseline.json" --output /tmp/american-empire-p3-evidence/baseline.json
+          python3 "$W/tools/simulate.py" run --scenario "$W/scenarios/examples/independent-corridor.json" --output /tmp/american-empire-p3-evidence/independent-corridor.json
+          python3 "$W/tools/simulate.py" run --scenario "$W/scenarios/examples/high-integration.json" --output /tmp/american-empire-p3-evidence/high-integration.json
+          python3 "$W/tools/simulate.py" replay --receipt /tmp/american-empire-p3-evidence/independent-corridor.json > /tmp/american-empire-p3-evidence/replay.json
+          python3 "$W/tools/simulate.py" compare --left "$W/scenarios/examples/baseline.json" --right "$W/scenarios/examples/independent-corridor.json" --output /tmp/american-empire-p3-evidence/compare.json
+          python3 "$W/tools/simulate.py" fork --parent "$W/scenarios/examples/independent-corridor.json" --year 2030 --name independent-fork --events "$W/scenarios/examples/fork-events.json" --output /tmp/american-empire-p3-evidence/independent-fork.json
+          python3 "$W/tools/simulate.py" run --scenario /tmp/american-empire-p3-evidence/independent-fork.json --output /tmp/american-empire-p3-evidence/independent-fork-run.json
+          python3 - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('/tmp/american-empire-p3-evidence')
+          source=json.loads((p/'baseline.json').read_text())
+          candidate=json.loads((p/'independent-corridor.json').read_text())
+          comparison=json.loads((p/'compare.json').read_text())
+          fork=json.loads((p/'independent-fork-run.json').read_text())
+          assert source['authority_layer']=='scenario_only'
+          assert candidate['authority_layer']=='scenario_only'
+          assert len(candidate['snapshots'])==12
+          assert len(candidate['event_receipts'])==3
+          assert comparison['first_divergent_year']==2030
+          assert comparison['not_a_canon_revision'] is True
+          assert fork['scenario']['branch']['fork_year']==2030
+          assert json.loads((p/'replay.json').read_text())['verified'] is True
+          assert candidate['final_state']['V6']>source['final_state']['V6']
+          print('AMERICAN EMPIRE P3 SCENARIOS PASS: 12 snapshots, signed action receipts, scenario replay and fork')
+          PY
+      - name: Publish derived P3 scenario evidence, not canon
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: american-empire-p3-scenario-evidence
+          path: /tmp/american-empire-p3-evidence/*.json
+          if-no-files-found: error
+          retention-days: 30

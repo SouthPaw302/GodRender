@@ -1,0 +1,31 @@
+{
+  "schema": "american-empire.scenario.v1",
+  "id": "independent-corridor",
+  "description": "Counterfactual: a stronger non-imperial alternative and civic oversight around 2030; not recovered canon.",
+  "events": [
+    {
+      "id": "alternative-2030",
+      "year": 2030,
+      "type": "independent_alternative",
+      "intensity": 2,
+      "subject": "actor:A8",
+      "note": "Illustrative industrial and settlement interoperability support, not a historical fact"
+    },
+    {
+      "id": "oversight-2030",
+      "year": 2030,
+      "type": "civic_oversight",
+      "intensity": 2,
+      "subject": "actor:A4",
+      "note": "Illustrative scrutiny of Corridor service conditions"
+    },
+    {
+      "id": "exit-2032",
+      "year": 2032,
+      "type": "exit_guarantee",
+      "intensity": 2,
+      "subject": "system:S6",
+      "note": "Counterfactual right to independently exit infrastructure dependence"
+    }
+  ]
+}

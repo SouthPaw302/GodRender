@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "American Empire P3 counterfactual scenario (NOT canon)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "events"
+  ],
+  "properties": {
+    "schema": {
+      "const": "american-empire.scenario.v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "source_world_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parent_scenario_id",
+        "parent_run_sha256",
+        "fork_year"
+      ],
+      "properties": {
+        "parent_scenario_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
+        },
+        "parent_run_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fork_year": {
+          "type": "integer",
+          "minimum": 2026,
+          "maximum": 2036
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "year",
+          "type",
+          "intensity"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 2026,
+            "maximum": 2037
+          },
+          "type": {
+            "enum": [
+              "crisis_shock",
+              "stack_relief",
+              "atlas_expansion",
+              "sentinel_demonstration",
+              "covenant_enforcement",
+              "corridor_accession",
+              "civic_oversight",
+              "independent_alternative",
+              "directorate_split",
+              "exit_guarantee"
+            ]
+          },
+          "intensity": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "subject": {
+            "type": "string",
+            "pattern": "^(actor|system|person|institution|event|variable|anchor):"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 300
+          }
+        }
+      }
+    }
+  }
+}
