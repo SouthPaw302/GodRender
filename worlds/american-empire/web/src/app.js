@@ -217,4 +217,6 @@ async function init(){
  setTab(location.hash.slice(1)||'world');$('error').hidden=true;
  }catch(e){$('error').hidden=false;$('error').textContent='World Explorer unavailable: '+e.message+'. Check the verified browser build.';console.error(e);}
 }
-init();
+// Inline standalone scripts must all initialize before asynchronous data parity.
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+else init();
