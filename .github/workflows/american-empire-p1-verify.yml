@@ -1,0 +1,26 @@
+name: American Empire P1 canon integrity
+on:
+  push:
+    branches:
+      - world/american-empire
+    paths:
+      - 'worlds/american-empire/**'
+      - '.github/workflows/american-empire-p1-verify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-canon:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the exact world branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify pinned written-source files
+        run: python3 worlds/american-empire/tools/verify_canon.py
+      - name: Regression-test canon tamper and adaptation isolation
+        run: python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
