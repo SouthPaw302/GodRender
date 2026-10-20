@@ -1,0 +1,32 @@
+{
+  "schema": "american-empire.phase-manifest.v1",
+  "phase": "P2",
+  "status": "IMPLEMENTED_PENDING_CI",
+  "repository": "SouthPaw302/GodRender",
+  "branch": "world/american-empire",
+  "canon_lock": "CANON_LOCK.json",
+  "world_graph_schema": "P2_WORLD_GRAPH.schema.json",
+  "source_matrix": "archive/01_CANON_SOURCE/REALITY_MATRIX.json",
+  "components": [
+    "engine/world_matrix.py",
+    "tools/world.py",
+    "tests/test_world_matrix.py"
+  ],
+  "invariant": "All factual nodes and relations are obtained from the verified original Reality Matrix, not adaptations or proposed additions",
+  "excludes": [
+    "scenario simulation",
+    "Godot execution",
+    "Paris film import",
+    "canon promotions"
+  ],
+  "access_mode": "read_only",
+  "semantics": {
+    "source_relation": "recorded",
+    "system_prerequisite": "recorded",
+    "timeline_successor": "derived_order",
+    "collapse_sequence": "derived_order",
+    "faction_membership": "derived_from_typed_actor",
+    "proposal_status": "candidate_unapproved"
+  },
+  "status_note": "CI result, not this static manifest, is execution authority"
+}

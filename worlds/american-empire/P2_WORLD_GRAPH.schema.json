@@ -1,0 +1,305 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SouthPaw302/GodRender/tree/world/american-empire/worlds/american-empire/P2_WORLD_GRAPH.schema.json",
+  "title": "American Empire P2 read-only world graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "fictional_reality_cutoff",
+    "timeline_range",
+    "source",
+    "counts",
+    "nodes",
+    "edges",
+    "documents",
+    "proposal_sections",
+    "excluded_layers",
+    "semantic_sha256"
+  ],
+  "properties": {
+    "schema": {
+      "const": "american-empire.world-graph.v1"
+    },
+    "stage": {
+      "const": "P2_QUERY_ONLY"
+    },
+    "fictional_reality_cutoff": {
+      "const": "2026-08-31"
+    },
+    "timeline_range": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": 2026
+        },
+        {
+          "const": 2037
+        }
+      ],
+      "items": false
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo",
+        "commit",
+        "matrix_git_blob_sha1"
+      ],
+      "properties": {
+        "repo": {
+          "const": "SouthPaw302/AIVideoEdit"
+        },
+        "commit": {
+          "const": "d768ee1684ebddd06af249f3a366181c929bc80c"
+        },
+        "matrix_git_blob_sha1": {
+          "const": "575e8c1b20bc6e9bf5c61ac32e32536256abcab0"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": [
+        "nodes",
+        "edges",
+        "proposed_sections",
+        "source_chronicles",
+        "kinds"
+      ]
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      }
+    },
+    "proposal_sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/proposal"
+      }
+    },
+    "excluded_layers": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "scenario",
+          "adaptation"
+        ]
+      },
+      "minItems": 2,
+      "uniqueItems": true
+    },
+    "semantic_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "json_pointer",
+        "git_blob_sha1",
+        "authority_layer",
+        "source_commit"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^archive/"
+        },
+        "json_pointer": {
+          "type": "string"
+        },
+        "git_blob_sha1": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "authority_layer": {
+          "enum": [
+            "established",
+            "proposal",
+            "source_narrative"
+          ]
+        },
+        "source_commit": {
+          "const": "d768ee1684ebddd06af249f3a366181c929bc80c"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "layer",
+        "attributes",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "institution",
+            "actor",
+            "system",
+            "person",
+            "event",
+            "variable",
+            "reality_anchor",
+            "document"
+          ]
+        },
+        "layer": {
+          "const": "established"
+        },
+        "attributes": {
+          "type": "object"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "from",
+        "to",
+        "kind",
+        "label",
+        "strength",
+        "derived",
+        "layer",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "source_relationship",
+            "prerequisite",
+            "chronological_successor",
+            "causal_sequence",
+            "affiliation"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "strength": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": -5,
+          "maximum": 5
+        },
+        "derived": {
+          "type": "boolean"
+        },
+        "layer": {
+          "const": "established"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "text",
+        "status",
+        "source",
+        "source_heading_line"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "status": {
+          "const": "candidate_unapproved"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "source_heading_line": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "layer",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "layer": {
+          "const": "source_narrative"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      }
+    }
+  }
+}

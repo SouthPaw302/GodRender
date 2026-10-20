@@ -1,0 +1,54 @@
+name: American Empire P2 World Matrix
+on:
+  push:
+    branches:
+      - world/american-empire
+    paths:
+      - 'worlds/american-empire/**'
+      - '.github/workflows/american-empire-p2-world.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-world-graph:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact world branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify original P1 canon bytes and lock
+        run: python3 worlds/american-empire/tools/verify_canon.py
+      - name: Run P1 and P2 regression suites
+        run: python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
+      - name: Build and inspect live world graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/world.py status
+          python3 worlds/american-empire/tools/world.py show person:P3 > /tmp/ae-person.json
+          python3 worlds/american-empire/tools/world.py relations system:S1 > /tmp/ae-atlas.json
+          python3 worlds/american-empire/tools/world.py timeline --year 2030 --through > /tmp/ae-timeline.json
+          python3 worlds/american-empire/tools/world.py export --output "$RUNNER_TEMP/american-empire-world-graph.json"
+          python3 - "$RUNNER_TEMP/american-empire-world-graph.json" <<'PY'
+          import json,sys
+          payload=json.load(open(sys.argv[1],encoding='utf-8'))
+          assert payload['stage']=='P2_QUERY_ONLY'
+          assert payload['counts']['nodes']==52
+          assert payload['counts']['edges']==48
+          assert payload['counts']['proposed_sections']==3
+          assert payload['excluded_layers']==['adaptation','scenario']
+          assert all(x['layer']=='established' for x in payload['nodes'])
+          print('WORLD MATRIX P2 GRAPH PASS: 52 nodes, 48 edges, 3 isolated proposal sections')
+          PY
+      - name: Retain derived graph as noncanonical evidence
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: american-empire-p2-world-graph
+          path: ${{ runner.temp }}/american-empire-world-graph.json
+          if-no-files-found: error
+          retention-days: 30
