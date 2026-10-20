@@ -74,7 +74,7 @@ function setYear(year){
  moduleState.api.updateYear(moduleState.year);
 }
 function syncYear(year){moduleState.year=Math.max(2026,Math.min(2037,Number(year)));if(moduleState.lastRun)renderMetrics();}
-function syncScenario(index){const rec=moduleState.world.scenarios[index];if(rec&&moduleState.records.has(rec.id)){
+function syncScenario(index){if(!moduleState.world||!moduleState.sim||!moduleState.records.size)return;const rec=moduleState.world.scenarios[index];if(rec&&moduleState.records.has(rec.id)){
  moduleState.selected=rec.id;moduleState.lastRun=moduleState.records.get(rec.id).run;render();
 }}
 function syncWorld(id){
