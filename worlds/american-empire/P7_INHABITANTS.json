@@ -1,0 +1,458 @@
+{
+  "schema": "american-empire.p7-inhabitants.v1",
+  "phase": "P7",
+  "authority_layer": "scenario_only",
+  "canon_anchors": {
+    "source": "worlds/american-empire/archive/01_CANON_SOURCE/REALITY_MATRIX.json",
+    "characters": "/point_of_view_characters",
+    "institutions": "/actors",
+    "note": "Only names/roles, written knows/does-not-know and organizational goals/fears are locked story references."
+  },
+  "policy": {
+    "decision_rules": "deterministic_desire_priority_v1",
+    "numeric_authority": "Goals, priorities, trust values, budgets, behavior rules and locations not specified by written canon are all fictional modeling assumptions.",
+    "memories": "Simulation observations and messages are private world-state records, not canon statements or evidence of knowledge outside direct observations.",
+    "confidentiality": "Canon 'does_not_know' texts are immutable sealed references and cannot be learned automatically through simulated messages.",
+    "outcomes": "Agent choices and their effects are never backfilled into the locked chronology; interventions are separate branches.",
+    "execution": "Local browser model; no LLM, Godot, ONNX, external agent runner or Drive write is invoked."
+  },
+  "protagonists": [
+    {
+      "id": "mara",
+      "source_id": "P1",
+      "kind": "character",
+      "place": "philadelphia",
+      "initial_budget": 72,
+      "priorities": {
+        "relief": 3,
+        "liberty": 3,
+        "order": 2,
+        "truth": 5,
+        "trade": 4
+      },
+      "canon_knows": "The Stack was built for migration, not merely disaster recovery.",
+      "canon_unknown_sealed": "The Ascendants deliberately rejected a viable 2027 off-ramp.",
+      "location_authority": "scenario_assignment_except_explicit_canon_locations",
+      "source_pointer": "/point_of_view_characters/0"
+    },
+    {
+      "id": "caleb",
+      "source_id": "P2",
+      "kind": "character",
+      "place": "anderson",
+      "initial_budget": 72,
+      "priorities": {
+        "relief": 5,
+        "liberty": 3,
+        "order": 2,
+        "truth": 3,
+        "trade": 1
+      },
+      "canon_knows": "On Dollar Night, the invisible government feeds his county when the visible one cannot.",
+      "canon_unknown_sealed": "His family's relief was part of a precomputed legitimacy campaign.",
+      "location_authority": "scenario_assignment_except_explicit_canon_locations",
+      "source_pointer": "/point_of_view_characters/1"
+    },
+    {
+      "id": "neda",
+      "source_id": "P3",
+      "kind": "character",
+      "place": "bandar-abbas",
+      "initial_budget": 72,
+      "priorities": {
+        "relief": 5,
+        "liberty": 4,
+        "order": 1,
+        "truth": 3,
+        "trade": 1
+      },
+      "canon_knows": "All grand systems are experienced by ordinary people as water, medicine, absence, and grief.",
+      "canon_unknown_sealed": "Her hospital's survival will be used to force her city into the first foreign accession.",
+      "location_authority": "scenario_assignment_except_explicit_canon_locations",
+      "source_pointer": "/point_of_view_characters/2"
+    },
+    {
+      "id": "lin",
+      "source_id": "P4",
+      "kind": "character",
+      "place": "gwadar",
+      "initial_budget": 72,
+      "priorities": {
+        "relief": 2,
+        "liberty": 4,
+        "order": 2,
+        "truth": 3,
+        "trade": 5
+      },
+      "canon_knows": "The empire's greatest weapon is the ability to make its rule feel like the return of normal life.",
+      "canon_unknown_sealed": "Her own delegation's logistics network has already made a secret interoperability agreement with Atlas.",
+      "location_authority": "scenario_assignment_except_explicit_canon_locations",
+      "source_pointer": "/point_of_view_characters/3"
+    },
+    {
+      "id": "jonah",
+      "source_id": "P5",
+      "kind": "character",
+      "place": "philadelphia",
+      "initial_budget": 72,
+      "priorities": {
+        "relief": 2,
+        "liberty": 5,
+        "order": 2,
+        "truth": 5,
+        "trade": 1
+      },
+      "canon_knows": "The legal transfer was valid only because it promised a future referendum and a protected right of exit.",
+      "canon_unknown_sealed": "The referendum engine has been trained to identify any exit movement as a cascading infrastructure threat.",
+      "location_authority": "scenario_assignment_except_explicit_canon_locations",
+      "source_pointer": "/point_of_view_characters/4"
+    }
+  ],
+  "organizations": [
+    {
+      "id": "keepers",
+      "source_id": "A4",
+      "kind": "institution",
+      "place": "philadelphia",
+      "initial_budget": 84,
+      "priorities": {
+        "relief": 2,
+        "liberty": 5,
+        "order": 2,
+        "truth": 5,
+        "trade": 1
+      },
+      "location_authority": "scenario_assignment_not_canon",
+      "source_pointer": "/actors/3"
+    },
+    {
+      "id": "ascendants",
+      "source_id": "A5",
+      "kind": "institution",
+      "place": "washington",
+      "initial_budget": 84,
+      "priorities": {
+        "relief": 3,
+        "liberty": 0,
+        "order": 5,
+        "truth": 0,
+        "trade": 5
+      },
+      "location_authority": "scenario_assignment_not_canon",
+      "source_pointer": "/actors/4"
+    },
+    {
+      "id": "union",
+      "source_id": "A8",
+      "kind": "institution",
+      "place": "karachi",
+      "initial_budget": 84,
+      "priorities": {
+        "relief": 2,
+        "liberty": 4,
+        "order": 3,
+        "truth": 2,
+        "trade": 5
+      },
+      "location_authority": "scenario_assignment_not_canon",
+      "source_pointer": "/actors/7"
+    },
+    {
+      "id": "league",
+      "source_id": "A9",
+      "kind": "institution",
+      "place": "mombasa",
+      "initial_budget": 84,
+      "priorities": {
+        "relief": 3,
+        "liberty": 5,
+        "order": 2,
+        "truth": 3,
+        "trade": 4
+      },
+      "location_authority": "scenario_assignment_not_canon",
+      "source_pointer": "/actors/8"
+    },
+    {
+      "id": "unbound",
+      "source_id": "A10",
+      "kind": "institution",
+      "place": "bandar-abbas",
+      "initial_budget": 84,
+      "priorities": {
+        "relief": 2,
+        "liberty": 5,
+        "order": 0,
+        "truth": 4,
+        "trade": 1
+      },
+      "location_authority": "scenario_assignment_not_canon",
+      "source_pointer": "/actors/9"
+    }
+  ],
+  "trust_links": [
+    {
+      "from": "mara",
+      "to": "jonah",
+      "trust": 70,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "jonah",
+      "to": "mara",
+      "trust": 68,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "mara",
+      "to": "ascendants",
+      "trust": 42,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "ascendants",
+      "to": "mara",
+      "trust": 55,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "caleb",
+      "to": "neda",
+      "trust": 45,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "neda",
+      "to": "caleb",
+      "trust": 51,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "neda",
+      "to": "unbound",
+      "trust": 54,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "unbound",
+      "to": "neda",
+      "trust": 62,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "neda",
+      "to": "keepers",
+      "trust": 62,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "keepers",
+      "to": "neda",
+      "trust": 61,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "jonah",
+      "to": "keepers",
+      "trust": 82,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "keepers",
+      "to": "jonah",
+      "trust": 85,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "jonah",
+      "to": "ascendants",
+      "trust": 24,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "ascendants",
+      "to": "jonah",
+      "trust": 23,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "lin",
+      "to": "union",
+      "trust": 84,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "union",
+      "to": "lin",
+      "trust": 79,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "lin",
+      "to": "league",
+      "trust": 68,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "league",
+      "to": "lin",
+      "trust": 65,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "league",
+      "to": "union",
+      "trust": 60,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "union",
+      "to": "league",
+      "trust": 58,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "keepers",
+      "to": "unbound",
+      "trust": 54,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "unbound",
+      "to": "keepers",
+      "trust": 55,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "ascendants",
+      "to": "unbound",
+      "trust": 14,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "unbound",
+      "to": "ascendants",
+      "trust": 8,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "ascendants",
+      "to": "union",
+      "trust": 30,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "union",
+      "to": "ascendants",
+      "trust": 26,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "neda",
+      "to": "lin",
+      "trust": 45,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "lin",
+      "to": "neda",
+      "trust": 48,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "caleb",
+      "to": "keepers",
+      "trust": 45,
+      "authority": "scenario_seed_only"
+    },
+    {
+      "from": "keepers",
+      "to": "caleb",
+      "trust": 53,
+      "authority": "scenario_seed_only"
+    }
+  ],
+  "actions": {
+    "relief": {
+      "label": "Deliver local relief",
+      "cost": 13,
+      "service": 7,
+      "independence": -1,
+      "truth": 0,
+      "trust": 2
+    },
+    "civic_rights": {
+      "label": "Protect civic exit rights",
+      "cost": 11,
+      "service": -1,
+      "independence": 8,
+      "truth": 1,
+      "trust": 3
+    },
+    "coordinate": {
+      "label": "Coordinate neighboring institutions",
+      "cost": 10,
+      "service": 4,
+      "independence": 2,
+      "truth": 0,
+      "trust": 4
+    },
+    "investigate": {
+      "label": "Investigate the record",
+      "cost": 12,
+      "service": 0,
+      "independence": 1,
+      "truth": 7,
+      "trust": -1
+    },
+    "restrict": {
+      "label": "Prioritize controlled access",
+      "cost": 13,
+      "service": 6,
+      "independence": -8,
+      "truth": -2,
+      "trust": -5
+    },
+    "independent_network": {
+      "label": "Establish independent support",
+      "cost": 15,
+      "service": 3,
+      "independence": 6,
+      "truth": 0,
+      "trust": 1
+    }
+  },
+  "interventions": [
+    {
+      "agent": "neda",
+      "year": 2030,
+      "priority": "liberty",
+      "id": "neda-autonomy-2030",
+      "note": "Hypothetical stance favouring exit despite service risk"
+    },
+    {
+      "agent": "ascendants",
+      "year": 2030,
+      "priority": "order",
+      "id": "ascendants-order-2030",
+      "note": "Hypothetical emphasis on control"
+    }
+  ],
+  "constraints": {
+    "years": [
+      2026,
+      2037
+    ],
+    "max_agents": 10,
+    "max_memories_per_agent": 40,
+    "max_interventions": 20,
+    "trust_bounds": [
+      0,
+      100
+    ],
+    "budget_bounds": [
+      0,
+      100
+    ]
+  }
+}

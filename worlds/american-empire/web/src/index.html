@@ -20,6 +20,7 @@
       <button type="button" class="tab" data-tab="chronology">Chronology</button>
       <button type="button" class="tab" data-tab="simulation">Simulation Lab</button>
       <button type="button" class="tab" data-tab="earth">Earth Network</button>
+      <button type="button" class="tab" data-tab="inhabitants">Living Inhabitants</button>
       <button type="button" class="tab" data-tab="brain">Second Brain</button>
       <button type="button" class="tab" data-tab="production">Production Desk</button>
     </nav>
@@ -182,6 +183,70 @@
       </div>
     </section>
 
+
+    <section id="inhabitants" class="page widepage" aria-label="Living inhabitants simulation">
+      <div class="page-intro"><p class="eyebrow">P7 · SOCIAL SIMULATION · SOURCE-ANCHORED FICTION</p>
+      <h1>Every system has people inside it.</h1>
+      <p>Observe ten simulated participants: five original viewpoint characters and five institutions. Each has bounded resources, priorities, relationships, private observations and memory. These are <strong>deterministic rule-based agents</strong>, not language-model conversations or established new chapters.</p></div>
+      <div id="peopleStatus" class="sim-status" role="status" aria-live="polite">Initializing the inhabitant model…</div>
+      <div class="inhabitants-layout">
+       <div class="inhabitants-main">
+        <div class="geo-control-strip">
+         <div><label for="peopleYear">SIMULATED YEAR</label><strong id="peopleYearValue">2030</strong></div>
+         <input type="range" id="peopleYear" min="2026" max="2037" step="1" value="2030">
+         <button id="peoplePrev" class="flat-button" aria-label="Previous inhabitant year">←</button>
+         <button id="peopleNext" class="flat-button" aria-label="Next inhabitant year">→</button>
+         <div class="geo-scenario"><small>ACTIVE P5 RUN</small><strong id="peopleP5">baseline</strong></div>
+        </div>
+        <div class="panel-label">INHABITANTS AND INSTITUTIONS <span class="tiny">SELECT ONE TO INSPECT</span></div>
+        <div id="peopleCards" class="people-cards"></div>
+        <div class="panel-label">DECISIONS THIS YEAR <span class="tiny">ALTERNATIVE SIMULATION</span></div>
+        <div id="peopleDecisions" class="people-decisions"></div>
+        <div class="rule"></div>
+        <div class="panel-label">RELATIONSHIP AND KNOWLEDGE FLOW <span class="tiny">ONE-YEAR MESSAGE DELAY</span></div>
+        <div id="peopleConnections" class="people-connections"></div>
+       </div>
+       <aside class="people-inspector">
+        <div class="panel-label">SELECTED INHABITANT</div>
+        <h2 id="personFullName">Dr. Neda Farzan</h2>
+        <p id="personCanonRole" class="source-copy"></p>
+        <div class="people-numbers">
+          <div><small>AVAILABLE RESOURCES</small><strong id="personBudget">—</strong></div>
+          <div><small>PUBLIC STANDING</small><strong id="personStanding">—</strong></div>
+          <div><small>LOCAL SERVICE · P7</small><strong id="personLocal">—</strong></div>
+        </div>
+        <div class="panel-label">ESTABLISHED SOURCE KNOWLEDGE</div>
+        <p id="personCanonKnows" class="people-canon"></p>
+        <div class="panel-label">IN-SIMULATION KNOWLEDGE</div>
+        <div id="personKnowledge" class="people-knowledge"></div>
+        <div class="panel-label">PRIVATE MEMORY IN THIS BRANCH</div>
+        <div id="personMemory" class="people-memory"></div>
+        <div class="rule"></div>
+        <div class="panel-label">DIRECTIVE / COUNTERFACTUAL INTERVENTION</div>
+        <label for="personPriority">Ask this actor to prioritize</label>
+        <select id="personPriority">
+         <option value="relief">Material relief</option>
+         <option value="liberty">Autonomy and exit</option>
+         <option value="truth">Investigation and evidence</option>
+         <option value="order">Centralized order</option>
+         <option value="trade">Negotiation and trade</option>
+        </select>
+        <button id="personApply" class="primary-button full-button">Create alternative choice</button>
+        <p class="caveat">A directive changes this actor's behavior beginning in the selected year, not the locked historical timeline. Different people and institutions can respond differently.</p>
+        <div class="people-compare">
+         <div class="panel-label">BEHAVIORAL DIVERGENCE</div>
+         <div id="personComparison"></div>
+        </div>
+        <div class="geo-button-row">
+         <button id="personUndo" class="flat-button">Undo latest</button>
+         <button id="personReplay" class="flat-button">Verify replay</button>
+        </div>
+        <button id="personExport" class="flat-button full-button">Export world-state receipt</button>
+        <p id="personSourceNote" class="tiny muted">Character knowledge is limited to the canon's stated initial perspective and simulated messages. Canonically unknown information cannot be learned automatically.</p>
+       </aside>
+      </div>
+    </section>
+
     <section id="chronology" class="page widepage" aria-label="Chronology">
       <div class="page-intro"><p class="eyebrow">THE ESTABLISHED SPINE</p><h1>Twelve years that changed the world.</h1><p>These titles and descriptions belong to the original Reality Matrix. Select a year to inspect its connected hypothetical state in the World Matrix.</p></div>
       <div class="chronology-layout"><div id="timelineList" class="timeline-list"></div><aside class="side-feature"><span class="panel-label">TEMPORAL INTEGRITY</span><h2>One canon. Many possible futures.</h2><p>P1 preserved the written chronology; P2 indexed it. P3 can branch scenarios without editing canonical history.</p><div id="timelineDetail" class="time-detail"></div><button id="timelineToWorld" class="primary-button">EXPLORE SELECTED YEAR ↗</button></aside></div>
@@ -207,5 +272,7 @@
 <script src="./live.js" defer></script>
 <script src="./regions.js" defer></script>
 <script src="./earth.js" defer></script>
+<script src="./inhabitants.js" defer></script>
+<script src="./people.js" defer></script>
 </body>
 </html>

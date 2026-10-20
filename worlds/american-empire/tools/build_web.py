@@ -129,6 +129,20 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     if land.get("type") != "FeatureCollection" or len(land["features"]) < 100:
         raise ValueError("Natural Earth coastline source is invalid")
     geo["source_geo_sha256"] = hashlib.sha256(json.dumps(geo,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
+    inhabitants = _load("worlds/american-empire/P7_INHABITANTS.json")
+    p1matrix = _load("worlds/american-empire/archive/01_CANON_SOURCE/REALITY_MATRIX.json")
+    if inhabitants.get("schema") != "american-empire.p7-inhabitants.v1" or len(inhabitants["protagonists"]) != 5 or len(inhabitants["organizations"]) != 5:
+        raise ValueError("P7 actor manifest schema or roster drift")
+    for actor in inhabitants["protagonists"]:
+        found = next((p for p in p1matrix["point_of_view_characters"] if p["id"] == actor["source_id"]), None)
+        if found is None or found["knows"] != actor["canon_knows"] or found["does_not_know"] != actor["canon_unknown_sealed"]:
+            raise ValueError("P7 character knowledge diverged from immutable P1 source")
+    original_orgs = {a["id"]:a for a in p1matrix["actors"]}
+    if any(a["source_id"] not in original_orgs for a in inhabitants["organizations"]):
+        raise ValueError("P7 institutional agent not in P1 source")
+    inhabitants["source_manifest_sha256"] = hashlib.sha256(json.dumps(inhabitants,sort_keys=True,ensure_ascii=False,separators=(",",":")).encode("utf-8")).hexdigest()
+    people_source = {"point_of_view_characters":p1matrix["point_of_view_characters"],"actors":p1matrix["actors"],
+                     "authority":"locked_original_p1_quoted_reference_only"}
     model = _load("worlds/american-empire/P3_MODEL.json")
     references = [_load("worlds/american-empire/scenarios/examples/"+name+".json")
                   for name in ("baseline","independent-corridor","high-integration")]
@@ -140,11 +154,11 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
+            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js"):
+    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js","inhabitants.js","people.js"):
         shutil.copy2(SOURCE / name, out / name)
     _write(out / "data" / "world.json",bundle)
     _write(out / "data" / "brain.json",brain)
@@ -152,6 +166,8 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     _write(out / "data" / "reference_scenarios.json",references)
     _write(out / "data" / "geo.json",geo)
     _write(out / "data" / "land.geojson",land)
+    _write(out / "data" / "inhabitants.json",inhabitants)
+    _write(out / "data" / "people_source.json",people_source)
     # One-file offline artifact: embed signed/source-pinned P3 rules and inputs.
     # Less-than escaping prevents an embedded JSON value from closing its script.
     html = (SOURCE / "index.html").read_text(encoding="utf-8")
@@ -162,11 +178,14 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         ("live.js", (SOURCE / "live.js").read_text(encoding="utf-8")),
         ("regions.js", (SOURCE / "regions.js").read_text(encoding="utf-8")),
         ("earth.js", (SOURCE / "earth.js").read_text(encoding="utf-8")),
+        ("inhabitants.js", (SOURCE / "inhabitants.js").read_text(encoding="utf-8")),
+        ("people.js", (SOURCE / "people.js").read_text(encoding="utf-8")),
     )
     html = html.replace('<link rel="stylesheet" href="./styles.css">', '<style>'+css+'</style>')
     inline_data = (("embeddedWorld",bundle),("embeddedBrain",brain),
                    ("embeddedModel",model),("embeddedReference",references),
-                   ("embeddedGeo",geo),("embeddedLand",land))
+                   ("embeddedGeo",geo),("embeddedLand",land),
+                   ("embeddedInhabitants",inhabitants),("embeddedPeopleSource",people_source))
     payload = "".join('<script type="application/json" id="'+label+'">'
                       +json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(",",":")).replace("<","\\u003c")
                       +"</script>\n" for label,data in inline_data)

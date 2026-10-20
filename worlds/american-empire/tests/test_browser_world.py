@@ -67,6 +67,15 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertTrue((output/"data/land.geojson").is_file())
             self.assertTrue((output/"regions.js").is_file())
             self.assertTrue((output/"earth.js").is_file())
+            self.assertTrue((output/"inhabitants.js").is_file())
+            self.assertTrue((output/"people.js").is_file())
+            self.assertTrue((output/"data/inhabitants.json").is_file())
+            self.assertTrue((output/"data/people_source.json").is_file())
+            actors=json.loads((output/"data/inhabitants.json").read_text())
+            self.assertEqual(len(actors["protagonists"]),5)
+            self.assertEqual(len(actors["organizations"]),5)
+            self.assertEqual(len(actors["trust_links"]),30)
+            self.assertEqual(len(actors["source_manifest_sha256"]),64)
             self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["nodes"]),12)
             self.assertEqual(len(json.loads((output/"data/geo.json").read_text())["routes"]),16)
             self.assertTrue((output/"data/reference_scenarios.json").is_file())
@@ -80,6 +89,8 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertIn('id="embeddedReference"', standalone)
             self.assertIn('id="embeddedGeo"', standalone)
             self.assertIn('id="embeddedLand"', standalone)
+            self.assertIn('id="embeddedInhabitants"', standalone)
+            self.assertIn('id="embeddedPeopleSource"', standalone)
             self.assertIn('P5 browser-native deterministic P3 simulation', standalone)
             self.assertIn('<style>', standalone)
             self.assertIn('counterfactual_adaptation_not_canon', standalone)
@@ -98,9 +109,9 @@ class BrowserExplorerTests(unittest.TestCase):
 
     def test_interface_references_existing_controls(self):
         html=(ROOT/"web/src/index.html").read_text()
-        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text()
+        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["world","chronology","brain","production","simulation","earth","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
+        for ident in ["world","chronology","brain","production","simulation","earth","inhabitants","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)

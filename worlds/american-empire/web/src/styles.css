@@ -78,3 +78,43 @@
 .geo-button-row{display:flex;gap:8px;margin-top:12px}.geo-button-row button{flex:1}
 @media(max-width:1200px){.geo-layout{grid-template-columns:minmax(0,1fr)}.geo-sidebar{max-width:none}}
 @media(max-width:650px){.geo-control-strip{flex-wrap:wrap}.geo-scenario{border-left:0;padding-left:0}.geo-map-top{flex-wrap:wrap}.geo-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.geo-stats strong{font-size:16px}}
+
+/* P7 Living Inhabitants */
+.inhabitants-layout{display:grid;grid-template-columns:minmax(0,1fr) 355px;gap:22px;align-items:start}
+.inhabitants-main{min-width:0}
+.people-inspector{background:#112639;border:1px solid #325268;border-radius:8px;padding:21px}
+.people-inspector h2{font:400 28px Georgia,serif;color:#e6d0a4;margin:10px 0}
+.people-inspector label{display:block;font-size:11px;font-weight:700;color:#c1d2d9;margin:13px 0 8px}
+.people-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0 28px}
+.people-card{background:#112739;border:1px solid #2c4b5f;border-radius:7px;padding:13px;text-align:left;color:#d6e4eb;min-width:0;display:flex;flex-direction:column;gap:9px;min-height:144px}
+.people-card.selected,.people-card:hover{border-color:#ddb978;background:#1c3746}
+.people-kind{font-size:9px;color:#8ba8b7;letter-spacing:.07em;text-transform:uppercase}
+.people-card strong{color:#e3c79b;font-size:15px}
+.people-card small{color:#abc1cb;font-size:10px;line-height:1.6;max-height:35px;overflow:hidden}
+.people-current{font-size:10px;border-left:2px solid #76bec6;padding-left:8px;color:#a2d8d2;text-transform:capitalize}
+.people-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 24px}
+.people-numbers>div{background:#1a3649;border:1px solid #33566a;border-radius:5px;padding:9px 7px}
+.people-numbers small{display:block;min-height:34px;font-size:9px;color:#98b6c2;line-height:1.5}
+.people-numbers strong{display:block;font:24px Georgia,serif;color:#d9bb84}
+.people-canon{font-size:11px;line-height:1.65;color:#ccd8d9;border-left:2px solid #d9b780;padding-left:10px}
+.people-knowledge,.people-memory{font-size:11px;line-height:1.55;color:#aebfc9;max-height:175px;overflow-y:auto;margin:10px 0 20px}
+.people-log-item{padding:8px 3px;border-bottom:1px solid #2a475a}
+.people-log-item small{font-size:9px;color:#a5d4d0;text-transform:uppercase}
+.people-log-item p{margin:4px 0}
+.people-decisions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:13px 0 28px}
+.people-decision{display:flex;gap:7px;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:12px;text-align:left;border-radius:5px;border:1px solid #28485b;background:#102738;color:#d6e8ee}
+.people-decision:hover{background:#1d3748;border-color:#bc9761}
+.people-decision span{font-size:10px;color:#89b8bf}
+.people-decision strong{font-size:11px;color:#dec897}
+.people-decision small{flex-basis:100%;font-size:9px;color:#90aaba}
+.people-connections{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.people-link{background:#112b3d;padding:12px;border:1px solid #2d4b5c;display:grid;gap:5px;border-radius:4px}
+.people-link strong{font-size:11px;color:#d9bf8e}
+.people-link span{font-size:9px;color:#9db9c5}
+.people-compare{background:#0c2131;padding:13px;margin-top:20px;border:1px solid #315167;border-radius:5px}
+.people-compare-data{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.people-compare-data div{display:grid;gap:8px}
+.people-compare-data strong{font:25px Georgia,serif;color:#dabc88}
+.people-compare-data small{font-size:9px;color:#9ab5c1;line-height:1.4}
+@media(max-width:1160px){.inhabitants-layout{grid-template-columns:1fr}.people-cards{grid-template-columns:repeat(3,1fr)}.people-inspector{max-width:none}}
+@media(max-width:750px){.people-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.people-decisions{grid-template-columns:1fr}.people-connections{grid-template-columns:repeat(2,minmax(0,1fr))}}
