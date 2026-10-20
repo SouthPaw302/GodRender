@@ -1,7 +1,7 @@
 {
   "schema": "american-empire.phase-manifest.v1",
   "phase": "P4",
-  "status": "IMPLEMENTED_PENDING_CI",
+  "status": "IMPLEMENTED",
   "repository": "SouthPaw302/GodRender",
   "branch": "world/american-empire",
   "source_authority": "original P1 canon + P2 world graph",
@@ -18,5 +18,6 @@
   "visualization": "interactive Godot 4 relationship schematic, not world geographic map",
   "technical_proof": "A passing GitHub Actions P4 run with Xvfb/Mesa-rendered frames, state change logs and verification report is required",
   "production_approval": false,
-  "web_deployed": false
+  "web_deployed": false,
+  "status_note": "GitHub Actions P4 technical-run conclusion is the execution authority; status is descriptive, and screenshot proof does not establish production acceptance."
 }
