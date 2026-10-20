@@ -64,15 +64,17 @@ jobs:
           if python3 worlds/american-empire/tools/population_model.py --receipt "$RUNNER_TEMP/tampered.json" --output "$RUNNER_TEMP/should-not-exist.json" --actor claire --year 2027 --mode smoke; then
             echo 'ERROR: Tampered P7 source accepted'; exit 1
           fi
-      - name: Install small model runtime when explicitly selected
-        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'smollm2-135m'
-        run: python3 -m pip install --disable-pip-version-check 'transformers==4.57.1' 'torch>=2.4,<3'
+      - name: Install small model runtime (pilot on push or explicit manual request)
+        if: github.event_name == 'push' || inputs.mode == 'smollm2-135m'
+        run: |
+          python3 -m pip install --disable-pip-version-check 'torch==2.7.1' --index-url https://download.pytorch.org/whl/cpu
+          python3 -m pip install --disable-pip-version-check 'transformers==4.57.1'
       - name: Run small language model as non-authoritative adviser
-        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'smollm2-135m'
+        if: github.event_name == 'push' || inputs.mode == 'smollm2-135m'
         env:
           HF_HUB_DISABLE_TELEMETRY: '1'
         run: |
-          python3 worlds/american-empire/tools/population_model.py --receipt "$RUNNER_TEMP/ae-p7-receipt.json" --output "$RUNNER_TEMP/ae-population-model-proposal.json" --actor "${{ inputs.actor }}" --year "${{ inputs.year }}" --mode smollm2-135m
+          python3 worlds/american-empire/tools/population_model.py --receipt "$RUNNER_TEMP/ae-p7-receipt.json" --output "$RUNNER_TEMP/ae-population-model-proposal.json" --actor "${{ inputs.actor || 'claire' }}" --year "${{ inputs.year || '2027' }}" --mode smollm2-135m
       - name: Keep results as inspectable action artifacts
         if: success()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

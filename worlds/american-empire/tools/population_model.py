@@ -91,18 +91,30 @@ def select_smollm(snapshot, agent):
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=False)
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, trust_remote_code=False).eval()
     messages = [
-        {"role": "system", "content": "Respond with exactly one allowed priority token."},
+        {"role": "system", "content": "Select one policy priority for the fictional character."},
         {"role": "user", "content": prompt},
     ]
-    inputs = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=True, return_tensors="pt")
+    # Constrained candidate scoring: genuine neural forward passes, but the
+    # model cannot generate unconstrained instructions or overwrite canon.
+    prefix = tokenizer.apply_chat_template(
+        messages, add_generation_prompt=True, tokenize=True, return_tensors="pt"
+    )
+    scores = {}
     with torch.no_grad():
-        output = model.generate(inputs, max_new_tokens=12, do_sample=False,
-                                pad_token_id=tokenizer.eos_token_id)
-    raw = tokenizer.decode(output[0][inputs.shape[-1]:], skip_special_tokens=True).strip().lower()
-    candidate = re.sub(r"[.! \n]+$", "", raw)
+        for label in sorted(PRIORITIES):
+            target = tokenizer.encode(label, add_special_tokens=False)
+            if not target:
+                raise ValueError("Tokenizer could not encode allowed priority")
+            seq = torch.cat([prefix, torch.tensor([target], dtype=prefix.dtype)], dim=1)
+            logits = model(seq).logits[0]
+            # Candidate token probabilities at each continuation position.
+            start = prefix.shape[1] - 1
+            logprobs = torch.log_softmax(logits[start:start+len(target)], dim=-1)
+            scores[label] = float(sum(logprobs[i,tid].item() for i,tid in enumerate(target))) / len(target)
+    candidate = max(scores, key=lambda choice:(scores[choice],choice))
     if candidate not in PRIORITIES:
-        raise ValueError("Language model returned invalid proposal, no fallback: " + repr(raw[:120]))
-    return candidate, "Model-generated priority accepted by strict choice validator"
+        raise ValueError("Language model produced no valid constrained priority")
+    return candidate, "Constrained neural scoring of approved priorities using a real CPU model"
 
 
 def propose(receipt, actor, year, mode="smoke"):
