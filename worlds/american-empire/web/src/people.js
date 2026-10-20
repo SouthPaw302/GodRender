@@ -158,6 +158,36 @@ function download(){
  setTimeout(()=>URL.revokeObjectURL(u),1500);
  note('Exported source-bound agent history and private simulated memories; no server or Drive upload.');
 }
+async function importRunnerProposal(file){
+ if(!file)return;
+ try{
+  if(file.size>200000)throw Error('Proposal file too large');
+  const data=JSON.parse(await file.text());
+  if(data.schema!=='american-empire.p8-population-proposal.v1'
+   ||data.authority_layer!=='scenario_only_proposal_not_applied'
+   ||data.status!=='proposal_only_requires_observer_approval')
+   throw Error('Unexpected proposal format or authority');
+  if(data.source_p7_run_sha256!==S.run.run_sha256||data.source_manifest_sha256!==S.run.manifest_sha256)
+   throw Error('Runner proposal belongs to another history or source revision');
+  if(!Number.isInteger(data.year)||data.year<2026||data.year>2037)throw Error('Year outside history');
+  if(!['relief','liberty','truth','order','trade'].includes(data.priority))throw Error('Invalid priority');
+  if(![...S.manifest.protagonists,...S.manifest.organizations,...(S.manifest.film_cast||[])].some(a=>a.id===data.actor))
+   throw Error('Unknown actor');
+  if(data.source_p7_snapshot_sha256!==S.run.snapshots[data.year-2026].sha256)
+   throw Error('Runner saw a different annual world state');
+  const kind=String(data.backend||'');
+  if(kind!=='deterministic_smoke_no_model'&&kind!=='HuggingFaceTB/SmolLM2-135M-Instruct')
+   throw Error('Unapproved model backend');
+  S.selected=data.actor;S.year=data.year;paint();
+  $('personPriority').value=data.priority;
+  const human=kind==='deterministic_smoke_no_model'?'TEST SUGGESTION — NO LANGUAGE MODEL EXECUTED':'SMALL-MODEL CANDIDATE — REVIEW BEFORE ACCEPTANCE';
+  $('personProposalStatus').textContent=human+': '+data.actor+' · '+data.year+' · '+data.priority+'. Click Create alternative choice to apply it in a hypothetical branch.';
+  note('Validated source-bound proposal. No action applied; operator approval required.');
+ }catch(e){
+  $('personProposalStatus').textContent='Proposal rejected: '+e.message;
+  note('Rejected model proposal: '+e.message,true);
+ }finally{$('personProposalFile').value='';}
+}
 async function init({manifest,geo,canon}){
  S.manifest=manifest;S.geo=geo;S.canon=canon;
  if(manifest.schema!=='american-empire.p7-inhabitants.v1'||geo.schema!=='american-empire.geography.v1'
@@ -181,6 +211,8 @@ async function init({manifest,geo,canon}){
  $('personUndo').addEventListener('click',undo);
  $('personReplay').addEventListener('click',replay);
  $('personExport').addEventListener('click',download);
+ $('personLoadProposal').addEventListener('click',()=>$('personProposalFile').click());
+ $('personProposalFile').addEventListener('change',e=>importRunnerProposal(e.target.files[0]));
  await refresh();
 }
 root.AE_People={init,refresh,moveYear,select(id){if([...(S.manifest?.protagonists||[]),...(S.manifest?.organizations||[]),...(S.manifest?.film_cast||[])].some(a=>a.id===id)){S.selected=id;paint();}},getRun:()=>S.run,getBaseline:()=>S.baseline,getEngine:()=>S.engine};

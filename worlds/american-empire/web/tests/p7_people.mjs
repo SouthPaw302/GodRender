@@ -33,6 +33,23 @@ try{
  assert.ok(state.caleb2027>0,'established knowledge released no earlier than 2027');
  assert.equal(state.claire2026,0,'film Scene 01 has not been placed before the 2027 simulation anchor');
  assert.ok(state.claire2027>0,'film anchor available at explicitly provisional year');
+ const candidate=await page.evaluate(()=>{
+  const r=window.AE_People.getRun(),s=r.snapshots[1];
+  return {schema:'american-empire.p8-population-proposal.v1',authority_layer:'scenario_only_proposal_not_applied',
+    status:'proposal_only_requires_observer_approval',actor:'claire',year:2027,priority:'liberty',
+    backend:'deterministic_smoke_no_model',source_p7_run_sha256:r.run_sha256,
+    source_p7_snapshot_sha256:s.sha256,source_manifest_sha256:r.manifest_sha256};
+ });
+ const tamperedProposal={...candidate,source_p7_snapshot_sha256:'0'.repeat(64)};
+ await page.locator('#personProposalFile').setInputFiles({name:'invalid-proposal.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(tamperedProposal))});
+ await page.getByText(/Proposal rejected/).waitFor();
+ assert.equal(await page.evaluate(()=>window.AE_People.getRun().interventions.length),0);
+ await page.locator('#personProposalFile').setInputFiles({name:'approved-source-proposal.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(candidate))});
+ await page.getByText(/TEST SUGGESTION — NO LANGUAGE MODEL EXECUTED/).waitFor();
+ assert.equal((await page.locator('#personFullName').textContent()).trim(),'Claire Delacroix');
+ assert.equal(await page.locator('#personPriority').inputValue(),'liberty');
+ assert.equal(await page.evaluate(()=>window.AE_People.getRun().interventions.length),0,'model candidate must not auto-apply');
+ await page.locator('.people-card').filter({hasText:'Dr. Neda Farzan'}).click();
  await page.locator('#peopleYear').evaluate(el=>{el.value='2030';el.dispatchEvent(new Event('input',{bubbles:true}));});
  await page.locator('#personPriority').selectOption('order');
  await page.locator('#personApply').click();

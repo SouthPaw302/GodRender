@@ -233,6 +233,9 @@
          <option value="trade">Negotiation and trade</option>
         </select>
         <button id="personApply" class="primary-button full-button">Create alternative choice</button>
+        <button id="personLoadProposal" class="flat-button full-button">Load AI runner proposal (JSON)</button>
+        <input type="file" id="personProposalFile" accept=".json,application/json" hidden>
+        <p id="personProposalStatus" class="tiny muted" aria-live="polite">Proposals are inert until validated and approved; model suggestions do not automatically act.</p>
         <p class="caveat">A directive changes this actor's behavior beginning in the selected year, not the locked historical timeline. Different people and institutions can respond differently.</p>
         <div class="people-compare">
          <div class="panel-label">BEHAVIORAL DIVERGENCE</div>

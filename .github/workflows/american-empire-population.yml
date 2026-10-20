@@ -1,0 +1,86 @@
+name: American Empire Population Intelligence Pilot
+on:
+  push:
+    branches: [world/american-empire]
+    paths:
+      - 'worlds/american-empire/tools/population_model.py'
+      - 'worlds/american-empire/web/tests/export_population_seed.mjs'
+      - '.github/workflows/american-empire-population.yml'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'smoke is non-AI; smollm2-135m downloads a small public model on this temporary runner'
+        type: choice
+        options: [smoke, smollm2-135m]
+        default: smoke
+        required: true
+      actor:
+        description: 'Known agent ID: claire, daniel, neda, etc.'
+        default: claire
+        required: true
+      year:
+        description: 'Simulated year 2026-2037'
+        default: '2027'
+        required: true
+permissions:
+  contents: read
+jobs:
+  bounded-population-proposal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    steps:
+      - name: Read exact source commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check source-protected world
+        run: |
+          python3 worlds/american-empire/tools/verify_canon.py
+          python3 worlds/american-empire/tools/build_web.py --repro > /tmp/ae-build.json
+      - name: Prepare real Chromium world state
+        run: |
+          npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
+          npx --prefix worlds/american-empire/web/tests playwright install --with-deps chromium
+      - name: Export dated inhabitant receipt from browser P7
+        run: |
+          set -euo pipefail
+          cd worlds/american-empire/web
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory dist >/tmp/ae-population-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          for i in $(seq 1 40); do if curl -fsS http://127.0.0.1:8765/data/world.json >/dev/null; then break; fi; sleep 1; done
+          AE_SEED_OUTPUT="$RUNNER_TEMP/ae-p7-receipt.json" node tests/export_population_seed.mjs
+      - name: Verify source receipt and non-model smoke proposal
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/population_model.py --receipt "$RUNNER_TEMP/ae-p7-receipt.json" --output "$RUNNER_TEMP/ae-population-smoke.json" --actor claire --year 2027 --mode smoke
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          rec=json.loads((Path(os.environ["RUNNER_TEMP"])/"ae-p7-receipt.json").read_text())
+          rec["snapshots"][1]["people"]["claire"]["budget"]=999
+          (Path(os.environ["RUNNER_TEMP"])/"tampered.json").write_text(json.dumps(rec))
+          PY
+          if python3 worlds/american-empire/tools/population_model.py --receipt "$RUNNER_TEMP/tampered.json" --output "$RUNNER_TEMP/should-not-exist.json" --actor claire --year 2027 --mode smoke; then
+            echo 'ERROR: Tampered P7 source accepted'; exit 1
+          fi
+      - name: Install small model runtime when explicitly selected
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'smollm2-135m'
+        run: python3 -m pip install --disable-pip-version-check 'transformers==4.57.1' 'torch>=2.4,<3'
+      - name: Run small language model as non-authoritative adviser
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'smollm2-135m'
+        env:
+          HF_HUB_DISABLE_TELEMETRY: '1'
+        run: |
+          python3 worlds/american-empire/tools/population_model.py --receipt "$RUNNER_TEMP/ae-p7-receipt.json" --output "$RUNNER_TEMP/ae-population-model-proposal.json" --actor "${{ inputs.actor }}" --year "${{ inputs.year }}" --mode smollm2-135m
+      - name: Keep results as inspectable action artifacts
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: american-empire-population-proposal
+          path: |
+            ${{ runner.temp }}/ae-p7-receipt.json
+            ${{ runner.temp }}/ae-population-smoke.json
+            ${{ runner.temp }}/ae-population-model-proposal.json
+          if-no-files-found: error
+          retention-days: 30
