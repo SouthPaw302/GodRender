@@ -25,3 +25,9 @@ Godot 3D scene: `worlds/american-empire/godot/scenes/scene_bridge.tscn`
 Validator: `worlds/american-empire/tools/verify_scene_proof.py`.
 
 Future integration should add a user-selectable source-bounded actor/year snapshot and a native GodRender processing job action with authorization; follow with actual scene reconstruction only after media proof/QC approval. The JavaScript P5–P7 engine is NOT yet fully migrated into one authoritative server-side runtime.
+
+## First verified execution
+
+The full independent GitHub Actions run [39558757705](https://github.com/SouthPaw302/GodRender/actions/runs/39558757705) **PASSED** on source commit `2763a2f39a38f586557a67cd94dff2c866f63096`. Current-main native OS bootstrap and production guards passed, browser P7 initialization and source export passed, Python tamper rejection passed, Godot 4 generated 48 real frames at 24 FPS, FFmpeg encoded a two-second MP4, and QC independently checked frame differences and source hashes. Proof contract SHA-256: `2eeaf3f76c0b6dee415cf894cfbe5936fabc2ed5fb077431fd06dda1876a418f`. Source snapshot SHA-256: `3d0c4841852d105c84ee2ab8775ec65ff06927d8a812e6bc5656e1702b2967be`.
+
+**This is a one-way CI proof from a browser baseline; user-selected what-if states are not yet connected to a persistent Godot server or Web 3D display.** No media assets were exposed or regenerated.

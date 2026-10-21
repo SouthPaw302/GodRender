@@ -1,7 +1,7 @@
 {
   "schema": "american-empire.production-simulation-link.v1",
   "branch": "world/american-empire",
-  "stage": "declaration_only_unwired",
+  "stage": "tested_one_way_batch_browser_to_godot_3d",
   "main_os_ref": "main",
   "main_os_sha": "03e4d790a2cfb14b4e9848ee5f5f948f9498a4eb",
   "world_sources": [
@@ -14,7 +14,7 @@
   "browser_path": "worlds/american-empire/web",
   "godot_project": "worlds/american-empire/godot/project.godot",
   "media_index_private": "worlds/american-empire/MEDIA_INVENTORY.json",
-  "note": "Native GodRender boot proved PASS in temporary song-prefixed runner checkout; the browser/Godot world runtime is not yet implemented or connected.",
+  "note": "Verified one-way batch extraction: Chromium AE P7 run -> SHA-validated GodRender Python contract -> native Godot 4 3D procedural proof + FFmpeg movie + QC. Not persistent world state, real cinematic Paris reconstruction, 3D WebGUI, or direct live browser-to-Godot session.",
   "native_os_boot": {
     "verified": true,
     "scope": "isolated_github_actions_temporary_local_song_checkout_only",
@@ -30,5 +30,26 @@
       "workflow_guard_pass"
     ],
     "persistent_remote_song_branch_created": false
+  },
+  "godot_scene": "worlds/american-empire/godot/scenes/scene_bridge.tscn",
+  "source_receipt_exporter": "worlds/american-empire/web/tests/export_population_seed.mjs",
+  "source_scene_contract_validator": "worlds/american-empire/tools/export_godot_scene.py",
+  "execution_workflow": ".github/workflows/american-empire-world-godot.yml",
+  "latest_verified_3d_scene_proof": {
+    "source_commit": "2763a2f39a38f586557a67cd94dff2c866f63096",
+    "workflow_url": "https://github.com/SouthPaw302/GodRender/actions/runs/39558757705",
+    "source_p7_run_sha256": "130394616397b844e9427a83c3f9ed293f574124f1b244e834df1e199a006b60",
+    "p7_snapshot_sha256": "3d0c4841852d105c84ee2ab8775ec65ff06927d8a812e6bc5656e1702b2967be",
+    "scene_contract_sha256": "2eeaf3f76c0b6dee415cf894cfbe5936fabc2ed5fb077431fd06dda1876a418f",
+    "actor": "claire",
+    "place": "paris",
+    "year": 2027,
+    "frames": 48,
+    "fps": 24,
+    "classification": "scenario_only_technical_3d_geometry_not_approved_film",
+    "browser_state_source": "real_P7_chromium_receipt",
+    "proof_artifact": "ae-browser-godot-3d-scene-proof",
+    "tamper_rejection_passed": true,
+    "original_media_ingested": false
   }
 }
