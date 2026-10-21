@@ -170,11 +170,11 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     brain["world_bundle_sha256"] = bundle["bundle_sha256"]
     if out.exists():
         for file in out.rglob("*"):
-            if file.is_file() and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "film_bridge.json", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
+            if file.is_file() and file.parent.name != "proofs" and file.name not in {"index.html", "app.js", "styles.css", "simulator.js", "live.js", "regions.js", "earth.js", "inhabitants.js", "people.js", "scene_forge.js", "scene_proofs.json", "film_bridge.json", "inhabitants.json", "people_source.json", "geo.json", "land.geojson", "world.json", "brain.json", "model.json", "reference_scenarios.json", "standalone.html", "explorer-preview.png"}:
                 raise ValueError("Unexpected existing dist content: "+str(file))
         shutil.rmtree(out)
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js","inhabitants.js","people.js"):
+    for name in ("index.html","app.js","styles.css","simulator.js","live.js","regions.js","earth.js","inhabitants.js","people.js","scene_forge.js"):
         shutil.copy2(SOURCE / name, out / name)
     _write(out / "data" / "world.json",bundle)
     _write(out / "data" / "brain.json",brain)
@@ -185,6 +185,27 @@ def build(out: Path = DEFAULT_DEST) -> dict:
     _write(out / "data" / "inhabitants.json",inhabitants)
     _write(out / "data" / "people_source.json",people_source)
     _write(out / "data" / "film_bridge.json",film_bridge)
+    # Only GitHub-Actions-QC verified, procedurally derived Godot scene proofs.
+    # No MEDIA_INVENTORY data or Drive source media is ever copied to dist.
+    proofs_path=WORLD / "web" / "proofs" / "registry.json"
+    proofs=json.loads(proofs_path.read_text(encoding="utf-8"))
+    if not isinstance(proofs,list) or len(proofs)>12:
+        raise ValueError("Unverified scene-proof registry")
+    for entry in proofs:
+        ident=entry.get("id")
+        if not isinstance(ident,str) or not ident.startswith("godot-") or not ident.replace("-","").isalnum():
+            raise ValueError("Illegal generated proof ID")
+        if entry.get("classification")!="technical_geometry_proof_not_approved_film" or entry.get("verified") is not True:
+            raise ValueError("Unverified or original media must never be published")
+        if entry.get("video")!=f"proofs/{ident}.mp4":
+            raise ValueError("Unexpected media path")
+        video=WORLD / "web" / "proofs" / (ident+".mp4")
+        if not video.is_file() or hashlib.sha256(video.read_bytes()).hexdigest()!=entry.get("video_sha256"):
+            raise ValueError("Godot generated video digest mismatch")
+        target=out / "proofs"
+        target.mkdir(exist_ok=True)
+        shutil.copy2(video,target/video.name)
+    _write(out / "data" / "scene_proofs.json",proofs)
     # One-file offline artifact: embed signed/source-pinned P3 rules and inputs.
     # Less-than escaping prevents an embedded JSON value from closing its script.
     html = (SOURCE / "index.html").read_text(encoding="utf-8")
@@ -197,13 +218,14 @@ def build(out: Path = DEFAULT_DEST) -> dict:
         ("earth.js", (SOURCE / "earth.js").read_text(encoding="utf-8")),
         ("inhabitants.js", (SOURCE / "inhabitants.js").read_text(encoding="utf-8")),
         ("people.js", (SOURCE / "people.js").read_text(encoding="utf-8")),
+        ("scene_forge.js", (SOURCE / "scene_forge.js").read_text(encoding="utf-8")),
     )
     html = html.replace('<link rel="stylesheet" href="./styles.css">', '<style>'+css+'</style>')
     inline_data = (("embeddedWorld",bundle),("embeddedBrain",brain),
                    ("embeddedModel",model),("embeddedReference",references),
                    ("embeddedGeo",geo),("embeddedLand",land),
                    ("embeddedInhabitants",inhabitants),("embeddedPeopleSource",people_source),
-                   ("embeddedFilmBridge",film_bridge))
+                   ("embeddedFilmBridge",film_bridge),("embeddedSceneProofs",proofs))
     payload = "".join('<script type="application/json" id="'+label+'">'
                       +json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(",",":")).replace("<","\\u003c")
                       +"</script>\n" for label,data in inline_data)

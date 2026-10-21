@@ -55,7 +55,9 @@ func _valid_contract() -> bool:
     for key in ["service", "independence"]:
         if not w.has(key) or int(w[key]) < 0 or int(w[key]) > 100:
             return false
-    if str(a.get("id", "")) == "" or str(a.get("place", "")) != str(w.get("place_id", "")):
+    if str(a.get("id", "")) == "" or str(a.get("place", "")) == "":
+        return false
+    if not a.has("present_in_scene") or bool(a["present_in_scene"]) != (str(a["place"]) == str(w["place_id"])):
         return false
     return true
 

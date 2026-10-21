@@ -17,8 +17,11 @@ def verify(root: Path) -> dict:
     frame,person=assert_run(source, contract["actor"]["id"], contract["world"]["year"])
     if frame["sha256"] != contract["source"]["p7_snapshot_sha256"] or source["run_sha256"] != contract["source"]["p7_run_sha256"]:
         raise ValueError("World source hash mismatch")
-    place=person["place"]
-    if place!=contract["world"]["place_id"] or frame["places"][place]["service"]!=contract["world"]["service"]:
+    home=person["place"]
+    place=contract["world"]["place_id"]
+    if contract["actor"]["place"] != home or contract["actor"]["present_in_scene"] is not (home == place):
+        raise ValueError("Actor was teleported or presence assertion changed")
+    if place not in frame["places"] or frame["places"][place]["service"]!=contract["world"]["service"]:
         raise ValueError("Rendered place or service disconnected from source")
     if frame["places"][place]["independence"]!=contract["world"]["independence"]:
         raise ValueError("Rendered independence disconnected from source")

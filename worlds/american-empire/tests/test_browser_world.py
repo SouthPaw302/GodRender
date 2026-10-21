@@ -69,6 +69,8 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertTrue((output/"earth.js").is_file())
             self.assertTrue((output/"inhabitants.js").is_file())
             self.assertTrue((output/"people.js").is_file())
+            self.assertTrue((output/"scene_forge.js").is_file())
+            self.assertTrue((output/"data/scene_proofs.json").is_file())
             self.assertFalse((output/"cinema.js").exists())
             self.assertFalse((output/"data/media_inventory.json").exists())
             self.assertTrue((output/"data/inhabitants.json").is_file())
@@ -101,6 +103,7 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertNotIn('id="embeddedMediaInventory"', standalone)
             self.assertNotIn('https://drive.google.com/file/d/', standalone)
             self.assertIn('id="embeddedFilmBridge"', standalone)
+            self.assertIn('id="embeddedSceneProofs"', standalone)
             self.assertIn('P5 browser-native deterministic P3 simulation', standalone)
             self.assertIn('<style>', standalone)
             self.assertIn('counterfactual_adaptation_not_canon', standalone)
@@ -119,9 +122,9 @@ class BrowserExplorerTests(unittest.TestCase):
 
     def test_interface_references_existing_controls(self):
         html=(ROOT/"web/src/index.html").read_text()
-        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text()
+        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text() + (ROOT/"web/src/scene_forge.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["home","startParis","startTimeline","startClaire","startEarth","startSimulation","world","chronology","brain","production","simulation","earth","inhabitants","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
+        for ident in ["home","startParis","startTimeline","startClaire","startEarth","startSimulation","world","chronology","brain","production","simulation","earth","inhabitants","forge","forgeActor","forgePlace","forgeYear","forgeJSON","forgeBuild","forgeCopy","forgeRun","forgeProofList","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)

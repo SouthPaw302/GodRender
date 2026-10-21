@@ -18,13 +18,14 @@ WORLD = REPO / "worlds" / "american-empire"
 SCHEMA = "american-empire.godot-scene-contract.v1"
 
 
-def build(receipt: dict, actor: str = "claire", year: int = 2027) -> dict:
+def build(receipt: dict, actor: str = "claire", year: int = 2027, place: str | None = None) -> dict:
     frame, person = assert_run(receipt, actor, year)
     p6 = json.loads((WORLD / "P6_GEOGRAPHY.json").read_text(encoding="utf-8"))
     p8 = json.loads((WORLD / "P8_FILM_BRIDGE.json").read_text(encoding="utf-8"))
     nodes = {n["id"]: n for n in p6["nodes"]}
     nodes[p8["location"]["id"]] = p8["location"]
-    place_id = person["place"]
+    home_id = person["place"]
+    place_id = place or home_id
     if place_id not in nodes or place_id not in frame["places"]:
         raise ValueError("Actor location not present in approved local source")
     site = nodes[place_id]
@@ -36,7 +37,7 @@ def build(receipt: dict, actor: str = "claire", year: int = 2027) -> dict:
     if not all(type(v) is int and 0 <= v <= 100 for v in (service, autonomy)):
         raise ValueError("Invalid local indices")
     decision = next((x for x in frame["decisions"] if x["id"] == actor), None)
-    if not decision or decision["place"] != place_id:
+    if not decision or decision["place"] != home_id:
         raise ValueError("No coherent actor decision for source year")
     if not all(type(person[k]) is int and 0 <= person[k] <= 100 for k in ("budget", "standing")):
         raise ValueError("Actor resources outside bound")
@@ -62,7 +63,8 @@ def build(receipt: dict, actor: str = "claire", year: int = 2027) -> dict:
         },
         "actor": {
             "id": actor, "simulation_kind": "modeled_character_marker_not_face_or_costume",
-            "place": place_id, "budget": person["budget"],
+            "place": home_id, "present_in_scene": home_id == place_id,
+            "budget": person["budget"],
             "standing": person["standing"],
             "last_action": decision["action"],
             "memory_count": len(person["memory"]),
@@ -94,9 +96,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--actor", default="claire")
     parser.add_argument("--year", type=int, default=2027)
+    parser.add_argument("--place", default=None, help="Observer focus; never teleports modeled characters")
     args = parser.parse_args()
     world = json.loads(args.receipt.read_text(encoding="utf-8"))
-    contract = build(world, args.actor, args.year)
+    contract = build(world, args.actor, args.year, args.place)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(contract, sort_keys=True, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     print("AE_SCENE_CONTRACT_PASS "+json.dumps({

@@ -24,6 +24,7 @@
       <button type="button" class="tab" data-tab="inhabitants">Living Inhabitants</button>
       <button type="button" class="tab" data-tab="brain">Second Brain</button>
       <button type="button" class="tab" data-tab="production">Production Desk</button>
+      <button type="button" class="tab" data-tab="forge">World Scene Forge</button>
     </nav>
     <div class="top-right"><span class="live-dot"></span><span class="top-status">CANON VERIFIED</span><a id="githubTop" class="external" rel="noreferrer" target="_blank">GITHUB ↗</a></div>
   </header>
@@ -37,7 +38,7 @@
         <p class="eyebrow">WELCOME TO THE AMERICAN EMPIRE · FICTIONAL WORLD</p>
         <h1>One Earth. Two futures.<br>Millions of possible lives.</h1>
         <p>This is an explorable alternate-history universe. Until 2026, its visible past closely follows our own. Then the timelines divide. In one branch, a hidden American continuity system emerges and ultimately rules Earth. You are the <strong>Observer</strong>: you can enter the world, follow its inhabitants, and experiment with consequences.</p>
-        <div class="ae-start-buttons"><button id="startParis" type="button" class="primary-button"><span>01 / ENTER A PLACE</span><strong>Paris, 2027</strong></button><button id="startClaire" type="button" class="flat-button"><span>02 / FOLLOW A PERSON</span><strong>Claire Delacroix</strong></button><button id="startEarth" type="button" class="flat-button"><span>03 / EXPLORE THE PLANET</span><strong>Earth Network</strong></button></div>
+        <div class="ae-start-buttons"><button id="startParis" type="button" class="primary-button"><span>01 / ENTER A PLACE</span><strong>Paris, 2027</strong></button><button id="startClaire" type="button" class="flat-button"><span>02 / FOLLOW A PERSON</span><strong>Claire Delacroix</strong></button><button id="startEarth" type="button" class="flat-button"><span>03 / EXPLORE THE PLANET</span><strong>Earth Network</strong></button><button id="startForge" type="button" class="flat-button"><span>04 / CONSTRUCT A SCENE</span><strong>GodRender 3D</strong></button></div>
       </div>
       <div class="ae-start-grid">
         <div><span class="panel-label">THE STORY</span><h2>Enter Paris as a location</h2><p>Claire receives a call in pre-dawn Paris. The city begins behaving as though it already knows what is coming. Follow its inhabitants and their modeled consequences; source media remains in the production pipeline.</p><button id="startTimeline" class="flat-button">Explore historical timeline →</button></div>
@@ -285,6 +286,37 @@
       <div class="production-layout"><div class="production-card"><div class="panel-label">WORLD REFERENCE</div><label for="briefYear">Year</label><select id="briefYear"></select><label for="briefEntity">Focal institution / system / person</label><select id="briefEntity"></select><label for="briefMode">Authority treatment</label><select id="briefMode"><option value="canon_reference">Canonical historical reference (read-only)</option><option value="scenario_adaptation">Counterfactual adaptation — not canon</option></select><label for="briefFx">Optional registered FX technique</label><select id="briefFx"><option value="">No FX technique selected</option></select><label for="briefNote">Director's scene intention</label><textarea id="briefNote" rows="4" maxlength="700" placeholder="Describe the viewpoint, setting and dramatic purpose. No media will be generated."></textarea><div class="action-row"><button id="copyBrief" class="primary-button">COPY PRODUCTION BRIEF</button><button id="downloadBrief" class="flat-button">DOWNLOAD JSON</button></div><p class="tiny muted" id="briefMessage" aria-live="polite"></p></div>
       <div class="production-info"><div class="panel-label">GODRENDER HANDOFF · NOT AN EXECUTION GATE</div><h2>Use the whole stack, when the scene calls for it.</h2><p>Studio supplies the six-stage Media → Direction → Storyboard → Shots → Assemble → Finish workflow. The inherited Second Brain helps retrieve eligible effects and earlier proofs. No historical technique may execute without current native verification.</p><div id="briefPreview" class="preview-code"></div><a id="studioLink" href="#" target="_blank" rel="noreferrer" class="external-link">OPEN GODRENDER STUDIO SOURCE ↗</a><p class="tiny muted">The website is a read-only explorer. A production worker or authenticated Studio connection is not running on this hosting service.</p></div></div>
     </section>
+    <section id="forge" class="page widepage" aria-label="GodRender scene forge">
+      <div class="page-intro"><p class="eyebrow">P10 · GODRENDER NATIVE SCENE EXECUTOR</p>
+        <h1>Give the world a camera.</h1>
+        <p>Take a character and a year from your <strong>current modeled timeline</strong> and ask the protected GodRender production runner to reconstruct a schematic 3D viewpoint. A chosen city does not teleport people. Film footage, original Drive media and personal credentials never enter this viewer.</p>
+      </div>
+      <div id="forgeStatus" class="sim-status" role="status" aria-live="polite">Initializing scene handoff…</div>
+      <div class="ae-forge-columns">
+        <aside class="panel ae-forge-controls">
+          <div class="panel-label">SCENE SOURCE / YOUR ACTIVE WORLD</div>
+          <label for="forgeActor">Follow an inhabitant</label><select id="forgeActor" class="select"></select>
+          <label for="forgeYear">Simulation year <strong id="forgeYearValue">2027</strong></label>
+          <input type="range" id="forgeYear" min="2026" max="2037" step="1" value="2027">
+          <label for="forgePlace">Observe this location</label><select id="forgePlace" class="select"></select>
+          <button type="button" id="forgeBuild" class="primary-button">1. Prepare verified world state</button>
+          <label for="forgeJSON">GitHub Actions scene request</label>
+          <textarea id="forgeJSON" readonly rows="7" spellcheck="false" placeholder="The compact world request appears here after you prepare the scene."></textarea>
+          <div class="ae-forge-buttons"><button type="button" id="forgeCopy" class="flat-button">2. Copy request</button>
+          <a id="forgeRun" class="flat-button" target="_blank" rel="noreferrer">3. Open GitHub runner ↗</a></div>
+          <p class="caveat">In GitHub Actions, choose <strong>Run workflow</strong>, paste the copied JSON into <code>scene_request</code>, and launch the job. GitHub runs Godot after replaying and validating your history. No GitHub credential is embedded here; the job is not executed just by clicking these controls.</p>
+        </aside>
+        <div class="panel ae-forge-view">
+          <div class="panel-label">GODOT 4 · DERIVED WORLD SCENES ONLY</div>
+          <div id="forgePlayer" class="ae-forge-video"><p>Select a verified generated scene below. This is not original film or archival Drive footage.</p></div>
+          <p id="forgeProofDetails" class="tiny muted"></p>
+          <div id="forgeProofList" class="ae-forge-list" aria-label="Verified Godot scene proofs"></div>
+          <p class="caveat">Only QC-verified schematic outputs may appear here; city geometry is illustrative. This is an asynchronous, user-triggered render workflow, not live GPU streaming. Source image, audio, video and character identity remain protected in the production system.</p>
+          <a class="external-link" target="_blank" rel="noreferrer" href="https://github.com/SouthPaw302/GodRender/actions/workflows/american-empire-world-godot.yml">Open scene render history ↗</a>
+        </div>
+      </div>
+    </section>
+
   </main>
   <footer><span>THE AMERICAN EMPIRE · A FICTIONAL ALTERNATE HISTORY</span><span id="footSource">VERIFYING SOURCE…</span><span>ORIGINAL CANON PROTECTED · PARIS FILM SAME WORLD</span></footer>
 </div>
@@ -295,5 +327,6 @@
 <script src="./earth.js" defer></script>
 <script src="./inhabitants.js" defer></script>
 <script src="./people.js" defer></script>
+<script src="./scene_forge.js" defer></script>
 </body>
 </html>

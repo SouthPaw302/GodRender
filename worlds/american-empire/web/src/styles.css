@@ -124,7 +124,7 @@
 .ae-start-hero::after{content:"AE";font:130px Georgia,serif;opacity:.045;position:absolute;right:4%;top:8%;pointer-events:none}
 .ae-start-hero h1{font:400 clamp(32px,4.4vw,56px)/1.14 Georgia,serif;color:#e8d2a9;letter-spacing:-.02em;margin:15px 0 21px;max-width:760px}
 .ae-start-hero p{max-width:800px;color:#c1d3dc;font-size:14px;line-height:1.85}
-.ae-start-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:29px}
+.ae-start-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:29px}
 .ae-start-buttons button{min-width:0;padding:17px 19px;display:flex;flex-direction:column;text-align:left;gap:10px;border-radius:7px}
 .ae-start-buttons span{font-size:9px;letter-spacing:.12em;opacity:.84}
 .ae-start-buttons strong{font:21px Georgia,serif}
@@ -137,3 +137,19 @@
 .ae-start-status span{flex:1;min-width:190px;line-height:1.7}
 .ae-start-status strong{display:block;letter-spacing:.08em;color:#dfc99e}
 @media(max-width:840px){.ae-start-buttons,.ae-start-grid{grid-template-columns:1fr}.ae-start-hero{padding:30px 25px}.ae-start-grid p{min-height:0}}
+
+/* Only verified Godot-generated artifacts play here; never original Drive files. */
+.ae-forge-columns{display:grid;grid-template-columns:minmax(275px,.9fr) minmax(350px,1.5fr);gap:18px}
+.ae-forge-controls,.ae-forge-view{min-width:0;padding:22px;background:#102638;border:1px solid #33546a;border-radius:9px}
+.ae-forge-controls label{display:block;color:#c9dce6;font-size:12px;margin:16px 0 8px}
+.ae-forge-controls select,.ae-forge-controls textarea{width:100%;box-sizing:border-box;background:#0a1c2b;color:#dfdfdf;border:1px solid #33546a;border-radius:4px;padding:10px;font:12px/1.5 monospace}
+.ae-forge-controls input[type=range]{width:100%}
+.ae-forge-controls button{margin-top:15px}
+.ae-forge-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.ae-forge-buttons a{display:inline-block;padding:10px 14px}
+.ae-forge-video{aspect-ratio:16/9;display:grid;place-items:center;background:#050e19;border:1px solid #3b627c;border-radius:6px;overflow:hidden;margin:14px 0;padding:0}
+.ae-forge-video>p{padding:25px;color:#b6c9d4;font:16px/1.7 Georgia,serif;text-align:center}
+.ae-forge-video video{width:100%;height:100%;object-fit:contain}
+.ae-forge-list{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}
+.ae-forge-list button{font-size:12px}
+@media(max-width:850px){.ae-forge-columns{grid-template-columns:1fr}}
