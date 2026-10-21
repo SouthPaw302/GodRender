@@ -14,5 +14,21 @@
   "browser_path": "worlds/american-empire/web",
   "godot_project": "worlds/american-empire/godot/project.godot",
   "media_index_private": "worlds/american-empire/MEDIA_INVENTORY.json",
-  "note": "Manifest declares data flows only. It does not perform automatic persistent world state writes, invoke Godot rendering, ingest private Drive assets, or bypass boot safeguards."
+  "note": "Native GodRender boot proved PASS in temporary song-prefixed runner checkout; the browser/Godot world runtime is not yet implemented or connected.",
+  "native_os_boot": {
+    "verified": true,
+    "scope": "isolated_github_actions_temporary_local_song_checkout_only",
+    "source_branch": "world/american-empire",
+    "local_branch": "song/american-empire",
+    "source_commit": "eb18a24ea44b5609d6310fb5b0f00d33c4fe1032",
+    "main_os_sha": "03e4d790a2cfb14b4e9848ee5f5f948f9498a4eb",
+    "workflow_url": "https://github.com/SouthPaw302/GodRender/actions/runs/39557339190",
+    "guard_results": [
+      "bootstrap_pass",
+      "production_guard_pass",
+      "recut_guard_pass",
+      "workflow_guard_pass"
+    ],
+    "persistent_remote_song_branch_created": false
+  }
 }
