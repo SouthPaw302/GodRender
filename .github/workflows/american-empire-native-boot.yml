@@ -1,4 +1,4 @@
-name: American Empire native main-OS boot
+name: American Empire native song production boot
 on:
   push:
     branches: [world/american-empire]
@@ -40,15 +40,35 @@ jobs:
           PY
           git rev-parse HEAD
           git rev-parse refs/remotes/origin/main
-      - name: Attempt actual production bootstrap against exact protected main
+      - name: Prepare isolated local song production checkout
         shell: bash
         run: |
           set -euo pipefail
-          python3 bootstrap.py boot --offline --repo-root "$GITHUB_WORKSPACE" --branch world/american-empire --project-dir projects/american-empire 2>&1 | tee "$RUNNER_TEMP/ae-native-boot.log"
+          SOURCE_SHA="$(git rev-parse HEAD)"
+          # Local-only alias at the exact AE source commit. Do not push or rename
+          # the protected main or existing world/american-empire remote ref.
+          git -c advice.detachedHead=false switch -c song/american-empire
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("projects/american-empire/PROJECT_STATE.json")
+          state=json.loads(p.read_text(encoding="utf-8"))
+          assert state["branch"]=="world/american-empire"
+          state["branch"]="song/american-empire"
+          p.write_text(json.dumps(state,indent=2)+"\n",encoding="utf-8")
+          PY
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          echo "LOCAL WORKTREE ALIAS: song/american-empire at $SOURCE_SHA"
+          echo "REMOTE SOURCE UNCHANGED: origin/world/american-empire"
+      - name: Attempt actual song-production bootstrap against exact protected main
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 bootstrap.py boot --offline --repo-root "$GITHUB_WORKSPACE" --branch song/american-empire --project-dir projects/american-empire 2>&1 | tee "$RUNNER_TEMP/ae-native-boot.log"
           python3 bootstrap.py status --repo-root "$GITHUB_WORKSPACE" > "$RUNNER_TEMP/ae-native-boot-status.json"
-          python3 .godrender/os/general/reusable/tools/production_guard.py --branch world/american-empire
-          python3 .godrender/os/general/reusable/tools/workflow_guard.py --branch world/american-empire
-          echo "NATIVE AE MAIN-OS BOOT: PASS"
+          python3 .godrender/os/general/reusable/tools/production_guard.py --branch song/american-empire
+          python3 .godrender/os/general/reusable/tools/workflow_guard.py --branch song/american-empire
+          echo "ISOLATED LOCAL AE SONG-PRODUCTION BOOT: PASS"
       - name: Preserve inspectable attestation and failure diagnostic
         if: always()
         shell: bash
@@ -60,12 +80,15 @@ jobs:
           cp .godrender/session_attestation.json "$RUNNER_TEMP/ae-native-proof/session_attestation.json" 2>/dev/null || true
           cp .godrender/SECOND_BRAIN.md "$RUNNER_TEMP/ae-native-proof/SECOND_BRAIN.md" 2>/dev/null || true
           git rev-parse HEAD > "$RUNNER_TEMP/ae-native-proof/ae_head_sha.txt"
+          git branch --show-current > "$RUNNER_TEMP/ae-native-proof/local_checkout_branch.txt"
+          git rev-parse origin/world/american-empire > "$RUNNER_TEMP/ae-native-proof/remote_ae_sha.txt"
+          git diff -- projects/american-empire/PROJECT_STATE.json > "$RUNNER_TEMP/ae-native-proof/local_state_overlay.patch"
           git rev-parse refs/remotes/origin/main > "$RUNNER_TEMP/ae-native-proof/os_main_sha.txt"
       - name: Upload actual bootstrap evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: american-empire-native-main-os-boot
+          name: american-empire-local-song-os-boot
           path: ${{ runner.temp }}/ae-native-proof/
           if-no-files-found: error
           retention-days: 30
