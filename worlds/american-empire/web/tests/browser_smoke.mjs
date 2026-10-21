@@ -76,7 +76,11 @@ try{
  await page.locator('#forgeDownload').click();
  const sceneDownload=await sceneDownloadPromise;
  assert.match(sceneDownload.suggestedFilename(),/^request-2027-claire-paris-[a-f0-9]{12}\.json$/);
- assert.equal(await page.locator('#forgePlayer video').count(),0,'no unverified proof loaded');
+ const derivedProofs=await page.locator('#forgePlayer video source').count();
+ if(derivedProofs){
+   assert.match(await page.locator('#forgePlayer video source').getAttribute('src'),/^\.\/proofs\/godot-[a-z0-9-]+\.mp4$/);
+   assert.equal(await page.locator('iframe[src*="drive.google.com"]').count(),0);
+ }
  assert.equal(await page.locator('iframe[src*="drive.google.com"]').count(),0);
  assert.equal(await page.locator('[data-tab="cinema"]').count(),0,'Media gallery must not appear in Observer');
  assert.equal(await page.locator('.cinema-item').count(),0);

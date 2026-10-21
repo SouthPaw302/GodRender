@@ -47,7 +47,16 @@ def publish(root:Path, run_id:str)->dict:
     }
     destination=PROOFS/(filename+".mp4")
     if destination.exists() and hashlib.sha256(destination.read_bytes()).hexdigest()!=digest:
-        raise ValueError("Existing proof ID has different bytes; no overwrite")
+        # Identical source-world contracts can encode slightly different MP4 bytes
+        # across runners. Do not overwrite or proliferate a previously verified
+        # proof for the same world state.
+        prior=next((e for e in registry if e.get("id")==filename),None)
+        if prior and prior.get("contract_sha256")==report["contract_sha256"] and \
+           hashlib.sha256(destination.read_bytes()).hexdigest()==prior.get("video_sha256") and \
+           prior.get("verified") is True:
+            print("AE_EXISTING_VERIFIED_PROOF_RETAINED "+filename)
+            return prior
+        raise ValueError("Existing proof ID collision failed provenance check")
     shutil.copy2(video,destination)
     registry=[item]+[e for e in registry if e.get("id")!=filename]
     if len(registry)>8:
