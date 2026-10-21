@@ -1,0 +1,144 @@
+name: AE Browser to Godot Native 3D Proof
+
+on:
+  push:
+    branches:
+      - world/american-empire
+    paths:
+      - 'worlds/american-empire/tools/export_godot_scene.py'
+      - 'worlds/american-empire/tools/verify_scene_proof.py'
+      - 'worlds/american-empire/godot/scripts/scene_bridge.gd'
+      - 'worlds/american-empire/godot/scenes/scene_bridge.tscn'
+      - '.github/workflows/american-empire-world-godot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-3d-world-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GODOT_VERSION: "4.7.2-stable"
+      GODOT_ZIP_SHA256: "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4"
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      MESA_GL_VERSION_OVERRIDE: "3.3"
+    steps:
+      - name: Checkout exact world branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Bootstrap exact protected main OS in local song production checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = world/american-empire
+          git switch -c song/american-empire
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path("projects/american-empire/PROJECT_STATE.json")
+          state=json.loads(path.read_text())
+          assert state["branch"]=="world/american-empire"
+          state["branch"]="song/american-empire"
+          path.write_text(json.dumps(state,indent=2)+"\n")
+          PY
+          python3 bootstrap.py boot --offline --repo-root "$GITHUB_WORKSPACE" --branch song/american-empire --project-dir projects/american-empire
+          python3 .godrender/os/general/reusable/tools/production_guard.py --branch song/american-empire
+          python3 .godrender/os/general/reusable/tools/workflow_guard.py --branch song/american-empire
+      - name: Verify original canon and existing engines
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/verify_canon.py
+          python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
+      - name: Build world browser and extract actual verified P7 state in Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/build_web.py --repro
+          npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
+          npx --prefix worlds/american-empire/web/tests playwright install --with-deps chromium
+          cd worlds/american-empire/web
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory dist >/tmp/ae-scene-http.log 2>&1 &
+          WEB_PID=$!
+          trap 'kill "$WEB_PID" || true' EXIT
+          for i in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:8765/data/world.json >/dev/null; then break; fi
+            sleep 1
+          done
+          AE_SEED_OUTPUT="$RUNNER_TEMP/ae-p7-receipt.json" node tests/export_population_seed.mjs
+      - name: Source-bound scene contract and adversarial tamper rejection
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/ae-world-godot"
+          mkdir -p "$OUT" worlds/american-empire/godot/data
+          cp "$RUNNER_TEMP/ae-p7-receipt.json" "$OUT/ae-p7-receipt.json"
+          python3 worlds/american-empire/tools/export_godot_scene.py --receipt "$OUT/ae-p7-receipt.json" --output worlds/american-empire/godot/data/scene_contract.json --actor claire --year 2027
+          cp worlds/american-empire/godot/data/scene_contract.json "$OUT/scene_contract.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          folder=Path(os.environ["RUNNER_TEMP"])/"ae-world-godot"
+          data=json.loads((folder/"ae-p7-receipt.json").read_text())
+          data["snapshots"][1]["places"]["paris"]["service"]=999
+          (folder/"tampered.json").write_text(json.dumps(data))
+          PY
+          if python3 worlds/american-empire/tools/export_godot_scene.py --receipt "$OUT/tampered.json" --output "$OUT/unsafe.json"; then
+            echo "ERROR: tampered source accepted"; exit 1
+          fi
+          test ! -f "$OUT/unsafe.json"
+      - name: Install Xvfb and software OpenGL dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb xauth libgl1-mesa-dri libgl1 libx11-6 libxcursor1 libxinerama1 libxi6 libxrandr2 libxrender1 libasound2t64 ffmpeg unzip curl
+      - name: Download official Godot and verify established SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip" -o /tmp/godot-p4.zip
+          printf "%s  %s\n" "$GODOT_ZIP_SHA256" /tmp/godot-p4.zip | sha256sum -c -
+          unzip -q /tmp/godot-p4.zip -d /tmp/godot-p4-bin
+          chmod +x "/tmp/godot-p4-bin/Godot_v${GODOT_VERSION}_linux.x86_64"
+          "/tmp/godot-p4-bin/Godot_v${GODOT_VERSION}_linux.x86_64" --version
+      - name: Import and render 3D geometry from exact browser world snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT="$(find /tmp/godot-p4-bin -maxdepth 1 -type f -name 'Godot_v*' | head -1)"
+          OUT="$RUNNER_TEMP/ae-world-godot"
+          PROJ="$GITHUB_WORKSPACE/worlds/american-empire/godot"
+          "$GODOT" --headless --path "$PROJ" --editor --import --quit 2>&1 | tee "$OUT/import.log"
+          if grep -E "SCRIPT ERROR|Parse Error|Failed to load script" "$OUT/import.log"; then exit 1; fi
+          xvfb-run -a -s "-screen 0 1600x1000x24" "$GODOT" \
+            --path "$PROJ" --scene res://scenes/scene_bridge.tscn \
+            --rendering-method gl_compatibility --write-movie "$OUT/frame.png" \
+            --fixed-fps 24 --quit-after 48 -- --scene-proof 2>&1 | tee "$OUT/godot.log"
+          if grep -E "SCRIPT ERROR|Parse Error|AE_SCENE_FAIL" "$OUT/godot.log"; then exit 1; fi
+          ffmpeg -hide_banner -loglevel error -nostdin -y \
+            -framerate 24 -i "$OUT/frame%08d.png" \
+            -c:v libx264 -preset fast -crf 24 -pix_fmt yuv420p "$OUT/godot-proof.mp4"
+      - name: Verify source SHA links, real moving images, film guard
+        shell: bash
+        run: |
+          python3 worlds/american-empire/tools/verify_scene_proof.py --root "$RUNNER_TEMP/ae-world-godot"
+      - name: Upload only derived technical proof and hashes
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ae-browser-godot-3d-scene-proof
+          path: |
+            ${{ runner.temp }}/ae-world-godot/ae-p7-receipt.json
+            ${{ runner.temp }}/ae-world-godot/scene_contract.json
+            ${{ runner.temp }}/ae-world-godot/godot-proof.mp4
+            ${{ runner.temp }}/ae-world-godot/frame00000002.png
+            ${{ runner.temp }}/ae-world-godot/frame00000024.png
+            ${{ runner.temp }}/ae-world-godot/frame00000044.png
+            ${{ runner.temp }}/ae-world-godot/verification.json
+            ${{ runner.temp }}/ae-world-godot/godot.log
+            ${{ runner.temp }}/ae-world-godot/import.log
+          if-no-files-found: warn
+          retention-days: 30
