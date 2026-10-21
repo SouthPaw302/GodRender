@@ -22,7 +22,6 @@
       <button type="button" class="tab" data-tab="simulation">Simulation Lab</button>
       <button type="button" class="tab" data-tab="earth">Earth Network</button>
       <button type="button" class="tab" data-tab="inhabitants">Living Inhabitants</button>
-      <button type="button" class="tab" data-tab="cinema">Observer Cinema</button>
       <button type="button" class="tab" data-tab="brain">Second Brain</button>
       <button type="button" class="tab" data-tab="production">Production Desk</button>
     </nav>
@@ -37,15 +36,15 @@
       <div class="ae-start-hero">
         <p class="eyebrow">WELCOME TO THE AMERICAN EMPIRE · FICTIONAL WORLD</p>
         <h1>One Earth. Two futures.<br>Millions of possible lives.</h1>
-        <p>This is an explorable alternate-history universe. Until 2026, its visible past closely follows our own. Then the timelines divide. In one branch, a hidden American continuity system emerges and ultimately rules Earth. You are the <strong>Observer</strong>: you can watch the films, follow people, and experiment with consequences.</p>
-        <div class="ae-start-buttons"><button id="startCinema" type="button" class="primary-button"><span>01 / WATCH THE MOVIE</span><strong>Paris Act I</strong></button><button id="startClaire" type="button" class="flat-button"><span>02 / FOLLOW A PERSON</span><strong>Claire Delacroix</strong></button><button id="startEarth" type="button" class="flat-button"><span>03 / EXPLORE THE PLANET</span><strong>Earth Network</strong></button></div>
+        <p>This is an explorable alternate-history universe. Until 2026, its visible past closely follows our own. Then the timelines divide. In one branch, a hidden American continuity system emerges and ultimately rules Earth. You are the <strong>Observer</strong>: you can enter the world, follow its inhabitants, and experiment with consequences.</p>
+        <div class="ae-start-buttons"><button id="startParis" type="button" class="primary-button"><span>01 / ENTER A PLACE</span><strong>Paris, 2027</strong></button><button id="startClaire" type="button" class="flat-button"><span>02 / FOLLOW A PERSON</span><strong>Claire Delacroix</strong></button><button id="startEarth" type="button" class="flat-button"><span>03 / EXPLORE THE PLANET</span><strong>Earth Network</strong></button></div>
       </div>
       <div class="ae-start-grid">
-        <div><span class="panel-label">THE FILM</span><h2>Real scenes in the fictional world</h2><p>Claire receives a call in pre-dawn Paris. The city begins behaving as though it already knows what is coming. Watch preserved GodRender media, then inspect Claire's modeled life.</p><button id="startFilmAgain" class="flat-button">Open cinema →</button></div>
+        <div><span class="panel-label">THE STORY</span><h2>Enter Paris as a location</h2><p>Claire receives a call in pre-dawn Paris. The city begins behaving as though it already knows what is coming. Follow its inhabitants and their modeled consequences; source media remains in the production pipeline.</p><button id="startTimeline" class="flat-button">Explore historical timeline →</button></div>
         <div><span class="panel-label">THE SIMULATION</span><h2>Decisions alter a timeline</h2><p>Thirteen mapped places and twelve modeled actors across 2026–2037. Change a hypothetical decision to see how the world reacts. Results never rewrite established history or the film.</p><button id="startSimulation" class="flat-button">Try a decision →</button></div>
         <div><span class="panel-label">THE INTELLIGENCE</span><h2>Real models, bounded choices</h2><p>A small language model has produced one verified, source-bound proposal for Claire on a GitHub CPU runner. You review model suggestions before they can influence any scenario.</p><a href="https://github.com/SouthPaw302/GodRender/actions/runs/39397843670" class="external-link" target="_blank" rel="noreferrer">View model proof ↗</a></div>
       </div>
-      <div class="ae-start-status"><span><strong>IN GITHUB</strong> GodRender processing, simulation engines, Godot scenes, model pilots</span><span><strong>IN DRIVE</strong> Original movies, stories, Second Brain and production assets</span><span><strong>IN THE BROWSER</strong> Observer interface and local what-if choices</span></div>
+      <div class="ae-start-status"><span><strong>IN GITHUB</strong> GodRender processing, simulation engines, Godot scenes, model pilots</span><span><strong>IN DRIVE</strong> Private production inputs, story records, FX and verified source assets</span><span><strong>IN THE BROWSER</strong> Observer interface and local what-if choices</span></div>
       <p class="caveat">Current scale: 12 modeled agents, 13 mapped reference locations, twelve annual states—not a full population, continuous 24/7 AI society or a rendered 3D globe. The film's exact calendar date is not verified; 2027 is only its current simulation placement.</p>
     </section>
 
@@ -269,42 +268,6 @@
     </section>
 
 
-    <section id="cinema" class="page widepage" aria-label="Observer Cinema media library">
-      <div class="page-intro"><p class="eyebrow">AMERICAN EMPIRE · OBSERVER CINEMA · SAME WORLD</p>
-      <h1>Watch their world unfold.</h1>
-      <p>Scenes from <em>Paris Act I</em> follow Claire Delacroix and Daniel living inside the same American Empire reality as the Quiet Accession. This is <strong>our cinematic view into that world</strong>, not a separate universe and not a fictional TV program broadcast to the characters.</p></div>
-      <div class="sim-status" id="cinemaStatus" aria-live="polite">Reading the Drive-backed media inventory…</div>
-      <div class="cinema-layout">
-       <aside class="cinema-catalog">
-        <div class="panel-label">CURATED MOVIE &amp; SOURCE MEDIA</div>
-        <div id="cinemaItems" class="cinema-list"></div>
-        <div class="rule"></div>
-        <p class="caveat">Only the four copied movie titles are held in the curated film collection. Other indexed score and storyboard assets remain in their original AE source folders. Rejected media is not featured.</p>
-       </aside>
-       <div class="cinema-stage">
-        <div class="panel-label">OBSERVER SCREEN · SELECTED PRODUCTION ASSET</div>
-        <div id="cinemaFrame" class="cinema-frame" aria-live="polite"></div>
-        <div class="cinema-actions">
-          <button id="cinemaPlay" class="primary-button">Preview this media</button>
-          <a id="cinemaOpen" class="flat-button" target="_blank" rel="noreferrer" href="#">Open original in Drive ↗</a>
-        </div>
-        <h2 id="cinemaTitle">Paris Act I</h2>
-        <div class="cinema-meta" id="cinemaType"></div>
-        <p id="cinemaSource" class="tiny muted"></p>
-        <p id="cinemaRights" class="caveat"></p>
-        <p id="cinemaNotice" class="tiny muted" role="status"></p>
-        <div class="rule"></div>
-        <div class="panel-label">INSIDE THE WORLD · FILM CHARACTER DOSSIER</div>
-        <div class="cinema-character-list">
-          <div><strong>Claire Delacroix</strong><span>Paris · Act I · Scene 01–03</span><p>Her story advances from a warning and domestic decision into a visibly changing public order. Her accepted film appearance and timeline require continuity.</p></div>
-          <div><strong>Daniel</strong><span>Paris/American source · Act I · Scene 01–03</span><p>His warning to Claire, “Claire. You need to move,” is a continuity anchor. His full simulation agent state has not yet been instantiated.</p></div>
-        </div>
-        <div class="cinema-actions"><button type="button" class="primary-button" id="cinemaFindClaire">Follow Claire in the simulation</button><button type="button" class="flat-button" id="cinemaFindDaniel">Follow Daniel in the simulation</button></div>
-        <p class="caveat">Both film characters inhabit the same simulation. The exact year of the filmed events is not specified by the checked scripts; 2027 is only the provisional modeling anchor. Original dialogue and cinematic continuity remain locked.</p>
-       </div>
-      </div>
-    </section>
-
     <section id="chronology" class="page widepage" aria-label="Chronology">
       <div class="page-intro"><p class="eyebrow">THE ESTABLISHED SPINE</p><h1>Twelve years that changed the world.</h1><p>These titles and descriptions belong to the original Reality Matrix. Select a year to inspect its connected hypothetical state in the World Matrix.</p></div>
       <div class="chronology-layout"><div id="timelineList" class="timeline-list"></div><aside class="side-feature"><span class="panel-label">TEMPORAL INTEGRITY</span><h2>One canon. Many possible futures.</h2><p>P1 preserved the written chronology; P2 indexed it. P3 can branch scenarios without editing canonical history.</p><div id="timelineDetail" class="time-detail"></div><button id="timelineToWorld" class="primary-button">EXPLORE SELECTED YEAR ↗</button></aside></div>
@@ -332,6 +295,5 @@
 <script src="./earth.js" defer></script>
 <script src="./inhabitants.js" defer></script>
 <script src="./people.js" defer></script>
-<script src="./cinema.js" defer></script>
 </body>
 </html>

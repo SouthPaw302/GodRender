@@ -5,7 +5,7 @@
   "project": "American Empire",
   "fictional_world_membership": "shared_american_empire_timeline",
   "canon_rule": "The film depicts lives inside the same fictional world. Written canon controls macro-history. Unapproved film detail is not silently promoted to literary canon.",
-  "viewer_rule": "Film and media are observer-facing presentation assets. They are not in-world broadcasts or documentary recordings unless separately authored as such.",
+  "viewer_rule": "Production-only input library. No source image, audio, video, thumbnail, Drive link or full media inventory is served through the simulation GUI. GodRender may consume explicitly approved source assets to construct scenes, characters and render proofs when triggered by a verified production manifest.",
   "project_folder_id": "1hnRyqWuHGxBdRI5zeegNs2wDZ5N8SHTz",
   "curated_films_folder_id": "1vCnDalBcMB24fBWIEumTvhmhBFOkFvMG",
   "legacy_archive_folder_id": "1z_eppUB98uuncVXQ6mMboLx2vJPwNyPO",
@@ -39,7 +39,7 @@
       "scene": "01-02",
       "drive_file_id": "1FCvNWwBq-aVUFChLZuEwFG2mwZcz7xlK",
       "source_drive_file_id": "1bs1mU03AiuLK-I6zAePKj_tSc6YXATmU",
-      "world_role": "observer_cinematic_view",
+      "world_role": "scene_reference_for_world_construction",
       "drive_url": "https://drive.google.com/file/d/1FCvNWwBq-aVUFChLZuEwFG2mwZcz7xlK/view",
       "visibility": "private_drive_requires_permission",
       "literal_footage_of_real_events": false
@@ -52,7 +52,7 @@
       "scene": "01",
       "drive_file_id": "1gOBZcA0HIVl7Sprg2-BB6gdQBdjtCNlA",
       "source_drive_file_id": "1KLr0OdvM_DMoxqrsVmF1Q4Sz3sLJ8zJB",
-      "world_role": "observer_cinematic_view",
+      "world_role": "scene_reference_for_world_construction",
       "drive_url": "https://drive.google.com/file/d/1gOBZcA0HIVl7Sprg2-BB6gdQBdjtCNlA/view",
       "visibility": "private_drive_requires_permission",
       "literal_footage_of_real_events": false
@@ -65,7 +65,7 @@
       "scene": "02",
       "drive_file_id": "17rLR0r7OR1K2wI-x23q5QpGs6jnUNJ7Z",
       "source_drive_file_id": "1WLX7cgLT5CKg4w35fgyzIsCoS1pRMxeg",
-      "world_role": "observer_cinematic_view",
+      "world_role": "scene_reference_for_world_construction",
       "drive_url": "https://drive.google.com/file/d/17rLR0r7OR1K2wI-x23q5QpGs6jnUNJ7Z/view",
       "visibility": "private_drive_requires_permission",
       "literal_footage_of_real_events": false
@@ -78,7 +78,7 @@
       "scene": "03",
       "drive_file_id": "1FlaS0NfpuTCxYaJjU95rKPIbD1ilikuk",
       "source_drive_file_id": "1tvUpSxx8X47vtLXdJdusIfMKOSCdg0vD",
-      "world_role": "observer_cinematic_view",
+      "world_role": "scene_reference_for_world_construction",
       "drive_url": "https://drive.google.com/file/d/1FlaS0NfpuTCxYaJjU95rKPIbD1ilikuk/view",
       "visibility": "private_drive_requires_permission",
       "literal_footage_of_real_events": false
@@ -182,7 +182,8 @@
     "Index is a verified metadata snapshot, not an automatic Drive sync",
     "Curated copies are not SHA-byte-verified against originals; drive.copy retained source name and size",
     "Legacy source folders contain additional proofs/images/variants not enumerated individually here",
-    "No live media proxy; private Drive player may require sign-in",
-    "The 2037 fictional historical arc and media Act I are linked by shared world membership, not by silent alteration of the literary canon"
+    "The 2037 fictional historical arc and media Act I are linked by shared world membership, not by silent alteration of the literary canon",
+    "Browser distribution does not include this manifest or any Drive media pointers.",
+    "No media-derived 3D reconstruction or automatic scene invocation is operational yet."
   ]
 }

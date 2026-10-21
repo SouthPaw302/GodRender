@@ -119,28 +119,6 @@
 @media(max-width:1160px){.inhabitants-layout{grid-template-columns:1fr}.people-cards{grid-template-columns:repeat(3,1fr)}.people-inspector{max-width:none}}
 @media(max-width:750px){.people-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.people-decisions{grid-template-columns:1fr}.people-connections{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* Observer Cinema: user-initiated private Drive previews, same-world characters. */
-.cinema-layout{display:grid;grid-template-columns:minmax(265px,.45fr) minmax(0,1.5fr);gap:19px}
-.cinema-catalog,.cinema-stage{min-width:0;background:#102537;border:1px solid #2c4b5f;border-radius:8px;padding:20px}
-.cinema-list{display:flex;flex-direction:column;gap:8px;max-height:600px;overflow-y:auto;margin:12px 0}
-.cinema-item{display:flex;flex-direction:column;gap:7px;text-align:left;background:#152c40;border:1px solid #30546a;padding:12px;border-radius:5px;color:#dfc99e}
-.cinema-item small{font-size:9px;color:#99b2c4;text-transform:uppercase;letter-spacing:.055em}
-.cinema-item.selected,.cinema-item:hover{background:#2b4452;border-color:#d6ae77}
-.cinema-frame{aspect-ratio:16/9;background:#070f1c;border:1px solid #3c6179;border-radius:4px;display:grid;place-items:center;overflow:hidden;position:relative}
-.cinema-frame iframe{border:0;width:100%;height:100%;background:#101c2d}
-.cinema-placeholder{max-width:430px;text-align:center;color:#a8bac6;padding:28px;font-family:Georgia,serif;font-size:16px;line-height:1.7}
-.cinema-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
-.cinema-actions a{display:inline-block;text-decoration:none;padding:11px 16px}
-.cinema-stage h2{font-family:Georgia,serif;font-weight:400;font-size:27px;color:#e5cfac;margin:18px 0 8px}
-.cinema-meta{font-size:10px;color:#9db6c2;text-transform:uppercase;letter-spacing:.08em}
-.cinema-character-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:14px 0}
-.cinema-character-list>div{background:#173042;border:1px solid #2e5366;border-radius:6px;padding:16px}
-.cinema-character-list strong{display:block;font-size:15px;color:#eccb94;margin-bottom:7px}
-.cinema-character-list span{display:block;color:#9bb8c5;font-size:10px;margin-bottom:12px}
-.cinema-character-list p{font-size:11px;line-height:1.65;color:#c3d4db}
-@media(max-width:950px){.cinema-layout{grid-template-columns:1fr}.cinema-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.cinema-list,.cinema-character-list{grid-template-columns:1fr}}
-
 /* Observer entrance: progressive disclosure, not another tool dashboard. */
 .ae-start-hero{background:radial-gradient(circle at 76% 28%,#19475a 0,#102b3a 41%,#0b2030 100%);border:1px solid #406077;border-radius:11px;padding:45px 42px;position:relative;overflow:hidden}
 .ae-start-hero::after{content:"AE";font:130px Georgia,serif;opacity:.045;position:absolute;right:4%;top:8%;pointer-events:none}

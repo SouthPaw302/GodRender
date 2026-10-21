@@ -39,7 +39,6 @@ jobs:
           node --check worlds/american-empire/web/src/earth.js
           node --check worlds/american-empire/web/src/inhabitants.js
           node --check worlds/american-empire/web/src/people.js
-          node --check worlds/american-empire/web/src/cinema.js
       - name: Install Playwright Chromium for actual browser interaction
         run: |
           npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
@@ -76,7 +75,6 @@ jobs:
             worlds/american-empire/web/dist/earth.js
             worlds/american-empire/web/dist/inhabitants.js
             worlds/american-empire/web/dist/people.js
-            worlds/american-empire/web/dist/cinema.js
             worlds/american-empire/web/dist/styles.css
             worlds/american-empire/web/dist/data/*.json
             worlds/american-empire/web/dist/explorer-preview.png

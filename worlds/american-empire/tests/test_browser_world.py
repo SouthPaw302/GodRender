@@ -69,12 +69,8 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertTrue((output/"earth.js").is_file())
             self.assertTrue((output/"inhabitants.js").is_file())
             self.assertTrue((output/"people.js").is_file())
-            self.assertTrue((output/"cinema.js").is_file())
-            self.assertTrue((output/"data/media_inventory.json").is_file())
-            media=json.loads((output/"data/media_inventory.json").read_text())
-            self.assertEqual(media["fictional_world_membership"],"shared_american_empire_timeline")
-            self.assertGreaterEqual(len(media["media"]),10)
-            self.assertTrue(all(v["visibility"]=="private_drive_requires_permission" for v in media["media"]))
+            self.assertFalse((output/"cinema.js").exists())
+            self.assertFalse((output/"data/media_inventory.json").exists())
             self.assertTrue((output/"data/inhabitants.json").is_file())
             self.assertTrue((output/"data/people_source.json").is_file())
             actors=json.loads((output/"data/inhabitants.json").read_text())
@@ -102,7 +98,8 @@ class BrowserExplorerTests(unittest.TestCase):
             self.assertIn('id="embeddedLand"', standalone)
             self.assertIn('id="embeddedInhabitants"', standalone)
             self.assertIn('id="embeddedPeopleSource"', standalone)
-            self.assertIn('id="embeddedMediaInventory"', standalone)
+            self.assertNotIn('id="embeddedMediaInventory"', standalone)
+            self.assertNotIn('https://drive.google.com/file/d/', standalone)
             self.assertIn('id="embeddedFilmBridge"', standalone)
             self.assertIn('P5 browser-native deterministic P3 simulation', standalone)
             self.assertIn('<style>', standalone)
@@ -122,15 +119,18 @@ class BrowserExplorerTests(unittest.TestCase):
 
     def test_interface_references_existing_controls(self):
         html=(ROOT/"web/src/index.html").read_text()
-        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text() + (ROOT/"web/src/cinema.js").read_text()
+        js=(ROOT/"web/src/app.js").read_text() + (ROOT/"web/src/live.js").read_text() + (ROOT/"web/src/earth.js").read_text() + (ROOT/"web/src/people.js").read_text()
         css=(ROOT/"web/src/styles.css").read_text()
-        for ident in ["home","startCinema","startClaire","startEarth","startSimulation","world","chronology","brain","production","simulation","earth","inhabitants","cinema","cinemaItems","cinemaPlay","cinemaOpen","cinemaFrame","cinemaFindClaire","cinemaFindDaniel","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
+        for ident in ["home","startParis","startTimeline","startClaire","startEarth","startSimulation","world","chronology","brain","production","simulation","earth","inhabitants","peopleYear","peopleCards","personApply","personExport","geoYear","earthMap","geoApply","geoExport","liveScenario","liveApply","liveIntensity","liveCompare","liveReplay","liveSave","liveExport","liveImportFile","scenarioSelect","yearSlider",
                       "brainSearch","brainGate","brainCategory","copyBrief","downloadBrief",
                       "brainSelected","entityDetail","timelineList","graph"]:
             self.assertIn('id="'+ident+'"',html)
             self.assertIn(ident,js)
         self.assertIn('not_connected_to_this_static_explorer',json.dumps(self.brain))
         self.assertIn("counterfactual_adaptation_not_canon",js)
+        self.assertNotIn('data-tab="cinema"',html)
+        self.assertNotIn('cinemaFrame',html)
+        self.assertNotIn('media_inventory.json',js)
         self.assertIn("--gold:",css)
 
 if __name__=="__main__":

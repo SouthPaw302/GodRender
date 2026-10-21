@@ -4,7 +4,7 @@
 One fictional Earth with a locked history; GodRender is the media processing toolchain; the Second Brain stores reusable production know-how; Drive AE owns story/media originals; P5/P6/P7 simulate alternative decisions; and Vercel is the Observer interface that joins them.
 
 ## Demonstrable end-to-end path
-1. Open Observer Cinema on the preview and select an accepted Paris Act I movie master. Private Drive preview requires Google permission; no originals are publicly hosted.
+1. Open the Observer's **Start Here** interface. Enter Paris on the Earth view. Private source media stays in Drive and is not distributed to browser visitors.
 2. Select Follow Claire in the simulation. Claire and Daniel now have real modeled agent records with bounded budgets, knowledge, memories and connections, sharing the same Earth as the original five viewpoint characters.
 3. Living Inhabitants opens in 2027 as a PROVISIONAL simulation placement, not the confirmed year of the film (checked scripts give no calendar year).
 4. Select Earth Network and inspect Paris. P8 overlays the original twelve P6 nodes; it does not overwrite the P6 source file.
@@ -14,7 +14,11 @@ One fictional Earth with a locked history; GodRender is the media processing too
 - P1 Universe Bible and Reality Matrix remain canon authority. The Paris film is part of the SAME fictional reality, not a separate universe. Film production status is distinct from literary authority.
 - Film sources: SouthPaw302/AIVideoEdit branches project/american-empire-act1/scene-01, scene-02, scene-03. P8_FILM_BRIDGE.json retains source paths and explicit provisional-year labels.
 - Original P7 ten-actor source and P6 twelve-node geographic source are preserved unchanged: build-time overlays add two film agents, Paris geography, two hypothetical links and six hypothetical trust relationships. All new numerical seeds and trust relationships remain scenario_only.
-- Drive originals and rejected media are preserved; Observer Cinema loads private video by explicit request only. Browser saves are local-only, with exported JSON available.
+- Drive originals and rejected media are preserved as restricted processing inputs. The Observer displays simulated inhabitants and regions, not a movie library, media file list, previews or Drive links. Browser scenario saves are local-only.
+
+## Intended media use
+
+Approved source video, stills and audio may be referenced by hash in a GodRender shot/scene manifest when world state calls for a visual reconstruction. Godot can construct and render an environment; canonical FX/QC gates verify the output. This is a design contract, **not** a claim that automatic AE Godot scene building already works.
 
 ## What is NOT yet operational
 - No deployed language-model inference for inhabitants. They still choose through deterministic rules; ONNX music models and GodRender processing runners do not prove an active AE language model.
