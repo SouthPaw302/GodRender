@@ -26,3 +26,7 @@ This is a **manual-authorized batch renderer**, not a continuous cloud GPU or li
 - No UI-to-GitHub credential bridge exists; **human action in GitHub Actions is required**. The public Vercel UI should never contain GitHub tokens.
 
 Relevant workflow: `.github/workflows/american-empire-world-godot.yml`.
+
+## Confirmed manual-trigger limitation
+
+GitHub documents that `workflow_dispatch` requires the workflow file on the default branch. The AE-only workflow is not on protected `main`, so the supported operator route is committing a new request JSON file to `worlds/american-empire/scene_requests` on the existing AE branch. The branch push triggers the renderer. This is deliberately not a direct unauthenticated button in the public Vercel app.

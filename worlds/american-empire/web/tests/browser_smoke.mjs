@@ -72,6 +72,10 @@ try{
  assert.equal(sceneRequest.observer_place,'paris');
  assert.equal(sceneRequest.year,2027);
  assert.equal(sceneRequest.source.p7_run_sha256,await page.evaluate(()=>window.AE_People.getRun().run_sha256));
+ const sceneDownloadPromise=page.waitForEvent('download');
+ await page.locator('#forgeDownload').click();
+ const sceneDownload=await sceneDownloadPromise;
+ assert.match(sceneDownload.suggestedFilename(),/^request-2027-claire-paris-[a-f0-9]{12}\.json$/);
  assert.equal(await page.locator('#forgePlayer video').count(),0,'no unverified proof loaded');
  assert.equal(await page.locator('iframe[src*="drive.google.com"]').count(),0);
  assert.equal(await page.locator('[data-tab="cinema"]').count(),0,'Media gallery must not appear in Observer');

@@ -41,6 +41,7 @@ jobs:
           node --check worlds/american-empire/web/src/people.js
           node --check worlds/american-empire/web/src/scene_forge.js
           node --check worlds/american-empire/web/tests/replay_scene_request.mjs
+          node --check worlds/american-empire/web/tests/p10_alternate.mjs
       - name: Install Playwright Chromium for actual browser interaction
         run: |
           npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
@@ -58,6 +59,7 @@ jobs:
           node tests/p5_live.mjs
           AE_P6_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/earth-preview.png" node tests/p6_earth.mjs
           AE_P7_SCREENSHOT="$GITHUB_WORKSPACE/worlds/american-empire/web/dist/inhabitants-preview.png" node tests/p7_people.mjs
+          AE_ALT_OUTPUT="$RUNNER_TEMP/ae-scene-alternative.json" node tests/p10_alternate.mjs
           AE_BASE_URL="file://$GITHUB_WORKSPACE/worlds/american-empire/web/dist/standalone.html" node tests/browser_smoke.mjs
           AE_BASE_URL="file://$GITHUB_WORKSPACE/worlds/american-empire/web/dist/standalone.html" node tests/p5_live.mjs
           AE_BASE_URL="file://$GITHUB_WORKSPACE/worlds/american-empire/web/dist/standalone.html" node tests/p6_earth.mjs

@@ -9,6 +9,7 @@ on:
       - 'worlds/american-empire/tools/publish_scene_proof.py'
       - 'worlds/american-empire/web/tests/replay_scene_request.mjs'
       - 'worlds/american-empire/web/src/scene_forge.js'
+      - 'worlds/american-empire/scene_requests/request-*.json'
       - 'worlds/american-empire/tools/verify_scene_proof.py'
       - 'worlds/american-empire/godot/scripts/scene_bridge.gd'
       - 'worlds/american-empire/godot/scenes/scene_bridge.tscn'
@@ -62,6 +63,21 @@ jobs:
           set -euo pipefail
           python3 worlds/american-empire/tools/verify_canon.py
           python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
+      - name: Select at most one submitted AE scene request
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t candidates < <(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^worlds/american-empire/scene_requests/request-[a-z0-9-]+\.json$' || true)
+          if (( ${#candidates[@]} > 1 )); then
+            echo "Refusing ambiguous multi-scene request commit"; exit 1
+          fi
+          if (( ${#candidates[@]} == 1 )); then
+            test -f "${candidates[0]}"
+            test "$(wc -c < "${candidates[0]}")" -le 21000
+            echo "AE_SCENE_REQUEST_FILE=$GITHUB_WORKSPACE/${candidates[0]}" >> "$GITHUB_ENV"
+            echo "Verified request file selected: ${candidates[0]}"
+          fi
       - name: Build world browser and extract actual verified P7 state in Chromium
         shell: bash
         env:
@@ -79,7 +95,11 @@ jobs:
             if curl -fsS http://127.0.0.1:8765/data/world.json >/dev/null; then break; fi
             sleep 1
           done
-          AE_SCENE_OUTPUT="$RUNNER_TEMP/ae-world-godot" node tests/replay_scene_request.mjs
+          if [[ -n "${AE_SCENE_REQUEST_FILE:-}" ]]; then
+            AE_SCENE_REQUEST_JSON="$(cat "$AE_SCENE_REQUEST_FILE")" AE_SCENE_OUTPUT="$RUNNER_TEMP/ae-world-godot" node tests/replay_scene_request.mjs
+          else
+            AE_SCENE_OUTPUT="$RUNNER_TEMP/ae-world-godot" node tests/replay_scene_request.mjs
+          fi
       - name: Generate selected scenario scene contract and reject tampered receipts
         shell: bash
         run: |

@@ -5,7 +5,7 @@
 const $=id=>document.getElementById(id);
 const status=(s,bad=false)=>{const el=$('forgeStatus');el.textContent=s;el.classList.toggle('error-state',bad)};
 const requestSchema='american-empire.scene-request.v1';
-const actionUrl='https://github.com/SouthPaw302/GodRender/actions/workflows/american-empire-world-godot.yml';
+const actionUrl='https://github.com/SouthPaw302/GodRender/tree/world/american-empire/worlds/american-empire/scene_requests';
 const copy=async text=>{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text)}else{
  const b=$('forgeJSON');b.focus();b.select();document.execCommand('copy');
 }};
@@ -78,12 +78,22 @@ async function init({geo,manifest,proofs}){
  $('forgeYearValue').textContent='2027';
  $('forgeYear').addEventListener('input',e=>$('forgeYearValue').textContent=e.target.value);
  $('forgeBuild').addEventListener('click',()=>build().catch(e=>status('Cannot prepare request: '+e.message,true)));
+ $('forgeDownload').addEventListener('click',async()=>{
+  try{
+   const req=await build();
+   const name='request-'+req.year+'-'+req.actor+'-'+req.observer_place+'-'+req.source.p7_run_sha256.slice(0,12)+'.json';
+   const url=URL.createObjectURL(new Blob([JSON.stringify(req,null,2)+'\n'],{type:'application/json'}));
+   const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();
+   setTimeout(()=>URL.revokeObjectURL(url),1200);
+   status('Downloaded '+name+'. Upload this JSON into AE scene_requests/ and commit to the existing AE branch.');
+  }catch(e){status('Download rejected: '+e.message,true)}
+ });
  $('forgeCopy').addEventListener('click',async()=>{
   try{if(!$('forgeJSON').value)await build();await copy($('forgeJSON').value);status('Scene request copied. Open the Actions workflow, choose Run workflow, paste into scene_request.')}catch(e){status('Copy failed: '+e.message,true)}
  });
  $('forgeRun').href=actionUrl;
  renderRegistry();
- status('Choose actor/year/place, then export the current simulation timeline. Godot rendering runs in GitHub Actions after you submit the request.');
+ status('Choose actor/year/place, download the source-bound request JSON, then upload and commit it to the AE GitHub request folder. GitHub Actions will verify and process the job.');
 }
 root.AE_Forge={init,build,renderRegistry};
 })(window);

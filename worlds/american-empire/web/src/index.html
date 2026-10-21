@@ -302,9 +302,9 @@
           <button type="button" id="forgeBuild" class="primary-button">1. Prepare verified world state</button>
           <label for="forgeJSON">GitHub Actions scene request</label>
           <textarea id="forgeJSON" readonly rows="7" spellcheck="false" placeholder="The compact world request appears here after you prepare the scene."></textarea>
-          <div class="ae-forge-buttons"><button type="button" id="forgeCopy" class="flat-button">2. Copy request</button>
-          <a id="forgeRun" class="flat-button" target="_blank" rel="noreferrer">3. Open GitHub runner ↗</a></div>
-          <p class="caveat">In GitHub Actions, choose <strong>Run workflow</strong>, paste the copied JSON into <code>scene_request</code>, and launch the job. GitHub runs Godot after replaying and validating your history. No GitHub credential is embedded here; the job is not executed just by clicking these controls.</p>
+          <div class="ae-forge-buttons"><button type="button" id="forgeDownload" class="flat-button">2. Download request JSON</button><button type="button" id="forgeCopy" class="flat-button">Copy for ChatGPT</button>
+          <a id="forgeRun" class="flat-button" target="_blank" rel="noreferrer">3. Upload to GitHub request folder ↗</a></div>
+          <p class="caveat">Open the AE request folder on GitHub. Choose <strong>Add file → Upload files</strong>, upload your downloaded <code>request-*.json</code> file and commit it to <code>world/american-empire</code>. That branch push triggers the guarded Godot runner. Never upload original movie or Drive assets here. You may instead copy this small JSON into ChatGPT for an authorized GitHub submission.</p>
         </aside>
         <div class="panel ae-forge-view">
           <div class="panel-label">GODOT 4 · DERIVED WORLD SCENES ONLY</div>
