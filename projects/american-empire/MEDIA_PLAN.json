@@ -1,0 +1,9 @@
+{
+  "schema": "godrender.media-plan.v1",
+  "selected_capabilities": [],
+  "user_approach_established": false,
+  "production_mode": "hybrid",
+  "production_mode_authority": "user_directed_future_production",
+  "production_mode_locked": false,
+  "bootstrap_note": "This is a native production scaffold for an existing fictional world; no new footage, 3D world generation or creative sign-off is implied."
+}

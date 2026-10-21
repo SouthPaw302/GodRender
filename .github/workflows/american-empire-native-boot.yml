@@ -1,0 +1,71 @@
+name: American Empire native main-OS boot
+on:
+  push:
+    branches: [world/american-empire]
+    paths:
+      - 'projects/american-empire/**'
+      - '.github/workflows/american-empire-native-boot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-main-bootstrap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout existing AE branch and its full main ancestry
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify no new branch and native production identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "world/american-empire"
+          test -f projects/american-empire/PROJECT_STATE.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("projects/american-empire")
+          state=json.loads((p/"PROJECT_STATE.json").read_text())
+          order=json.loads((p/"OPERATING_ORDER.json").read_text())
+          assert state["branch"]=="world/american-empire"
+          assert state["stage"]=="INITIALIZED"
+          assert state["director_brain_version"]==4
+          assert order["director_supervision"]["required"] is True
+          assert not state.get("production_complete")
+          assert not state.get("final_qc_passed")
+          print("EXISTING AE BRANCH / INITIALIZED STATE: VERIFIED")
+          PY
+          git rev-parse HEAD
+          git rev-parse refs/remotes/origin/main
+      - name: Attempt actual production bootstrap against exact protected main
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 bootstrap.py boot --offline --repo-root "$GITHUB_WORKSPACE" --branch world/american-empire --project-dir projects/american-empire 2>&1 | tee "$RUNNER_TEMP/ae-native-boot.log"
+          python3 bootstrap.py status --repo-root "$GITHUB_WORKSPACE" > "$RUNNER_TEMP/ae-native-boot-status.json"
+          python3 .godrender/os/general/reusable/tools/production_guard.py --branch world/american-empire
+          python3 .godrender/os/general/reusable/tools/workflow_guard.py --branch world/american-empire
+          echo "NATIVE AE MAIN-OS BOOT: PASS"
+      - name: Preserve inspectable attestation and failure diagnostic
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/ae-native-proof"
+          cp "$RUNNER_TEMP/ae-native-boot.log" "$RUNNER_TEMP/ae-native-proof/boot.log" 2>/dev/null || true
+          cp "$RUNNER_TEMP/ae-native-boot-status.json" "$RUNNER_TEMP/ae-native-proof/status.json" 2>/dev/null || true
+          cp .godrender/boot_capsule.json "$RUNNER_TEMP/ae-native-proof/boot_capsule.json" 2>/dev/null || true
+          cp .godrender/session_attestation.json "$RUNNER_TEMP/ae-native-proof/session_attestation.json" 2>/dev/null || true
+          cp .godrender/SECOND_BRAIN.md "$RUNNER_TEMP/ae-native-proof/SECOND_BRAIN.md" 2>/dev/null || true
+          git rev-parse HEAD > "$RUNNER_TEMP/ae-native-proof/ae_head_sha.txt"
+          git rev-parse refs/remotes/origin/main > "$RUNNER_TEMP/ae-native-proof/os_main_sha.txt"
+      - name: Upload actual bootstrap evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: american-empire-native-main-os-boot
+          path: ${{ runner.temp }}/ae-native-proof/
+          if-no-files-found: error
+          retention-days: 30

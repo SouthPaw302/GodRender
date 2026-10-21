@@ -1,0 +1,19 @@
+{
+  "schema": "godrender.source-authority.v1",
+  "allow": {
+    "historical_chats": false,
+    "historical_summaries": false,
+    "unrelated_song_branches": false,
+    "prior_project_storyboards": false,
+    "prior_project_visual_dna": false,
+    "prior_project_media": false
+  },
+  "explicit_user_authorizations": [],
+  "active_project_story_sources": [
+    "worlds/american-empire/archive/01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+    "worlds/american-empire/archive/01_CANON_SOURCE/REALITY_MATRIX.json",
+    "worlds/american-empire/P8_FILM_BRIDGE.json"
+  ],
+  "media_provenance_manifest": "worlds/american-empire/MEDIA_INVENTORY.json",
+  "media_policy": "Private production source; no automatic ingestion, re-approval or GUI display; verify bytes and stage before using."
+}

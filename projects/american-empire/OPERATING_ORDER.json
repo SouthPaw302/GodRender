@@ -1,0 +1,63 @@
+{
+  "schema": "godrender.operating-order.v1",
+  "mission": "Maintain and produce the existing American Empire fictional universe, preserving its locked story and accepted visual sources while integrating the already-built browser simulation into GodRender's Godot/media processing pipeline.",
+  "direction_authority": "user_directed",
+  "production_mode": "hybrid",
+  "canon_lock": {
+    "locked": true,
+    "picture_language": "Preserve the source-approved Paris Act I character appearances, architecture, camera geography, lighting and protected regions. Existing accepted media is input for constructing scenes, not an Observer video gallery. No new visual canon without review.",
+    "items": [
+      "worlds/american-empire/archive/01_CANON_SOURCE/UNIVERSE_BIBLE.md",
+      "worlds/american-empire/archive/01_CANON_SOURCE/REALITY_MATRIX.json",
+      "worlds/american-empire/P8_FILM_BRIDGE.json (same-world film continuity, provisional year only)",
+      "No silent replacement of accepted film shots, assets, FX, characters or geography."
+    ]
+  },
+  "accepted_baseline": {
+    "status": "none",
+    "file_or_locator": null,
+    "sha256": null,
+    "user_acceptance_statement": null
+  },
+  "accepted_source_library": {
+    "status": "none",
+    "role": null,
+    "file_or_locator": null,
+    "sha256": null,
+    "user_acceptance_statement": null,
+    "content_reuse_authorized": false,
+    "timeline_locked": false
+  },
+  "refinement_scope": {
+    "active": false,
+    "goal": null,
+    "allowed_changes": [],
+    "forbidden_changes": [],
+    "restart_authorized": false
+  },
+  "recut_scope": {
+    "active": false,
+    "named_defects": [],
+    "allowed_changes": [],
+    "forbidden_changes": [],
+    "source_replacement_authorized": false
+  },
+  "current_user_direction": "Remain on the existing world/american-empire branch. Do NOT create, rename or delete branches. Boot the exact protected current GodRender main OS, use native song-production records and safeguards, connect the existing web simulation to Godot/GodRender; never expose Drive source media on the simulation GUI.",
+  "exact_next_action": "Attest current-main bootstrap and guard against this exact existing branch; if main branch_policy rejects world/american-empire, report the blockage and require a narrowly reviewed main-policy change before claiming native boot PASS.",
+  "updated_at_utc": "2026-10-21T00:00:00Z",
+  "director_supervision": {
+    "required": true,
+    "reviewer_role": "sandbox_director",
+    "checkpoint_file": "DIRECTOR_CHECKPOINTS.json",
+    "execution_ledger_file": "PRODUCTION_EXECUTION_LEDGER.json",
+    "checkpoints": [
+      "media_selection",
+      "representative_proof",
+      "rough_cut",
+      "fx_pass",
+      "final_review"
+    ],
+    "runner_may_choose_art_direction": false,
+    "technical_pass_is_creative_pass": false
+  }
+}

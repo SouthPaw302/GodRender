@@ -1,0 +1,18 @@
+{
+  "schema": "american-empire.production-simulation-link.v1",
+  "branch": "world/american-empire",
+  "stage": "declaration_only_unwired",
+  "main_os_ref": "main",
+  "main_os_sha": "03e4d790a2cfb14b4e9848ee5f5f948f9498a4eb",
+  "world_sources": [
+    "worlds/american-empire/engine/world_matrix.py",
+    "worlds/american-empire/engine/simulation.py",
+    "worlds/american-empire/P6_GEOGRAPHY.json",
+    "worlds/american-empire/P7_INHABITANTS.json",
+    "worlds/american-empire/P8_FILM_BRIDGE.json"
+  ],
+  "browser_path": "worlds/american-empire/web",
+  "godot_project": "worlds/american-empire/godot/project.godot",
+  "media_index_private": "worlds/american-empire/MEDIA_INVENTORY.json",
+  "note": "Manifest declares data flows only. It does not perform automatic persistent world state writes, invoke Godot rendering, ingest private Drive assets, or bypass boot safeguards."
+}

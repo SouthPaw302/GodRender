@@ -1,0 +1,23 @@
+{
+  "schema": "godrender.project-state.v1",
+  "branch": "world/american-empire",
+  "stage": "INITIALIZED",
+  "director_brain_version": 4,
+  "source_ingest_complete": false,
+  "reference_analysis_complete": false,
+  "music_analysis_complete": false,
+  "lyrics_status_resolved": false,
+  "genre_authority_resolved": false,
+  "visual_approach_established": false,
+  "storyboard_locked": false,
+  "script_locked": false,
+  "shot_packages_built": false,
+  "shot_proofs_accepted": false,
+  "fx_lock_verified": false,
+  "assembly_complete": false,
+  "final_qc_passed": false,
+  "archive_complete": false,
+  "production_complete": false,
+  "human_visual_approval": false,
+  "notes": "Native tracking records initialized without resetting or overwriting P1–P8 world source assets. Previous proofs remain in worlds/american-empire; project stage is not a claim about their review status."
+}

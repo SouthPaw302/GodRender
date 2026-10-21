@@ -1,0 +1,23 @@
+{
+  "schema": "godrender.director-checkpoints.v1",
+  "project": "american-empire",
+  "created_at": "2026-10-21T00:00:00Z",
+  "updated_at": "2026-10-21T00:00:00Z",
+  "checkpoints": {
+    "media_selection": {
+      "status": "pending"
+    },
+    "representative_proof": {
+      "status": "pending"
+    },
+    "rough_cut": {
+      "status": "pending"
+    },
+    "fx_pass": {
+      "status": "pending"
+    },
+    "final_review": {
+      "status": "pending"
+    }
+  }
+}
