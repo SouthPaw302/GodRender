@@ -110,8 +110,26 @@ jobs:
         with:
           name: nordic-b01-brain-source-${{ github.run_id }}
           path: ${{ runner.temp }}/input
-      - name: Verify approved FX lock against exact branch bytes
-        run: python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/production/B01_BRAIN_APPROVED_FX.fx.json --verify-lock "$RUNNER_TEMP/input/fx.lock.json"
+      - name: Verify prepared PASS lock and exact branch bytes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          lock=json.loads((Path(os.environ["RUNNER_TEMP"])/"input/fx.lock.json").read_text())
+          assert lock.get("result")=="PASS"
+          def sha(path):
+              h=hashlib.sha256()
+              with Path(path).open("rb") as f:
+                  for b in iter(lambda:f.read(1<<20),b""): h.update(b)
+              return h.hexdigest()
+          assert sha("projects/nordic-remastered/production/B01_BRAIN_APPROVED_FX.fx.json")==lock["manifest_sha256"]
+          assert sha("general/reusable/fx_v2/registry.json")==lock["registry_sha256"]
+          assert sha("general/reusable/fx_v2/runtime.py")==lock["runtime_sha256"]
+          for rec in lock.get("render_inputs",[]):
+              assert sha(rec["path"])==rec["sha256"], rec["path"]
+          print("PREPARED B01 APPROVED FX LOCK + EXACT BRANCH BYTES PASS")
+          PY
       - name: Render Brain/repo FX shard
         run: |
           python projects/nordic-remastered/production/render_b01_brainfx.py shot \
