@@ -1,0 +1,120 @@
+{
+  "schema": "godrender.nordic-director-timing-map.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "source_receipt": "analysis/ONNX_SCAN_RECEIPT.json",
+  "source_audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "engine_commit": "03e4d790a2cfb14b4e9848ee5f5f948f9498a4eb",
+  "analysis_engine": "beat_this_onnx",
+  "bpm": 90.91,
+  "beat_count": 210,
+  "downbeat_count": 58,
+  "method_note": "Section boundaries are Sol-Director editorial interpretation anchored to measured ONNX beat/downbeat and 50ms RMS/flux controls. Energy values and timing are measured; director_function is editorial interpretation.",
+  "sections": [
+    {
+      "id": "S00",
+      "start_seconds": 0.0,
+      "end_seconds": 1.98,
+      "energy": "near_silent_lead_in",
+      "director_function": "Hold opening state; no premature visual escalation.",
+      "measured": {"mean_energy": 0.013366, "peak_energy": 0.034946, "mean_transient": 0.003126, "peak_transient": 0.030935},
+      "beats": [],
+      "downbeats": []
+    },
+    {
+      "id": "S01",
+      "start_seconds": 1.98,
+      "end_seconds": 20.0,
+      "energy": "low_establishment",
+      "director_function": "Witness / observer establishment; restrained motion and long visual breaths.",
+      "measured": {"mean_energy": 0.153582, "peak_energy": 0.648151, "mean_transient": 0.038027, "peak_transient": 0.678543},
+      "downbeats": [1.98,2.3,2.64,3.96,4.28,4.62,6.58,6.9,7.24,9.52,12.14,14.76,17.38]
+    },
+    {
+      "id": "S02",
+      "start_seconds": 20.0,
+      "end_seconds": 33.1,
+      "energy": "building",
+      "director_function": "Sky-memory / portal ignition; increase internal motion and cut frequency gradually.",
+      "measured": {"mean_energy": 0.240196, "peak_energy": 0.75092, "mean_transient": 0.066232, "peak_transient": 0.900568},
+      "downbeats": [20.0,22.62,25.24,27.86,30.5]
+    },
+    {
+      "id": "S03",
+      "start_seconds": 33.1,
+      "end_seconds": 51.44,
+      "energy": "full_groove",
+      "director_function": "Threshold commitment; portal/world transition may become visually decisive.",
+      "measured": {"mean_energy": 0.47665, "peak_energy": 0.888645, "mean_transient": 0.055876, "peak_transient": 0.994197},
+      "downbeats": [33.1,35.72,38.34,40.96,43.58,46.2,48.82]
+    },
+    {
+      "id": "S04",
+      "start_seconds": 51.44,
+      "end_seconds": 72.4,
+      "energy": "sustained_drive",
+      "director_function": "Future-city revelation; broaden coverage and spatial motion without breaking identity/topology.",
+      "measured": {"mean_energy": 0.502991, "peak_energy": 0.897835, "mean_transient": 0.06795, "peak_transient": 0.600988},
+      "downbeats": [51.44,54.06,56.68,59.3,61.92,64.54,67.16,69.78]
+    },
+    {
+      "id": "S05",
+      "start_seconds": 72.4,
+      "end_seconds": 90.74,
+      "energy": "high_drive",
+      "director_function": "Emissaries/future-consciousness sequence; strongest sustained forward motion before first pivot.",
+      "measured": {"mean_energy": 0.519113, "peak_energy": 1.0, "mean_transient": 0.060483, "peak_transient": 0.658206},
+      "downbeats": [72.4,75.02,77.64,80.26,82.88,85.5,88.12]
+    },
+    {
+      "id": "S06",
+      "start_seconds": 90.74,
+      "end_seconds": 93.36,
+      "energy": "break_transient_pivot",
+      "director_function": "Hard editorial breath/pivot; avoid burying the transient with decorative FX.",
+      "measured": {"mean_energy": 0.313942, "peak_energy": 0.958454, "mean_transient": 0.094637, "peak_transient": 1.0},
+      "downbeats": [90.74]
+    },
+    {
+      "id": "S07",
+      "start_seconds": 93.36,
+      "end_seconds": 109.08,
+      "energy": "high_return",
+      "director_function": "Return to developed future world; faster progression but preserve visual continuity.",
+      "measured": {"mean_energy": 0.555101, "peak_energy": 0.895332, "mean_transient": 0.053206, "peak_transient": 0.557863},
+      "downbeats": [93.36,95.98,98.6,101.22,103.84,106.46]
+    },
+    {
+      "id": "S08",
+      "start_seconds": 109.08,
+      "end_seconds": 114.32,
+      "energy": "drop_break",
+      "director_function": "Second breathing space / narrative turn; prepare late climax.",
+      "measured": {"mean_energy": 0.280051, "peak_energy": 0.837487, "mean_transient": 0.05765, "peak_transient": 0.776968},
+      "downbeats": [109.08,111.7]
+    },
+    {
+      "id": "S09",
+      "start_seconds": 114.32,
+      "end_seconds": 130.02,
+      "energy": "late_climax",
+      "director_function": "Peak convergence of observer, portal, city and emissary motifs; strongest late editorial density.",
+      "measured": {"mean_energy": 0.605809, "peak_energy": 0.92433, "mean_transient": 0.062113, "peak_transient": 0.622428},
+      "downbeats": [114.32,116.94,119.56,122.16,124.78,127.4]
+    },
+    {
+      "id": "S10",
+      "start_seconds": 130.02,
+      "end_seconds": 137.952,
+      "energy": "outro_decay",
+      "director_function": "Return / myth completion; reduce motion and resolve on the Observer/sky world rather than extend the future-city climax.",
+      "measured": {"mean_energy": 0.161833, "peak_energy": 0.553456, "mean_transient": 0.008267, "peak_transient": 0.470257},
+      "downbeats": [130.02,132.6,135.26]
+    }
+  ],
+  "global_notes": [
+    "Early 1.98-9.52s downbeat detections are not treated as a stable four-beat bar grid; stable ~2.62s downbeat spacing emerges around 9.52s.",
+    "Beat/downbeat evidence is timing authority only; it does not decide story, canon, or asset acceptance.",
+    "Existing batch story order remains Witness -> Sky/Portal -> Threshold -> City -> Emissaries -> Return/Myth Completion."
+  ]
+}
