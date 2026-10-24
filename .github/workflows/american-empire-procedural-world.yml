@@ -1,0 +1,227 @@
+name: AE Source-Bound Procedural World Proof
+
+on:
+  push:
+    branches:
+      - world/american-empire
+    paths:
+      - 'worlds/american-empire/tools/export_godot_scene.py'
+      - 'worlds/american-empire/tools/publish_scene_proof.py'
+      - 'worlds/american-empire/web/tests/replay_scene_request.mjs'
+      - 'worlds/american-empire/web/src/scene_forge.js'
+      - 'worlds/american-empire/scene_requests/request-*.json'
+      - 'worlds/american-empire/tools/verify_scene_proof.py'
+      - 'worlds/american-empire/godot/scripts/scene_bridge.gd'
+      - 'worlds/american-empire/godot/scenes/scene_bridge.tscn'
+      - 'worlds/american-empire/tools/build_procedural_geometry.py'
+      - 'worlds/american-empire/godot/scripts/procedural_scene.gd'
+      - 'worlds/american-empire/godot/scenes/procedural_scene.tscn'
+      - 'worlds/american-empire/tests/test_procedural_geometry.py'
+      - '.github/workflows/american-empire-procedural-world.yml'
+  workflow_dispatch:
+    inputs:
+      scene_request:
+        description: 'Paste World Scene Forge JSON; leave empty for a verified Claire baseline scene'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  native-procedural-world-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GODOT_VERSION: "4.7.2-stable"
+      GODOT_ZIP_SHA256: "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4"
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      MESA_GL_VERSION_OVERRIDE: "3.3"
+    steps:
+      - name: Checkout exact world branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Bootstrap exact protected main OS in local song production checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = world/american-empire
+          git switch -c song/american-empire
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path("projects/american-empire/PROJECT_STATE.json")
+          state=json.loads(path.read_text())
+          assert state["branch"]=="world/american-empire"
+          state["branch"]="song/american-empire"
+          path.write_text(json.dumps(state,indent=2)+"\n")
+          PY
+          python3 bootstrap.py boot --offline --repo-root "$GITHUB_WORKSPACE" --branch song/american-empire --project-dir projects/american-empire
+          python3 .godrender/os/general/reusable/tools/production_guard.py --branch song/american-empire
+          python3 .godrender/os/general/reusable/tools/workflow_guard.py --branch song/american-empire
+      - name: Verify original canon and existing engines
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/verify_canon.py
+          python3 -m unittest discover -s worlds/american-empire/tests -p 'test_*.py' -v
+      - name: Select at most one submitted AE scene request
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t candidates < <(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^worlds/american-empire/scene_requests/request-[a-z0-9-]+\.json$' || true)
+          if (( ${#candidates[@]} > 1 )); then
+            echo "Refusing ambiguous multi-scene request commit"; exit 1
+          fi
+          if (( ${#candidates[@]} == 1 )); then
+            test -f "${candidates[0]}"
+            test "$(wc -c < "${candidates[0]}")" -le 21000
+            echo "AE_SCENE_REQUEST_FILE=$GITHUB_WORKSPACE/${candidates[0]}" >> "$GITHUB_ENV"
+            echo "Verified request file selected: ${candidates[0]}"
+          fi
+      - name: Build world browser and extract actual verified P7 state in Chromium
+        shell: bash
+        env:
+          AE_SCENE_REQUEST_JSON: ${{ inputs.scene_request || '' }}
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/build_web.py --repro
+          npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
+          npx --prefix worlds/american-empire/web/tests playwright install --with-deps chromium
+          cd worlds/american-empire/web
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory dist >/tmp/ae-scene-http.log 2>&1 &
+          WEB_PID=$!
+          trap 'kill "$WEB_PID" || true' EXIT
+          for i in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:8765/data/world.json >/dev/null; then break; fi
+            sleep 1
+          done
+          if [[ -n "${AE_SCENE_REQUEST_FILE:-}" ]]; then
+            AE_SCENE_REQUEST_JSON="$(cat "$AE_SCENE_REQUEST_FILE")" AE_SCENE_OUTPUT="$RUNNER_TEMP/ae-world-godot" node tests/replay_scene_request.mjs
+          else
+            AE_SCENE_OUTPUT="$RUNNER_TEMP/ae-world-godot" node tests/replay_scene_request.mjs
+          fi
+      - name: Generate selected scenario scene contract and reject tampered receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/ae-world-godot"
+          mkdir -p worlds/american-empire/godot/data
+          python3 - <<'PY'
+          import json,os,re
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])/"ae-world-godot"/"scene_request.json"
+          req=json.loads(p.read_text())
+          assert req["schema"]=="american-empire.scene-request.v1"
+          for f in ("actor","observer_place"):
+              assert re.fullmatch(r"[a-z0-9-]{1,50}",req[f])
+          assert type(req["year"]) is int and 2026<=req["year"]<=2037
+          with open(os.environ["GITHUB_ENV"],"a") as out:
+              for k,v in (("AE_ACTOR",req["actor"]),("AE_YEAR",req["year"]),("AE_PLACE",req["observer_place"])):
+                  out.write(f"{k}={v}\n")
+          PY
+      - name: Validate scenario receipt and create scene contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/ae-world-godot"
+          python3 worlds/american-empire/tools/export_godot_scene.py \
+            --receipt "$OUT/ae-p7-receipt.json" --output worlds/american-empire/godot/data/scene_contract.json \
+            --actor "$AE_ACTOR" --year "$AE_YEAR" --place "$AE_PLACE"
+          cp worlds/american-empire/godot/data/scene_contract.json "$OUT/scene_contract.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"ae-world-godot"
+          receipt=json.loads((root/"ae-p7-receipt.json").read_text())
+          target=json.loads((root/"scene_request.json").read_text())
+          receipt["snapshots"][target["year"]-2026]["places"][target["observer_place"]]["service"]=999
+          (root/"tampered.json").write_text(json.dumps(receipt))
+          PY
+          if python3 worlds/american-empire/tools/export_godot_scene.py \
+             --receipt "$OUT/tampered.json" --output "$OUT/unsafe.json" \
+             --actor "$AE_ACTOR" --year "$AE_YEAR" --place "$AE_PLACE"; then
+            echo "ERROR: tampered world state accepted"; exit 1
+          fi
+          test ! -f "$OUT/unsafe.json"
+      - name: Generate source-bound mathematical terrain and test independence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s worlds/american-empire/tests -p 'test_procedural_geometry.py' -v
+          OUT="$RUNNER_TEMP/ae-world-godot"
+          python3 worlds/american-empire/tools/build_procedural_geometry.py \
+            --contract "$OUT/scene_contract.json" \
+            --output worlds/american-empire/godot/data/procedural_geometry.json
+          cp worlds/american-empire/godot/data/procedural_geometry.json "$OUT/procedural_geometry.json"
+          python3 worlds/american-empire/tools/build_procedural_geometry.py \
+            --contract "$OUT/scene_contract.json" --verify "$OUT/procedural_geometry.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])/"ae-world-godot"
+          d=json.loads((p/"procedural_geometry.json").read_text())
+          d["heights_dm"][0][0]+=1
+          (p/"tampered-geometry.json").write_text(json.dumps(d))
+          PY
+          if python3 worlds/american-empire/tools/build_procedural_geometry.py \
+            --contract "$OUT/scene_contract.json" --verify "$OUT/tampered-geometry.json"; then
+              echo "ERROR: tampered geometry accepted"; exit 1
+          fi
+      - name: Install Xvfb and software OpenGL dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb xauth libgl1-mesa-dri libgl1 libx11-6 libxcursor1 libxinerama1 libxi6 libxrandr2 libxrender1 libasound2t64 ffmpeg unzip curl
+      - name: Download official Godot and verify established SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip" -o /tmp/godot-p4.zip
+          printf "%s  %s\n" "$GODOT_ZIP_SHA256" /tmp/godot-p4.zip | sha256sum -c -
+          unzip -q /tmp/godot-p4.zip -d /tmp/godot-p4-bin
+          chmod +x "/tmp/godot-p4-bin/Godot_v${GODOT_VERSION}_linux.x86_64"
+          "/tmp/godot-p4-bin/Godot_v${GODOT_VERSION}_linux.x86_64" --version
+      - name: Import and render 3D geometry from exact browser world snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT="$(find /tmp/godot-p4-bin -maxdepth 1 -type f -name 'Godot_v*' | head -1)"
+          OUT="$RUNNER_TEMP/ae-world-godot"
+          PROJ="$GITHUB_WORKSPACE/worlds/american-empire/godot"
+          "$GODOT" --headless --path "$PROJ" --editor --import --quit 2>&1 | tee "$OUT/import.log"
+          if grep -E "SCRIPT ERROR|Parse Error|Failed to load script" "$OUT/import.log"; then exit 1; fi
+          xvfb-run -a -s "-screen 0 1600x1000x24" "$GODOT" \
+            --path "$PROJ" --scene res://scenes/procedural_scene.tscn \
+            --rendering-method gl_compatibility --write-movie "$OUT/frame.png" \
+            --fixed-fps 24 --quit-after 48 -- --scene-proof 2>&1 | tee "$OUT/godot.log"
+          if grep -E "SCRIPT ERROR|Parse Error|AE_SCENE_FAIL|AE_PROCEDURAL_FAIL" "$OUT/godot.log"; then exit 1; fi
+          grep -q 'AE_PROCEDURAL_SCENE_READY' "$OUT/godot.log"
+          ffmpeg -hide_banner -loglevel error -nostdin -y \
+            -framerate 24 -i "$OUT/frame%08d.png" \
+            -c:v libx264 -preset fast -crf 24 -pix_fmt yuv420p "$OUT/godot-proof.mp4"
+      - name: Verify source SHA links, real moving images, film guard
+        shell: bash
+        run: |
+          python3 worlds/american-empire/tools/verify_scene_proof.py --root "$RUNNER_TEMP/ae-world-godot"
+      - name: Upload only derived technical proof and hashes
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ae-source-bound-mathematical-world
+          path: |
+            ${{ runner.temp }}/ae-world-godot/ae-p7-receipt.json
+            ${{ runner.temp }}/ae-world-godot/scene_contract.json
+            ${{ runner.temp }}/ae-world-godot/procedural_geometry.json
+            ${{ runner.temp }}/ae-world-godot/scene_request.json
+            ${{ runner.temp }}/ae-world-godot/godot-proof.mp4
+            ${{ runner.temp }}/ae-world-godot/frame00000002.png
+            ${{ runner.temp }}/ae-world-godot/frame00000024.png
+            ${{ runner.temp }}/ae-world-godot/frame00000044.png
+            ${{ runner.temp }}/ae-world-godot/verification.json
+            ${{ runner.temp }}/ae-world-godot/godot.log
+            ${{ runner.temp }}/ae-world-godot/import.log
+          if-no-files-found: warn
+          retention-days: 30
