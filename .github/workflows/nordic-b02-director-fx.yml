@@ -26,6 +26,12 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install numpy opencv-python-headless pillow
       - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg unzip
+      - name: Fetch exact Main authority for native boot
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          echo "MAIN=$(git rev-parse main)"
+          echo "B02=$(git rev-parse HEAD)"
       - name: Boot GodRender
         env:
           GODRENDER_VALIDATION_MODE: '1'
