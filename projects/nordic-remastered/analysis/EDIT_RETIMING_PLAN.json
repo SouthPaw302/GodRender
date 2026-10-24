@@ -1,0 +1,159 @@
+{
+  "schema": "godrender.nordic-edit-retiming-plan.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "source_timing_map": "analysis/DIRECTOR_TIMING_MAP.json",
+  "target_duration_seconds": 137.952,
+  "authority": "director_plan_not_asset_approval",
+  "rules": [
+    "Preserve both original Gemini source videos at natural speed.",
+    "Do not promote generated or recovered candidate stills by this plan.",
+    "Use measured ONNX timing as musical timing evidence; story/canon decisions remain Director authority.",
+    "Do not loop or stretch the two source videos to claim song coverage."
+  ],
+  "segments": [
+    {
+      "id": "B01_01",
+      "start": 0,
+      "end": 6.58
+    },
+    {
+      "id": "B01_05",
+      "start": 6.58,
+      "end": 12.14
+    },
+    {
+      "id": "B01_09",
+      "start": 12.14,
+      "end": 20
+    },
+    {
+      "id": "B02_01",
+      "start": 20,
+      "end": 25.24
+    },
+    {
+      "id": "B02_05",
+      "start": 25.24,
+      "end": 33.1
+    },
+    {
+      "id": "B02_09",
+      "start": 33.1,
+      "end": 40.96
+    },
+    {
+      "id": "VIDEO_A",
+      "source": "gemini_generated_video_4b4db55f.mp4",
+      "start": 40.96,
+      "end": 50.965,
+      "natural_speed": true
+    },
+    {
+      "id": "B03_01",
+      "start": 50.965,
+      "end": 56.68,
+      "note": "0.475 s transition handle after VIDEO_A"
+    },
+    {
+      "id": "B03_05",
+      "start": 56.68,
+      "end": 61.92
+    },
+    {
+      "id": "B03_09",
+      "start": 61.92,
+      "end": 69.78
+    },
+    {
+      "id": "VIDEO_B",
+      "source": "gemini_generated_video_e4937f10.mp4",
+      "start": 69.78,
+      "end": 79.785,
+      "natural_speed": true
+    },
+    {
+      "id": "B04_01",
+      "start": 79.785,
+      "end": 85.5,
+      "note": "0.475 s transition handle after VIDEO_B"
+    },
+    {
+      "id": "B04_05",
+      "start": 85.5,
+      "end": 90.74
+    },
+    {
+      "id": "B04_09",
+      "start": 90.74,
+      "end": 93.36,
+      "note": "protect transient break"
+    },
+    {
+      "id": "B05_01",
+      "start": 93.36,
+      "end": 101.22
+    },
+    {
+      "id": "B05_05",
+      "start": 101.22,
+      "end": 109.08
+    },
+    {
+      "id": "B05_09",
+      "start": 109.08,
+      "end": 114.32,
+      "note": "second drop / breath"
+    },
+    {
+      "id": "B06_01",
+      "start": 114.32,
+      "end": 122.16
+    },
+    {
+      "id": "B06_05",
+      "start": 122.16,
+      "end": 130.02
+    },
+    {
+      "id": "B06_09",
+      "start": 130.02,
+      "end": 137.952
+    }
+  ],
+  "fx_direction": [
+    {
+      "range": "0.000-20.000",
+      "direction": "Restrained living-scene motion; protect Observer identity, cliff geometry and night-sky geography."
+    },
+    {
+      "range": "20.000-33.100",
+      "direction": "Increase internal sky/portal response with bounded activity."
+    },
+    {
+      "range": "33.100-90.740",
+      "direction": "Strongest world development; semantic/spatial motion rather than uniform zooms."
+    },
+    {
+      "range": "90.740-93.360",
+      "direction": "Reduce decorative FX and protect the transient break."
+    },
+    {
+      "range": "93.360-109.080",
+      "direction": "Resume controlled progression."
+    },
+    {
+      "range": "109.080-114.320",
+      "direction": "Simplify for the second breath and prepare climax."
+    },
+    {
+      "range": "114.320-130.020",
+      "direction": "Highest density and motif convergence."
+    },
+    {
+      "range": "130.020-137.952",
+      "direction": "De-escalate toward Observer/sky world."
+    }
+  ],
+  "next_production_action": "Create Batch 01 representative moving FX proof, QC it, and record exact native GodRender route/parameters/hashes before broader batch treatment."
+}
