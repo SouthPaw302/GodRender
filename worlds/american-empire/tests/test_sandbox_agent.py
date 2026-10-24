@@ -16,7 +16,6 @@ import sandbox_agent as agent
 
 class SandboxAgentTests(unittest.TestCase):
     def test_cli_and_site_are_not_deployment_services(self):
-        self.assertEqual(agent.main(["--help"]), 0) if False else None
         self.assertEqual(agent.DIST, ROOT / "web" / "dist")
         self.assertTrue((agent.TOOLS / "build_web.py").is_file())
         self.assertTrue((agent.TOOLS / "build_procedural_geometry.py").is_file())
@@ -28,7 +27,8 @@ class SandboxAgentTests(unittest.TestCase):
             (base / "data" / "world.json").write_text(json.dumps({
                 "schema": "american-empire.godot-explorer-bundle.v1",
             }), encoding="utf-8")
-            with patch.object(agent, "handler", lambda: agent.handler(base)):
+            original_handler = agent.handler
+            with patch.object(agent, "handler", lambda: original_handler(base)):
                 with agent.local_server(0) as server:
                     self.assertEqual(server.server_address[0], "127.0.0.1")
                     thread = agent.start_for_agent(server)
