@@ -75,6 +75,8 @@ def manifest_load(path, input_root):
             if scene not in valid:
                 raise ValueError("Godot scene must be a vetted local project scene")
         normalized_fx(shot)
+        if "base_camera" in shot and not isinstance(shot.get("base_camera"), bool):
+            raise ValueError("base_camera must be boolean")
     if data.get("audio"):
         rec = data["audio"]
         path = within(input_root, rec.get("path", ""))
@@ -176,14 +178,16 @@ def render_one(data, shot, input_root, out):
                     raise RuntimeError(f"missing input frame {i}/{total} from {mode}")
             else:
                 frame = source.copy()
-                # Bounded camera movement; a user source never gets replaced by a generated scene.
-                zoom = 1.015 + 0.013 * math.sin(i / max(total, 1) * math.pi)
-                tx = 1.5 * math.sin(2 * math.pi * i / max(total, 1))
-                ty = 1.0 * math.cos(2 * math.pi * i / max(total, 1))
-                M = np.float32([[zoom, 0, tx - frame.shape[1] * (zoom - 1) / 2],
-                                [0, zoom, ty - frame.shape[0] * (zoom - 1) / 2]])
-                frame = cv2.warpAffine(frame, M, (frame.shape[1], frame.shape[0]),
-                                       flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT101)
+                # Legacy bounded camera movement remains the compatibility default.
+                # Production shots may disable it when explicit approved camera FX are authored.
+                if bool(shot.get("base_camera", True)):
+                    zoom = 1.015 + 0.013 * math.sin(i / max(total, 1) * math.pi)
+                    tx = 1.5 * math.sin(2 * math.pi * i / max(total, 1))
+                    ty = 1.0 * math.cos(2 * math.pi * i / max(total, 1))
+                    M = np.float32([[zoom, 0, tx - frame.shape[1] * (zoom - 1) / 2],
+                                    [0, zoom, ty - frame.shape[0] * (zoom - 1) / 2]])
+                    frame = cv2.warpAffine(frame, M, (frame.shape[1], frame.shape[0]),
+                                           flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT101)
             frame = cv2.resize(frame, (width, height), interpolation=cv2.INTER_LINEAR)
             ctx = FXContext(t=i/fps, duration=total/fps, frame_index=i, fps=fps,
                             energy=float(shot.get("energy", .45)), transient=float(shot.get("transient", .2)))
@@ -217,6 +221,7 @@ def render_one(data, shot, input_root, out):
                "human_approval":False,"shot":shot["id"],"mode":mode,"frames":total,
                "nonidentical_frames":nonidentical,"fx_executed":[e["id"] for e in effects],
                "fx_parameters":effects,
+               "base_camera":bool(shot.get("base_camera", True)),
                "video":result_path.name,"video_sha256":sha256(result_path),
                "source_sha256":(shot.get("image") or shot.get("video") or {}).get("sha256"),
                "source_main_sha":current_godrender_commit()}
