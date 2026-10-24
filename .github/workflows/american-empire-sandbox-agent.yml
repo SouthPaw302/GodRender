@@ -1,0 +1,84 @@
+name: AE Sandbox Agent Local Pipeline
+on:
+  push:
+    branches: [world/american-empire]
+    paths:
+      - 'worlds/american-empire/tools/sandbox_agent.py'
+      - 'worlds/american-empire/tests/test_sandbox_agent.py'
+      - 'worlds/american-empire/P11_SANDBOX_AGENT.md'
+      - 'worlds/american-empire/.gitignore'
+      - '.github/workflows/american-empire-sandbox-agent.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-agent:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact existing world branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Native sandbox CLI integration and protected source checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s worlds/american-empire/tests -p 'test_sandbox_agent.py' -v
+          python3 worlds/american-empire/tools/sandbox_agent.py check
+      - name: Verify actual sandbox HTTP server on loopback
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/sandbox_agent.py serve --port 8877 > /tmp/ae-sandbox-server.log 2>&1 &
+          AGENT_PID=$!
+          trap 'kill "$AGENT_PID" || true' EXIT
+          for _ in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8877/data/world.json > /tmp/ae-sandbox-world.json; then break; fi
+            sleep 1
+          done
+          python3 - <<'PY'
+          import json
+          d=json.load(open("/tmp/ae-sandbox-world.json"))
+          assert d["schema"] == "american-empire.godot-explorer-bundle.v1"
+          print("AE_SANDBOX_HTTP_PASS", d["bundle_sha256"])
+          PY
+          curl -fsS http://127.0.0.1:8877/standalone.html > /dev/null
+          if curl -fsS http://127.0.0.1:8877/data/private_source_media.json; then
+            echo "Forbidden media endpoint found"; exit 1
+          fi
+      - name: Install browser used by existing AE simulation engines
+        run: |
+          npm install --no-audit --no-fund --no-package-lock --no-save --prefix worlds/american-empire/web/tests playwright@1.56.1
+          npx --prefix worlds/american-empire/web/tests playwright install --with-deps chromium
+      - name: Sandbox agent drives real browser simulation into procedural geometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 worlds/american-empire/tools/sandbox_agent.py scene --output-dir "$RUNNER_TEMP/ae-sandbox-scene"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          d=Path(os.environ["RUNNER_TEMP"])/"ae-sandbox-scene"
+          receipt=json.loads((d/"agent-receipt.json").read_text())
+          geom=json.loads((d/"procedural_geometry.json").read_text())
+          assert receipt["status"]=="AE_SANDBOX_SCENE_DATA_PASS"
+          assert receipt["geometry_sha256"]==geom["geometry_sha256"]
+          assert receipt["source_p7_snapshot_sha256"]==geom["source_p7_snapshot_sha256"]
+          assert len(geom["settlements"])>=3 and len(geom["roads"])>=2
+          print("AE_SANDBOX_AGENT_END_TO_END_PASS", receipt["geometry_sha256"])
+          PY
+      - name: Upload source-bound technical output (no private film media)
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ae-sandbox-agent-sourcebound-proof
+          path: |
+            ${{ runner.temp }}/ae-sandbox-scene/agent-receipt.json
+            ${{ runner.temp }}/ae-sandbox-scene/scene_request.json
+            ${{ runner.temp }}/ae-sandbox-scene/scene_contract.json
+            ${{ runner.temp }}/ae-sandbox-scene/procedural_geometry.json
+          retention-days: 30
+          if-no-files-found: error
