@@ -1,0 +1,83 @@
+name: Nordic B02 Director Edit FX
+on:
+  workflow_dispatch:
+  push:
+    branches: ['song/nordic-remastered']
+    paths:
+      - 'projects/nordic-remastered/production/B02_DIRECTOR_EDIT_FX_MANIFEST.json'
+      - 'projects/nordic-remastered/production/B02_FX_REQUIREMENTS.fx.json'
+      - 'projects/nordic-remastered/production/render_b02_director_fx.py'
+      - '.github/workflows/nordic-b02-director-fx.yml'
+permissions:
+  contents: read
+concurrency:
+  group: nordic-b02-director-fx-\${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy opencv-python-headless pillow
+      - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg unzip
+      - name: Boot GodRender
+        env:
+          GODRENDER_VALIDATION_MODE: '1'
+        run: python3 godrender_boot.py --offline
+      - name: Acquire exact B02 sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/b02" "$RUNNER_TEMP/b02/stills"
+          curl -fL --retry 3 "https://drive.usercontent.google.com/download?id=1__0qJfclh1BtTbbytT0BXLKEKQkcASDh&export=download&confirm=t" -o "$RUNNER_TEMP/b02/B02.zip"
+          echo "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309  $RUNNER_TEMP/b02/B02.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/b02/B02.zip" -d "$RUNNER_TEMP/b02/stills"
+          curl -fL --retry 3 "https://drive.usercontent.google.com/download?id=1PyHI7F7In-uZxYhZfHKJK17Ah_8LCWaB&export=download&confirm=t" -o "$RUNNER_TEMP/b02/source_video_a.mp4"
+          echo "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70  $RUNNER_TEMP/b02/source_video_a.mp4" | sha256sum -c -
+          cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/b02/Nordic_Remastered.mp3"
+          echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/b02/Nordic_Remastered.mp3" | sha256sum -c -
+      - name: Verify selected source still hashes
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"b02/stills"
+          d=json.loads(Path("projects/nordic-remastered/production/B02_DIRECTOR_EDIT_FX_MANIFEST.json").read_text())
+          for s in d["selected_stills"]:
+              p=root/s["file"]; assert p.is_file(), p
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==s["sha256"], s["id"]
+          assert sum(int(x["frames"]) for x in d["timeline"])==503
+          print("B02 SELECTED SOURCE + TIMELINE PASS")
+          PY
+      - name: Compile FX lock
+        run: python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/production/B02_FX_REQUIREMENTS.fx.json --lock-out "$RUNNER_TEMP/b02/fx.lock.json"
+      - name: Render B02 continuous edit
+        run: |
+          python projects/nordic-remastered/production/render_b02_director_fx.py \
+            --manifest projects/nordic-remastered/production/B02_DIRECTOR_EDIT_FX_MANIFEST.json \
+            --input-root "$RUNNER_TEMP/b02/stills" \
+            --video-a "$RUNNER_TEMP/b02/source_video_a.mp4" \
+            --audio "$RUNNER_TEMP/b02/Nordic_Remastered.mp3" \
+            --out "$RUNNER_TEMP/final"
+      - name: QC exact B02 duration and frame count
+        run: |
+          ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=nb_read_frames,width,height,r_frame_rate -show_entries format=duration,size -of json "$RUNNER_TEMP/final/NORDIC_B02_DIRECTOR_EDIT_FX_720p.mp4" | tee "$RUNNER_TEMP/final/ffprobe.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ["RUNNER_TEMP"])/"final/ffprobe.json").read_text())
+          assert int(d["streams"][0]["nb_read_frames"])==503, d
+          dur=float(d["format"]["duration"]); assert 20.93 <= dur <= 20.99, dur
+          print("B02 503-FRAME QC PASS")
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b02-director-edit-fx-\${{ github.run_id }}
+          path: \${{ runner.temp }}/final/
+          retention-days: 30

@@ -1,0 +1,203 @@
+{
+  "schema": "godrender.nordic-b02-director-edit-fx.v1",
+  "project": "Nordic (Remastered)",
+  "batch": "B02",
+  "film_range_seconds": [
+    20,
+    40.9583333333
+  ],
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "total_frames": 503,
+  "source_zip": {
+    "drive_id": "1__0qJfclh1BtTbbytT0BXLKEKQkcASDh",
+    "sha256": "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309"
+  },
+  "source_video_a": {
+    "drive_id": "1PyHI7F7In-uZxYhZfHKJK17Ah_8LCWaB",
+    "sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70"
+  },
+  "audio": {
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+    "offset_seconds": 20
+  },
+  "director_rule": "Do not repeat B01 flip-book cuts. Best stills become authored holds; exact source-video motion bridges connect same-source stills; portal handoffs use canonical transition FX.",
+  "selected_stills": [
+    {
+      "id": "B02-01",
+      "file": "Nordic_B02_01.png",
+      "sha256": "1368c0eb99c1599a7aad8e12a9f7f875c89c7c4ae4192bf3ec128227f2d6c8ed",
+      "role": "constellation establish"
+    },
+    {
+      "id": "B02-04",
+      "file": "Nordic_B02_04.png",
+      "sha256": "11de4998fd63de32839471fd14fb1fab0f2ac74d5806896a674ffbd924d2dc75",
+      "role": "observer reaches"
+    },
+    {
+      "id": "B02-06",
+      "file": "Nordic_B02_06.png",
+      "sha256": "420988f1550abe49cdad4578d0bd84010a5c439564033c6c34fa43680f5f445c",
+      "role": "constellation intensifies"
+    },
+    {
+      "id": "B02-08",
+      "file": "Nordic_B02_08.png",
+      "sha256": "5de49ea7940dbc4558ecf1d51f361a401df89654dc462958a8787cc688c8842c",
+      "role": "stellar ignition"
+    },
+    {
+      "id": "B02-09",
+      "file": "Nordic_B02_09.png",
+      "sha256": "e18a85dbeb26aeb026b5ba0f07822eae1b469946081ae00f13f84c86bb5b76f9",
+      "role": "portal ring"
+    },
+    {
+      "id": "B02-10",
+      "file": "Nordic_B02_10.png",
+      "sha256": "a23cdd583e9c923482792d42c546eb72c00b74b0047f23b5d458a4e2a1742f7a",
+      "role": "future city reveal"
+    }
+  ],
+  "timeline": [
+    {
+      "type": "still",
+      "id": "B02-01",
+      "frames": 60,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.018,
+        "center_start": [
+          0.52,
+          0.5
+        ],
+        "center_end": [
+          0.54,
+          0.48
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 5,
+      "source_end": 6.5,
+      "frames": 36
+    },
+    {
+      "type": "still",
+      "id": "B02-04",
+      "frames": 48,
+      "camera": {
+        "zoom_start": 1.006,
+        "zoom_end": 1.022,
+        "center_start": [
+          0.52,
+          0.5
+        ],
+        "center_end": [
+          0.55,
+          0.46
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 6.5,
+      "source_end": 7.5,
+      "frames": 24
+    },
+    {
+      "type": "still",
+      "id": "B02-06",
+      "frames": 48,
+      "camera": {
+        "zoom_start": 1.018,
+        "zoom_end": 1.006,
+        "center_start": [
+          0.53,
+          0.47
+        ],
+        "center_end": [
+          0.51,
+          0.49
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 7.5,
+      "source_end": 8.5,
+      "frames": 24
+    },
+    {
+      "type": "still",
+      "id": "B02-08",
+      "frames": 48,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.032,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.55,
+          0.32
+        ]
+      },
+      "fx": [
+        "FX2-LIGHT-024"
+      ]
+    },
+    {
+      "type": "transition",
+      "from": "B02-08",
+      "to": "B02-09",
+      "frames": 24,
+      "fx": "FX2-TRANS-026"
+    },
+    {
+      "type": "still",
+      "id": "B02-09",
+      "frames": 60,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.025,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.58,
+          0.48
+        ]
+      }
+    },
+    {
+      "type": "transition",
+      "from": "B02-09",
+      "to": "B02-10",
+      "frames": 24,
+      "fx": "FX2-TRANS-027"
+    },
+    {
+      "type": "still",
+      "id": "B02-10",
+      "frames": 107,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.038,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.62,
+          0.48
+        ]
+      }
+    }
+  ]
+}
