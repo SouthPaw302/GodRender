@@ -1,0 +1,130 @@
+name: Nordic ONNX music scan
+
+on:
+  push:
+    branches:
+      - integration/production-runtime-7systems-20261018
+    paths:
+      - .github/workflows/nordic-onnx-scan.yml
+
+permissions:
+  contents: read
+
+jobs:
+  nordic-onnx-scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      AUDIO_FILE_ID: "1DxnCzKJK-bJkCgQsyEbXypCvbdJ25Vvr"
+      AUDIO_SHA256: "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+      AUDIO_SIZE: "3188260"
+    steps:
+      - name: Checkout exact GodRender main engine
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          path: engine
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ONNX/audio dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+          python -m pip install --disable-pip-version-check numpy onnxruntime google-auth requests
+
+      - name: Download exact private Nordic master from Drive
+        env:
+          GODRENDER_DRIVE_SA_JSON: ${{ secrets.GODRENDER_DRIVE_SA_JSON }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          import requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+
+          secret=os.environ.get("GODRENDER_DRIVE_SA_JSON","").strip()
+          if not secret:
+              raise SystemExit("GODRENDER_DRIVE_SA_JSON is unavailable")
+          info=json.loads(secret)
+          print("Drive service account:", info.get("client_email","<unknown>"))
+          creds=service_account.Credentials.from_service_account_info(
+              info, scopes=["https://www.googleapis.com/auth/drive.readonly"]
+          )
+          creds.refresh(Request())
+          file_id=os.environ["AUDIO_FILE_ID"]
+          url=f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media"
+          r=requests.get(url,headers={"Authorization":"Bearer "+creds.token},timeout=120)
+          if r.status_code != 200:
+              raise SystemExit(f"Drive download failed HTTP {r.status_code}: {r.text[:500]}")
+          target=Path("/tmp/Nordic  (Remastered).mp3")
+          target.write_bytes(r.content)
+          got=hashlib.sha256(r.content).hexdigest()
+          if len(r.content)!=int(os.environ["AUDIO_SIZE"]):
+              raise SystemExit(f"audio size mismatch {len(r.content)}")
+          if got!=os.environ["AUDIO_SHA256"]:
+              raise SystemExit(f"audio SHA mismatch {got}")
+          print("NORDIC AUDIO BYTE IDENTITY PASS", len(r.content), got)
+          PY
+
+      - name: Provision pinned Beat This ONNX model from Main registry
+        working-directory: engine
+        run: |
+          python -m general.reusable.tools.model_provision music-beat-onnx-v1
+
+      - name: Run Main music_beat_worker on Nordic master
+        run: |
+          mkdir -p "$RUNNER_TEMP/nordic-onnx"
+          PYTHONPATH="$PWD/engine" python - <<'PY'
+          import hashlib, json, os, sys
+          from pathlib import Path
+
+          engine=Path("engine").resolve()
+          sys.path.insert(0,str(engine))
+          from general.reusable.tools.music_beat_worker import analyze_music
+
+          audio=Path("/tmp/Nordic  (Remastered).mp3")
+          evidence=analyze_music(audio)
+          if evidence.get("engine")!="beat_this_onnx":
+              raise SystemExit("ONNX engine not used: "+str(evidence.get("engine")))
+          resolution=evidence.get("model_resolution") or {}
+          if resolution.get("used_fallback"):
+              raise SystemExit("ONNX fallback was used")
+          out=Path(os.environ["RUNNER_TEMP"])/"nordic-onnx"
+          ev=out/"MUSIC_BEAT_EVIDENCE.json"
+          ev.write_text(json.dumps(evidence,indent=2)+"\n",encoding="utf-8")
+          receipt={
+              "schema":"godrender.nordic-onnx-scan.v1",
+              "branch":"song/nordic-remastered",
+              "source_audio":"Nordic  (Remastered).mp3",
+              "audio_sha256":hashlib.sha256(audio.read_bytes()).hexdigest(),
+              "audio_bytes":audio.stat().st_size,
+              "engine_commit":os.environ.get("GITHUB_SHA"),
+              "analysis_engine":evidence.get("engine"),
+              "provider":evidence.get("provider"),
+              "providers":evidence.get("providers"),
+              "bpm":evidence.get("bpm"),
+              "beat_count":len(evidence.get("beat_positions_seconds") or []),
+              "downbeat_count":len(evidence.get("downbeat_positions_seconds") or []),
+              "confidence":evidence.get("confidence"),
+              "authority":evidence.get("authority"),
+              "fallback_used":resolution.get("used_fallback"),
+              "music_evidence_sha256":hashlib.sha256(ev.read_bytes()).hexdigest()
+          }
+          (out/"ONNX_SCAN_RECEIPT.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(receipt,indent=2))
+          PY
+
+      - name: Upload ONNX evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: nordic-onnx-evidence-${{ github.run_id }}
+          path: ${{ runner.temp }}/nordic-onnx/
+          retention-days: 30
+          if-no-files-found: warn
