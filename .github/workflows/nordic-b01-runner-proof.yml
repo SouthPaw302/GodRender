@@ -31,7 +31,10 @@ jobs:
         with:
           python-version: '3.11'
       - name: Fetch exact Main authority for offline boot
-        run: git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          git rev-parse main
       - name: Install canonical FX dependencies
         run: python -m pip install numpy opencv-python-headless
       - name: Install FFmpeg
