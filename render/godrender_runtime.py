@@ -74,9 +74,9 @@ def manifest_load(path, input_root):
                      "upstream/mainv2-lab/lab/godot/scenes/proof_3d.tscn")
             if scene not in valid:
                 raise ValueError("Godot scene must be a vetted local project scene")
-        effects = shot.get("fx_ids", [])
-        if not isinstance(effects, list) or len(effects) > 12 or not all(isinstance(x, str) for x in effects):
-            raise ValueError("invalid FX list")
+        normalized_fx(shot)
+        if "base_camera" in shot and not isinstance(shot.get("base_camera"), bool):
+            raise ValueError("base_camera must be boolean")
     if data.get("audio"):
         rec = data["audio"]
         path = within(input_root, rec.get("path", ""))
@@ -84,13 +84,41 @@ def manifest_load(path, input_root):
             raise ValueError("music source hash mismatch")
     return data
 
+def normalized_fx(shot):
+    """Return validated structured FX entries while preserving fx_ids compatibility."""
+    legacy = shot.get("fx_ids", [])
+    structured = shot.get("fx")
+    if structured is None:
+        if not isinstance(legacy, list) or len(legacy) > 12 or not all(isinstance(x, str) for x in legacy):
+            raise ValueError("invalid FX list")
+        return [{"id": eid, "params": {}} for eid in legacy]
+    if not isinstance(structured, list) or len(structured) > 12:
+        raise ValueError("invalid structured FX list")
+    out = []
+    for raw in structured:
+        if isinstance(raw, str):
+            raw = {"id": raw}
+        if not isinstance(raw, dict) or not isinstance(raw.get("id"), str) or not raw["id"]:
+            raise ValueError("invalid structured FX entry")
+        params = raw.get("params", {})
+        if not isinstance(params, dict):
+            raise ValueError("FX params must be an object")
+        out.append({"id": raw["id"], "params": params})
+    if legacy:
+        if not isinstance(legacy, list) or not all(isinstance(x, str) for x in legacy):
+            raise ValueError("invalid FX list")
+        if legacy != [item["id"] for item in out]:
+            raise ValueError("fx_ids and structured fx disagree")
+    return out
+
 def check_fx(effects):
     from general.reusable.fx_v2.executor import FXExecutor
     fx = FXExecutor(consumer="godrender_parallel_shot")
-    for e in effects:
-        rec = fx._rec(e)  # approved gate; refuses missing/unpromoted registry entry
+    for item in effects:
+        eid = item["id"]
+        rec = fx._rec(eid)  # approved gate; refuses missing/unpromoted registry entry
         if (rec.get("implementation") or {}).get("kind") == "runtime_transition":
-            raise ValueError("transition FX cannot run as per-frame FX: " + e)
+            raise ValueError("transition FX cannot run as per-frame FX: " + eid)
     return fx
 
 def render_one(data, shot, input_root, out):
@@ -101,7 +129,7 @@ def render_one(data, shot, input_root, out):
     out.mkdir(parents=True, exist_ok=True)
     fps, width, height = int(data["fps"]), int(data["width"]), int(data["height"])
     total = max(1, round(float(shot["seconds"]) * fps))
-    effects = shot.get("fx_ids", [])
+    effects = normalized_fx(shot)
     fx = check_fx(effects)
     mode = shot["mode"]
     capture = None
@@ -150,19 +178,21 @@ def render_one(data, shot, input_root, out):
                     raise RuntimeError(f"missing input frame {i}/{total} from {mode}")
             else:
                 frame = source.copy()
-                # Bounded camera movement; a user source never gets replaced by a generated scene.
-                zoom = 1.015 + 0.013 * math.sin(i / max(total, 1) * math.pi)
-                tx = 1.5 * math.sin(2 * math.pi * i / max(total, 1))
-                ty = 1.0 * math.cos(2 * math.pi * i / max(total, 1))
-                M = np.float32([[zoom, 0, tx - frame.shape[1] * (zoom - 1) / 2],
-                                [0, zoom, ty - frame.shape[0] * (zoom - 1) / 2]])
-                frame = cv2.warpAffine(frame, M, (frame.shape[1], frame.shape[0]),
-                                       flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT101)
+                # Legacy bounded camera movement remains the compatibility default.
+                # Production shots may disable it when explicit approved camera FX are authored.
+                if bool(shot.get("base_camera", True)):
+                    zoom = 1.015 + 0.013 * math.sin(i / max(total, 1) * math.pi)
+                    tx = 1.5 * math.sin(2 * math.pi * i / max(total, 1))
+                    ty = 1.0 * math.cos(2 * math.pi * i / max(total, 1))
+                    M = np.float32([[zoom, 0, tx - frame.shape[1] * (zoom - 1) / 2],
+                                    [0, zoom, ty - frame.shape[0] * (zoom - 1) / 2]])
+                    frame = cv2.warpAffine(frame, M, (frame.shape[1], frame.shape[0]),
+                                           flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT101)
             frame = cv2.resize(frame, (width, height), interpolation=cv2.INTER_LINEAR)
             ctx = FXContext(t=i/fps, duration=total/fps, frame_index=i, fps=fps,
                             energy=float(shot.get("energy", .45)), transient=float(shot.get("transient", .2)))
             for effect in effects:
-                frame = fx.apply_frame(effect, frame, ctx)
+                frame = fx.apply_frame(effect["id"], frame, ctx, params=effect.get("params") or {})
             if not isinstance(frame, np.ndarray) or frame.shape != (height,width,3):
                 raise RuntimeError("FX returned invalid picture shape")
             if first_frame is None:
@@ -189,7 +219,9 @@ def render_one(data, shot, input_root, out):
         raise RuntimeError("shot frames are static: moving-scene requirement failed")
     receipt = {"schema":"godrender.shot-receipt.v1","status":"TECHNICAL_RENDER_PASS_VISUAL_REVIEW_PENDING",
                "human_approval":False,"shot":shot["id"],"mode":mode,"frames":total,
-               "nonidentical_frames":nonidentical,"fx_executed":effects,
+               "nonidentical_frames":nonidentical,"fx_executed":[e["id"] for e in effects],
+               "fx_parameters":effects,
+               "base_camera":bool(shot.get("base_camera", True)),
                "video":result_path.name,"video_sha256":sha256(result_path),
                "source_sha256":(shot.get("image") or shot.get("video") or {}).get("sha256"),
                "source_main_sha":current_godrender_commit()}
