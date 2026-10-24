@@ -113,8 +113,29 @@ jobs:
         with:
           name: nordic-b01-source-${{ github.run_id }}
           path: ${{ runner.temp }}/input
-      - name: Reverify FX lock immediately before render
-        run: python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/FX_REQUIREMENTS.fx.json --verify-lock "$RUNNER_TEMP/input/fx.lock.json"
+      - name: Verify prepared PASS lock and exact source commit
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path.cwd()
+          lock_path=Path(os.environ["RUNNER_TEMP"])/"input/fx.lock.json"
+          lock=json.loads(lock_path.read_text())
+          assert lock.get("result")=="PASS"
+          def sha(p):
+              h=hashlib.sha256()
+              with Path(p).open("rb") as f:
+                  for chunk in iter(lambda:f.read(1<<20),b""): h.update(chunk)
+              return h.hexdigest()
+          assert sha("projects/nordic-remastered/FX_REQUIREMENTS.fx.json")==lock["manifest_sha256"]
+          assert sha("general/reusable/fx_v2/registry.json")==lock["registry_sha256"]
+          assert sha("general/reusable/fx_v2/runtime.py")==lock["runtime_sha256"]
+          for rec in lock.get("render_inputs",[]):
+              assert sha(root/rec["path"])==rec["sha256"], rec["path"]
+          print("PREPARED FX LOCK + EXACT COMMIT PASS")
+          PY
       - name: Render canonical FX shard
         run: |
           python render/godrender_runtime.py shot --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --shot-id "${{ matrix.shot_id }}" --out "$RUNNER_TEMP/shot"
