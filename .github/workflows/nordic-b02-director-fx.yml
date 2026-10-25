@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.11'
-      - run: python -m pip install numpy opencv-python-headless pillow gdown
+      - run: python -m pip install numpy opencv-python-headless pillow google-auth requests
       - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg unzip
       - name: Fetch exact Main authority for native boot
         run: |
@@ -37,15 +37,65 @@ jobs:
           GODRENDER_VALIDATION_MODE: '1'
         run: python3 godrender_boot.py --offline
       - name: Acquire exact B02 sources
+        env:
+          GDRIVE_SERVICE_ACCOUNT_JSON: \${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+          GDRIVE_OAUTH_CLIENT_ID: \${{ secrets.GDRIVE_OAUTH_CLIENT_ID }}
+          GDRIVE_OAUTH_CLIENT_SECRET: \${{ secrets.GDRIVE_OAUTH_CLIENT_SECRET }}
+          GDRIVE_OAUTH_REFRESH_TOKEN: \${{ secrets.GDRIVE_OAUTH_REFRESH_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/b02" "$RUNNER_TEMP/b02/stills"
-          gdown 1__0qJfclh1BtTbbytT0BXLKEKQkcASDh -O "$RUNNER_TEMP/b02/B02.zip"
-          echo "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309  $RUNNER_TEMP/b02/B02.zip" | sha256sum -c -
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          import requests
+          from google.auth.transport.requests import Request
+          from google.oauth2 import service_account
+          from google.oauth2.credentials import Credentials
+
+          scopes = ["https://www.googleapis.com/auth/drive.readonly"]
+          sa = os.environ.get("GDRIVE_SERVICE_ACCOUNT_JSON", "").strip()
+          refresh = os.environ.get("GDRIVE_OAUTH_REFRESH_TOKEN", "").strip()
+          if sa:
+              creds = service_account.Credentials.from_service_account_info(json.loads(sa), scopes=scopes)
+          elif refresh and os.environ.get("GDRIVE_OAUTH_CLIENT_ID") and os.environ.get("GDRIVE_OAUTH_CLIENT_SECRET"):
+              creds = Credentials(
+                  token=None, refresh_token=refresh,
+                  token_uri="https://oauth2.googleapis.com/token",
+                  client_id=os.environ["GDRIVE_OAUTH_CLIENT_ID"],
+                  client_secret=os.environ["GDRIVE_OAUTH_CLIENT_SECRET"],
+                  scopes=scopes,
+              )
+          else:
+              raise SystemExit("B02 SOURCE AUTH MISSING: configure a Drive-authorized service account or OAuth refresh-token secrets; never use anonymous gdown.")
+          creds.refresh(Request())
+          root = Path(os.environ["RUNNER_TEMP"])/"b02"
+          sources = [
+              ("1__0qJfclh1BtTbbytT0BXLKEKQkcASDh", "B02.zip", "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309"),
+              ("1PyHI7F7In-uZxYhZfHKJK17Ah_8LCWaB", "source_video_a.mp4", "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70"),
+          ]
+          for file_id, name, expected in sources:
+              target = root/name
+              digest = hashlib.sha256()
+              with requests.get(
+                  f"https://www.googleapis.com/drive/v3/files/{file_id}",
+                  params={"alt":"media"},
+                  headers={"Authorization": f"Bearer {creds.token}"},
+                  stream=True, timeout=120,
+              ) as response:
+                  response.raise_for_status()
+                  with target.open("wb") as out:
+                      for chunk in response.iter_content(chunk_size=1024*1024):
+                          if chunk:
+                              out.write(chunk)
+                              digest.update(chunk)
+              if digest.hexdigest() != expected:
+                  target.unlink(missing_ok=True)
+                  raise SystemExit(f"B02 SOURCE HASH MISMATCH: {name}")
+              print(f"B02 authenticated source verified: {name}")
+          PY
           unzip -q "$RUNNER_TEMP/b02/B02.zip" -d "$RUNNER_TEMP/b02/stills"
-          gdown 1PyHI7F7In-uZxYhZfHKJK17Ah_8LCWaB -O "$RUNNER_TEMP/b02/source_video_a.mp4"
-          echo "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70  $RUNNER_TEMP/b02/source_video_a.mp4" | sha256sum -c -
           cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/b02/Nordic_Remastered.mp3"
           echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/b02/Nordic_Remastered.mp3" | sha256sum -c -
       - name: Verify selected source still hashes
