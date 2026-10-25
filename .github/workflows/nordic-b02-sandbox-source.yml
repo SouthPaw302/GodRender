@@ -1,0 +1,39 @@
+name: Nordic B02 sandbox source bridge
+on:
+  push:
+    branches: ['song/nordic-remastered']
+    paths: ['.github/workflows/nordic-b02-sandbox-source.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Fetch exact native Main ref
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          git rev-parse HEAD
+          git rev-parse main
+      - name: Verify canonical import integrity
+        run: python3 tools/verify_consolidation.py
+      - name: Boot native engine
+        env:
+          GODRENDER_VALIDATION_MODE: '1'
+        run: python3 godrender_boot.py --offline
+      - name: Package exact repository including Git refs
+        run: |
+          tar -czf "$RUNNER_TEMP/godrender-nordic-sandbox.tar.gz" -C "$GITHUB_WORKSPACE" .
+          sha256sum "$RUNNER_TEMP/godrender-nordic-sandbox.tar.gz"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b02-sandbox-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/godrender-nordic-sandbox.tar.gz
+          retention-days: 3
+          if-no-files-found: error
