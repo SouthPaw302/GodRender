@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: nordic-b02-director-fx-\${{ github.ref }}
+  group: nordic-b02-director-fx-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   render:
@@ -38,10 +38,10 @@ jobs:
         run: python3 godrender_boot.py --offline
       - name: Acquire exact B02 sources
         env:
-          GDRIVE_SERVICE_ACCOUNT_JSON: \${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
-          GDRIVE_OAUTH_CLIENT_ID: \${{ secrets.GDRIVE_OAUTH_CLIENT_ID }}
-          GDRIVE_OAUTH_CLIENT_SECRET: \${{ secrets.GDRIVE_OAUTH_CLIENT_SECRET }}
-          GDRIVE_OAUTH_REFRESH_TOKEN: \${{ secrets.GDRIVE_OAUTH_REFRESH_TOKEN }}
+          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+          GDRIVE_OAUTH_CLIENT_ID: ${{ secrets.GDRIVE_OAUTH_CLIENT_ID }}
+          GDRIVE_OAUTH_CLIENT_SECRET: ${{ secrets.GDRIVE_OAUTH_CLIENT_SECRET }}
+          GDRIVE_OAUTH_REFRESH_TOKEN: ${{ secrets.GDRIVE_OAUTH_REFRESH_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
@@ -134,6 +134,6 @@ jobs:
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: nordic-b02-director-edit-fx-\${{ github.run_id }}
-          path: \${{ runner.temp }}/final/
+          name: nordic-b02-director-edit-fx-${{ github.run_id }}
+          path: ${{ runner.temp }}/final/
           retention-days: 30
