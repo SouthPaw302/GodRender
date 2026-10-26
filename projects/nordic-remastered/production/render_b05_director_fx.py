@@ -50,14 +50,14 @@ def still_frame(fx,im,idx,total,camera,rois,subtle=False):
     mask=glow_mask(fr.shape,rois)
     if not subtle:
         motion=fx.apply_frame("FX2-MOTION-002",fr,ctx)
-        fr=blend(fr,motion,mask*.19)
+        fr=blend(fr,motion,mask*.37)
     if rois:
         x,y,*_=rois[0]
         lit=fx.apply_frame("FX2-LIGHT-002",fr,ctx,params={"origin":[x,y],"strength":.16 if not subtle else .07})
-        fr=blend(fr,lit,mask*(.28 if not subtle else .12))
+        fr=blend(fr,lit,mask*(.57 if not subtle else .13))
     if not subtle:
         graded=fx.apply_frame("FX2-LIGHT-025",fr,ctx)
-        fr=cv2.addWeighted(fr,.976,graded,.024,0)
+        fr=cv2.addWeighted(fr,.962,graded,.038,0)
     return fr
 
 def read_video_frames(path,start,count,crop):
@@ -79,17 +79,16 @@ def read_video_frames(path,start,count,crop):
     return out
 
 def transition_frames(fx,a,b,rois,count):
-    out=[]; glow=glow_mask(a.shape,rois); faces=face_mask(a.shape)
+    # RC2: protected identity match-cut, never dissolve a face or body.
+    out=[]; glow=glow_mask(a.shape,rois)
     for i in range(count):
         p=ease((i+1)/(count+1))
         ctx=FXContext(t=i/24,duration=count/24,frame_index=i,fps=24,energy=.24,transient=.08)
         registered=fx.apply_transition("FX2-TRANS-025",a,b,p,ctx)
-        baseline=blend(a,b,p)
-        fr=blend(baseline,registered,glow*(.29*np.sin(np.pi*p)**2))
-        # Preserve faces against ghosted double-exposure through the memory handoff.
-        facial_cut=ease(np.clip((p-.44)/.12,0,1))
-        face=blend(a,b,facial_cut)
-        out.append(blend(fr,face,faces*.96))
+        # The hologram carries memory. Faces, bodies, and architecture cut as a clean unit.
+        base=a.copy() if p<.5 else b.copy()
+        local=blend(blend(a,b,p),registered,.26*np.sin(np.pi*p)**2)
+        out.append(blend(base,local,glow*.44))
     return out
 
 def render(args):
@@ -145,7 +144,7 @@ def render(args):
     final=out/"NORDIC_B05_DIRECTOR_EDIT_FX_720p.mp4"; dur=503/24
     mux=subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-nostdin","-y","-i",str(silent),"-ss",str(manifest["audio"]["offset_seconds"]),"-i",str(args.audio),"-map","0:v:0","-map","1:a:0","-t",f"{dur:.9f}","-c:v","copy","-c:a","aac","-b:a","192k","-movflags","+faststart",str(final)],capture_output=True,text=True)
     if mux.returncode: raise RuntimeError(mux.stderr[-2000:])
-    rec={"schema":"godrender.nordic-b05-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B05","frames":503,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[8.4,9],[8.833333,11]],"transition_fx":["FX2-TRANS-025"],"localized_motion_fx":"FX2-MOTION-002","interface_only":True,"camera_fx":["FX2-CAMERA-023"],"second_breath_at_batch_frame":377,"film_sha256":sha(final),"film_bytes":final.stat().st_size,"director_rc":"RC1_EMISSARY_INTERFACE_COMMUNION","source_boundary_easing_frames":6}
+    rec={"schema":"godrender.nordic-b05-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B05","frames":503,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[8.4,9],[8.833333,11]],"transition_fx":["FX2-TRANS-025"],"localized_motion_fx":"FX2-MOTION-002","interface_only":True,"camera_fx":["FX2-CAMERA-023"],"second_breath_at_batch_frame":377,"film_sha256":sha(final),"film_bytes":final.stat().st_size,"director_rc":"RC2_PROTECTED_IDENTITY_CLEAN_INTERFACE_MATCHCUT","source_boundary_easing_frames":6}
     (out/"render_receipt.json").write_text(json.dumps(rec,indent=2)+"\n"); print(json.dumps(rec))
 
 if __name__=="__main__":
