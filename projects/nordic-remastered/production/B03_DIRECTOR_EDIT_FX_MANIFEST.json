@@ -37,61 +37,49 @@
       "file": "Nordic_B03_09.png",
       "sha256": "454c89d5d3b9a34c73a9579c26883887f02963eeb124ad2fb9e0b80137d6292b",
       "role": "emissaries and future interface"
+    },
+    {
+      "id": "B03-10",
+      "file": "Nordic_B03_10.png",
+      "sha256": "f027f3897f3aac4cfceb56b66ce0f0ba5437fd441ae11f17a3dc3ad5bf032e11",
+      "role": "resolved future-city interface with emissaries"
     }
   ],
   "timeline": [
     {
       "type": "still",
       "id": "B03-01",
-      "frames": 115,
+      "frames": 64,
       "camera": {
         "zoom_start": 1,
-        "zoom_end": 1.009,
+        "zoom_end": 1.013,
         "center_start": [
           0.5,
           0.5
         ],
         "center_end": [
-          0.505,
+          0.506,
           0.5
         ]
       }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 2.5,
+      "source_end": 4.2,
+      "frames": 41
     },
     {
       "type": "transition",
       "from": "B03-01",
       "to": "B03-05",
-      "frames": 24,
+      "frames": 12,
       "fx": "FX2-TRANS-027"
     },
     {
       "type": "still",
       "id": "B03-05",
-      "frames": 115,
-      "camera": {
-        "zoom_start": 1,
-        "zoom_end": 1.016,
-        "center_start": [
-          0.5,
-          0.5
-        ],
-        "center_end": [
-          0.515,
-          0.5
-        ]
-      }
-    },
-    {
-      "type": "transition",
-      "from": "B03-05",
-      "to": "B03-09",
-      "frames": 24,
-      "fx": "FX2-TRANS-025"
-    },
-    {
-      "type": "still",
-      "id": "B03-09",
-      "frames": 174,
+      "frames": 20,
       "camera": {
         "zoom_start": 1,
         "zoom_end": 1.008,
@@ -100,11 +88,102 @@
           0.5
         ],
         "center_end": [
-          0.51,
+          0.506,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "still",
+      "id": "B03-05",
+      "frames": 63,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.017,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 5.3,
+      "source_end": 7,
+      "frames": 41
+    },
+    {
+      "type": "transition",
+      "from": "B03-05",
+      "to": "B03-09",
+      "frames": 12,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B03-09",
+      "frames": 10,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.004,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "still",
+      "id": "B03-09",
+      "frames": 84,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.009,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 8.1,
+      "source_end": 9,
+      "frames": 22
+    },
+    {
+      "type": "still",
+      "id": "B03-10",
+      "frames": 83,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.017,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
           0.5
         ]
       }
     }
   ],
-  "director_rule": "Only B03 source-derived pixels, restrained ROI FX; city topology/portal and Observer protected; technical proof requires Director review."
+  "director_rule": "Three lyric/ONNX-aligned acts of 137/126/189 frames. Use exact Gemini B original-speed 24fps motion at 2.5-4.2,5.3-7.0,8.1-9.0 with authored still holds and only approved FX. Protect Observer, portal geometry, emissary identities, city topology. Review proof before gate promotion.",
+  "source_video_b": {
+    "drive_id": "1wpHGl6NgP9XMPbEtasYrqt8sEbQaXFJ8",
+    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+  }
 }

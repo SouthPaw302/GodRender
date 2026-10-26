@@ -50,13 +50,14 @@ def still_frame(fx,im,idx,total,camera,extra):
 
 def read_video_frames(path,start,end,count):
     cap=cv2.VideoCapture(str(path))
-    if not cap.isOpened(): raise RuntimeError("cannot open source video A")
+    if not cap.isOpened(): raise RuntimeError("cannot open source video B")
     frames=[]
+    source_fps=cap.get(cv2.CAP_PROP_FPS)
+    if abs(source_fps-24)>0.02: raise RuntimeError(f"B03 source cadence {source_fps} not original 24fps")
+    cap.set(cv2.CAP_PROP_POS_FRAMES,round(start*source_fps))
     for i in range(count):
-        p=i/max(count-1,1); t=start+(end-start)*p
-        cap.set(cv2.CAP_PROP_POS_MSEC,t*1000.0)
         ok,fr=cap.read()
-        if not ok: raise RuntimeError(f"video bridge decode failed at {t:.3f}")
+        if not ok: raise RuntimeError(f"B03 same-source video bridge decode failed at frame {i}")
         frames.append(resize(fr))
     cap.release(); return frames
 
@@ -74,6 +75,7 @@ def render(args):
     manifest=json.loads(Path(args.manifest).read_text())
     if manifest["schema"]!="godrender.nordic-b03-director-edit-fx.v1": raise RuntimeError("wrong manifest")
     if sum(int(x["frames"]) for x in manifest["timeline"])!=452: raise RuntimeError("timeline must be 452 frames")
+    if sha(args.video_b)!=manifest["source_video_b"]["sha256"]: raise RuntimeError("B03 original Gemini B video SHA mismatch")
     stills=load_stills(manifest,args.input_root); fx=FXExecutor(consumer="nordic_b03_director_edit_fx"); frames=[]
     for seg in manifest["timeline"]:
         n=int(seg["frames"])
@@ -95,11 +97,11 @@ def render(args):
     final=out/"NORDIC_B03_DIRECTOR_EDIT_FX_720p.mp4"; dur=452/24
     mux=subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-nostdin","-y","-i",str(silent),"-ss",str(manifest["audio"]["offset_seconds"]),"-i",str(args.audio),"-map","0:v:0","-map","1:a:0","-t",f"{dur:.9f}","-c:v","copy","-c:a","aac","-b:a","192k","-movflags","+faststart",str(final)],capture_output=True,text=True)
     if mux.returncode: raise RuntimeError(mux.stderr[-2000:])
-    rec={"schema":"godrender.nordic-b03-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B03","frames":452,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[],"transition_fx":["FX2-TRANS-026","FX2-TRANS-027"],"camera_fx":"FX2-CAMERA-023","film_sha256":sha(final),"film_bytes":final.stat().st_size}
+    rec={"schema":"godrender.nordic-b03-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B03","frames":452,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[2.5,4.2],[5.3,7.0],[8.1,9.0]],"transition_fx":["FX2-TRANS-027","FX2-TRANS-025"],"camera_fx":"FX2-CAMERA-023","film_sha256":sha(final),"film_bytes":final.stat().st_size}
     (out/"render_receipt.json").write_text(json.dumps(rec,indent=2)+"\n"); print(json.dumps(rec))
 
 if __name__=="__main__":
     ap=argparse.ArgumentParser()
     for x in ["--manifest","--input-root","--audio","--out"]: ap.add_argument(x,required=True)
-    ap.add_argument("--video-b",required=False)
+    ap.add_argument("--video-b",required=True)
     render(ap.parse_args())

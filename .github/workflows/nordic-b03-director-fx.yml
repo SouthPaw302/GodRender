@@ -4,6 +4,7 @@ on:
   push:
     branches: ['song/nordic-remastered']
     paths:
+      - 'projects/nordic-remastered/runner_sources/batch-03/**'
       - 'projects/nordic-remastered/production/B03_DIRECTOR_EDIT_FX_MANIFEST.json'
       - 'projects/nordic-remastered/production/B03_FX_REQUIREMENTS.fx.json'
       - 'projects/nordic-remastered/production/render_b03_director_fx.py'
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -38,67 +39,19 @@ jobs:
         env:
           GODRENDER_VALIDATION_MODE: '1'
         run: python3 godrender_boot.py --offline
-      - name: Acquire exact B03 sources
-        env:
-          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
-          GDRIVE_OAUTH_CLIENT_ID: ${{ secrets.GDRIVE_OAUTH_CLIENT_ID }}
-          GDRIVE_OAUTH_CLIENT_SECRET: ${{ secrets.GDRIVE_OAUTH_CLIENT_SECRET }}
-          GDRIVE_OAUTH_REFRESH_TOKEN: ${{ secrets.GDRIVE_OAUTH_REFRESH_TOKEN }}
+      - name: Reassemble exact sandbox-staged B03 media
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/b03" "$RUNNER_TEMP/b03/stills"
-          python3 - <<'PY'
-          import hashlib, json, os
-          from pathlib import Path
-          import requests
-          from google.auth.transport.requests import Request
-          from google.oauth2 import service_account
-          from google.oauth2.credentials import Credentials
-
-          scopes = ["https://www.googleapis.com/auth/drive.readonly"]
-          sa = os.environ.get("GDRIVE_SERVICE_ACCOUNT_JSON", "").strip()
-          refresh = os.environ.get("GDRIVE_OAUTH_REFRESH_TOKEN", "").strip()
-          if sa:
-              creds = service_account.Credentials.from_service_account_info(json.loads(sa), scopes=scopes)
-          elif refresh and os.environ.get("GDRIVE_OAUTH_CLIENT_ID") and os.environ.get("GDRIVE_OAUTH_CLIENT_SECRET"):
-              creds = Credentials(
-                  token=None, refresh_token=refresh,
-                  token_uri="https://oauth2.googleapis.com/token",
-                  client_id=os.environ["GDRIVE_OAUTH_CLIENT_ID"],
-                  client_secret=os.environ["GDRIVE_OAUTH_CLIENT_SECRET"],
-                  scopes=scopes,
-              )
-          else:
-              raise SystemExit("B03 SOURCE AUTH MISSING: configure a Drive-authorized service account or OAuth refresh-token secrets; never use anonymous gdown.")
-          creds.refresh(Request())
-          root = Path(os.environ["RUNNER_TEMP"])/"b03"
-          sources = [
-              ("181eUpaePjGd4l53wb_s1j--23PZ6-_6A", "B03.zip", "156dd5916efc46b148f92a6bbc07ce91271bbff4412b0f4ea4ef22ea37f8c618"),
-          ]
-          for file_id, name, expected in sources:
-              target = root/name
-              digest = hashlib.sha256()
-              with requests.get(
-                  f"https://www.googleapis.com/drive/v3/files/{file_id}",
-                  params={"alt":"media"},
-                  headers={"Authorization": f"Bearer {creds.token}"},
-                  stream=True, timeout=120,
-              ) as response:
-                  response.raise_for_status()
-                  with target.open("wb") as out:
-                      for chunk in response.iter_content(chunk_size=1024*1024):
-                          if chunk:
-                              out.write(chunk)
-                              digest.update(chunk)
-              if digest.hexdigest() != expected:
-                  target.unlink(missing_ok=True)
-                  raise SystemExit(f"B03 SOURCE HASH MISMATCH: {name}")
-              print(f"B03 authenticated source verified: {name}")
-          PY
+          cat projects/nordic-remastered/runner_sources/batch-03/storyboard.zip.part* > "$RUNNER_TEMP/b03/B03.zip"
+          echo "156dd5916efc46b148f92a6bbc07ce91271bbff4412b0f4ea4ef22ea37f8c618  $RUNNER_TEMP/b03/B03.zip" | sha256sum -c -
           unzip -q "$RUNNER_TEMP/b03/B03.zip" -d "$RUNNER_TEMP/b03/stills"
+          cat projects/nordic-remastered/runner_sources/batch-03/source_video_b.mp4.part* > "$RUNNER_TEMP/b03/source_video_b.mp4"
+          echo "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68  $RUNNER_TEMP/b03/source_video_b.mp4" | sha256sum -c -
           cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/b03/Nordic_Remastered.mp3"
           echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/b03/Nordic_Remastered.mp3" | sha256sum -c -
+          echo "B03 SANDBOX-TO-RUNNER SOURCE HASH PASS"
       - name: Verify selected source still hashes
         run: |
           python3 - <<'PY'
@@ -110,6 +63,7 @@ jobs:
               p=root/s["file"]; assert p.is_file(), p
               assert hashlib.sha256(p.read_bytes()).hexdigest()==s["sha256"], s["id"]
           assert sum(int(x["frames"]) for x in d["timeline"])==452
+          assert len([x for x in d["timeline"] if x["type"]=="source_video_bridge"])==3
           print("B03 SELECTED SOURCE + TIMELINE PASS")
           PY
       - name: Compile FX lock
@@ -119,6 +73,7 @@ jobs:
           python projects/nordic-remastered/production/render_b03_director_fx.py \
             --manifest projects/nordic-remastered/production/B03_DIRECTOR_EDIT_FX_MANIFEST.json \
             --input-root "$RUNNER_TEMP/b03/stills" \
+            --video-b "$RUNNER_TEMP/b03/source_video_b.mp4" \
             --audio "$RUNNER_TEMP/b03/Nordic_Remastered.mp3" \
             --out "$RUNNER_TEMP/final"
       - name: QC exact B03 duration and frame count
