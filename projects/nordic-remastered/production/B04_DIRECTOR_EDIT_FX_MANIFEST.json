@@ -10,6 +10,39 @@
   "source_video_b": {
     "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
   },
-  "selected_stills": [],
-  "timeline": []
+  "selected_stills": [
+    {
+      "id": "B04-01",
+      "file": "Nordic_B04_01.png",
+      "sha256": "01a6f56409abefbc830f005004368d6e3401d27ab2049e1a62edd9b045a4e20b"
+    },
+    {
+      "id": "B04-04",
+      "file": "Nordic_B04_04.png",
+      "sha256": "724f2910a48386bcbafdc36a86f05b653f40b873fc74ffb3926e5a0af39291b4"
+    },
+    {
+      "id": "B04-06",
+      "file": "Nordic_B04_06.png",
+      "sha256": "cd1c0cd0ef1f0475a999292d5d40b9bf4b779115634fb3978ede6a00eda4541b"
+    },
+    {
+      "id": "B04-07",
+      "file": "Nordic_B04_07.png",
+      "sha256": "d02ba8a6e64b0dfe2054d98544836b13494c3f71abad5b82a205cd6bc90560b7"
+    }
+  ],
+  "timeline": [],
+  "project": "Nordic (Remastered)",
+  "width": 1280,
+  "height": 720,
+  "film_range_seconds": [
+    79.785,
+    93.368333333
+  ],
+  "source_zip": {
+    "drive_id": "1Mye7HfPyJJELcRROeGc_lgxSS2HSN9Y7",
+    "sandbox_sha256": "2e2a1d59c4ad76d52ceed915abc3565f7622cff8bf8a5cea1b4a334a90a39564",
+    "staged_eight_records_sha256": "a5aa600b644707ffff615cfaeb1776cfea58683806f422883bc46108f886bb55"
+  }
 }
