@@ -31,16 +31,22 @@
       "file": "Nordic_B03_05.png",
       "sha256": "501b8e118f3eb4bb70539df35f2133eacf8c8abe8e437f7f26a8961f1ae5fe7f",
       "role": "city vision opens"
+    },
+    {
+      "id": "B03-09",
+      "file": "Nordic_B03_09.png",
+      "sha256": "454c89d5d3b9a34c73a9579c26883887f02963eeb124ad2fb9e0b80137d6292b",
+      "role": "emissaries and future interface"
     }
   ],
   "timeline": [
     {
       "type": "still",
       "id": "B03-01",
-      "frames": 124,
+      "frames": 115,
       "camera": {
         "zoom_start": 1,
-        "zoom_end": 1.014,
+        "zoom_end": 1.009,
         "center_start": [
           0.5,
           0.5
@@ -61,16 +67,40 @@
     {
       "type": "still",
       "id": "B03-05",
-      "frames": 304,
+      "frames": 115,
       "camera": {
         "zoom_start": 1,
-        "zoom_end": 1.033,
+        "zoom_end": 1.016,
         "center_start": [
           0.5,
           0.5
         ],
         "center_end": [
           0.515,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "transition",
+      "from": "B03-05",
+      "to": "B03-09",
+      "frames": 24,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B03-09",
+      "frames": 174,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.008,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.51,
           0.5
         ]
       }
