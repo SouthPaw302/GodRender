@@ -1,0 +1,204 @@
+name: Nordic B01 Brain FX production proof
+on:
+  push:
+    branches: ['song/nordic-remastered']
+    paths:
+      - 'projects/nordic-remastered/production/B01_BRAIN_FX_MANIFEST.json'
+      - 'projects/nordic-remastered/production/B01_DIRECTOR_FX_AUTHORITY.json'
+      - 'projects/nordic-remastered/production/B01_BRAIN_APPROVED_FX.fx.json'
+      - 'projects/nordic-remastered/production/render_b01_brainfx.py'
+      - '.github/workflows/nordic-b01-brainfx.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: nordic-b01-brainfx-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Fetch exact Main authority for native boot
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          echo "MAIN=$(git rev-parse main)"
+          echo "B01=$(git rev-parse HEAD)"
+      - name: Install FX dependencies
+        run: python -m pip install numpy opencv-python-headless pillow
+      - name: Install FFmpeg
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+      - name: Boot native GodRender OS
+        env:
+          GODRENDER_VALIDATION_MODE: '1'
+        run: python3 godrender_boot.py --offline
+      - name: Prepare exact B01 source package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/input/batch-01"
+          cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/input/Nordic_Remastered.mp3"
+          echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/input/Nordic_Remastered.mp3" | sha256sum -c -
+          cp projects/nordic-remastered/runner_sources/batch-01/NORDIC_B01_*_SOURCE.png "$RUNNER_TEMP/input/batch-01/"
+          cp projects/nordic-remastered/production/B01_BRAIN_FX_MANIFEST.json "$RUNNER_TEMP/input/manifest.json"
+          cp projects/nordic-remastered/production/B01_DIRECTOR_FX_AUTHORITY.json "$RUNNER_TEMP/input/authority.json"
+      - name: Verify Director authority and all 10 source hashes
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])/'input'
+          d=json.loads((root/'manifest.json').read_text())
+          a=json.loads((root/'authority.json').read_text())
+          assert len(d['shots'])==10
+          assert sum(int(x['frames']) for x in d['shots'])==480
+          assert len(a['authorized_existing_fx'])==5
+          for s in d['shots']:
+              p=root/s['image']['path']
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==s['image']['sha256']
+          print('B01 BRAIN SOURCE + DIRECTOR AUTHORITY PASS')
+          PY
+      - name: Compile canonical approved-lane FX lock
+        run: |
+          python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/production/B01_BRAIN_APPROVED_FX.fx.json --lock-out "$RUNNER_TEMP/input/fx.lock.json"
+          python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/production/B01_BRAIN_APPROVED_FX.fx.json --verify-lock "$RUNNER_TEMP/input/fx.lock.json"
+      - name: Build 10-shot matrix
+        id: plan
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ['RUNNER_TEMP'])/'input/manifest.json').read_text())
+          m={'include':[{'shot_id':s['id']} for s in d['shots']]}
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('matrix='+json.dumps(m,separators=(',',':'))+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b01-brain-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input/
+          retention-days: 3
+
+  render-shot:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy opencv-python-headless pillow
+      - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: nordic-b01-brain-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input
+      - name: Verify prepared PASS lock and exact branch bytes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          lock=json.loads((Path(os.environ["RUNNER_TEMP"])/"input/fx.lock.json").read_text())
+          assert lock.get("result")=="PASS"
+          def sha(path):
+              h=hashlib.sha256()
+              with Path(path).open("rb") as f:
+                  for b in iter(lambda:f.read(1<<20),b""): h.update(b)
+              return h.hexdigest()
+          assert sha("projects/nordic-remastered/production/B01_BRAIN_APPROVED_FX.fx.json")==lock["manifest_sha256"]
+          assert sha("general/reusable/fx_v2/registry.json")==lock["registry_sha256"]
+          assert sha("general/reusable/fx_v2/runtime.py")==lock["runtime_sha256"]
+          for rec in lock.get("render_inputs",[]):
+              assert sha(rec["path"])==rec["sha256"], rec["path"]
+          print("PREPARED B01 APPROVED FX LOCK + EXACT BRANCH BYTES PASS")
+          PY
+      - name: Render Brain/repo FX shard
+        run: |
+          python projects/nordic-remastered/production/render_b01_brainfx.py shot \
+            --manifest "$RUNNER_TEMP/input/manifest.json" \
+            --input-root "$RUNNER_TEMP/input" \
+            --shot-id "${{ matrix.shot_id }}" \
+            --authority "$RUNNER_TEMP/input/authority.json" \
+            --out "$RUNNER_TEMP/shot"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: nordic-b01-brain-shot-${{ matrix.shot_id }}
+          path: ${{ runner.temp }}/shot/
+          retention-days: 30
+
+  assemble:
+    needs: [prepare, render-shot]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy opencv-python-headless pillow
+      - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: nordic-b01-brain-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: nordic-b01-brain-shot-*
+          path: ${{ runner.temp }}/shards
+      - name: Restore shard directory names
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])/'shards'
+          for p in list(root.iterdir()):
+              if p.is_dir() and p.name.startswith('nordic-b01-brain-shot-'):
+                  p.rename(root/p.name.removeprefix('nordic-b01-brain-shot-'))
+          PY
+      - name: Assemble exact 480-frame B01 proof
+        run: |
+          python projects/nordic-remastered/production/render_b01_brainfx.py assemble \
+            --manifest "$RUNNER_TEMP/input/manifest.json" \
+            --input-root "$RUNNER_TEMP/input" \
+            --shards "$RUNNER_TEMP/shards" \
+            --authority "$RUNNER_TEMP/input/authority.json" \
+            --out "$RUNNER_TEMP/final"
+          ffprobe -v error -select_streams v:0 -count_frames \
+            -show_entries stream=nb_read_frames,width,height,r_frame_rate \
+            -show_entries format=duration,size -of json \
+            "$RUNNER_TEMP/final/NORDIC_B01_BRAIN_FX_PROOF03_720p.mp4" | tee "$RUNNER_TEMP/final/ffprobe.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'final/ffprobe.json'
+          d=json.loads(p.read_text()); assert int(d['streams'][0]['nb_read_frames'])==480, d
+          dur=float(d['format']['duration']); assert 19.95 <= dur <= 20.05, dur
+          print('B01 EXACT 480-FRAME / 20-SECOND QC PASS')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b01-brainfx-${{ github.run_id }}
+          path: ${{ runner.temp }}/final/
+          retention-days: 30

@@ -36,6 +36,19 @@ class RenderManifestTests(unittest.TestCase):
     def test_duplicate_shot_rejected(self):
         self.data["shots"].append(self.data["shots"][0].copy())
         with self.assertRaises(ValueError):self.load()
+    def test_structured_fx_params_are_accepted(self):
+        self.data["shots"][0]["fx_ids"]=["FX2-MOTION-002","FX2-CAMERA-023"]
+        self.data["shots"][0]["fx"]=[
+            {"id":"FX2-MOTION-002","params":{"roi":[0.45,0.25,1.0,0.70],"strength":0.20}},
+            {"id":"FX2-CAMERA-023","params":{"zoom_start":1.0,"zoom_end":1.018,"easing":"cosine","zoom_cap":1.04}},
+        ]
+        loaded=self.load()
+        self.assertEqual(loaded["shots"][0]["fx"][0]["params"]["strength"],0.20)
+
+    def test_structured_fx_mismatch_fails_closed(self):
+        self.data["shots"][0]["fx"]=[{"id":"FX2-LIGHT-002","params":{}}]
+        with self.assertRaises(ValueError):self.load()
+
     def test_parallel_plan_has_stable_identity(self):
         p=self.root/"plan.json";d=self.load()
         self.assertEqual(plan(d,p)["include"][0]["shot_id"],"first")

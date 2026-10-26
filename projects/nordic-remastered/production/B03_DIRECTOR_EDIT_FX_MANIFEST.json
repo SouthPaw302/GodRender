@@ -1,0 +1,155 @@
+{
+  "schema": "godrender.nordic-b03-director-edit-fx.v1",
+  "project": "Nordic (Remastered)",
+  "batch": "B03",
+  "film_range_seconds": [
+    50.965,
+    69.798333
+  ],
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "total_frames": 452,
+  "source_zip": {
+    "drive_id": "181eUpaePjGd4l53wb_s1j--23PZ6-_6A",
+    "sha256": "156dd5916efc46b148f92a6bbc07ce91271bbff4412b0f4ea4ef22ea37f8c618"
+  },
+  "source_video_b_sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68",
+  "audio": {
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+    "offset_seconds": 50.965
+  },
+  "selected_stills": [
+    {
+      "id": "B03-01",
+      "file": "Nordic_B03_01.png",
+      "sha256": "0636b0dbbb94482f116115869fe813edda97dab25aec6a7f79035a75bb6683c2",
+      "role": "observer and portal threshold"
+    },
+    {
+      "id": "B03-05",
+      "file": "Nordic_B03_05.png",
+      "sha256": "501b8e118f3eb4bb70539df35f2133eacf8c8abe8e437f7f26a8961f1ae5fe7f",
+      "role": "city vision opens"
+    },
+    {
+      "id": "B03-09",
+      "file": "Nordic_B03_09.png",
+      "sha256": "454c89d5d3b9a34c73a9579c26883887f02963eeb124ad2fb9e0b80137d6292b",
+      "role": "emissaries and future interface"
+    },
+    {
+      "id": "B03-10",
+      "file": "Nordic_B03_10.png",
+      "sha256": "f027f3897f3aac4cfceb56b66ce0f0ba5437fd441ae11f17a3dc3ad5bf032e11",
+      "role": "resolved future-city interface with emissaries"
+    }
+  ],
+  "timeline": [
+    {
+      "type": "still",
+      "id": "B03-01",
+      "frames": 64,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.013,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 2.5,
+      "source_end": 4.2,
+      "frames": 41
+    },
+    {
+      "type": "transition",
+      "from": "B03-01",
+      "to": "B03-05",
+      "frames": 22,
+      "fx": "FX2-TRANS-027"
+    },
+    {
+      "type": "still",
+      "id": "B03-05",
+      "frames": 65,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.017,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.515,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 5.3,
+      "source_end": 7,
+      "frames": 41
+    },
+    {
+      "type": "transition",
+      "from": "B03-05",
+      "to": "B03-09",
+      "frames": 22,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B03-09",
+      "frames": 92,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.009,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.51,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 8.1,
+      "source_end": 9,
+      "frames": 22
+    },
+    {
+      "type": "still",
+      "id": "B03-10",
+      "frames": 83,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.017,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
+          0.5
+        ]
+      }
+    }
+  ],
+  "director_rule": "RC2: 452 frames; source-exact Gemini B motion bridges; registered transitions FX2-TRANS-027/025 applied to bridge endpoint and incoming FX-processed still. Extend transitions to 22 frames, zero-weight FX at endpoints; preserve continuous still camera across beat marks 137/263 with no artificial cut. Six-frame easing from still into original video bridge. Protect portal geometry, Observer/emissaries, city topology.",
+  "source_video_b": {
+    "drive_id": "1wpHGl6NgP9XMPbEtasYrqt8sEbQaXFJ8",
+    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+  }
+}

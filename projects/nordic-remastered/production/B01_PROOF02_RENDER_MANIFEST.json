@@ -1,0 +1,588 @@
+{
+  "schema": "godrender.production.v1",
+  "project": "nordic-remastered",
+  "proof": "B01_PROOF02",
+  "width": 854,
+  "height": 480,
+  "fps": 24,
+  "audio": {
+    "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_AUDIO_0-20s.mp3",
+    "sha256": "e2e53e6a70f0ef6c74c5b63e5485e767dd70a57d9af3867cc37ec0ddb3b58d73",
+    "source_master_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "shots": [
+    {
+      "id": "b01_001",
+      "seconds": 1.98,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_001_SOURCE.png",
+        "sha256": "166a6cd1275e9e15239d169ad1b7243438b2c7e2467de9f4e565de1fc435f42b"
+      },
+      "energy": 0.013366,
+      "transient": 0.003126,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.45,
+              0.58,
+              1,
+              0.84
+            ],
+            "strength": 0.08
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.76,
+              0.18
+            ],
+            "strength": 0.2
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.006,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.502,
+              0.498
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        0,
+        1.98
+      ]
+    },
+    {
+      "id": "b01_002",
+      "seconds": 1.98,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_002_SOURCE.png",
+        "sha256": "c774ffe173a6f7152f80b6cc5ec240ffcd87c414e76e45d1d1760e0012a16735"
+      },
+      "energy": 0.185032,
+      "transient": 0.053047,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.45,
+              0.58,
+              1,
+              0.84
+            ],
+            "strength": 0.1
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.74,
+              0.18
+            ],
+            "strength": 0.28
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.008,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.504,
+              0.498
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        1.98,
+        3.96
+      ]
+    },
+    {
+      "id": "b01_003",
+      "seconds": 1.96,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_003_SOURCE.png",
+        "sha256": "536621840d2e024dea01fd071279ebe641f6cf84495ee6916d91d6726f4d4638"
+      },
+      "energy": 0.177515,
+      "transient": 0.041615,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.45,
+              0.6,
+              1,
+              0.84
+            ],
+            "strength": 0.1
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.7,
+              0.17
+            ],
+            "strength": 0.3
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.01,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.505,
+              0.496
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        3.96,
+        5.92
+      ]
+    },
+    {
+      "id": "b01_004",
+      "seconds": 1.96,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_004_SOURCE.png",
+        "sha256": "035d19c17519a754533d665ceb2cdd99b0c2c4c2da623d382f884078b3b92c0a"
+      },
+      "energy": 0.181957,
+      "transient": 0.040631,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.45,
+              0.62,
+              1,
+              0.86
+            ],
+            "strength": 0.1
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.68,
+              0.16
+            ],
+            "strength": 0.31
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.011,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.506,
+              0.496
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        5.92,
+        7.88
+      ]
+    },
+    {
+      "id": "b01_005",
+      "seconds": 1.64,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_005_SOURCE.png",
+        "sha256": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221"
+      },
+      "energy": 0.158913,
+      "transient": 0.045238,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.46,
+              0.64,
+              1,
+              0.88
+            ],
+            "strength": 0.11
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.7,
+              0.16
+            ],
+            "strength": 0.33
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.012,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.506,
+              0.495
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        7.88,
+        9.52
+      ]
+    },
+    {
+      "id": "b01_006",
+      "seconds": 1.98,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_006_SOURCE.png",
+        "sha256": "d99f69a6892f1b8ed4cb9c9f55129eb271c3e7978d203f587287a079b3033ffe"
+      },
+      "energy": 0.142471,
+      "transient": 0.042441,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.46,
+              0.65,
+              1,
+              0.88
+            ],
+            "strength": 0.11
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.72,
+              0.16
+            ],
+            "strength": 0.34
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.012,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.507,
+              0.495
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        9.52,
+        11.5
+      ]
+    },
+    {
+      "id": "b01_007",
+      "seconds": 1.96,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_007_SOURCE.png",
+        "sha256": "8abe34c34a3fcb1e0173a0902639f862cd1d585885478572a4e50d292db9cc2c"
+      },
+      "energy": 0.113572,
+      "transient": 0.036544,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.47,
+              0.66,
+              1,
+              0.89
+            ],
+            "strength": 0.1
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.74,
+              0.15
+            ],
+            "strength": 0.34
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.013,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.507,
+              0.494
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        11.5,
+        13.46
+      ]
+    },
+    {
+      "id": "b01_008",
+      "seconds": 1.96,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_008_SOURCE.png",
+        "sha256": "e9158809c19faf546436d633cc15b574a76f110035d515d11dd27c6ff70e6168"
+      },
+      "energy": 0.170152,
+      "transient": 0.01985,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.48,
+              0.66,
+              1,
+              0.89
+            ],
+            "strength": 0.11
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.75,
+              0.15
+            ],
+            "strength": 0.35
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.014,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.508,
+              0.494
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        13.46,
+        15.42
+      ]
+    },
+    {
+      "id": "b01_009",
+      "seconds": 1.96,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_009_SOURCE.png",
+        "sha256": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55"
+      },
+      "energy": 0.089476,
+      "transient": 0.02022,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.48,
+              0.67,
+              1,
+              0.9
+            ],
+            "strength": 0.09
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.76,
+              0.14
+            ],
+            "strength": 0.33
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.014,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.508,
+              0.493
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        15.42,
+        17.38
+      ]
+    },
+    {
+      "id": "b01_010",
+      "seconds": 2.62,
+      "mode": "still_fx",
+      "image": {
+        "path": "projects/nordic-remastered/media/b01_gemini_extractions/NORDIC_B01_010_SOURCE.png",
+        "sha256": "22acc350bc431b4a67c87f6bce5b43ca2da17de59002b16ffbb1f202715195d4"
+      },
+      "energy": 0.160843,
+      "transient": 0.041881,
+      "base_camera": false,
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.48,
+              0.67,
+              1,
+              0.9
+            ],
+            "strength": 0.12
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.77,
+              0.14
+            ],
+            "strength": 0.38
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.018,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.51,
+              0.492
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ],
+      "source_interval_seconds": [
+        17.38,
+        20
+      ]
+    }
+  ],
+  "human_visual_approval": false,
+  "timing_authority": "projects/nordic-remastered/analysis/DIRECTOR_TIMING_MAP.json",
+  "source_lineage": "Gemini video d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70 -> ten byte-verified extracted keyframes"
+}

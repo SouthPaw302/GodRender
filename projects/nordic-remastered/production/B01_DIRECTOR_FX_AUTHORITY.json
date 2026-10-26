@@ -1,0 +1,47 @@
+{
+  "schema": "godrender.nordic-b01-director-fx-authority.v1",
+  "project": "Nordic (Remastered)",
+  "batch": "B01",
+  "date": "2026-10-24",
+  "scope": "song/nordic-remastered only; does not alter Main or global FX approval",
+  "instruction": "Director explicitly authorizes the existing proven Brain/repo FX below for the real B01 production pass.",
+  "authorized_existing_fx": [
+    {
+      "id": "FX2-ATM-005",
+      "name": "cloud_drift",
+      "registry_gate": "proof_required",
+      "implementation": "general/reusable/fx_v2/living_still_fx.py::cloud_drift"
+    },
+    {
+      "id": "FX2-ATM-006",
+      "name": "star_field",
+      "registry_gate": "proof_required",
+      "implementation": "general/reusable/fx_v2/living_still_fx.py::star_field"
+    },
+    {
+      "id": "FX2-MOTION-001",
+      "name": "depth_parallax",
+      "registry_gate": "proof_required",
+      "implementation": "general/reusable/painterly-motion/hybrid_painterly_fx.py::depth_parallax"
+    },
+    {
+      "id": "FX2-SPATIAL-001",
+      "name": "hybrid_25d",
+      "registry_gate": "proof_required",
+      "implementation": "general/reusable/depth-parallax-25d/depth_parallax_25d.py"
+    },
+    {
+      "id": "FX2-SPATIAL-004",
+      "name": "streaming_living_parallax",
+      "registry_gate": "proof_required",
+      "implementation": "general/reusable/generative-engine/spatial/living_parallax.py"
+    }
+  ],
+  "truth_rules": [
+    "This is a Director production-scope override, not a claim that the canonical registry gate changed.",
+    "The runner must verify the exact implementation paths and hashes at execution.",
+    "Canonical approved FX still execute through FXExecutor.",
+    "All ten B01 source still hashes must verify before rendering.",
+    "Technical PASS never implies human creative acceptance."
+  ]
+}

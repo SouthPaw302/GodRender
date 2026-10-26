@@ -1,0 +1,243 @@
+{
+  "schema": "godrender.nordic-b05-director-edit-fx.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "batch": "B05",
+  "film_range_seconds": [
+    93.368333333,
+    114.32666666633332
+  ],
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "total_frames": 503,
+  "source_zip": {
+    "drive_id": "1-e83xCMPVU3u3Uzs1hDSFBMlSo-aCw0K",
+    "sha256": "e3609729dd069c5f3ef970a27ef9e26d7b0206a07772cd742921030b5b148abe"
+  },
+  "source_video_b": {
+    "drive_id": "1wpHGl6NgP9XMPbEtasYrqt8sEbQaXFJ8",
+    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+  },
+  "audio": {
+    "offset_seconds": 93.368333333,
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "selected_stills": [
+    {
+      "id": "B05-10",
+      "file": "Nordic_B05_10.png",
+      "sha256": "f1a4a382052e48e98cd477bea1f0891708f08cfee901946d32ab898dd1cd5979",
+      "role": "wide witness-to-emissaries establishing panorama",
+      "glow": [
+        [
+          0.795,
+          0.5,
+          0.045,
+          0.09
+        ]
+      ]
+    },
+    {
+      "id": "B05-01",
+      "file": "Nordic_B05_01.png",
+      "sha256": "c893513fa580b6378cab7ef9c41a17bd3c27049486b74072cd1a3d09c34eccaa",
+      "role": "emissary pair first contact",
+      "glow": [
+        [
+          0.27,
+          0.49,
+          0.065,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "B05-05",
+      "file": "Nordic_B05_05.png",
+      "sha256": "81a1001e56038ca5afaa9166c563ebced35ae7ffaca0865c98e7a03e2a708c48",
+      "role": "orb and existing chest interface",
+      "glow": [
+        [
+          0.27,
+          0.49,
+          0.07,
+          0.12
+        ],
+        [
+          0.42,
+          0.76,
+          0.055,
+          0.085
+        ]
+      ]
+    },
+    {
+      "id": "B05-07",
+      "file": "Nordic_B05_07.png",
+      "sha256": "1275f6b1cad57d73d732f77fae83a89494ace9fa3ce926bd4681d946a2c91748",
+      "role": "silent technical communion",
+      "glow": [
+        [
+          0.28,
+          0.49,
+          0.06,
+          0.1
+        ],
+        [
+          0.41,
+          0.7,
+          0.06,
+          0.08
+        ]
+      ]
+    },
+    {
+      "id": "B05-09",
+      "file": "Nordic_B05_09.png",
+      "sha256": "8385d8bfab6aa8a1e31ed684293f2f00dfc6d03a9c531397acaf2f9586a86b02",
+      "role": "emissaries prepare second breath and myth return",
+      "glow": [
+        [
+          0.32,
+          0.47,
+          0.065,
+          0.12
+        ],
+        [
+          0.42,
+          0.65,
+          0.055,
+          0.09
+        ]
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "type": "still",
+      "id": "B05-10",
+      "frames": 64,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.006,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.501,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "cut",
+      "to": "B05-01",
+      "frames": 1
+    },
+    {
+      "type": "still",
+      "id": "B05-01",
+      "frames": 74,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.004,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.501,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 8.4,
+      "frames": 9,
+      "crop_to": "B05-01"
+    },
+    {
+      "type": "transition",
+      "to": "B05-05",
+      "frames": 16,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B05-05",
+      "frames": 68,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.503,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 8.833333,
+      "frames": 11,
+      "crop_to": "B05-05"
+    },
+    {
+      "type": "transition",
+      "to": "B05-07",
+      "frames": 16,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B05-07",
+      "frames": 70,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.005,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.499,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "cut",
+      "to": "B05-09",
+      "frames": 1
+    },
+    {
+      "type": "still",
+      "id": "B05-09",
+      "frames": 47,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.003,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "quiet_breath",
+      "id": "B05-09",
+      "frames": 126
+    }
+  ],
+  "director_rule": "B05 intelligent emissary interactions. 5 verified hero stills, original 24fps Gemini motion in 2 unrepeated segments cropped to source-locked coordinates, 2 memory transitions limited to existing orb/interface ROIs with protection for emissary faces. One-frame deliberate editorial cuts. At local frame 377 (global 109.076667s) reduce to one quiet 126-frame interface hold. No global master FX or replacement sources."
+}

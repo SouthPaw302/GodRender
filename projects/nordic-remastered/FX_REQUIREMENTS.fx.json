@@ -1,0 +1,51 @@
+{
+  "project": "nordic-remastered-b01-runner-proof",
+  "runtime": "aivideoedit-fx-v2",
+  "seed": 302,
+  "effects": [
+    {
+      "id": "FX2-MOTION-002",
+      "strength": 0.18,
+      "roi": [
+        0.45,
+        0.22,
+        1,
+        0.79
+      ]
+    },
+    {
+      "id": "FX2-LIGHT-002",
+      "strength": 0.42,
+      "origin": [
+        0.66,
+        0.18
+      ]
+    },
+    {
+      "id": "FX2-CAMERA-023",
+      "params": {
+        "zoom_start": 1,
+        "zoom_end": 1.022,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.507,
+          0.492
+        ],
+        "easing": "cosine",
+        "zoom_cap": 1.04
+      }
+    }
+  ],
+  "transitions": [],
+  "render_inputs": [
+    "render/godrender_runtime.py",
+    "general/reusable/fx_v2/executor.py",
+    "general/reusable/fx_v2/runtime.py",
+    "general/reusable/fx_v2/promoted_effects.py",
+    "projects/nordic-remastered/production/B01_RUNNER_PROOF_MANIFEST.json",
+    "projects/nordic-remastered/analysis/DIRECTOR_TIMING_MAP.json"
+  ]
+}

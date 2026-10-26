@@ -1,0 +1,22 @@
+{
+  "schema": "godrender.nordic.director-fx-override.v1",
+  "project": "Nordic (Remastered)",
+  "batch": "B01",
+  "branch": "song/nordic-remastered",
+  "authority": "director_user_explicit",
+  "authorized_on": "2026-10-24",
+  "statement": "Director explicitly declared these existing repository FX proven and authorized them for Nordic B01. This is project-scoped authority and does not promote their global Main registry gate.",
+  "effects": [
+    {"id":"FX2-ATM-005","name":"cloud_drift","registry_gate":"proof_required","scope":"Nordic B01 only"},
+    {"id":"FX2-ATM-006","name":"star_field","registry_gate":"proof_required","scope":"Nordic B01 only"},
+    {"id":"FX2-MOTION-001","name":"depth_parallax","registry_gate":"proof_required","scope":"Nordic B01 only"},
+    {"id":"FX2-SPATIAL-001","name":"hybrid_25d","registry_gate":"proof_required","scope":"Nordic B01 only"},
+    {"id":"FX2-SPATIAL-004","name":"streaming_living_parallax","registry_gate":"proof_required","scope":"Nordic B01 only"}
+  ],
+  "rules": [
+    "Do not modify Main registry gate status.",
+    "Use exact repository implementations and record exact source commit in receipts.",
+    "Protect Observer identity and cliff/horizon geometry.",
+    "Technical PASS never implies creative acceptance."
+  ]
+}
