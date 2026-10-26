@@ -79,16 +79,27 @@ def read_video_frames(path,start,count,crop):
     return out
 
 def transition_frames(fx,a,b,rois,count):
-    # RC2: protected identity match-cut, never dissolve a face or body.
-    out=[]; glow=glow_mask(a.shape,rois)
+    # RC3: source-orb-centred reveal. Every subject pixel comes from one
+    # original source or the other; never double-expose faces or alter geometry.
+    h,w=a.shape[:2]
+    cx,cy=(rois[0][0],rois[0][1]) if rois else (.30,.49)
+    yy,xx=np.ogrid[:h,:w]
+    radius_map=np.sqrt((xx-cx*w)**2+(yy-cy*h)**2)
+    maximum=max(np.hypot(x-cx*w,y-cy*h) for x,y in ((0,0),(w,0),(w,h),(0,h)))
+    glow=glow_mask(a.shape,rois)
+    faces=face_mask(a.shape)
+    out=[]
     for i in range(count):
         p=ease((i+1)/(count+1))
         ctx=FXContext(t=i/24,duration=count/24,frame_index=i,fps=24,energy=.24,transient=.08)
         registered=fx.apply_transition("FX2-TRANS-025",a,b,p,ctx)
-        # The hologram carries memory. Faces, bodies, and architecture cut as a clean unit.
-        base=a.copy() if p<.5 else b.copy()
-        local=blend(blend(a,b,p),registered,.26*np.sin(np.pi*p)**2)
-        out.append(blend(base,local,glow*.44))
+        r=p*(maximum+45)-20
+        reveal=np.clip((r-radius_map+8)/16,0,1).astype(np.float32)[...,None]
+        # Clean expansion out of the authored orb; 16px feather solely at
+        # the moving reveal edge. Faces never receive a blended double image.
+        base=blend(a,b,reveal)
+        memory_region=glow*(1-faces)*(.11*np.sin(np.pi*p)**2)
+        out.append(blend(base,registered,memory_region))
     return out
 
 def render(args):
@@ -144,7 +155,7 @@ def render(args):
     final=out/"NORDIC_B05_DIRECTOR_EDIT_FX_720p.mp4"; dur=503/24
     mux=subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-nostdin","-y","-i",str(silent),"-ss",str(manifest["audio"]["offset_seconds"]),"-i",str(args.audio),"-map","0:v:0","-map","1:a:0","-t",f"{dur:.9f}","-c:v","copy","-c:a","aac","-b:a","192k","-movflags","+faststart",str(final)],capture_output=True,text=True)
     if mux.returncode: raise RuntimeError(mux.stderr[-2000:])
-    rec={"schema":"godrender.nordic-b05-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B05","frames":503,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[8.4,9],[8.833333,11]],"transition_fx":["FX2-TRANS-025"],"localized_motion_fx":"FX2-MOTION-002","interface_only":True,"camera_fx":["FX2-CAMERA-023"],"second_breath_at_batch_frame":377,"film_sha256":sha(final),"film_bytes":final.stat().st_size,"director_rc":"RC2_PROTECTED_IDENTITY_CLEAN_INTERFACE_MATCHCUT","source_boundary_easing_frames":6}
+    rec={"schema":"godrender.nordic-b05-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B05","frames":503,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[8.4,9],[8.833333,11]],"transition_fx":["FX2-TRANS-025"],"localized_motion_fx":"FX2-MOTION-002","interface_only":True,"camera_fx":["FX2-CAMERA-023"],"second_breath_at_batch_frame":377,"film_sha256":sha(final),"film_bytes":final.stat().st_size,"director_rc":"RC3_ORB_LOCAL_REVEAL_FACE_SAFE","source_boundary_easing_frames":6}
     (out/"render_receipt.json").write_text(json.dumps(rec,indent=2)+"\n"); print(json.dumps(rec))
 
 if __name__=="__main__":
