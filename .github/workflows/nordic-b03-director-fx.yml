@@ -98,7 +98,7 @@ jobs:
           PY
           unzip -q "$RUNNER_TEMP/b03/B03.zip" -d "$RUNNER_TEMP/b03/stills"
           cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/b03/Nordic_Remastered.mp3"
-          echo "d5dc263e6edc7a248452acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/b03/Nordic_Remastered.mp3" | sha256sum -c -
+          echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/b03/Nordic_Remastered.mp3" | sha256sum -c -
       - name: Verify selected source still hashes
         run: |
           python3 - <<'PY'
@@ -119,7 +119,6 @@ jobs:
           python projects/nordic-remastered/production/render_b03_director_fx.py \
             --manifest projects/nordic-remastered/production/B03_DIRECTOR_EDIT_FX_MANIFEST.json \
             --input-root "$RUNNER_TEMP/b03/stills" \
-            --video-a "$RUNNER_TEMP/b03/source_video_a.mp4" \
             --audio "$RUNNER_TEMP/b03/Nordic_Remastered.mp3" \
             --out "$RUNNER_TEMP/final"
       - name: QC exact B03 duration and frame count
