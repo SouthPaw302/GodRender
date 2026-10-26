@@ -8,7 +8,8 @@
     "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
   },
   "source_video_b": {
-    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68",
+    "drive_id": "1wpHGl6NgP9XMPbEtasYrqt8sEbQaXFJ8"
   },
   "selected_stills": [
     {
@@ -32,7 +33,129 @@
       "sha256": "d02ba8a6e64b0dfe2054d98544836b13494c3f71abad5b82a205cd6bc90560b7"
     }
   ],
-  "timeline": [],
+  "timeline": [
+    {
+      "type": "still",
+      "id": "B04-01",
+      "frames": 40,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.009,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.502,
+          0.5
+        ]
+      },
+      "fx": []
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 5,
+      "source_end": 5.75,
+      "frames": 18
+    },
+    {
+      "type": "transition",
+      "from": "B04-01",
+      "to": "B04-04",
+      "frames": 18,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B04-04",
+      "frames": 38,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.012,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.506,
+          0.5
+        ]
+      },
+      "fx": [
+        "FX2-CAMERA-021"
+      ]
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 6.05,
+      "source_end": 6.758333,
+      "frames": 17
+    },
+    {
+      "type": "transition",
+      "from": "B04-04",
+      "to": "B04-06",
+      "frames": 18,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B04-06",
+      "frames": 38,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.497,
+          0.5
+        ]
+      },
+      "fx": []
+    },
+    {
+      "type": "source_video_bridge",
+      "source_start": 6.75,
+      "source_end": 7.5,
+      "frames": 18
+    },
+    {
+      "type": "transition",
+      "from": "B04-06",
+      "to": "B04-07",
+      "frames": 16,
+      "fx": "FX2-TRANS-025"
+    },
+    {
+      "type": "still",
+      "id": "B04-07",
+      "frames": 42,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.5
+        ]
+      },
+      "fx": [
+        "FX2-SPATIAL-021"
+      ]
+    },
+    {
+      "type": "clean_breath",
+      "id": "B04-07",
+      "frames": 63,
+      "fx": []
+    }
+  ],
   "project": "Nordic (Remastered)",
   "width": 1280,
   "height": 720,
@@ -43,6 +166,8 @@
   "source_zip": {
     "drive_id": "1Mye7HfPyJJELcRROeGc_lgxSS2HSN9Y7",
     "sandbox_sha256": "2e2a1d59c4ad76d52ceed915abc3565f7622cff8bf8a5cea1b4a334a90a39564",
-    "staged_eight_records_sha256": "a5aa600b644707ffff615cfaeb1776cfea58683806f422883bc46108f886bb55"
-  }
+    "staged_eight_records_sha256": "a5aa600b644707ffff615cfaeb1776cfea58683806f422883bc46108f886bb55",
+    "sha256": "2e2a1d59c4ad76d52ceed915abc3565f7622cff8bf8a5cea1b4a334a90a39564"
+  },
+  "director_rule": "City revelation: protected original frames, real source video bridges, bounded world-only spatial FX, restrained city light, three FX2-TRANS-025 handoffs, at absolute 90.743333s (local frame263) enter clean 63-frame musical break with no additional effects. No AI-invented coverage or master FX until assembly."
 }
