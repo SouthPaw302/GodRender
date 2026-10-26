@@ -67,8 +67,10 @@ def transition_frames(fx,a,b,effect,count):
         p=ease((i+1)/(count+1))
         ctx=FXContext(t=i/24,duration=count/24,frame_index=i,fps=24,energy=.32,transient=.12)
         tr=fx.apply_transition(effect,a,b,p,ctx)
-        tr=cv2.addWeighted(tr,.78,blend(a,b,p),.22,0)
-        out.append(tr)
+        baseline=blend(a,b,p)
+        # Registered FX is strongest in the middle, with exact source-boundary continuity.
+        fx_weight=float(.42*np.sin(np.pi*p)**2)
+        out.append(blend(baseline,tr,fx_weight))
     return out
 
 def render(args):
@@ -77,15 +79,27 @@ def render(args):
     if sum(int(x["frames"]) for x in manifest["timeline"])!=452: raise RuntimeError("timeline must be 452 frames")
     if sha(args.video_b)!=manifest["source_video_b"]["sha256"]: raise RuntimeError("B03 original Gemini B video SHA mismatch")
     stills=load_stills(manifest,args.input_root); fx=FXExecutor(consumer="nordic_b03_director_edit_fx"); frames=[]
-    for seg in manifest["timeline"]:
+    for k,seg in enumerate(manifest["timeline"]):
         n=int(seg["frames"])
         if seg["type"]=="still":
             im=stills[seg["id"]]
             frames += [still_frame(fx,im,i,n,seg["camera"],seg.get("fx",[])) for i in range(n)]
         elif seg["type"]=="source_video_bridge":
-            frames += read_video_frames(args.video_b,float(seg["source_start"]),float(seg["source_end"]),n)
+            motion=read_video_frames(args.video_b,float(seg["source_start"]),float(seg["source_end"]),n)
+            if frames:
+                anchor=frames[-1].copy()
+                for i in range(min(6,len(motion))):
+                    alpha=ease((i+1)/6)
+                    motion[i]=blend(anchor,motion[i],alpha)
+            frames += motion
         elif seg["type"]=="transition":
-            frames += transition_frames(fx,stills[seg["from"]],stills[seg["to"]],seg["fx"],n)
+            if not frames or k+1>=len(manifest["timeline"]):
+                raise RuntimeError("B03 transition requires adjacent source media")
+            next_seg=manifest["timeline"][k+1]
+            if next_seg["type"]!="still" or next_seg["id"]!=seg["to"]:
+                raise RuntimeError("B03 transition target not next canonical still")
+            anchor=still_frame(fx,stills[seg["to"]],0,int(next_seg["frames"]),next_seg["camera"],next_seg.get("fx",[]))
+            frames += transition_frames(fx,frames[-1],anchor,seg["fx"],n)
         else: raise RuntimeError("unknown segment "+seg["type"])
     if len(frames)!=452: raise RuntimeError(f"render frame count {len(frames)}")
     out=Path(args.out); out.mkdir(parents=True,exist_ok=True); silent=out/"b03_silent.mp4"
@@ -97,7 +111,7 @@ def render(args):
     final=out/"NORDIC_B03_DIRECTOR_EDIT_FX_720p.mp4"; dur=452/24
     mux=subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-nostdin","-y","-i",str(silent),"-ss",str(manifest["audio"]["offset_seconds"]),"-i",str(args.audio),"-map","0:v:0","-map","1:a:0","-t",f"{dur:.9f}","-c:v","copy","-c:a","aac","-b:a","192k","-movflags","+faststart",str(final)],capture_output=True,text=True)
     if mux.returncode: raise RuntimeError(mux.stderr[-2000:])
-    rec={"schema":"godrender.nordic-b03-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B03","frames":452,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[2.5,4.2],[5.3,7.0],[8.1,9.0]],"transition_fx":["FX2-TRANS-027","FX2-TRANS-025"],"camera_fx":"FX2-CAMERA-023","film_sha256":sha(final),"film_bytes":final.stat().st_size}
+    rec={"schema":"godrender.nordic-b03-director-edit-fx.receipt.v1","status":"TECHNICAL_RENDER_PASS_DIRECTOR_REVIEW_REQUIRED","batch":"B03","frames":452,"fps":24,"duration_seconds":dur,"selected_stills":[x["id"] for x in manifest["selected_stills"]],"source_video_bridges":[[2.5,4.2],[5.3,7.0],[8.1,9.0]],"transition_fx":["FX2-TRANS-027","FX2-TRANS-025"],"camera_fx":"FX2-CAMERA-023","film_sha256":sha(final),"film_bytes":final.stat().st_size,"director_rc":"RC2_BOUNDARY_ANCHORED_FX_TRANSITIONS","source_boundary_easing_frames":6}
     (out/"render_receipt.json").write_text(json.dumps(rec,indent=2)+"\n"); print(json.dumps(rec))
 
 if __name__=="__main__":

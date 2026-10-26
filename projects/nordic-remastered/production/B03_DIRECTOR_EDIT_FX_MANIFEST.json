@@ -73,30 +73,13 @@
       "type": "transition",
       "from": "B03-01",
       "to": "B03-05",
-      "frames": 12,
+      "frames": 22,
       "fx": "FX2-TRANS-027"
     },
     {
       "type": "still",
       "id": "B03-05",
-      "frames": 20,
-      "camera": {
-        "zoom_start": 1,
-        "zoom_end": 1.008,
-        "center_start": [
-          0.5,
-          0.5
-        ],
-        "center_end": [
-          0.506,
-          0.5
-        ]
-      }
-    },
-    {
-      "type": "still",
-      "id": "B03-05",
-      "frames": 63,
+      "frames": 65,
       "camera": {
         "zoom_start": 1,
         "zoom_end": 1.017,
@@ -105,7 +88,7 @@
           0.5
         ],
         "center_end": [
-          0.506,
+          0.515,
           0.5
         ]
       }
@@ -120,30 +103,13 @@
       "type": "transition",
       "from": "B03-05",
       "to": "B03-09",
-      "frames": 12,
+      "frames": 22,
       "fx": "FX2-TRANS-025"
     },
     {
       "type": "still",
       "id": "B03-09",
-      "frames": 10,
-      "camera": {
-        "zoom_start": 1,
-        "zoom_end": 1.004,
-        "center_start": [
-          0.5,
-          0.5
-        ],
-        "center_end": [
-          0.506,
-          0.5
-        ]
-      }
-    },
-    {
-      "type": "still",
-      "id": "B03-09",
-      "frames": 84,
+      "frames": 92,
       "camera": {
         "zoom_start": 1,
         "zoom_end": 1.009,
@@ -152,7 +118,7 @@
           0.5
         ],
         "center_end": [
-          0.506,
+          0.51,
           0.5
         ]
       }
@@ -181,7 +147,7 @@
       }
     }
   ],
-  "director_rule": "Three lyric/ONNX-aligned acts of 137/126/189 frames. Use exact Gemini B original-speed 24fps motion at 2.5-4.2,5.3-7.0,8.1-9.0 with authored still holds and only approved FX. Protect Observer, portal geometry, emissary identities, city topology. Review proof before gate promotion.",
+  "director_rule": "RC2: 452 frames; source-exact Gemini B motion bridges; registered transitions FX2-TRANS-027/025 applied to bridge endpoint and incoming FX-processed still. Extend transitions to 22 frames, zero-weight FX at endpoints; preserve continuous still camera across beat marks 137/263 with no artificial cut. Six-frame easing from still into original video bridge. Protect portal geometry, Observer/emissaries, city topology.",
   "source_video_b": {
     "drive_id": "1wpHGl6NgP9XMPbEtasYrqt8sEbQaXFJ8",
     "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
