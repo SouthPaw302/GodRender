@@ -1,0 +1,15 @@
+{
+  "schema": "godrender.nordic-b04-director-edit-fx.v1",
+  "batch": "B04",
+  "fps": 24,
+  "total_frames": 326,
+  "audio": {
+    "offset_seconds": 79.785,
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "source_video_b": {
+    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+  },
+  "selected_stills": [],
+  "timeline": []
+}
