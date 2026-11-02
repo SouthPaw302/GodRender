@@ -1,0 +1,700 @@
+{
+  "schema": "godrender.production.v1",
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "audio": {
+    "path": "Nordic_Remastered.mp3",
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "human_visual_approval": false,
+  "shots": [
+    {
+      "id": "b01p3_001",
+      "frames": 48,
+      "seconds": 2,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_001_SOURCE.png",
+        "sha256": "166a6cd1275e9e15239d169ad1b7243438b2c7e2467de9f4e565de1fc435f42b"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_002_SOURCE.png",
+        "sha256": "c774ffe173a6f7152f80b6cc5ec240ffcd87c414e76e45d1d1760e0012a16735"
+      },
+      "depth_mode": "old_depth_parallax",
+      "protect_box": [
+        0.05,
+        0.18,
+        0.46,
+        1
+      ],
+      "fx_ids": [
+        "FX2-MOTION-001",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-ATM-021"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-021",
+          "params": {}
+        }
+      ],
+      "energy": 0.013366,
+      "transient": 0.003126,
+      "transition_fraction": 0,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.67
+      ],
+      "star_strength": 0.18,
+      "cloud_strength": 0.11,
+      "light_origin": [
+        0.74,
+        0.18
+      ],
+      "light_strength": 0.18,
+      "depth_amount": 3,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_002",
+      "frames": 48,
+      "seconds": 2,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_002_SOURCE.png",
+        "sha256": "c774ffe173a6f7152f80b6cc5ec240ffcd87c414e76e45d1d1760e0012a16735"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_003_SOURCE.png",
+        "sha256": "536621840d2e024dea01fd071279ebe641f6cf84495ee6916d91d6726f4d4638"
+      },
+      "depth_mode": "old_depth_parallax",
+      "protect_box": [
+        0.08,
+        0.18,
+        0.49,
+        1
+      ],
+      "fx_ids": [
+        "FX2-MOTION-001",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-TRANS-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-TRANS-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0.24,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.67
+      ],
+      "star_strength": 0.2,
+      "cloud_strength": 0.12,
+      "light_origin": [
+        0.72,
+        0.18
+      ],
+      "light_strength": 0.2,
+      "depth_amount": 3.2,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_003",
+      "frames": 63,
+      "seconds": 2.625,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_003_SOURCE.png",
+        "sha256": "536621840d2e024dea01fd071279ebe641f6cf84495ee6916d91d6726f4d4638"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_004_SOURCE.png",
+        "sha256": "035d19c17519a754533d665ceb2cdd99b0c2c4c2da623d382f884078b3b92c0a"
+      },
+      "depth_mode": "streaming_living_parallax",
+      "protect_box": [
+        0.04,
+        0.28,
+        0.46,
+        1
+      ],
+      "fx_ids": [
+        "FX2-SPATIAL-004",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002"
+      ],
+      "fx": [
+        {
+          "id": "FX2-SPATIAL-004",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.25,
+      "cloud_strength": 0.14,
+      "light_origin": [
+        0.61,
+        0.16
+      ],
+      "light_strength": 0.23,
+      "depth_amount": 0,
+      "streaming_strength": 0.013,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_004",
+      "frames": 70,
+      "seconds": 2.9166666666666665,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_004_SOURCE.png",
+        "sha256": "035d19c17519a754533d665ceb2cdd99b0c2c4c2da623d382f884078b3b92c0a"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_005_SOURCE.png",
+        "sha256": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221"
+      },
+      "depth_mode": "streaming_living_parallax",
+      "protect_box": [
+        0.06,
+        0.32,
+        0.48,
+        1
+      ],
+      "fx_ids": [
+        "FX2-SPATIAL-004",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-LIGHT-025",
+        "FX2-TRANS-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-SPATIAL-004",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-025",
+          "params": {}
+        },
+        {
+          "id": "FX2-TRANS-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0.22,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.28,
+      "cloud_strength": 0.16,
+      "light_origin": [
+        0.63,
+        0.15
+      ],
+      "light_strength": 0.26,
+      "depth_amount": 0,
+      "streaming_strength": 0.015,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_005",
+      "frames": 63,
+      "seconds": 2.625,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_005_SOURCE.png",
+        "sha256": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_006_SOURCE.png",
+        "sha256": "d99f69a6892f1b8ed4cb9c9f55129eb271c3e7978d203f587287a079b3033ffe"
+      },
+      "depth_mode": "hybrid_25d",
+      "protect_box": [
+        0,
+        0.43,
+        0.46,
+        1
+      ],
+      "fx_ids": [
+        "FX2-SPATIAL-001",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-LIGHT-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-SPATIAL-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.33,
+      "cloud_strength": 0.18,
+      "light_origin": [
+        0.54,
+        0.18
+      ],
+      "light_strength": 0.29,
+      "depth_amount": 0,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 3.8
+    },
+    {
+      "id": "b01p3_006",
+      "frames": 63,
+      "seconds": 2.625,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_006_SOURCE.png",
+        "sha256": "d99f69a6892f1b8ed4cb9c9f55129eb271c3e7978d203f587287a079b3033ffe"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_007_SOURCE.png",
+        "sha256": "8abe34c34a3fcb1e0173a0902639f862cd1d585885478572a4e50d292db9cc2c"
+      },
+      "depth_mode": "hybrid_25d",
+      "protect_box": [
+        0,
+        0.47,
+        0.48,
+        1
+      ],
+      "fx_ids": [
+        "FX2-SPATIAL-001",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-TRANS-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-SPATIAL-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-TRANS-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0.23,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.36,
+      "cloud_strength": 0.18,
+      "light_origin": [
+        0.58,
+        0.18
+      ],
+      "light_strength": 0.31,
+      "depth_amount": 0,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 4.2
+    },
+    {
+      "id": "b01p3_007",
+      "frames": 63,
+      "seconds": 2.625,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_007_SOURCE.png",
+        "sha256": "8abe34c34a3fcb1e0173a0902639f862cd1d585885478572a4e50d292db9cc2c"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_008_SOURCE.png",
+        "sha256": "e9158809c19faf546436d633cc15b574a76f110035d515d11dd27c6ff70e6168"
+      },
+      "depth_mode": "old_depth_parallax",
+      "protect_box": [
+        0,
+        0.5,
+        0.46,
+        1
+      ],
+      "fx_ids": [
+        "FX2-MOTION-001",
+        "FX2-ATM-005",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-LIGHT-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-005",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.4,
+      "cloud_strength": 0.15,
+      "light_origin": [
+        0.6,
+        0.19
+      ],
+      "light_strength": 0.34,
+      "depth_amount": 3.6,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_008",
+      "frames": 21,
+      "seconds": 0.875,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_008_SOURCE.png",
+        "sha256": "e9158809c19faf546436d633cc15b574a76f110035d515d11dd27c6ff70e6168"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_009_SOURCE.png",
+        "sha256": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55"
+      },
+      "depth_mode": "old_depth_parallax",
+      "protect_box": [
+        0,
+        0.48,
+        0.45,
+        1
+      ],
+      "fx_ids": [
+        "FX2-MOTION-001",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-LIGHT-025",
+        "FX2-TRANS-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-025",
+          "params": {}
+        },
+        {
+          "id": "FX2-TRANS-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0.24,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.44,
+      "cloud_strength": 0,
+      "light_origin": [
+        0.62,
+        0.18
+      ],
+      "light_strength": 0.36,
+      "depth_amount": 3.1,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_009",
+      "frames": 21,
+      "seconds": 0.875,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_009_SOURCE.png",
+        "sha256": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55"
+      },
+      "next_image": {
+        "path": "batch-01/NORDIC_B01_010_SOURCE.png",
+        "sha256": "22acc350bc431b4a67c87f6bce5b43ca2da17de59002b16ffbb1f202715195d4"
+      },
+      "depth_mode": "streaming_living_parallax",
+      "protect_box": [
+        0,
+        0.51,
+        0.43,
+        1
+      ],
+      "fx_ids": [
+        "FX2-SPATIAL-004",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-LIGHT-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-SPATIAL-004",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.48,
+      "cloud_strength": 0,
+      "light_origin": [
+        0.64,
+        0.17
+      ],
+      "light_strength": 0.38,
+      "depth_amount": 0,
+      "streaming_strength": 0.017,
+      "hybrid_amplitude": 0
+    },
+    {
+      "id": "b01p3_010",
+      "frames": 20,
+      "seconds": 0.8333333333333334,
+      "mode": "still_fx",
+      "base_camera": false,
+      "image": {
+        "path": "batch-01/NORDIC_B01_010_SOURCE.png",
+        "sha256": "22acc350bc431b4a67c87f6bce5b43ca2da17de59002b16ffbb1f202715195d4"
+      },
+      "next_image": null,
+      "depth_mode": "hybrid_25d",
+      "protect_box": [
+        0,
+        0.52,
+        0.42,
+        1
+      ],
+      "fx_ids": [
+        "FX2-SPATIAL-001",
+        "FX2-ATM-006",
+        "FX2-LIGHT-002",
+        "FX2-LIGHT-025"
+      ],
+      "fx": [
+        {
+          "id": "FX2-SPATIAL-001",
+          "params": {}
+        },
+        {
+          "id": "FX2-ATM-006",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {}
+        },
+        {
+          "id": "FX2-LIGHT-025",
+          "params": {}
+        }
+      ],
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "transition_fraction": 0,
+      "sky_roi": [
+        0,
+        0,
+        1,
+        0.76
+      ],
+      "star_strength": 0.52,
+      "cloud_strength": 0,
+      "light_origin": [
+        0.58,
+        0.18
+      ],
+      "light_strength": 0.4,
+      "depth_amount": 0,
+      "streaming_strength": 0,
+      "hybrid_amplitude": 4
+    }
+  ]
+}

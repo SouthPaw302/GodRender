@@ -1,0 +1,233 @@
+{
+  "schema": "godrender.nordic-b01-brain-fx-plan.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "total_frames": 480,
+  "audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "director_authorized_proven_fx": [
+    {
+      "id": "FX2-ATM-005",
+      "name": "cloud_drift",
+      "registry_gate": "proof_required",
+      "scope": "Nordic B01 only"
+    },
+    {
+      "id": "FX2-ATM-006",
+      "name": "star_field",
+      "registry_gate": "proof_required",
+      "scope": "Nordic B01 only"
+    },
+    {
+      "id": "FX2-MOTION-001",
+      "name": "depth_parallax",
+      "registry_gate": "proof_required",
+      "scope": "Nordic B01 only"
+    },
+    {
+      "id": "FX2-SPATIAL-001",
+      "name": "hybrid_25d",
+      "registry_gate": "proof_required",
+      "scope": "authorized but not required; use only if identity-safe"
+    },
+    {
+      "id": "FX2-SPATIAL-004",
+      "name": "streaming_living_parallax",
+      "registry_gate": "proof_required",
+      "scope": "Nordic B01 only; synthetic depth fallback must remain labeled"
+    }
+  ],
+  "production_approved_fx": [
+    "FX2-LIGHT-002",
+    "FX2-ATM-021",
+    "FX2-LIGHT-025",
+    "FX2-TRANS-025",
+    "FX2-CAMERA-023"
+  ],
+  "protections": [
+    "Observer face",
+    "beard/hair silhouette",
+    "hands/body geometry",
+    "cliff foreground",
+    "horizon",
+    "major constellation geometry"
+  ],
+  "frame_boundaries": [
+    0,
+    48,
+    95,
+    158,
+    228,
+    291,
+    354,
+    417,
+    438,
+    459,
+    480
+  ],
+  "shots": [
+    {
+      "id": "b01_001",
+      "file": "NORDIC_B01_001_SOURCE.png",
+      "sha256": "166a6cd1275e9e15239d169ad1b7243438b2c7e2467de9f4e565de1fc435f42b",
+      "frames": 48,
+      "cloud": 0.18,
+      "stars": 0.18,
+      "depth": "none",
+      "light": 0.1,
+      "fog": 0.04,
+      "grade": 0,
+      "camera": false,
+      "transition": "none"
+    },
+    {
+      "id": "b01_002",
+      "file": "NORDIC_B01_002_SOURCE.png",
+      "sha256": "c774ffe173a6f7152f80b6cc5ec240ffcd87c414e76e45d1d1760e0012a16735",
+      "frames": 47,
+      "cloud": 0.2,
+      "stars": 0.22,
+      "depth": "old",
+      "depth_amount": 1.5,
+      "light": 0.12,
+      "fog": 0.05,
+      "grade": 0,
+      "camera": false,
+      "transition": "ghost",
+      "transition_frames": 8
+    },
+    {
+      "id": "b01_003",
+      "file": "NORDIC_B01_003_SOURCE.png",
+      "sha256": "536621840d2e024dea01fd071279ebe641f6cf84495ee6916d91d6726f4d4638",
+      "frames": 63,
+      "cloud": 0.22,
+      "stars": 0.28,
+      "depth": "old",
+      "depth_amount": 1.8,
+      "light": 0.15,
+      "fog": 0.06,
+      "grade": 0.04,
+      "camera": false,
+      "transition": "none"
+    },
+    {
+      "id": "b01_004",
+      "file": "NORDIC_B01_004_SOURCE.png",
+      "sha256": "035d19c17519a754533d665ceb2cdd99b0c2c4c2da623d382f884078b3b92c0a",
+      "frames": 70,
+      "cloud": 0.22,
+      "stars": 0.34,
+      "depth": "old",
+      "depth_amount": 2,
+      "light": 0.18,
+      "fog": 0.07,
+      "grade": 0.05,
+      "camera": true,
+      "zoom_end": 1.008,
+      "transition": "ghost",
+      "transition_frames": 10
+    },
+    {
+      "id": "b01_005",
+      "file": "NORDIC_B01_005_SOURCE.png",
+      "sha256": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221",
+      "frames": 63,
+      "cloud": 0.2,
+      "stars": 0.38,
+      "depth": "streaming",
+      "depth_amount": 0.006,
+      "light": 0.2,
+      "fog": 0.07,
+      "grade": 0.06,
+      "camera": false,
+      "transition": "none"
+    },
+    {
+      "id": "b01_006",
+      "file": "NORDIC_B01_006_SOURCE.png",
+      "sha256": "d99f69a6892f1b8ed4cb9c9f55129eb271c3e7978d203f587287a079b3033ffe",
+      "frames": 63,
+      "cloud": 0.18,
+      "stars": 0.42,
+      "depth": "streaming",
+      "depth_amount": 0.0065,
+      "light": 0.22,
+      "fog": 0.06,
+      "grade": 0.07,
+      "camera": false,
+      "transition": "ghost",
+      "transition_frames": 10
+    },
+    {
+      "id": "b01_007",
+      "file": "NORDIC_B01_007_SOURCE.png",
+      "sha256": "8abe34c34a3fcb1e0173a0902639f862cd1d585885478572a4e50d292db9cc2c",
+      "frames": 63,
+      "cloud": 0.14,
+      "stars": 0.46,
+      "depth": "old",
+      "depth_amount": 1.6,
+      "light": 0.24,
+      "fog": 0.05,
+      "grade": 0.08,
+      "camera": false,
+      "transition": "none"
+    },
+    {
+      "id": "b01_008",
+      "file": "NORDIC_B01_008_SOURCE.png",
+      "sha256": "e9158809c19faf546436d633cc15b574a76f110035d515d11dd27c6ff70e6168",
+      "frames": 21,
+      "cloud": 0.1,
+      "stars": 0.5,
+      "depth": "none",
+      "light": 0.26,
+      "fog": 0.04,
+      "grade": 0.09,
+      "camera": false,
+      "transition": "ghost",
+      "transition_frames": 6
+    },
+    {
+      "id": "b01_009",
+      "file": "NORDIC_B01_009_SOURCE.png",
+      "sha256": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55",
+      "frames": 21,
+      "cloud": 0.08,
+      "stars": 0.54,
+      "depth": "old",
+      "depth_amount": 1.4,
+      "light": 0.28,
+      "fog": 0.03,
+      "grade": 0.1,
+      "camera": false,
+      "transition": "none"
+    },
+    {
+      "id": "b01_010",
+      "file": "NORDIC_B01_010_SOURCE.png",
+      "sha256": "22acc350bc431b4a67c87f6bce5b43ca2da17de59002b16ffbb1f202715195d4",
+      "frames": 21,
+      "cloud": 0.05,
+      "stars": 0.58,
+      "depth": "none",
+      "light": 0.32,
+      "fog": 0.02,
+      "grade": 0.12,
+      "camera": true,
+      "zoom_end": 1.01,
+      "transition": "none"
+    }
+  ],
+  "notes": [
+    "All 10 source images are exact Gemini source-video extractions.",
+    "Frame quantization is cumulative-boundary based and totals exactly 480 frames / 20.000 seconds at 24 fps.",
+    "Legacy/proof_required FX are used only under explicit Director authorization for Nordic B01; canonical registry state is not globally altered.",
+    "hybrid_25d is authorized but intentionally not scheduled in v1 because subject segmentation/inpainting adds unnecessary identity risk for these Observer plates.",
+    "streaming_living_parallax uses its labeled synthetic radial fallback because no real depth map exists for the source stills.",
+    "Environmental parallax/cloud/star changes are composited through a protection mask that excludes the Observer/cliff region."
+  ]
+}

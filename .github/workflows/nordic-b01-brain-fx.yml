@@ -1,0 +1,114 @@
+name: Nordic B01 Brain repo FX
+on:
+  push:
+    branches: ['song/nordic-remastered']
+    paths:
+      - 'projects/nordic-remastered/production/B01_BRAIN_FX_RENDER_PLAN.json'
+      - 'projects/nordic-remastered/production/render_b01_brain_fx.py'
+      - '.github/workflows/nordic-b01-brain-fx.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nordic-b01-brain-fx-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+
+      - name: Fetch exact Main authority for native offline boot
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          echo "MAIN_AUTHORITY=$(git rev-parse main)"
+
+      - name: Install render dependencies
+        run: |
+          python -m pip install numpy opencv-python-headless pillow
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+
+      - name: Boot native GodRender OS
+        env:
+          GODRENDER_VALIDATION_MODE: "1"
+        run: python3 godrender_boot.py --offline
+
+      - name: Validate B01 choreography syntax
+        run: python3 -m py_compile projects/nordic-remastered/production/render_b01_brain_fx.py
+
+      - name: Prepare and verify exact B01 media
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/input" "$RUNNER_TEMP/output"
+          cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/input/Nordic_Remastered.mp3"
+          echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/input/Nordic_Remastered.mp3" | sha256sum -c -
+          cp projects/nordic-remastered/runner_sources/batch-01/NORDIC_B01_*_SOURCE.png "$RUNNER_TEMP/input/"
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          plan=json.loads(Path("projects/nordic-remastered/production/B01_BRAIN_FX_RENDER_PLAN.json").read_text())
+          root=Path(os.environ["RUNNER_TEMP"])/"input"
+          assert len(plan["shots"])==10
+          assert sum(int(s["frames"]) for s in plan["shots"])==480
+          for shot in plan["shots"]:
+              p=root/shot["file"]
+              assert p.is_file(), p
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              assert h==shot["sha256"], (shot["id"],h)
+          print("B01 ALL MEDIA PASS: 10/10 stills + exact master audio")
+          PY
+
+      - name: Render Brain/repo-driven B01
+        run: |
+          python3 projects/nordic-remastered/production/render_b01_brain_fx.py \
+            --plan projects/nordic-remastered/production/B01_BRAIN_FX_RENDER_PLAN.json \
+            --input-root "$RUNNER_TEMP/input" \
+            --audio "$RUNNER_TEMP/input/Nordic_Remastered.mp3" \
+            --out "$RUNNER_TEMP/output"
+
+      - name: Verify receipt and exact 20-second timeline
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          out=Path(os.environ["RUNNER_TEMP"])/"output"
+          r=json.loads((out/"NORDIC_B01_BRAIN_FX_PROOF03_RECEIPT.json").read_text())
+          assert r["technical_state"]=="TECHNICAL_RENDER_PASS_VISUAL_REVIEW_PENDING"
+          assert r["source_media"]["all_ten_used"] is True
+          assert r["qc"]["decoded_frames"]==480
+          assert r["qc"]["exact_20s_frame_timeline"] is True
+          assert "FX2-ATM-005" in r["used_legacy_direct_source_fx"]
+          assert "FX2-ATM-006" in r["used_legacy_direct_source_fx"]
+          assert "FX2-MOTION-001" in r["used_legacy_direct_source_fx"]
+          assert "FX2-SPATIAL-004" in r["used_legacy_direct_source_fx"]
+          assert "FX2-TRANS-025" in r["used_production_approved_fx"]
+          print("B01 BRAIN FX RECEIPT PASS")
+          print("OUTPUT_SHA256",r["output"]["sha256"])
+          print("OUTPUT_BYTES",r["output"]["bytes"])
+          PY
+          ffprobe -v error -count_frames \
+            -show_entries format=duration,size \
+            -show_entries stream=codec_name,codec_type,width,height,r_frame_rate,nb_read_frames \
+            -of json "$RUNNER_TEMP/output/NORDIC_B01_BRAIN_FX_PROOF03_720p.mp4"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: nordic-b01-brain-fx-${{ github.run_id }}
+          path: ${{ runner.temp }}/output/
+          retention-days: 30

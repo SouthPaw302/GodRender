@@ -1,0 +1,497 @@
+{
+  "assets": [
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_01",
+      "batch": "B05",
+      "bytes": 2317117,
+      "filename": "B05_01.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "6f8c3016ee7fbbb5939fea3de66585bafadf1b8ff1f056e15fec2bafd9abb0b8"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_02",
+      "batch": "B05",
+      "bytes": 2315145,
+      "filename": "B05_02.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "5e34ca775133e42cb5ee9e6ad574f1338d255bdee9052759720990d2fca57082"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_03",
+      "batch": "B05",
+      "bytes": 2304638,
+      "filename": "B05_03.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "97246910bd3f318268a5fa27cd3e110a7b1462d9c6fc0542dd89e0b9aea0bd0f"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_04",
+      "batch": "B05",
+      "bytes": 2486468,
+      "filename": "B05_04.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "a2d56942be0d7a97721d4eb722225195ea4ee4e4c7815aa10e3f5f73811a47cf"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_05",
+      "batch": "B05",
+      "bytes": 2305435,
+      "filename": "B05_05.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "869e6f6ebf5894506d7cdf76396ea5d148b1b110903b0ffcc1169ee2ad032e77"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_06",
+      "batch": "B05",
+      "bytes": 2332654,
+      "filename": "B05_06.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "1c6d0503be54fc4a0faabd241df2062d396b8f40befdad7915b0147733bab482"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_07",
+      "batch": "B05",
+      "bytes": 2365869,
+      "filename": "B05_07.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "0c5fa7341a214fb48c904af733ce6b1e74bac24f1e26872949a61a2acc0b09a0"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_08",
+      "batch": "B05",
+      "bytes": 2557374,
+      "filename": "B05_08.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "a57c543ddf025b1bd38e569b1113f9ab5592a838b42d215843dce17826b39e23"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_09",
+      "batch": "B05",
+      "bytes": 2413655,
+      "filename": "B05_09.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "35e136b8f182b69de677c6d5456bcdd7a33660c4c0d68661760f1aafa1a18036"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B05_10",
+      "batch": "B05",
+      "bytes": 2636046,
+      "filename": "B05_10.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "e89e67d7f6bf6c56620bc2841d12fed7ac061aaed2079b7434a2a28ee0cb6f72"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_01",
+      "batch": "B06",
+      "bytes": 2513944,
+      "filename": "B06_01.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "d26a458644f4ccbbe36a8dccff9fab78b3e57bdeee101114a0795d27637bf4eb"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_02",
+      "batch": "B06",
+      "bytes": 2575619,
+      "filename": "B06_02.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "63743a13991f5b0d0dbda9de9b85fe86e2e65c9c9f0c8b8b2c1d6f40fe243640"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_03",
+      "batch": "B06",
+      "bytes": 2563894,
+      "filename": "B06_03.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "e38f0f2cd67169fbdc4674d91f4dcc4f2d886a27a512e6e9f103f5855f6baf0a"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_04",
+      "batch": "B06",
+      "bytes": 2323814,
+      "filename": "B06_04.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "4055347ab473dc6553af3a2ed03cbfe2abbd2bb9f220da0e116b348f65ece90d"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_05",
+      "batch": "B06",
+      "bytes": 2074980,
+      "filename": "B06_05.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "c4b873c7c1d99de87df75245bb9d07099a8689bdf59e9183e7dd79985509d3ec"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_06",
+      "batch": "B06",
+      "bytes": 2689490,
+      "filename": "B06_06.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "7264978c5428dc14337842143e51807599c280405f29525c298fba6d5f935ce2"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_07",
+      "batch": "B06",
+      "bytes": 2535799,
+      "filename": "B06_07.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "2c829ea722ac0769873bc1ba8fd42842aaf4b08101e7d411ad1e29266578beb7"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_08",
+      "batch": "B06",
+      "bytes": 2723824,
+      "filename": "B06_08.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "f72d03c18b7aafb840075820c43facdde5992886508217c59769e61996cb4b6b"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_09",
+      "batch": "B06",
+      "bytes": 2429195,
+      "filename": "B06_09.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "7f78dfd03ca2ae38bca9a825e7b52ba92fcb05a4235364c9b334c6dd6a8ea701"
+    },
+    {
+      "approval": "GENERATED_CANDIDATE_UNAPPROVED",
+      "asset_id": "B06_10",
+      "batch": "B06",
+      "bytes": 2254933,
+      "filename": "B06_10.png",
+      "origin": "chat_generated_individual_image",
+      "sha256": "e231fbc05761c3de1e1d177b5b90960d30f184dee186cc433608d880d5e7dce1"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 319789,
+      "filename": "B05_recovery_qc.jpg",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "0e274d40a7119ab9193a2782c30caf1f7089ff8bf49635769a12bbf7b687522c"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 1215200,
+      "filename": "B06_01_source_ref.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "aad28031a343ff2b1d4a44acf781de5f75821192fc7be30ceabed721feda03b5"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 255349,
+      "filename": "B06_recovery_qc.jpg",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "f0211202ad81f32272e784a602bc5c1c76b0360a582d813a16c48b76358b009a"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2649175,
+      "filename": "a_cinematic_ultra_detailed_fantasy_sci_fi_landsca.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "5af37a7ae5420f9b33294bd24dff0661c470cef22a2af792160b2eb637c86467"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2895032,
+      "filename": "a_cinematic_ultra_detailed_sci_fi_fantasy_landsca.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "43c6ae16681993b6a155a03499eff35ba842d84e92441399d380107306abbb1a"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2974478,
+      "filename": "a_cinematic_ultra_high_detail_sci_fi_fantasy_land.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "869ca90e34735256a49c899e506b4d80c6de130178f88d940984947a4cbf5d17"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 3039914,
+      "filename": "a_wide_composite_cinematic_storyboard_contact_sh.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "dfaea5f33993c332067823e4bb670ca1aba6cfe584fdbe0cdaa1756cd038fde7"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2992137,
+      "filename": "a_wide_composite_grid_montage_of_nine_cinematic_fa.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "fa358be6757cfb345e342c9645db122b3168a47e62d7b85ea7798479d8acc9be"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2634020,
+      "filename": "android_emissaries_over_neon_metropolis.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "c99e836d08de6753dd7f9305f7694ec9c0a0a23d960af7ae6b75248be9ee9290"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2462031,
+      "filename": "androids_over_a_neon_metropolis.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "69cbd91f1eb161ebe904e59dac424814a3c5263f9211133a38388f8f6251ef24"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2314189,
+      "filename": "androids_overlooking_a_holographic_future_city.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "1c586610a7f4b8b259d2984ddea8dd463035a7b831e3bfb6640571fd96cfc140"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2658601,
+      "filename": "androids_overlooking_a_neon_utopia.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "2d4d43f353b0cc6fbf103bc3d5ab2991a78658aff4d1e75143ad8ac61fb0e1db"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2782975,
+      "filename": "epic_cinematic_fantasy_scene_a_wide_high_detail.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "172e8545411c85cbc06dd2a074d13e3664fdad660b73c0030303c31f04aab93b"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2766632,
+      "filename": "epic_cinematic_fantasy_sci_fi_landscape_scene_a_w.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "b2a183bbaebfdb09b9b6dac7ddaa77b6b58d0dfff88db9e8edd9ca3b8b1090d7"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2797654,
+      "filename": "epic_cinematic_sci_fi_fantasy_landscape_scene_a_l.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "2441261501e5628a4899f8276184cf099964db6297c032cb0de2bf94bdf25ea2"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2436131,
+      "filename": "neon_utopia_at_sunset.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "0c7ae98945641d6b4475749fe06491da4e41c40b7a2ed3113e70f2cae59a458b"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 285572,
+      "filename": "nordic_b06_inventory_preview.jpg",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "b35be50100a5c1298296abff8e69b75a4c4cf1a05564118ed283a367d3371069"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2649584,
+      "filename": "portal_framed_futuristic_city_and_android_interfac.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "eeca0033c781e214b7b62947bb87eabce011ccf7eed0f37055cc072811f0f33d"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2616174,
+      "filename": "portal_framed_futuristic_city_at_sunset.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "5d544e4d39c4fc30841bc1c94551c973d5c2073012cce6c8dd25a1816e43f8a6"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2669918,
+      "filename": "portal_framed_futuristic_metropolis.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "e7ae1ac324d40e84b29b7cb26472bc4de12f34657d7001d958a87ff99571c070"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2501258,
+      "filename": "portal_to_a_futuristic_sky_city.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "6150f01d66ed0a2d6822293e0ab698da5f1a3e0d94b7ce2d7560956b82fbce6b"
+    },
+    {
+      "approval": "UNCLASSIFIED_UNAPPROVED",
+      "bytes": 2419600,
+      "filename": "portal_to_the_futuristic_city.png",
+      "origin": "recovered_unclassified_loose",
+      "sha256": "c059a991d507e017788dfc417e8b499a9981197efe3a324de46f0c60f4c2a589"
+    },
+    {
+      "approval": "SOURCE_PRESERVED",
+      "bytes": 3188260,
+      "filename": "Nordic  (Remastered).mp3",
+      "origin": "original_source",
+      "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+    },
+    {
+      "approval": "SOURCE_PRESERVED",
+      "bytes": 3653541,
+      "filename": "gemini_generated_video_e4937f10.mp4",
+      "origin": "original_source",
+      "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+    },
+    {
+      "approval": "SOURCE_PRESERVED",
+      "bytes": 3356803,
+      "filename": "gemini_generated_video_4b4db55f.mp4",
+      "origin": "original_source",
+      "sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70"
+    },
+    {
+      "approval": "SOURCE_INTAKE",
+      "bytes": 10307746,
+      "filename": "Nordic_Batch01_Storyboard.zip",
+      "origin": "source_frame_package",
+      "sha256": "3afe2ca261582e04459ade185bfd18ccc1983b29fcd0a977538c8a9babfb2ecd"
+    },
+    {
+      "approval": "SOURCE_INTAKE",
+      "bytes": 11921664,
+      "filename": "Nordic_Batch02_Storyboard.zip",
+      "origin": "source_frame_package",
+      "sha256": "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309"
+    },
+    {
+      "approval": "SOURCE_INTAKE",
+      "bytes": 18217742,
+      "filename": "Nordic_Batch03_Storyboard.zip",
+      "origin": "source_frame_package",
+      "sha256": "156dd5916efc46b148f92a6bbc07ce91271bbff4412b0f4ea4ef22ea37f8c618"
+    },
+    {
+      "approval": "SOURCE_INTAKE",
+      "bytes": 11508533,
+      "filename": "Nordic_Batch04_Storyboard.zip",
+      "origin": "source_frame_package",
+      "sha256": "2e2a1d59c4ad76d52ceed915abc3565f7622cff8bf8a5cea1b4a334a90a39564"
+    },
+    {
+      "approval": "SOURCE_INTAKE",
+      "bytes": 9860705,
+      "filename": "Nordic_Batch05_Storyboard.zip",
+      "origin": "source_frame_package",
+      "sha256": "e3609729dd069c5f3ef970a27ef9e26d7b0206a07772cd742921030b5b148abe"
+    },
+    {
+      "approval": "SOURCE_INTAKE",
+      "bytes": 13576174,
+      "filename": "Nordic_Batch06_Storyboard.zip",
+      "origin": "source_frame_package",
+      "sha256": "ca31e1bef59dd2332e193596a5840c241d22888c6e7242c4c0704f69bccd80b4"
+    },
+    {
+      "approval": "REVIEW_ONLY",
+      "bytes": 9014253,
+      "filename": "Nordic_Editorial_Review_v1_480p.mp4",
+      "origin": "review_workprint",
+      "sha256": "69a9bd5e0307d01ac028cbd575280feb56db09571380a1cf40188e88b83d29b7"
+    },
+    {
+      "approval": "REVIEW_ONLY",
+      "bytes": 214304,
+      "filename": "Nordic_Editorial_Review_v1_QC.jpg",
+      "origin": "review_workprint",
+      "sha256": "d8d94aa51cc8df17204555d54ebfd4f438d4d4399f3ada259ffdc8f213e2050e"
+    },
+    {
+      "approval": "REVIEW_ONLY",
+      "bytes": 2748,
+      "filename": "Nordic_Editorial_Review_v1_receipt.json",
+      "origin": "review_workprint",
+      "sha256": "e08d3733ddc0b0608e948de5f75dd278ff98f19c877757b692a45d6f514c836b"
+    }
+  ],
+  "branch": "song/nordic-remastered",
+  "bundles": [
+    {
+      "bytes": 11731046,
+      "category": "B05 generated",
+      "file": "Nordic_B05_Generated_01-05_2026-10-23.zip",
+      "file_count": 5,
+      "sha256": "5127eb56463da68945059e046661d6c3cda8ec50d0f74fbfd7c9f20e4023d3e3"
+    },
+    {
+      "bytes": 12307841,
+      "category": "B05 generated",
+      "file": "Nordic_B05_Generated_06-10_2026-10-23.zip",
+      "file_count": 5,
+      "sha256": "04219ea745d2fa1834c86671960225b80049c6698944257eb29cf059fd21eb60"
+    },
+    {
+      "bytes": 12054494,
+      "category": "B06 generated",
+      "file": "Nordic_B06_Generated_01-05_2026-10-23.zip",
+      "file_count": 5,
+      "sha256": "399812be4aecd5b14289ce8ce47caff2b7bc16d9a65ccf9fd37deaa59d6d935e"
+    },
+    {
+      "bytes": 12635484,
+      "category": "B06 generated",
+      "file": "Nordic_B06_Generated_06-10_2026-10-23.zip",
+      "file_count": 5,
+      "sha256": "70247a0755317baecec779c660bf42dec0dce15221632ceaf69d467dfe2afb68"
+    },
+    {
+      "bytes": 10311245,
+      "category": "unclassified loose",
+      "file": "Nordic_Recovered_Assorted_Unclassified_01_of_05.zip",
+      "file_count": 6,
+      "sha256": "9df268f764566ccf3e516b159f40e035b0b04adb448bcc723dc580889f8b2d5d"
+    },
+    {
+      "bytes": 11129796,
+      "category": "unclassified loose",
+      "file": "Nordic_Recovered_Assorted_Unclassified_02_of_05.zip",
+      "file_count": 4,
+      "sha256": "25fc152020a4568d4f2ecd442ce9c4698958735e51355e86602378d283533632"
+    },
+    {
+      "bytes": 10524115,
+      "category": "unclassified loose",
+      "file": "Nordic_Recovered_Assorted_Unclassified_03_of_05.zip",
+      "file_count": 4,
+      "sha256": "f608d514abf664ceae096766bab7b0505d09f96568dea50455be4e0b389b6f5e"
+    },
+    {
+      "bytes": 10787091,
+      "category": "unclassified loose",
+      "file": "Nordic_Recovered_Assorted_Unclassified_04_of_05.zip",
+      "file_count": 5,
+      "sha256": "cbd57241b1258c52482c4ab85517bc447f92089662d442081bcecdb2dc140e0a"
+    },
+    {
+      "bytes": 7592025,
+      "category": "unclassified loose",
+      "file": "Nordic_Recovered_Assorted_Unclassified_05_of_05.zip",
+      "file_count": 3,
+      "sha256": "4c8190784e7356454aa3f98ae41762ffac79b2f99ff7d60d0c237b77554fbeb9"
+    }
+  ],
+  "counts": {
+    "individual_generated_b05": 10,
+    "individual_generated_b06": 10,
+    "new_bundles": 9,
+    "residual_loose_media": 22
+  },
+  "created_utc": "2026-10-24",
+  "media_policy": "preserve original; generated are candidates until Director QC",
+  "project": "Nordic (Remastered)"
+}

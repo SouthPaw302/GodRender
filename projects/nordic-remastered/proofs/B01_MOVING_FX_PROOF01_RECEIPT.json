@@ -1,0 +1,225 @@
+{
+  "schema": "godrender.nordic-b01-moving-fx-proof.v1",
+  "status": "RENDERED_AWAITING_DIRECTOR_ACCEPTANCE",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "engine_commit": "03e4d790a2cfb14b4e9848ee5f5f948f9498a4eb",
+  "source_audio": "Nordic  (Remastered).mp3",
+  "source_audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "duration_seconds": 20,
+  "fps": 24,
+  "resolution": [
+    640,
+    360
+  ],
+  "edit_segments": [
+    {
+      "id": "B01_01",
+      "file": "NORDIC_B01_001_SOURCE.png",
+      "start": 0,
+      "end": 6.58,
+      "sha": "166a6cd1275e9e15239d169ad1b7243438b2c7e2467de9f4e565de1fc435f42b"
+    },
+    {
+      "id": "B01_05",
+      "file": "NORDIC_B01_005_SOURCE.png",
+      "start": 6.58,
+      "end": 12.14,
+      "sha": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221"
+    },
+    {
+      "id": "B01_09",
+      "file": "NORDIC_B01_009_SOURCE.png",
+      "start": 12.14,
+      "end": 20,
+      "sha": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55"
+    }
+  ],
+  "onnx_timing": {
+    "bpm": 90.91,
+    "beat_count": 210,
+    "downbeat_count": 58,
+    "cuts_seconds": [
+      6.58,
+      12.14,
+      20
+    ],
+    "stable_downbeats_used_for_light_pulse": [
+      9.52,
+      12.14,
+      14.76,
+      17.38
+    ],
+    "section_energy": 0.153582,
+    "section_transient": 0.038027
+  },
+  "fx_route": [
+    {
+      "id": "FX2-MOTION-002",
+      "name": "localized_living_flow",
+      "gate_status": "approved",
+      "order": 1,
+      "per_shot": [
+        {
+          "shot": "B01_01",
+          "roi": [
+            0.45,
+            0.25,
+            1,
+            0.7
+          ],
+          "strength": 0.2
+        },
+        {
+          "shot": "B01_05",
+          "roi": [
+            0.45,
+            0.5,
+            1,
+            0.74
+          ],
+          "strength": 0.16
+        },
+        {
+          "shot": "B01_09",
+          "roi": [
+            0.48,
+            0.54,
+            1,
+            0.78
+          ],
+          "strength": 0.14
+        }
+      ]
+    },
+    {
+      "id": "FX2-LIGHT-002",
+      "name": "moving_light_field",
+      "gate_status": "approved",
+      "order": 2,
+      "per_shot": [
+        {
+          "shot": "B01_01",
+          "origin": [
+            0.76,
+            0.18
+          ],
+          "base_strength": 0.38,
+          "runtime_strength_scale": 0.08
+        },
+        {
+          "shot": "B01_05",
+          "origin": [
+            0.62,
+            0.18
+          ],
+          "base_strength": 0.42,
+          "runtime_strength_scale": 0.08
+        },
+        {
+          "shot": "B01_09",
+          "origin": [
+            0.66,
+            0.18
+          ],
+          "base_strength": 0.36,
+          "runtime_strength_scale": 0.08
+        }
+      ],
+      "downbeat_pulse": "editorial envelope derived from verified ONNX stable downbeat times; +16% max"
+    },
+    {
+      "id": "FX2-CAMERA-023",
+      "name": "narrative_camera_travel",
+      "gate_status": "approved",
+      "order": 3,
+      "per_shot": [
+        {
+          "shot": "B01_01",
+          "zoom_start": 1,
+          "zoom_end": 1.018,
+          "center_start": [
+            0.5,
+            0.5
+          ],
+          "center_end": [
+            0.512,
+            0.495
+          ],
+          "easing": "cosine",
+          "zoom_cap": 1.04
+        },
+        {
+          "shot": "B01_05",
+          "zoom_start": 1.014,
+          "zoom_end": 1.002,
+          "center_start": [
+            0.508,
+            0.495
+          ],
+          "center_end": [
+            0.5,
+            0.5
+          ],
+          "easing": "cosine",
+          "zoom_cap": 1.04
+        },
+        {
+          "shot": "B01_09",
+          "zoom_start": 1,
+          "zoom_end": 1.022,
+          "center_start": [
+            0.5,
+            0.5
+          ],
+          "center_end": [
+            0.506,
+            0.492
+          ],
+          "easing": "cosine",
+          "zoom_cap": 1.04
+        }
+      ]
+    }
+  ],
+  "protection_note": "Motion ROIs are placed away from the Observer and concentrated in distant sky/horizon regions; camera travel is bounded source-locked crop/resize. No source geometry replacement or generative substitution.",
+  "execution_note": "Rendered in sandbox without GodRender bootstrap, using the exact implementation logic of the three named Main effects from the pinned engine commit against byte-verified B01 source plates. This is a Director proof, not canon promotion.",
+  "artifact": {
+    "file": "NORDIC_B01_MOVING_FX_PROOF01_20s_360p.mp4",
+    "sha256": "f7a612fb1495acf8438f25d0afdeefae16e764898a4a9fc7c206b0511c8efcd1",
+    "bytes": 1652212,
+    "storage_status": "conversation_sandbox_proof; not promoted to Drive or canon"
+  },
+  "contact_sheet": {
+    "file": "NORDIC_B01_MOVING_FX_PROOF01_contact_sheet.jpg",
+    "sha256": "963f921a43fcd9bc5756b2aab32d7da663f6626f937f6c1a92add9d02f3ba2d4",
+    "bytes": 252491
+  },
+  "qc_metrics": {
+    "decoded_frames_expected": 480,
+    "black_frames": 0,
+    "mean_adjacent_frame_delta": 0.45822,
+    "p95_adjacent_frame_delta": 2.485896,
+    "mean_output_vs_source_delta": 6.218268
+  },
+  "ffprobe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "24/1"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "20.000000",
+      "size": "1652212"
+    }
+  }
+}

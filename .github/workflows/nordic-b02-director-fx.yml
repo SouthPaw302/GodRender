@@ -1,0 +1,139 @@
+name: Nordic B02 Director Edit FX
+on:
+  workflow_dispatch:
+  push:
+    branches: ['song/nordic-remastered']
+    paths:
+      - 'projects/nordic-remastered/production/B02_DIRECTOR_EDIT_FX_MANIFEST.json'
+      - 'projects/nordic-remastered/production/B02_FX_REQUIREMENTS.fx.json'
+      - 'projects/nordic-remastered/production/render_b02_director_fx.py'
+      - '.github/workflows/nordic-b02-director-fx.yml'
+permissions:
+  contents: read
+concurrency:
+  group: nordic-b02-director-fx-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy opencv-python-headless pillow google-auth requests
+      - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg unzip
+      - name: Fetch exact Main authority for native boot
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          echo "MAIN=$(git rev-parse main)"
+          echo "B02=$(git rev-parse HEAD)"
+      - name: Boot GodRender
+        env:
+          GODRENDER_VALIDATION_MODE: '1'
+        run: python3 godrender_boot.py --offline
+      - name: Acquire exact B02 sources
+        env:
+          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+          GDRIVE_OAUTH_CLIENT_ID: ${{ secrets.GDRIVE_OAUTH_CLIENT_ID }}
+          GDRIVE_OAUTH_CLIENT_SECRET: ${{ secrets.GDRIVE_OAUTH_CLIENT_SECRET }}
+          GDRIVE_OAUTH_REFRESH_TOKEN: ${{ secrets.GDRIVE_OAUTH_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/b02" "$RUNNER_TEMP/b02/stills"
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          import requests
+          from google.auth.transport.requests import Request
+          from google.oauth2 import service_account
+          from google.oauth2.credentials import Credentials
+
+          scopes = ["https://www.googleapis.com/auth/drive.readonly"]
+          sa = os.environ.get("GDRIVE_SERVICE_ACCOUNT_JSON", "").strip()
+          refresh = os.environ.get("GDRIVE_OAUTH_REFRESH_TOKEN", "").strip()
+          if sa:
+              creds = service_account.Credentials.from_service_account_info(json.loads(sa), scopes=scopes)
+          elif refresh and os.environ.get("GDRIVE_OAUTH_CLIENT_ID") and os.environ.get("GDRIVE_OAUTH_CLIENT_SECRET"):
+              creds = Credentials(
+                  token=None, refresh_token=refresh,
+                  token_uri="https://oauth2.googleapis.com/token",
+                  client_id=os.environ["GDRIVE_OAUTH_CLIENT_ID"],
+                  client_secret=os.environ["GDRIVE_OAUTH_CLIENT_SECRET"],
+                  scopes=scopes,
+              )
+          else:
+              raise SystemExit("B02 SOURCE AUTH MISSING: configure a Drive-authorized service account or OAuth refresh-token secrets; never use anonymous gdown.")
+          creds.refresh(Request())
+          root = Path(os.environ["RUNNER_TEMP"])/"b02"
+          sources = [
+              ("1__0qJfclh1BtTbbytT0BXLKEKQkcASDh", "B02.zip", "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309"),
+              ("1PyHI7F7In-uZxYhZfHKJK17Ah_8LCWaB", "source_video_a.mp4", "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70"),
+          ]
+          for file_id, name, expected in sources:
+              target = root/name
+              digest = hashlib.sha256()
+              with requests.get(
+                  f"https://www.googleapis.com/drive/v3/files/{file_id}",
+                  params={"alt":"media"},
+                  headers={"Authorization": f"Bearer {creds.token}"},
+                  stream=True, timeout=120,
+              ) as response:
+                  response.raise_for_status()
+                  with target.open("wb") as out:
+                      for chunk in response.iter_content(chunk_size=1024*1024):
+                          if chunk:
+                              out.write(chunk)
+                              digest.update(chunk)
+              if digest.hexdigest() != expected:
+                  target.unlink(missing_ok=True)
+                  raise SystemExit(f"B02 SOURCE HASH MISMATCH: {name}")
+              print(f"B02 authenticated source verified: {name}")
+          PY
+          unzip -q "$RUNNER_TEMP/b02/B02.zip" -d "$RUNNER_TEMP/b02/stills"
+          cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/b02/Nordic_Remastered.mp3"
+          echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/b02/Nordic_Remastered.mp3" | sha256sum -c -
+      - name: Verify selected source still hashes
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"b02/stills"
+          d=json.loads(Path("projects/nordic-remastered/production/B02_DIRECTOR_EDIT_FX_MANIFEST.json").read_text())
+          for s in d["selected_stills"]:
+              p=root/s["file"]; assert p.is_file(), p
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==s["sha256"], s["id"]
+          assert sum(int(x["frames"]) for x in d["timeline"])==503
+          print("B02 SELECTED SOURCE + TIMELINE PASS")
+          PY
+      - name: Compile FX lock
+        run: python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/production/B02_FX_REQUIREMENTS.fx.json --lock-out "$RUNNER_TEMP/b02/fx.lock.json"
+      - name: Render B02 continuous edit
+        run: |
+          python projects/nordic-remastered/production/render_b02_director_fx.py \
+            --manifest projects/nordic-remastered/production/B02_DIRECTOR_EDIT_FX_MANIFEST.json \
+            --input-root "$RUNNER_TEMP/b02/stills" \
+            --video-a "$RUNNER_TEMP/b02/source_video_a.mp4" \
+            --audio "$RUNNER_TEMP/b02/Nordic_Remastered.mp3" \
+            --out "$RUNNER_TEMP/final"
+      - name: QC exact B02 duration and frame count
+        run: |
+          ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=nb_read_frames,width,height,r_frame_rate -show_entries format=duration,size -of json "$RUNNER_TEMP/final/NORDIC_B02_DIRECTOR_EDIT_FX_720p.mp4" | tee "$RUNNER_TEMP/final/ffprobe.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ["RUNNER_TEMP"])/"final/ffprobe.json").read_text())
+          assert int(d["streams"][0]["nb_read_frames"])==503, d
+          dur=float(d["format"]["duration"]); assert 20.93 <= dur <= 20.99, dur
+          print("B02 503-FRAME QC PASS")
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b02-director-edit-fx-${{ github.run_id }}
+          path: ${{ runner.temp }}/final/
+          retention-days: 30

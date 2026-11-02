@@ -1,0 +1,17 @@
+{
+  "project": "nordic-remastered-b06-director-edit-fx",
+  "runtime": "aivideoedit-fx-v2",
+  "seed": 302,
+  "effects": [
+    {
+      "id": "FX2-CAMERA-023"
+    }
+  ],
+  "transitions": [],
+  "render_inputs": [
+    "projects/nordic-remastered/production/render_b06_director_fx.py",
+    "projects/nordic-remastered/production/B06_DIRECTOR_EDIT_FX_MANIFEST.json",
+    "general/reusable/fx_v2/executor.py",
+    "general/reusable/fx_v2/runtime.py"
+  ]
+}

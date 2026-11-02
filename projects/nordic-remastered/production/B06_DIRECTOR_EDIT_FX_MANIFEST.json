@@ -1,0 +1,246 @@
+{
+  "schema": "godrender.nordic-b06-director-edit-fx.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "batch": "B06",
+  "editorial_cut": "RC1",
+  "film_range_seconds": [
+    114.32666666633332,
+    137.95166666633332
+  ],
+  "music_outro_anchor_seconds": 130.02,
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "total_frames": 567,
+  "source_zip": {
+    "drive_id": "1mxPZBE5PtS0h7EROYg3l6QU_MpDMydoP",
+    "sha256": "ca31e1bef59dd2332e193596a5840c241d22888c6e7242c4c0704f69bccd80b4"
+  },
+  "source_video_b": {
+    "drive_id": "1wpHGl6NgP9XMPbEtasYrqt8sEbQaXFJ8",
+    "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+  },
+  "audio": {
+    "drive_id": "1sqG_muNUbxfP7UVNHotD25tS-P8xxUu_",
+    "offset_seconds": 114.32666666633332,
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "selected_stills": [
+    {
+      "id": "B06_06",
+      "file": "frames/B06_06.png",
+      "sha256": "235f93b1ddc0aa1483eb9cec937bd8d35be4d1228fb0e5366e14deaa68603e60",
+      "source_file": "gemini_generated_video_e4937f10.mp4",
+      "source_time_seconds": 8.8,
+      "role": "future city and emissary continuity"
+    },
+    {
+      "id": "B06_07",
+      "file": "frames/B06_07.png",
+      "sha256": "b467e4578d0157d8d09d68533b075c85df2f0c4a48717996d1b2d5d530a8d68d",
+      "source_file": "gemini_generated_video_e4937f10.mp4",
+      "source_time_seconds": 7.1,
+      "role": "city threshold before withdrawal"
+    },
+    {
+      "id": "B06_08",
+      "file": "frames/B06_08.png",
+      "sha256": "016dc53804a135779826bdffbc57b815ecc698a3f09a92f8248c7cd677f14bc8",
+      "source_file": "gemini_generated_video_e4937f10.mp4",
+      "source_time_seconds": 5.45,
+      "role": "observer witnesses technology through portal"
+    },
+    {
+      "id": "B06_09",
+      "file": "frames/B06_09.png",
+      "sha256": "b4c1384674f905fd144e0ffd0d700df890e046f8f509c0c94ab01f2cde00c396",
+      "source_file": "gemini_generated_video_e4937f10.mp4",
+      "source_time_seconds": 3,
+      "role": "city contracts within myth window"
+    },
+    {
+      "id": "B06_10",
+      "file": "frames/B06_10.png",
+      "sha256": "e18a85dbeb26aeb026b5ba0f07822eae1b469946081ae00f13f84c86bb5b76f9",
+      "source_file": "gemini_generated_video_e4937f10.mp4",
+      "source_time_seconds": 0.5,
+      "role": "portal becomes a luminous ring over cliff"
+    },
+    {
+      "id": "B06_03",
+      "file": "frames/B06_03.png",
+      "sha256": "411a2d675ed44f3ead7b2590f029003c99a30512d5982ad969812423bf4e016c",
+      "source_file": "gemini_generated_video_4b4db55f.mp4",
+      "source_time_seconds": 6.2,
+      "role": "constellation archer and stag over witness"
+    },
+    {
+      "id": "B06_04",
+      "file": "frames/B06_04.png",
+      "sha256": "adca561d5c481b2132a94aa9559e698f62d964537e1eef2cd18ef6f5357071e9",
+      "source_file": "gemini_generated_video_4b4db55f.mp4",
+      "source_time_seconds": 4.2,
+      "role": "myth figures resolve into starlight"
+    },
+    {
+      "id": "B06_05",
+      "file": "frames/B06_05.png",
+      "sha256": "e2fcff93c0883370bd6d9d2ea1cb1ace292bdd91cd33e258132d97225f338584",
+      "source_file": "gemini_generated_video_4b4db55f.mp4",
+      "source_time_seconds": 1.15,
+      "role": "original bearded Observer cliff and quiet sky"
+    }
+  ],
+  "timeline": [
+    {
+      "type": "still",
+      "id": "B06_06",
+      "frames": 40,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "still",
+      "id": "B06_07",
+      "frames": 40,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "id": "B06_07",
+      "frames": 12,
+      "source_start_seconds": 7.1
+    },
+    {
+      "type": "still",
+      "id": "B06_08",
+      "frames": 45,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "still",
+      "id": "B06_09",
+      "frames": 48,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "source_video_bridge",
+      "id": "B06_09",
+      "frames": 12,
+      "source_start_seconds": 3
+    },
+    {
+      "type": "still",
+      "id": "B06_10",
+      "frames": 45,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "still",
+      "id": "B06_03",
+      "frames": 60,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "still",
+      "id": "B06_04",
+      "frames": 74,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.007,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    },
+    {
+      "type": "quiet_hold",
+      "id": "B06_05",
+      "frames": 191,
+      "camera": {
+        "zoom_start": 1,
+        "zoom_end": 1.0015,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.5,
+          0.499
+        ]
+      }
+    }
+  ],
+  "director_rule": "B06 source-faithful city -> portal -> constellation -> Observer ending. Source Gemini video only in two short natural-speed, non-looping inserts. No new identities, geometry, imagery or replacement sources. Avoid crossfaded duplicate faces; editorial hard cuts intentional; local optical breathing and portal light only. From local frame 376 (film ~129.993 s) uninterrupted low-motion original Observer/sky image. Final full-song master FX deferred."
+}

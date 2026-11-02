@@ -1,0 +1,39 @@
+{
+  "project": "nordic-remastered-b01-brainfx-approved-lane",
+  "runtime": "aivideoedit-fx-v2",
+  "seed": 302,
+  "effects": [
+    {
+      "id": "FX2-LIGHT-002",
+      "strength": 0.4,
+      "origin": [
+        0.64,
+        0.18
+      ]
+    },
+    {
+      "id": "FX2-ATM-021"
+    },
+    {
+      "id": "FX2-LIGHT-025"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "FX2-TRANS-025"
+    }
+  ],
+  "render_inputs": [
+    "projects/nordic-remastered/production/render_b01_brainfx.py",
+    "projects/nordic-remastered/production/B01_BRAIN_FX_MANIFEST.json",
+    "projects/nordic-remastered/production/B01_DIRECTOR_FX_AUTHORITY.json",
+    "general/reusable/fx_v2/executor.py",
+    "general/reusable/fx_v2/runtime.py",
+    "general/reusable/fx_v2/promoted_effects.py",
+    "general/reusable/fx_v2/living_still_fx.py",
+    "general/reusable/painterly-motion/hybrid_painterly_fx.py",
+    "general/reusable/depth-parallax-25d/depth_parallax_25d.py",
+    "general/reusable/generative-engine/spatial/living_parallax.py",
+    "projects/nordic-remastered/analysis/DIRECTOR_TIMING_MAP.json"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "godrender.nordic-b01.master-director-fx.v1",
+  "status": "MASTER_B01_SECTION_RENDERED_DIRECTOR_PASS",
+  "batch": "B01",
+  "role": "downstream master director/edit/FX pass after B01 batch FX gate",
+  "resolution": [1280,720],
+  "fps": 24,
+  "frames": 480,
+  "duration_seconds": 20.0,
+  "film": "NORDIC_B01_MASTER_DIRECTOR_FX01_720p.mp4",
+  "film_sha256": "f96398298cd294c96f0fc30510a70b6c6cf125686d72d113f006074a3cc12741",
+  "bytes": 8877873,
+  "audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "gemini_source_video_sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70",
+  "brain_fx_gate_source_sha256": "0800fd0804c6fd50a825c5f34f6c84f62fc96d7e773cdda5b3ade98c0c3d0d38",
+  "selected_clean_fx_shots": ["B01_001","B01_003","B01_005","B01_007","B01_009","B01_010"],
+  "excluded_baked_transition_shots": ["B01_002","B01_004","B01_006","B01_008"],
+  "transition_strategy": "short original-Gemini-motion bridges plus 6-frame dissolves; no full-frame ghost-memory handoffs",
+  "camera_strategy": "restrained continuous camera treatment on still-derived FX shots; approximately 2-3% crop/scale only; original video bridges remain natural motion",
+  "source_truth": "current GodRender Observer/constellation canon only; legacy AIVideoEdit Nordic tall-white/emissary asset set explicitly excluded",
+  "director_review": {
+    "skyline_fx": "retain",
+    "observer_identity": "stable in sampled transition review",
+    "long_ghost_doubles": "removed",
+    "section_verdict": "PASS_FOR_B01_MASTER_SECTION; full-film Master FX remains downstream after B01-B06"
+  }
+}

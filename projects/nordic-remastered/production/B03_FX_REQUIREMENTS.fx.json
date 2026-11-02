@@ -1,0 +1,39 @@
+{
+  "project": "nordic-remastered-b03-director-edit-fx",
+  "runtime": "aivideoedit-fx-v2",
+  "seed": 302,
+  "effects": [
+    {
+      "id": "FX2-LIGHT-002",
+      "strength": 0.32,
+      "origin": [
+        0.62,
+        0.2
+      ]
+    },
+    {
+      "id": "FX2-ATM-021"
+    },
+    {
+      "id": "FX2-LIGHT-025"
+    },
+    {
+      "id": "FX2-CAMERA-023"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "FX2-TRANS-027"
+    },
+    {
+      "id": "FX2-TRANS-025"
+    }
+  ],
+  "render_inputs": [
+    "projects/nordic-remastered/production/render_b03_director_fx.py",
+    "projects/nordic-remastered/production/B03_DIRECTOR_EDIT_FX_MANIFEST.json",
+    "general/reusable/fx_v2/executor.py",
+    "general/reusable/fx_v2/runtime.py",
+    "general/reusable/fx_v2/promoted_effects.py"
+  ]
+}

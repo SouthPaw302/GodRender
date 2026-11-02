@@ -1,0 +1,588 @@
+{
+  "schema": "godrender.production.v1",
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "audio": {
+    "path": "Nordic_Remastered.mp3",
+    "sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "shots": [
+    {
+      "id": "b01_001",
+      "seconds": 1.98,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_001_SOURCE.png",
+        "sha256": "166a6cd1275e9e15239d169ad1b7243438b2c7e2467de9f4e565de1fc435f42b"
+      },
+      "energy": 0.013366,
+      "transient": 0.003126,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.45,
+              0.22,
+              1,
+              0.68
+            ],
+            "strength": 0.16
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.76,
+              0.18
+            ],
+            "strength": 0.3
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.012,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.506,
+              0.496
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_002",
+      "seconds": 1.98,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_002_SOURCE.png",
+        "sha256": "c774ffe173a6f7152f80b6cc5ec240ffcd87c414e76e45d1d1760e0012a16735"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.45,
+              0.24,
+              1,
+              0.7
+            ],
+            "strength": 0.17
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.74,
+              0.18
+            ],
+            "strength": 0.32
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.014,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.507,
+              0.496
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_003",
+      "seconds": 2.62,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_003_SOURCE.png",
+        "sha256": "536621840d2e024dea01fd071279ebe641f6cf84495ee6916d91d6726f4d4638"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.46,
+              0.28,
+              1,
+              0.72
+            ],
+            "strength": 0.18
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.72,
+              0.18
+            ],
+            "strength": 0.34
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.016,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.508,
+              0.496
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_004",
+      "seconds": 2.94,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_004_SOURCE.png",
+        "sha256": "035d19c17519a754533d665ceb2cdd99b0c2c4c2da623d382f884078b3b92c0a"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.46,
+              0.34,
+              1,
+              0.73
+            ],
+            "strength": 0.18
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.7,
+              0.18
+            ],
+            "strength": 0.35
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.017,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.509,
+              0.495
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_005",
+      "seconds": 2.62,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_005_SOURCE.png",
+        "sha256": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.46,
+              0.42,
+              1,
+              0.74
+            ],
+            "strength": 0.17
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.67,
+              0.18
+            ],
+            "strength": 0.36
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.018,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.51,
+              0.495
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_006",
+      "seconds": 2.62,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_006_SOURCE.png",
+        "sha256": "d99f69a6892f1b8ed4cb9c9f55129eb271c3e7978d203f587287a079b3033ffe"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.47,
+              0.46,
+              1,
+              0.75
+            ],
+            "strength": 0.16
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.64,
+              0.18
+            ],
+            "strength": 0.37
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.018,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.51,
+              0.494
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_007",
+      "seconds": 2.62,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_007_SOURCE.png",
+        "sha256": "8abe34c34a3fcb1e0173a0902639f862cd1d585885478572a4e50d292db9cc2c"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.47,
+              0.48,
+              1,
+              0.76
+            ],
+            "strength": 0.15
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.62,
+              0.18
+            ],
+            "strength": 0.38
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.019,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.51,
+              0.494
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_008",
+      "seconds": 0.873333,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_008_SOURCE.png",
+        "sha256": "e9158809c19faf546436d633cc15b574a76f110035d515d11dd27c6ff70e6168"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.48,
+              0.5,
+              1,
+              0.77
+            ],
+            "strength": 0.14
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.6,
+              0.18
+            ],
+            "strength": 0.39
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.02,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.509,
+              0.494
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_009",
+      "seconds": 0.873334,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_009_SOURCE.png",
+        "sha256": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.48,
+              0.52,
+              1,
+              0.78
+            ],
+            "strength": 0.13
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.58,
+              0.18
+            ],
+            "strength": 0.4
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.021,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.508,
+              0.493
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "b01_010",
+      "seconds": 0.873333,
+      "mode": "still_fx",
+      "image": {
+        "path": "batch-01/NORDIC_B01_010_SOURCE.png",
+        "sha256": "22acc350bc431b4a67c87f6bce5b43ca2da17de59002b16ffbb1f202715195d4"
+      },
+      "energy": 0.153582,
+      "transient": 0.038027,
+      "fx_ids": [
+        "FX2-MOTION-002",
+        "FX2-LIGHT-002",
+        "FX2-CAMERA-023"
+      ],
+      "fx": [
+        {
+          "id": "FX2-MOTION-002",
+          "params": {
+            "roi": [
+              0.48,
+              0.54,
+              1,
+              0.79
+            ],
+            "strength": 0.12
+          }
+        },
+        {
+          "id": "FX2-LIGHT-002",
+          "params": {
+            "origin": [
+              0.56,
+              0.18
+            ],
+            "strength": 0.42
+          }
+        },
+        {
+          "id": "FX2-CAMERA-023",
+          "params": {
+            "zoom_start": 1,
+            "zoom_end": 1.022,
+            "center_start": [
+              0.5,
+              0.5
+            ],
+            "center_end": [
+              0.507,
+              0.492
+            ],
+            "easing": "cosine",
+            "zoom_cap": 1.04
+          }
+        }
+      ]
+    }
+  ],
+  "human_visual_approval": false,
+  "notes": [
+    "All ten pictures are exact Gemini source-video extractions from gemini_generated_video_4b4db55f.mp4.",
+    "Primary boundaries follow the verified Nordic ONNX timing map through 17.38s; the final 2.62s is split evenly across frames 08-10 as a Director acceleration into Batch 02.",
+    "Observer identity and major scene geometry remain protected; structured FX parameters constrain living flow toward distant sky/horizon regions."
+  ]
+}

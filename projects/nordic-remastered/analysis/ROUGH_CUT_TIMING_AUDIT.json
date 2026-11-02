@@ -1,0 +1,119 @@
+{
+  "schema": "godrender.nordic-rough-cut-timing-audit.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "source_audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "source_scan_receipt": "analysis/ONNX_SCAN_RECEIPT.json",
+  "rough_cut": {
+    "drive_id": "1TRviUr3MwdbaRszgM5QKI2fFtT2N9QNQ",
+    "sha256": "69a9bd5e0307d01ac028cbd575280feb56db09571380a1cf40188e88b83d29b7",
+    "container_duration_seconds": 138,
+    "target_duration_seconds": 137.952,
+    "resolution": "854x480",
+    "fps": 12,
+    "segments": [
+      [
+        "B01_01",
+        0,
+        6.583
+      ],
+      [
+        "B01_05",
+        6.583,
+        13.167
+      ],
+      [
+        "B01_09",
+        13.167,
+        19.75
+      ],
+      [
+        "B02_01",
+        19.75,
+        26.333
+      ],
+      [
+        "B02_05",
+        26.333,
+        32.917
+      ],
+      [
+        "B02_09",
+        32.917,
+        39.5
+      ],
+      [
+        "VIDEO_A",
+        39.5,
+        49.5
+      ],
+      [
+        "B03_01",
+        49.5,
+        56.083
+      ],
+      [
+        "B03_05",
+        56.083,
+        62.667
+      ],
+      [
+        "B03_09",
+        62.667,
+        69.25
+      ],
+      [
+        "VIDEO_B",
+        69.25,
+        79.25
+      ],
+      [
+        "B04_01",
+        79.25,
+        85.833
+      ],
+      [
+        "B04_05",
+        85.833,
+        92.417
+      ],
+      [
+        "B04_09",
+        92.417,
+        99
+      ],
+      [
+        "B05_01",
+        99,
+        105.583
+      ],
+      [
+        "B05_05",
+        105.583,
+        112.167
+      ],
+      [
+        "B05_09",
+        112.167,
+        118.75
+      ],
+      [
+        "B06_01",
+        118.75,
+        125.333
+      ],
+      [
+        "B06_05",
+        125.333,
+        131.917
+      ],
+      [
+        "B06_09",
+        131.917,
+        138
+      ]
+    ]
+  },
+  "finding": "The current rough cut is structurally useful but mechanically timed: almost every still is held for about 6.583 seconds while both source videos play for about 10 seconds. Re-time editorial boundaries to measured ONNX structure before the FX master.",
+  "authority": "evidence_only"
+}

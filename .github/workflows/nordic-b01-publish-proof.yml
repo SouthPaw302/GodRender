@@ -1,0 +1,43 @@
+name: Publish Nordic B01 proof to branch
+on:
+  push:
+    branches: ['song/nordic-remastered']
+    paths: ['.github/workflows/nordic-b01-publish-proof.yml']
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: song/nordic-remastered
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Download exact successful runner artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nordic-proof
+          gh run download 40064408207 \
+            --repo SouthPaw302/GodRender \
+            --name nordic-b01-runner-proof-40064408207 \
+            --dir /tmp/nordic-proof
+          test -s /tmp/nordic-proof/godrender_review.mp4
+      - name: Verify and publish MP4
+        run: |
+          set -euo pipefail
+          echo "e0788a51a69b41d051ceec848a31d3512a5e647ece13b3aa8f9e57dbd3651411  /tmp/nordic-proof/godrender_review.mp4" | sha256sum -c -
+          bytes=$(stat -c %s /tmp/nordic-proof/godrender_review.mp4)
+          test "$bytes" -lt 100000000
+          mkdir -p projects/nordic-remastered/proofs
+          cp /tmp/nordic-proof/godrender_review.mp4 projects/nordic-remastered/proofs/NORDIC_B01_PROOF02_RUNNER_720p.mp4
+          git config user.name "GodRender Runner"
+          git config user.email "actions@users.noreply.github.com"
+          git add projects/nordic-remastered/proofs/NORDIC_B01_PROOF02_RUNNER_720p.mp4
+          git commit -m "Publish Nordic B01 proof02 runner video"
+          git push origin HEAD:song/nordic-remastered

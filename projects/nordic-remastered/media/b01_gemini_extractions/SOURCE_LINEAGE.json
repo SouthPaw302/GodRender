@@ -1,0 +1,105 @@
+{
+  "schema": "godrender.nordic-b01-source-lineage.v1",
+  "source_video": {
+    "name": "gemini_generated_video_4b4db55f.mp4",
+    "drive_id": "1PyHI7F7In-uZxYhZfHKJK17Ah_8LCWaB",
+    "sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70"
+  },
+  "drive_extraction_folder_id": "1viiUD0gsdJt2TX8ANh26RtcSbTx9wRI6",
+  "extraction_method": "source frame extraction only; no model generation or FX",
+  "frames": [
+    {
+      "frame": "NORDIC_B01_001_SOURCE.png",
+      "source_time_seconds": 0.5,
+      "sha256": "166a6cd1275e9e15239d169ad1b7243438b2c7e2467de9f4e565de1fc435f42b",
+      "direction": "Witness established",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_002_SOURCE.png",
+      "source_time_seconds": 1.45,
+      "sha256": "c774ffe173a6f7152f80b6cc5ec240ffcd87c414e76e45d1d1760e0012a16735",
+      "direction": "Cliff and scale",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_003_SOURCE.png",
+      "source_time_seconds": 2.4,
+      "sha256": "536621840d2e024dea01fd071279ebe641f6cf84495ee6916d91d6726f4d4638",
+      "direction": "First awareness",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_004_SOURCE.png",
+      "source_time_seconds": 3.35,
+      "sha256": "035d19c17519a754533d665ceb2cdd99b0c2c4c2da623d382f884078b3b92c0a",
+      "direction": "Contemplation",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_005_SOURCE.png",
+      "source_time_seconds": 4.3,
+      "sha256": "02cea7e793ab85ab8da6770169bf4c63a1ce1c39fb319bd62cc4488f41d74221",
+      "direction": "Cosmic orientation",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_006_SOURCE.png",
+      "source_time_seconds": 5.25,
+      "sha256": "d99f69a6892f1b8ed4cb9c9f55129eb271c3e7978d203f587287a079b3033ffe",
+      "direction": "Sky as pattern",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_007_SOURCE.png",
+      "source_time_seconds": 6.2,
+      "sha256": "8abe34c34a3fcb1e0173a0902639f862cd1d585885478572a4e50d292db9cc2c",
+      "direction": "Myth takes shape",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_008_SOURCE.png",
+      "source_time_seconds": 7.15,
+      "sha256": "e9158809c19faf546436d633cc15b574a76f110035d515d11dd27c6ff70e6168",
+      "direction": "World remembered",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_009_SOURCE.png",
+      "source_time_seconds": 8.1,
+      "sha256": "5f3b406e66fa5dc70bd70b702ef74650368b3e782efc13dac078b29397c50e55",
+      "direction": "The watcher persists",
+      "status": "candidate_not_individually_approved"
+    },
+    {
+      "frame": "NORDIC_B01_010_SOURCE.png",
+      "source_time_seconds": 9.05,
+      "sha256": "22acc350bc431b4a67c87f6bce5b43ca2da17de59002b16ffbb1f202715195d4",
+      "direction": "Threshold anticipation",
+      "status": "candidate_not_individually_approved"
+    }
+  ],
+  "audio_excerpt": {
+    "file": "NORDIC_B01_AUDIO_0-20s.mp3",
+    "sha256": "e2e53e6a70f0ef6c74c5b63e5485e767dd70a57d9af3867cc37ec0ddb3b58d73",
+    "duration_seconds": 20.04,
+    "derivation": "ffmpeg -t 20 -c copy from exact Nordic master",
+    "master_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f"
+  },
+  "timing": {
+    "boundaries_seconds": [
+      0,
+      1.98,
+      3.96,
+      5.92,
+      7.88,
+      9.52,
+      11.5,
+      13.46,
+      15.42,
+      17.38,
+      20
+    ],
+    "authority": "analysis/DIRECTOR_TIMING_MAP.json + MUSIC_BEAT_EVIDENCE"
+  }
+}

@@ -1,0 +1,194 @@
+name: Nordic B01 canonical runner proof
+on:
+  push:
+    branches: ['song/nordic-remastered']
+    paths:
+      - 'projects/nordic-remastered/runner_sources/**'
+      - 'projects/nordic-remastered/production/B01_RUNNER_PROOF_MANIFEST.json'
+      - 'projects/nordic-remastered/FX_REQUIREMENTS.fx.json'
+      - 'projects/nordic-remastered/production/B01_RUNNER_SOURCE_RECEIPT.json'
+      - 'render/godrender_runtime.py'
+      - 'tests/test_render_runtime.py'
+      - '.github/workflows/nordic-b01-runner-proof.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: nordic-b01-runner-proof-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Fetch exact Main authority for offline boot
+        run: |
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          git branch --force main refs/remotes/origin/main
+          git rev-parse main
+      - name: Install canonical FX dependencies
+        run: python -m pip install numpy opencv-python-headless
+      - name: Install FFmpeg
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+      - name: Boot native GodRender OS
+        env:
+          GODRENDER_VALIDATION_MODE: "1"
+        run: python3 godrender_boot.py --offline
+      - name: Run render-runtime regression tests
+        run: python3 -m unittest discover -s tests -p 'test_render_runtime.py' -v
+      - name: Reassemble and verify exact Nordic master audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/input/batch-01"
+          cat projects/nordic-remastered/runner_sources/audio/Nordic_Remastered.mp3.part* > "$RUNNER_TEMP/input/Nordic_Remastered.mp3"
+          echo "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f  $RUNNER_TEMP/input/Nordic_Remastered.mp3" | sha256sum -c -
+          cp projects/nordic-remastered/runner_sources/batch-01/NORDIC_B01_*_SOURCE.png "$RUNNER_TEMP/input/batch-01/"
+          cp projects/nordic-remastered/production/B01_RUNNER_PROOF_MANIFEST.json "$RUNNER_TEMP/input/manifest.json"
+      - name: Verify all ten Gemini extraction hashes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,hashlib,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"input"
+          d=json.loads((root/"manifest.json").read_text())
+          assert len(d["shots"])==10
+          for shot in d["shots"]:
+              p=root/shot["image"]["path"]
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              assert h==shot["image"]["sha256"], (p,h)
+          print("NORDIC B01 GEMINI EXTRACTIONS PASS 10/10")
+          PY
+      - name: Compile and verify immutable FX lock
+        run: |
+          python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/FX_REQUIREMENTS.fx.json --lock-out "$RUNNER_TEMP/input/fx.lock.json"
+          python general/reusable/fx_v2/precompile_gate.py --manifest projects/nordic-remastered/FX_REQUIREMENTS.fx.json --verify-lock "$RUNNER_TEMP/input/fx.lock.json"
+      - name: Build ten-shot runner matrix
+        id: plan
+        shell: bash
+        run: |
+          python render/godrender_runtime.py plan --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --output "$RUNNER_TEMP/input/shard_plan.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])/"input/shard_plan.json"
+          m=json.loads(p.read_text())
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write("matrix="+json.dumps(m,separators=(",",":"))+"\n")
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b01-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input/
+          retention-days: 3
+
+  render-shot:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy opencv-python-headless
+      - run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: nordic-b01-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input
+      - name: Verify prepared PASS lock and exact source commit
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path.cwd()
+          lock_path=Path(os.environ["RUNNER_TEMP"])/"input/fx.lock.json"
+          lock=json.loads(lock_path.read_text())
+          assert lock.get("result")=="PASS"
+          def sha(p):
+              h=hashlib.sha256()
+              with Path(p).open("rb") as f:
+                  for chunk in iter(lambda:f.read(1<<20),b""): h.update(chunk)
+              return h.hexdigest()
+          assert sha("projects/nordic-remastered/FX_REQUIREMENTS.fx.json")==lock["manifest_sha256"]
+          assert sha("general/reusable/fx_v2/registry.json")==lock["registry_sha256"]
+          assert sha("general/reusable/fx_v2/runtime.py")==lock["runtime_sha256"]
+          for rec in lock.get("render_inputs",[]):
+              assert sha(root/rec["path"])==rec["sha256"], rec["path"]
+          print("PREPARED FX LOCK + EXACT COMMIT PASS")
+          PY
+      - name: Render canonical FX shard
+        run: |
+          python render/godrender_runtime.py shot --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --shot-id "${{ matrix.shot_id }}" --out "$RUNNER_TEMP/shot"
+          test -s "$RUNNER_TEMP/shot/${{ matrix.shot_id }}.mp4"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: nordic-b01-shot-${{ matrix.shot_id }}
+          path: ${{ runner.temp }}/shot/
+          retention-days: 30
+
+  assemble:
+    needs: [prepare, render-shot]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: nordic-b01-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/input
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: nordic-b01-shot-*
+          path: ${{ runner.temp }}/shards
+      - name: Install FFmpeg
+        run: sudo apt-get update -y && sudo apt-get install -y ffmpeg
+      - name: Restore shard directory names
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"shards"
+          for p in list(root.iterdir()):
+              if p.is_dir() and p.name.startswith("nordic-b01-shot-"):
+                  p.rename(root/p.name.removeprefix("nordic-b01-shot-"))
+          PY
+      - name: Assemble verified 20-second proof
+        run: |
+          python render/godrender_runtime.py assemble --manifest "$RUNNER_TEMP/input/manifest.json" --input-root "$RUNNER_TEMP/input" --shards "$RUNNER_TEMP/shards" --out "$RUNNER_TEMP/final"
+          ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,codec_type,width,height,r_frame_rate -of json "$RUNNER_TEMP/final/godrender_review.mp4"
+      - name: Create Brain outbox / publish if runner credentials exist
+        env:
+          GODRENDER_DRIVE_SA_JSON: ${{ secrets.GODRENDER_DRIVE_SA_JSON }}
+          GODRENDER_DRIVE_SHEET: "1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c"
+        run: |
+          if [ -n "$GODRENDER_DRIVE_SA_JSON" ]; then python -m pip install google-auth requests; fi
+          python render/brain_sync.py --receipt "$RUNNER_TEMP/final/render_receipt.json" --run-url "https://github.com/SouthPaw302/GodRender/actions/runs/${{ github.run_id }}" --outbox "$RUNNER_TEMP/final/BRAIN_OUTBOX.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nordic-b01-runner-proof-${{ github.run_id }}
+          path: ${{ runner.temp }}/final/
+          retention-days: 30

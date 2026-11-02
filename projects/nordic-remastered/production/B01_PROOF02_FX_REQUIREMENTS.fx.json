@@ -1,0 +1,47 @@
+{
+  "project": "nordic-remastered-b01-proof02",
+  "runtime": "aivideoedit-fx-v2",
+  "seed": 302,
+  "render_inputs": [
+    "render/godrender_runtime.py",
+    "general/reusable/fx_v2/executor.py"
+  ],
+  "effects": [
+    {
+      "id": "FX2-MOTION-002",
+      "strength": 0.12,
+      "roi": [
+        0.45,
+        0.58,
+        1,
+        0.9
+      ]
+    },
+    {
+      "id": "FX2-LIGHT-002",
+      "strength": 0.38,
+      "origin": [
+        0.77,
+        0.14
+      ]
+    },
+    {
+      "id": "FX2-CAMERA-023",
+      "params": {
+        "zoom_start": 1,
+        "zoom_end": 1.018,
+        "center_start": [
+          0.5,
+          0.5
+        ],
+        "center_end": [
+          0.51,
+          0.492
+        ],
+        "easing": "cosine",
+        "zoom_cap": 1.04
+      }
+    }
+  ],
+  "transitions": []
+}

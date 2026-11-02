@@ -1,0 +1,20 @@
+{
+  "schema": "godrender.nordic-new-directors-cut.staged-source-lock.v1",
+  "media_staged_from": "sandbox-verified-originals",
+  "note": "GitHub runner reconstructs from Git chunks, never Drive",
+  "base64_fragment_chars": 680000,
+  "sources": [
+    {
+      "file": "source-a.mp4",
+      "parts": 7,
+      "sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70",
+      "bytes": 3356803
+    },
+    {
+      "file": "storyboard-b02.zip",
+      "parts": 24,
+      "sha256": "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309",
+      "bytes": 11921664
+    }
+  ]
+}

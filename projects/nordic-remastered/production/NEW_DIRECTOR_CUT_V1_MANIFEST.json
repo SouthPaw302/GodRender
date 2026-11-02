@@ -1,0 +1,422 @@
+{
+  "schema": "godrender.nordic-director-cut-new.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "mode": "NEW_60_SHOT_SOURCE_DIRECTOR_CUT",
+  "authorities": {
+    "main": "03e4d790a2cfb14b4e9848ee5f5f948f9498a4eb",
+    "onnx": "projects/nordic-remastered/analysis/ONNX_SCAN_RECEIPT.json",
+    "timing": "projects/nordic-remastered/analysis/DIRECTOR_TIMING_MAP.json",
+    "drive_brain": "1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c",
+    "fx_registry": "general/reusable/fx_v2/registry.json"
+  },
+  "frames": 3311,
+  "fps": 24,
+  "dimensions": [
+    1280,
+    720
+  ],
+  "audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "video_a_sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70",
+  "video_b_sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68",
+  "storyboard_zip_sha256": {
+    "B02": "0de98a96c73ebd644d19c49eab1091804f26302e5229a2f32b03f568b585f309",
+    "B03": "156dd5916efc46b148f92a6bbc07ce91271bbff4412b0f4ea4ef22ea37f8c618",
+    "B04": "2e2a1d59c4ad76d52ceed915abc3565f7622cff8bf8a5cea1b4a334a90a39564",
+    "B05": "e3609729dd069c5f3ef970a27ef9e26d7b0206a07772cd742921030b5b148abe",
+    "B06": "ca31e1bef59dd2332e193596a5840c241d22888c6e7242c4c0704f69bccd80b4"
+  },
+  "sections": [
+    {
+      "chapter": "Witness",
+      "batch": "B01",
+      "total": 480,
+      "chapter_energy": 0.16,
+      "start_frame": 0,
+      "end_frame": 480,
+      "shots": [
+        {
+          "id": "B01_01",
+          "frames": 68,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_02",
+          "frames": 49,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_03",
+          "frames": 40,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_04",
+          "frames": 40,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_05",
+          "frames": 36,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_06",
+          "frames": 43,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_07",
+          "frames": 43,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_08",
+          "frames": 42,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_09",
+          "frames": 51,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B01_10",
+          "frames": 68,
+          "fx_profile": "night_sky"
+        }
+      ]
+    },
+    {
+      "chapter": "The Sky Remembers",
+      "batch": "B02",
+      "total": 503,
+      "chapter_energy": 0.32,
+      "start_frame": 480,
+      "end_frame": 983,
+      "shots": [
+        {
+          "id": "B02_01",
+          "frames": 62,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_02",
+          "frames": 45,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_03",
+          "frames": 45,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_04",
+          "frames": 45,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_05",
+          "frames": 45,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_06",
+          "frames": 45,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_07",
+          "frames": 47,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_08",
+          "frames": 49,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_10",
+          "frames": 53,
+          "fx_profile": "night_sky"
+        },
+        {
+          "id": "B02_09",
+          "frames": 67,
+          "fx_profile": "night_sky"
+        }
+      ]
+    },
+    {
+      "chapter": "Original Moving Vision A",
+      "batch": "A",
+      "total": 240,
+      "natural_speed": true,
+      "chapter_energy": 0.44,
+      "start_frame": 983,
+      "end_frame": 1223
+    },
+    {
+      "chapter": "Threshold",
+      "batch": "B03",
+      "total": 452,
+      "chapter_energy": 0.49,
+      "start_frame": 1223,
+      "end_frame": 1675,
+      "shots": [
+        {
+          "id": "B03_02",
+          "frames": 61,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_03",
+          "frames": 49,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_04",
+          "frames": 41,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_05",
+          "frames": 41,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_06",
+          "frames": 41,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_07",
+          "frames": 40,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_08",
+          "frames": 40,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_09",
+          "frames": 40,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_10",
+          "frames": 40,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_01",
+          "frames": 59,
+          "fx_profile": "threshold"
+        }
+      ]
+    },
+    {
+      "chapter": "Original Moving Vision B",
+      "batch": "B",
+      "total": 240,
+      "natural_speed": true,
+      "chapter_energy": 0.53,
+      "start_frame": 1675,
+      "end_frame": 1915
+    },
+    {
+      "chapter": "Revelation / City",
+      "batch": "B04",
+      "total": 326,
+      "chapter_energy": 0.54,
+      "break_final_frames": 63,
+      "start_frame": 1915,
+      "end_frame": 2241,
+      "shots": [
+        {
+          "id": "B04_01",
+          "frames": 34,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_02",
+          "frames": 29,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_04",
+          "frames": 29,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_03",
+          "frames": 29,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_05",
+          "frames": 29,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_06",
+          "frames": 26,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_07",
+          "frames": 28,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_08",
+          "frames": 28,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_09",
+          "frames": 31,
+          "fx_profile": "architecture"
+        },
+        {
+          "id": "B04_10",
+          "frames": 63,
+          "fx_profile": "architecture"
+        }
+      ]
+    },
+    {
+      "chapter": "Emissaries / Consciousness",
+      "batch": "B05",
+      "total": 503,
+      "chapter_energy": 0.54,
+      "breath_final_two_frames": 126,
+      "start_frame": 2241,
+      "end_frame": 2744,
+      "shots": [
+        {
+          "id": "B05_01",
+          "frames": 61,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_02",
+          "frames": 46,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_03",
+          "frames": 46,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_04",
+          "frames": 46,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_05",
+          "frames": 41,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_06",
+          "frames": 46,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_07",
+          "frames": 46,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_08",
+          "frames": 45,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_09",
+          "frames": 54,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_10",
+          "frames": 72,
+          "fx_profile": "interface"
+        }
+      ]
+    },
+    {
+      "chapter": "Return / Open Ending",
+      "batch": "B06",
+      "total": 567,
+      "chapter_energy": 0.4,
+      "final_hold_frames": 191,
+      "start_frame": 2744,
+      "end_frame": 3311,
+      "shots": [
+        {
+          "id": "B06_06",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_07",
+          "frames": 43,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_08",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_09",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_01",
+          "frames": 46,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_02",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_03",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_04",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_05",
+          "frames": 41,
+          "fx_profile": "recollection"
+        },
+        {
+          "id": "B06_10",
+          "frames": 191,
+          "fx_profile": "ending"
+        }
+      ]
+    }
+  ],
+  "director_law": [
+    "source-canon geometry and protected identities unchanged",
+    "no synthetic videos/images, time reverse, source-looping, full-frame face ghosting",
+    "localized internal motion before camera; source-authentic FX only",
+    "film ends in B06_10 Observer silence-like stillness",
+    "do not touch previous accepted batch files or main"
+  ],
+  "status": "SOURCE_LOCKED_PLAN_RUNNER_NOT_YET_VERIFIED",
+  "editorial_revision": "RC2_PORTAL_RETURN_MATCH_CUTS",
+  "editorial_change_note": "Retain all 60 source-locked stills, same 3311 frames, chapter music alignment and all existing FX; B02 ends on empty portal; B03 ends on portal/witness before original video B; B05 ends on original wide emissary city for B06 match."
+}
