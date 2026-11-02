@@ -1,0 +1,20 @@
+{
+  "schema": "godrender.nordic-b06-source-lock.v1",
+  "branch": "song/nordic-remastered",
+  "origin": "Sandbox verified B06 storyboard ZIP, re-packed as 25 base64 text parts for GitHub runner intake; runner never downloads from Drive.",
+  "storyboard_zip_sha256": "ca31e1bef59dd2332e193596a5840c241d22888c6e7242c4c0704f69bccd80b4",
+  "storyboard_zip_bytes": 13576174,
+  "base64_total_chars": 18101568,
+  "part_count": 25,
+  "part_base64_chars": 750000,
+  "final_part_chars": 101568,
+  "video_b_sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68",
+  "audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "sandbox_proof": {
+    "frames": 567,
+    "fps": 24,
+    "duration_seconds": 23.625,
+    "film_sha256": "fe6b7e54368278efc1ebd817b0e4ce002b321ed686cbfa37d926fbe65879b663",
+    "scope": "OPTICAL_SANDBOX_PREVIEW_NOT_NATIVE_PROOF"
+  }
+}
