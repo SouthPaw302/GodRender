@@ -136,12 +136,12 @@
           "fx_profile": "night_sky"
         },
         {
-          "id": "B02_09",
+          "id": "B02_10",
           "frames": 53,
           "fx_profile": "night_sky"
         },
         {
-          "id": "B02_10",
+          "id": "B02_09",
           "frames": 67,
           "fx_profile": "night_sky"
         }
@@ -165,18 +165,13 @@
       "end_frame": 1675,
       "shots": [
         {
-          "id": "B03_01",
+          "id": "B03_02",
           "frames": 61,
           "fx_profile": "threshold"
         },
         {
-          "id": "B03_02",
-          "frames": 49,
-          "fx_profile": "threshold"
-        },
-        {
           "id": "B03_03",
-          "frames": 41,
+          "frames": 49,
           "fx_profile": "threshold"
         },
         {
@@ -191,7 +186,7 @@
         },
         {
           "id": "B03_06",
-          "frames": 40,
+          "frames": 41,
           "fx_profile": "threshold"
         },
         {
@@ -211,6 +206,11 @@
         },
         {
           "id": "B03_10",
+          "frames": 40,
+          "fx_profile": "threshold"
+        },
+        {
+          "id": "B03_01",
           "frames": 59,
           "fx_profile": "threshold"
         }
@@ -296,12 +296,12 @@
       "end_frame": 2744,
       "shots": [
         {
-          "id": "B05_10",
+          "id": "B05_01",
           "frames": 61,
           "fx_profile": "interface"
         },
         {
-          "id": "B05_01",
+          "id": "B05_02",
           "frames": 46,
           "fx_profile": "interface"
         },
@@ -311,18 +311,13 @@
           "fx_profile": "interface"
         },
         {
-          "id": "B05_02",
-          "frames": 46,
-          "fx_profile": "interface"
-        },
-        {
           "id": "B05_04",
-          "frames": 41,
+          "frames": 46,
           "fx_profile": "interface"
         },
         {
           "id": "B05_05",
-          "frames": 46,
+          "frames": 41,
           "fx_profile": "interface"
         },
         {
@@ -332,16 +327,21 @@
         },
         {
           "id": "B05_07",
-          "frames": 45,
+          "frames": 46,
           "fx_profile": "interface"
         },
         {
           "id": "B05_08",
-          "frames": 54,
+          "frames": 45,
           "fx_profile": "interface"
         },
         {
           "id": "B05_09",
+          "frames": 54,
+          "fx_profile": "interface"
+        },
+        {
+          "id": "B05_10",
           "frames": 72,
           "fx_profile": "interface"
         }
@@ -416,5 +416,7 @@
     "film ends in B06_10 Observer silence-like stillness",
     "do not touch previous accepted batch files or main"
   ],
-  "status": "SOURCE_LOCKED_PLAN_RUNNER_NOT_YET_VERIFIED"
+  "status": "SOURCE_LOCKED_PLAN_RUNNER_NOT_YET_VERIFIED",
+  "editorial_revision": "RC2_PORTAL_RETURN_MATCH_CUTS",
+  "editorial_change_note": "Retain all 60 source-locked stills, same 3311 frames, chapter music alignment and all existing FX; B02 ends on empty portal; B03 ends on portal/witness before original video B; B05 ends on original wide emissary city for B06 match."
 }
