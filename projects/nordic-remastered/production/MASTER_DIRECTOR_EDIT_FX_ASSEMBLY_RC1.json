@@ -1,0 +1,142 @@
+{
+  "schema": "godrender.nordic-master-director-picture-fx.v1",
+  "project": "Nordic (Remastered)",
+  "branch": "song/nordic-remastered",
+  "mode": "source-locked-assembly-preview",
+  "audio_sha256": "d5dc263e6edc7a248503acc1f8ecc5cc2ab91727905ef8ddac3d63a6a1644c2f",
+  "fps": 24,
+  "size": [
+    1280,
+    720
+  ],
+  "total_frames": 3311,
+  "duration_seconds": 137.95833333333334,
+  "source_sections": [
+    {
+      "name": "B01",
+      "start": 0,
+      "frames": 480,
+      "sha256": "f96398298cd294c96f0fc30510a70b6c6cf125686d72d113f006074a3cc12741"
+    },
+    {
+      "name": "B02",
+      "start": 480,
+      "frames": 503,
+      "sha256": "33ce1385fa0e8ba10fc16a4c702a64b4abf76455e2c8f118b7eceaec71d4b9f6"
+    },
+    {
+      "name": "GEMINI_A_ORIGINAL",
+      "start": 983,
+      "frames": 240,
+      "sha256": "d68af243b94e77f0a7311f99daa6f5b5b4dd9fdfa7a90d3b4b9c002020be6e70"
+    },
+    {
+      "name": "B03",
+      "start": 1223,
+      "frames": 452,
+      "sha256": "693c51b2845e56ed6cf03dcec6e7073f7180974338cbc4cfce58f60e3d10e730"
+    },
+    {
+      "name": "GEMINI_B_ORIGINAL",
+      "start": 1675,
+      "frames": 240,
+      "sha256": "79b7a65bef53cfd35fc9905c9ea4f09ee8a96bcf794e9296596c49d0c5933e68"
+    },
+    {
+      "name": "B04",
+      "start": 1915,
+      "frames": 326,
+      "sha256": "863efa114a5d27d58344bcfe3fa081b8f9088d0863705d35267494fc8322afff"
+    },
+    {
+      "name": "B05",
+      "start": 2241,
+      "frames": 503,
+      "sha256": "c6886fb4dba6c448af6cf7e212534e8d03df7bf69840d19b5c25c1a1643fc2b9"
+    },
+    {
+      "name": "B06",
+      "start": 2744,
+      "frames": 567,
+      "sha256": "52012cbb6cc7704231059c99de48b9c53523c62ac6928fdbffe5e8e60240938b"
+    }
+  ],
+  "seams": [
+    {
+      "frame": 480,
+      "style": "matched_constellation_cut"
+    },
+    {
+      "frame": 983,
+      "style": "portal_collapse_to_observer",
+      "frames": 12
+    },
+    {
+      "frame": 1223,
+      "style": "constellation_glint_to_threshold",
+      "frames": 10
+    },
+    {
+      "frame": 1675,
+      "style": "portal_memory_return",
+      "frames": 12
+    },
+    {
+      "frame": 1915,
+      "style": "matched_city_cut"
+    },
+    {
+      "frame": 2241,
+      "style": "intelligent_light_cut"
+    },
+    {
+      "frame": 2744,
+      "style": "memory_recedes_cut"
+    }
+  ],
+  "fx_brain": {
+    "google_sheet_id": "1Xi2wSER-vEIjy52FTKA5RvMXNnGrTxoYiEoPhyXw77c",
+    "tabs": [
+      "FX AND TRANSITIONS",
+      "FX COMPOSITION RECIPES",
+      "FX PIXEL APPLICATION ATLAS",
+      "PRODUCTION RECIPES",
+      "EVIDENCE & GAPS"
+    ],
+    "selection_policy": "Use only suitable approved FX and production-proven effects; do not apply all 91 catalog entries indiscriminately.",
+    "reviewed_registry_states": {
+      "approved": 61,
+      "proof_required": 28,
+      "conditional": 1,
+      "unavailable": 1
+    },
+    "proven_batch_ids": [
+      "FX2-CAMERA-023",
+      "FX2-CAMERA-021",
+      "FX2-LIGHT-002",
+      "FX2-LIGHT-025",
+      "FX2-TRANS-025",
+      "FX2-TRANS-026",
+      "FX2-TRANS-027",
+      "FX2-ATM-021",
+      "FX2-SPATIAL-021",
+      "FX2-MOTION-002"
+    ]
+  },
+  "master_output": {
+    "filename": "NORDIC_REMASTERED_DIRECTOR_MASTER_FX_RC1_720p.mp4",
+    "sha256": "bb1c931251d80caa9af3fec30f8708aa57386fbf538d93b13a000a19abb5753a",
+    "bytes": 136249902,
+    "status": "SANDBOX_PICTURE_AUDIO_TECHNICAL_PASS_ONLY",
+    "comment": "Project-local editorial seam mattes; not a claim of GitHub native full-master FXExecutor execution"
+  },
+  "qc": {
+    "decoded_video_frames": 3311,
+    "decoded_audio_error_free": true,
+    "decoded_video_error_free": true,
+    "black_frames": 0,
+    "median_grayscale_adjacent_difference": 0.9648573,
+    "p95_grayscale_adjacent_difference": 7.8497736
+  },
+  "release_gate": "BLOCKED_PENDING_NATIVE_MASTER_FX_RUN_AND_UNINTERRUPTED_DIRECTOR_VISUAL_APPROVAL"
+}
